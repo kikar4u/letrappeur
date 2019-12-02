@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        characterWalk();
+    }
+    void characterWalk()
+    {
         if (characterController.isGrounded)
         {
             // We are grounded, so recalculate
