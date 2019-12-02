@@ -19,9 +19,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        characterWalk();
+        CharacterWalk();
     }
-    void characterWalk()
+    void CharacterWalk()
     {
         if (characterController.isGrounded)
         {
