@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Components
     CharacterController characterController;
+    #endregion
 
+    #region Movements
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    #endregion
+    
+    #region Stats
 
+    #endregion
     private Vector3 moveDirection = Vector3.zero;
 
     void Start()
