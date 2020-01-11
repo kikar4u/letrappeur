@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105522097fefd4545ba7b35c657d5a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  innerCircle: {fileID: 6508800210682578077}
+  playerCircle: {fileID: 6508800210682578077}
   outerCircle: {fileID: 6508800210661416092}
   breathSpeed: 0
   scaleTimeStep: 0

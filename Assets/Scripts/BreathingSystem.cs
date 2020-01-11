@@ -8,50 +8,51 @@ public class BreathingSystem : MonoBehaviour
     Player player;
     #region Circles
     // cercle player
-    [SerializeField] Image innerCircle;
-    RectTransform innerCircleTransform;
+    [SerializeField] Image playerCircle;
+    RectTransform playerCircleTransform;
     // cercle avatar
     [SerializeField] Image outerCircle;
     RectTransform outerCircleTransform;
-    [Range(0.01f,0.1f)]
+    [Range(0.01f, 0.1f)]
     public float breathSpeed;
     public float scaleTimeStep;
     public float capPlayerInnerCircleMax;
     public float capPlayerInnerCircleMin;
     Vector3 originalScale;
+
     #region Input
     float LeftTrigger;
     float RightTrigger;
     #endregion
+    #endregion
+
+    #region Curve
     public AnimationCurve breathCurve;
     public float speedCirclePlayer;
     #endregion
 
     #region Collider
     [Header("Colliders")]
-    [SerializeField]Collider2D outerMarginCollider;
-    [SerializeField]Collider2D innerMarginCollider;
-    [SerializeField]Collider2D playerBreathCollider;
+    [SerializeField] Collider2D outerMarginCollider;
+    [SerializeField] Collider2D innerMarginCollider;
+    [SerializeField] Collider2D playerBreathCollider;
     #endregion
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        innerCircleTransform = innerCircle.GetComponent<RectTransform>();
+        playerCircleTransform = playerCircle.GetComponent<RectTransform>();
         outerCircleTransform = outerCircle.GetComponent<RectTransform>();
 
-        originalScale = outerCircleTransform.localScale;
+        //originalScale = outerCircleTransform.localScale;
+        outerCircleTransform.localScale = new Vector3(breathCurve.Evaluate(breathCurve.keys[1].value), breathCurve.Evaluate(breathCurve.keys[1].value), 1.0f);
         StartCoroutine(BreathScaling(breathSpeed));
-        //Debug.Log(" Breath courb : " + breathCurve);
-
-
     }
 
     private void Update()
     {
         LeftTrigger = Input.GetAxis("LeftTrigger");
         RightTrigger = Input.GetAxis("RightTrigger");
-        //Debug.Log("right trigger : " + RightTrigger);
-        //Debug.Log("Left trigger" + LeftTrigger);
+
         // si leurs valeurs sont plus grand (donc appui de la part du joueur) on grandit le cercle
         if (LeftTrigger >= 0.1f || RightTrigger >= 0.1f)
         {
@@ -60,7 +61,7 @@ public class BreathingSystem : MonoBehaviour
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
             //if (innerCircle.rectTransform.localScale.x >= capPlayerInnerCircleMin)
             //{
-            innerCircleTransform.localScale -= new Vector3((LeftTrigger + RightTrigger) * Time.deltaTime * 2, (LeftTrigger + RightTrigger) * Time.deltaTime * 2, 0.0f);
+            playerCircleTransform.localScale -= new Vector3((LeftTrigger + RightTrigger) * Time.deltaTime * 2, (LeftTrigger + RightTrigger) * Time.deltaTime * 2, 0.0f);
             //}
 
 
@@ -72,26 +73,25 @@ public class BreathingSystem : MonoBehaviour
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
             //if (innerCircle.rectTransform.localScale.x <= capPlayerInnerCircleMax)
             //{
-            //Debug.Log("fjqdsi" + innerCircleTransform.localScale.x);
-            innerCircleTransform.localScale += new Vector3((speedCirclePlayer) * Time.deltaTime, (speedCirclePlayer) * Time.deltaTime, 0.0f);
+            playerCircleTransform.localScale += new Vector3((speedCirclePlayer) * Time.deltaTime, (speedCirclePlayer) * Time.deltaTime, 0.0f);
             //}
 
         }
+        //Cap circle player
+        playerCircleTransform.localScale = new Vector3(Mathf.Clamp(playerCircleTransform.localScale.x, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), Mathf.Clamp(playerCircleTransform.localScale.y, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), 1.0f);
 
         //Si le cercle du player est dans le cercle de l'outer
         if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
-         && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
+        && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
         {
             //Le joueur respire bien
-            Debug.Log("Tu respires bien, gg !");
+            //Debug.Log("Tu respires bien, gg !");
         }
         else
         {
             //Le joueur respire mal
-            Debug.Log("Tu respires mal connard !");
+            //Debug.Log("Tu respires mal connard !");
         }
-        Debug.Log("shit here we go again");
-
     }
 
     public void CallBreathingSystem(float breathSpeed2, float scaleTimeStep2, float capPlayerInnerCircleMax2, float capPlayerInnerMin2, AnimationCurve breathCurve2, float speedCirclePlayer2)
@@ -104,26 +104,26 @@ public class BreathingSystem : MonoBehaviour
         speedCirclePlayer = speedCirclePlayer2;
 
     }
-    public IEnumerator BreathScaling(float Speed){
-        Debug.Log("breathSpeed" + breathSpeed);
-        Debug.Log("BreathCurve" + breathCurve);
-        Debug.Log("Speed circle player" + speedCirclePlayer);
-        while (true){
-            Debug.Log("outerscaleBefore" + outerCircleTransform.localScale);
-            outerCircleTransform.localScale += new Vector3(Speed * breathCurve.Evaluate(Time.time), Speed * breathCurve.Evaluate(Time.time), 0.0f);
-            Debug.Log("outerscale" + outerCircleTransform.localScale);
-            yield return new WaitForSeconds(0.01f);
-            if (outerCircleTransform.localScale.x >= 1.5f)
+    public IEnumerator BreathScaling(float Speed)
+    {
+        while (true)
+        {
+            //Debug.Log("outerscaleBefore" + outerCircleTransform.localScale);
+            outerCircleTransform.localScale += new Vector3(Speed * breathCurve.Evaluate(Time.time), Speed * breathCurve.Evaluate(Time.time), 1.0f);
+            outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), Mathf.Clamp(outerCircleTransform.localScale.y, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), 1.0f);
+            //Debug.Log("outerscale" + outerCircleTransform.localScale);
+            yield return new WaitForSeconds(0.02f);
+            if (outerCircleTransform.localScale.x >= breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value) || outerCircleTransform.localScale.x <= breathCurve.Evaluate(breathCurve.keys[0].value))
             {
                 Speed = -Speed;
-                Debug.Log("shit here=");
+                Debug.Log(Speed);
             }
-
-            if(outerCircleTransform.localScale.x <= originalScale.x)
+            /*
+            if (outerCircleTransform.localScale.x <= originalScale.x)
             {
                 Speed = -Speed;
             }
-
+            */
 
         }
     }
