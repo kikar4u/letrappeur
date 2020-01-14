@@ -13,12 +13,12 @@ public class BreathingSystem : MonoBehaviour
     // cercle avatar
     [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
+
     [Range(0.01f, 0.1f)]
     public float breathSpeed;
     public float scaleTimeStep;
     public float capPlayerInnerCircleMax;
     public float capPlayerInnerCircleMin;
-    Vector3 originalScale;
 
     #region Input
     float LeftTrigger;
@@ -38,6 +38,13 @@ public class BreathingSystem : MonoBehaviour
     [SerializeField] Collider2D playerBreathCollider;
     #endregion
 
+    [Header("Success Conditions")]
+    public float goalAmount;
+    public float pointsPerSecond;
+    private float pointsAmount;
+
+    [HideInInspector] public bool hasBeenInstantiated;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -46,6 +53,9 @@ public class BreathingSystem : MonoBehaviour
 
         outerCircleTransform.localScale = new Vector3(breathCurve.Evaluate(breathCurve.keys[1].value), breathCurve.Evaluate(breathCurve.keys[1].value), 1.0f);
         StartCoroutine(BreathScaling(breathSpeed));
+
+        pointsAmount = 0f;
+        hasBeenInstantiated = false;
     }
 
     private void Update()
@@ -80,6 +90,12 @@ public class BreathingSystem : MonoBehaviour
         {
             //Le joueur respire bien
             Debug.Log("Tu respires bien, gg !");
+            pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
+            Debug.Log(pointsAmount);
+            if (pointsAmount >= goalAmount)
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -110,6 +126,14 @@ public class BreathingSystem : MonoBehaviour
             {
                 Speed = -Speed;
             }
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && !hasBeenInstantiated)
+        {
 
         }
     }

@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class TriggerBreathing : MonoBehaviour
 {
-    Player player;
+    [SerializeField] BreathingSystem breathingSystem;
+
+    private void Start()
+    {
+        breathingSystem.gameObject.SetActive(false);
+    }
+    /*Player player;
 
     [SerializeField] GameObject breathingHUD;
     [SerializeField] GameObject HUD;
@@ -18,7 +24,7 @@ public class TriggerBreathing : MonoBehaviour
     [SerializeField] float capPlayerInnerCircleMin;
     //Vector3 originalScale;
 
-    bool hasBeenInstantiated;
+    
     #region Input
     float LeftTrigger;
     float RightTrigger;
@@ -26,17 +32,6 @@ public class TriggerBreathing : MonoBehaviour
 
     [SerializeField] AnimationCurve breathCurve;
     [SerializeField] float speedCirclePlayer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        hasBeenInstantiated = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -58,6 +53,15 @@ public class TriggerBreathing : MonoBehaviour
             Debug.Log("C'est le joueur qui passe par là");
             //Instantiate(BreathingHUD, HUD.transform);
         }
-
+    }*/
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("trigger");
+        if (!breathingSystem.hasBeenInstantiated && other.gameObject.tag == "Player")
+        {
+            Debug.Log("Player trigger");
+            breathingSystem.gameObject.SetActive(true);
+            breathingSystem.hasBeenInstantiated = true;
+        }
     }
 }

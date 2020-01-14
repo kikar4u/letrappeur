@@ -393,6 +393,8 @@ MonoBehaviour:
   outerMarginCollider: {fileID: 6508800208675506319}
   innerMarginCollider: {fileID: 6508800209217821200}
   playerBreathCollider: {fileID: 6508800210682578079}
+  goalAmount: 0
+  pointsPerSecond: 0
 --- !u!223 &2788448680402097961
 Canvas:
   m_ObjectHideFlags: 0

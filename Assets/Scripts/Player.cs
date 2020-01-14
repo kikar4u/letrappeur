@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     #endregion
-    
+
     #region Stats
 
     #endregion
