@@ -13,9 +13,13 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     #endregion
-    
+
     #region Stats
 
+    #endregion
+
+    #region Checkpoint
+    public Vector3 checkpointPosition;
     #endregion
     private Vector3 moveDirection = Vector3.zero;
 
@@ -27,6 +31,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         CharacterWalk();
+        if (Input.GetKeyDown("p"))
+        {
+            Respawn();
+        }
+
     }
     void CharacterWalk()
     {
@@ -52,5 +61,10 @@ public class Player : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void Respawn()
+    {
+        transform.position = checkpointPosition;
     }
 }
