@@ -11,7 +11,7 @@ public class BreathingSystem : MonoBehaviour
     [SerializeField] Image playerCircle;
     RectTransform playerCircleTransform;
     // cercle avatar
-    [SerializeField] Image outerCircle;
+    [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
     [Range(0.01f, 0.1f)]
     public float breathSpeed;
@@ -41,7 +41,7 @@ public class BreathingSystem : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerCircleTransform = playerCircle.GetComponent<RectTransform>();
-        outerCircleTransform = outerCircle.GetComponent<RectTransform>();
+        outerCircleTransform = donutCircle.GetComponent<RectTransform>();
 
         //originalScale = outerCircleTransform.localScale;
         outerCircleTransform.localScale = new Vector3(breathCurve.Evaluate(breathCurve.keys[1].value), breathCurve.Evaluate(breathCurve.keys[1].value), 1.0f);
@@ -85,12 +85,12 @@ public class BreathingSystem : MonoBehaviour
         && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
         {
             //Le joueur respire bien
-            //Debug.Log("Tu respires bien, gg !");
+            Debug.Log("Tu respires bien, gg !");
         }
         else
         {
             //Le joueur respire mal
-            //Debug.Log("Tu respires mal connard !");
+            Debug.Log("Tu respires mal connard !");
         }
     }
 
@@ -116,7 +116,6 @@ public class BreathingSystem : MonoBehaviour
             if (outerCircleTransform.localScale.x >= breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value) || outerCircleTransform.localScale.x <= breathCurve.Evaluate(breathCurve.keys[0].value))
             {
                 Speed = -Speed;
-                Debug.Log(Speed);
             }
             /*
             if (outerCircleTransform.localScale.x <= originalScale.x)
