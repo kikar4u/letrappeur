@@ -13,12 +13,12 @@ public class BreathingSystem : MonoBehaviour
     // cercle avatar
     [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
+
     [Range(0.01f, 0.1f)]
     public float breathSpeed;
     public float scaleTimeStep;
     public float capPlayerInnerCircleMax;
     public float capPlayerInnerCircleMin;
-    Vector3 originalScale;
 
     #region Input
     float LeftTrigger;
@@ -37,15 +37,25 @@ public class BreathingSystem : MonoBehaviour
     [SerializeField] Collider2D innerMarginCollider;
     [SerializeField] Collider2D playerBreathCollider;
     #endregion
+
+    [Header("Success Conditions")]
+    public float goalAmount;
+    public float pointsPerSecond;
+    private float pointsAmount;
+
+    [HideInInspector] public bool hasBeenInstantiated;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         playerCircleTransform = playerCircle.GetComponent<RectTransform>();
         outerCircleTransform = donutCircle.GetComponent<RectTransform>();
 
-        //originalScale = outerCircleTransform.localScale;
         outerCircleTransform.localScale = new Vector3(breathCurve.Evaluate(breathCurve.keys[1].value), breathCurve.Evaluate(breathCurve.keys[1].value), 1.0f);
         StartCoroutine(BreathScaling(breathSpeed));
+
+        pointsAmount = 0f;
+        hasBeenInstantiated = false;
     }
 
     private void Update()
@@ -59,11 +69,7 @@ public class BreathingSystem : MonoBehaviour
 
             // NOTE : J'ai mis un 2 pour augmenter la vitesse, mais il doit y avoir moyen de faire autrement
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-            //if (innerCircle.rectTransform.localScale.x >= capPlayerInnerCircleMin)
-            //{
             playerCircleTransform.localScale -= new Vector3((LeftTrigger + RightTrigger) * Time.deltaTime * 2, (LeftTrigger + RightTrigger) * Time.deltaTime * 2, 0.0f);
-            //}
-
 
         }
         // sinon on fait rétrécir le cercle
@@ -71,10 +77,8 @@ public class BreathingSystem : MonoBehaviour
         {
             // cap pour par que le cercle ne dépasse de l'écran si le joueur ne fait rien
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-            //if (innerCircle.rectTransform.localScale.x <= capPlayerInnerCircleMax)
-            //{
+
             playerCircleTransform.localScale += new Vector3((speedCirclePlayer) * Time.deltaTime, (speedCirclePlayer) * Time.deltaTime, 0.0f);
-            //}
 
         }
         //Cap circle player
@@ -86,6 +90,12 @@ public class BreathingSystem : MonoBehaviour
         {
             //Le joueur respire bien
             Debug.Log("Tu respires bien, gg !");
+            pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
+            Debug.Log(pointsAmount);
+            if (pointsAmount >= goalAmount)
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
@@ -108,21 +118,22 @@ public class BreathingSystem : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log("outerscaleBefore" + outerCircleTransform.localScale);
             outerCircleTransform.localScale += new Vector3(Speed * breathCurve.Evaluate(Time.time), Speed * breathCurve.Evaluate(Time.time), 1.0f);
             outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), Mathf.Clamp(outerCircleTransform.localScale.y, breathCurve.Evaluate(0), breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value)), 1.0f);
-            //Debug.Log("outerscale" + outerCircleTransform.localScale);
+
             yield return new WaitForSeconds(0.02f);
             if (outerCircleTransform.localScale.x >= breathCurve.Evaluate(breathCurve.keys[breathCurve.keys.Length - 1].value) || outerCircleTransform.localScale.x <= breathCurve.Evaluate(breathCurve.keys[0].value))
             {
                 Speed = -Speed;
             }
-            /*
-            if (outerCircleTransform.localScale.x <= originalScale.x)
-            {
-                Speed = -Speed;
-            }
-            */
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player" && !hasBeenInstantiated)
+        {
 
         }
     }
