@@ -26,15 +26,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        
+
     }
 
     void Update()
     {
+
         CharacterWalk();
         if (Input.GetKeyDown("p"))
         {
             Respawn();
         }
+        gameObject.GetComponent<InteractionRaycast>().interactionAnim();
 
     }
     void CharacterWalk()
