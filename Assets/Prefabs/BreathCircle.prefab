@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCircle: {fileID: 6508800210682578077}
-  donutCircle: {fileID: 5020577773153880526}
+  outerCircle: {fileID: 6508800210682578077}
   breathSpeed: 0
   scaleTimeStep: 0
   capPlayerInnerCircleMax: 0
