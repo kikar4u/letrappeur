@@ -5,13 +5,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region Components
-    CharacterController characterController;
+    [HideInInspector] public CharacterController characterController;
     #endregion
 
     #region Movements
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
+    [HideInInspector] public bool hasMovementControls;
     #endregion
 
     #region Stats
@@ -26,13 +27,11 @@ public class Player : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        
-
+        hasMovementControls = true;
     }
 
     void Update()
     {
-
         CharacterWalk();
         if (Input.GetKeyDown("p"))
         {
@@ -64,7 +63,10 @@ public class Player : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller
-        characterController.Move(moveDirection * Time.deltaTime);
+        if (hasMovementControls)
+        {
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
     }
 
     public void Respawn()

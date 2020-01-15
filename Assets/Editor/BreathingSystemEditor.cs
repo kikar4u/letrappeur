@@ -7,18 +7,26 @@ using UnityEditor;
 public class BreathingSystemEditor : Editor
 {
     SerializedProperty canWalkDuringBreathing;
+    SerializedProperty walkSpeedDuringBreathing;
     private void OnEnable()
     {
         canWalkDuringBreathing = serializedObject.FindProperty("canWalkDuringBreathing");
+        walkSpeedDuringBreathing = serializedObject.FindProperty("walkSpeedDuringBreathing");
+
     }
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         BreathingSystem breathingSystem = (BreathingSystem)target;
 
-        if (canWalkDuringBreathing.boolValue)
+        if (breathingSystem.canWalkDuringBreathing)
         {
-            breathingSystem.walkSpeedDuringBreathing = EditorGUILayout.FloatField("Walkspeed during breathing", breathingSystem.walkSpeedDuringBreathing);
+            breathingSystem.walkSpeedDuringBreathing = EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f,0.1f);
+        }
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(breathingSystem);
         }
     }
 }

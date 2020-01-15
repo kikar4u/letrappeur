@@ -360,11 +360,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCircle: {fileID: 6508800210682578077}
+  minPlayerCircleScale: 0.5
   donutCircle: {fileID: 5020577773153880526}
-  breathSpeed: 0
-  scaleTimeStep: 0
-  capPlayerInnerCircleMax: 0
-  capPlayerInnerCircleMin: 0
+  releasedBreathSpeed: 0
+  controledBreathSpeed: 0
+  outerCircleSpeed: 0
   breathCurve:
     serializedVersion: 2
     m_Curve:
@@ -395,6 +395,9 @@ MonoBehaviour:
   playerBreathCollider: {fileID: 6508800210682578079}
   goalAmount: 0
   pointsPerSecond: 0
+  hasBeenInstantiated: 0
+  canWalkDuringBreathing: 0
+  walkSpeedDuringBreathing: 0
 --- !u!223 &2788448680402097961
 Canvas:
   m_ObjectHideFlags: 0

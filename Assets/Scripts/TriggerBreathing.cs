@@ -46,7 +46,8 @@ public class TriggerBreathing : MonoBehaviour
             breathingVar.breathCurve = breathCurve;
             breathingVar.speedCirclePlayer = speedCirclePlayer;
             // on appelle la fonction avec les paramètres mis dans le trigger
-            // breathingHUD.GetComponent<BreathingSystem>().CallBreathingSystem(breathSpeed, scaleTimeStep, capPlayerInnerCircleMax, capPlayerInnerCircleMin, breathCurve, speedCirclePlayer);
+            // breathingHUD.GetComponent<BreathingSystem>().CallBreathingSystem(breathSpeed, 
+            , capPlayerInnerCircleMax, capPlayerInnerCircleMin, breathCurve, speedCirclePlayer);
             Instantiate(breathingHUD, HUD.transform);
             hasBeenInstantiated = true;
             // on appelle la fonction, avec les paramètres pour ce trigger
