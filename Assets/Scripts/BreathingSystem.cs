@@ -45,6 +45,8 @@ public class BreathingSystem : MonoBehaviour
 
     [HideInInspector] public bool hasBeenInstantiated;
 
+    public bool canWalkDuringBreathing;
+    [HideInInspector] public float walkSpeedDuringBreathing;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -56,6 +58,8 @@ public class BreathingSystem : MonoBehaviour
 
         pointsAmount = 0f;
         hasBeenInstantiated = false;
+
+        Debug.Log(walkSpeedDuringBreathing);
     }
 
     private void Update()
@@ -77,7 +81,6 @@ public class BreathingSystem : MonoBehaviour
         {
             // cap pour par que le cercle ne dépasse de l'écran si le joueur ne fait rien
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-
             playerCircleTransform.localScale += new Vector3((speedCirclePlayer) * Time.deltaTime, (speedCirclePlayer) * Time.deltaTime, 0.0f);
 
         }
