@@ -17,16 +17,29 @@ public class Player : MonoBehaviour
     #region Stats
 
     #endregion
+
+    #region Checkpoint
+    public Vector3 checkpointPosition;
+    #endregion
     private Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        
+
     }
 
     void Update()
     {
+
         CharacterWalk();
+        if (Input.GetKeyDown("p"))
+        {
+            Respawn();
+        }
+        gameObject.GetComponent<InteractionRaycast>().interactionAnim();
+
     }
     void CharacterWalk()
     {
@@ -52,5 +65,10 @@ public class Player : MonoBehaviour
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
+    }
+
+    public void Respawn()
+    {
+        transform.position = checkpointPosition;
     }
 }
