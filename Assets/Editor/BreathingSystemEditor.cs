@@ -21,9 +21,9 @@ public class BreathingSystemEditor : Editor
 
         if (breathingSystem.canWalkDuringBreathing)
         {
-            breathingSystem.walkSpeedDuringBreathing = EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f,0.1f);
+            breathingSystem.walkSpeedDuringBreathing = EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f, 0.1f);
         }
-
+        
         if (GUI.changed)
         {
             EditorUtility.SetDirty(breathingSystem);
