@@ -53,7 +53,7 @@ public class BreathingSystem : MonoBehaviour
 
     [Header("Mouvement pendant la respiration")]
     public bool canWalkDuringBreathing;
-    [Range(0,0.1f)]
+    [Range(0, 0.1f)]
     [HideInInspector] public float walkSpeedDuringBreathing;
     void Start()
     {
@@ -113,7 +113,7 @@ public class BreathingSystem : MonoBehaviour
         else
         {
             //Le joueur respire mal
-            
+
         }
     }
 
