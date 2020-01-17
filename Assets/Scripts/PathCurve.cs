@@ -39,7 +39,7 @@ public class PathCurve : MonoBehaviour
 
                 //Find the coordinates between the control points with a Catmull-Rom spline
                 Vector3 newPos = DeCasteljausAlgorithm(t);
-                Debug.Log("Nombre de loops : " + loops);
+                //Debug.Log("Nombre de loops : " + loops);
                 //Draw this line segment
                 Gizmos.DrawLine(lastPos, newPos);
 
