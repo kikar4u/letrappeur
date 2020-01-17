@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     [Range(0, 1)]
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
     [SerializeField] private float rotationSmoothness;
+    [Tooltip("Angle entre le forward du personnage avec la position du prochain waypoint sous lequel le joueur pourra bouger")]
+    [Range(0, 180)]
+    [SerializeField] private float moveAfterRotationDegreeThreshold;
+    private float forwardWayPointAngle;
     #endregion
 
     #region Stats
@@ -45,6 +49,7 @@ public class Player : MonoBehaviour
     {
         //CharacterWalk();
         CharacterWalkFollowingPath();
+        forwardWayPointAngle = Vector3.Angle(new Vector3(closestWayPointNode.waypointPosition.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
         if (Input.GetKeyDown("p"))
         {
             Respawn();
@@ -86,8 +91,11 @@ public class Player : MonoBehaviour
         if (transform.position.x < (closestWayPointNode.waypointPosition.position.x + 0.2f) && transform.position.x > (closestWayPointNode.waypointPosition.position.x - 0.2f)
         || Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
         {
-            direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-            UpdateWayPointTarget(direction);
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                UpdateWayPointTarget(direction);
+            }
         }
 
         moveDirection = new Vector3();
@@ -110,12 +118,16 @@ public class Player : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
 
-        if (hasMovementControls && direction != 0)
+        if (hasMovementControls)
         {
-            characterController.Move(moveDirection * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(closestWayPointNode.waypointPosition.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.position.z - transform.position.z)), rotationSmoothness);
+            //Debug.Log(Vector3.Angle(transform.eulerAngles, closestWayPointNode.waypointPosition.position));
+            if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
+                characterController.Move(moveDirection * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation,
+                Quaternion.LookRotation(new Vector3(closestWayPointNode.waypointPosition.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.position.z - transform.position.z)),
+                rotationSmoothness);
+            //transform.LookAt(closestWayPointNode.waypointPosition.position);
         }
-
     }
 
     // direction > 0 = right
@@ -124,29 +136,35 @@ public class Player : MonoBehaviour
         //If we go right
         if (direction > 0)
         {
-            closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
-            //For all waypoints after the current one
-            for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i < path.waypointCurves.Length; i++)
+            if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
             {
-                //Check the closest one
-                if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
+                closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
+                //For all waypoints after the current one
+                for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i < path.waypointCurves.Length; i++)
                 {
-                    closestWayPointNode = path.waypointCurves[i];
-                    Debug.Log("Go right & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
+                    //Check the closest one
+                    if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
+                    {
+                        closestWayPointNode = path.waypointCurves[i];
+                        Debug.Log("Go right & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
+                    }
                 }
             }
         }
         //If we go left
         else if (direction < 0)
         {
-            closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) - 1];
-            //For all waypoints before the current one
-            for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i > 0; i--)
+            if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) > 0)
             {
-                if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
+                closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) - 1];
+                //For all waypoints before the current one
+                for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i > 0; i--)
                 {
-                    closestWayPointNode = path.waypointCurves[i];
-                    Debug.Log("Go left & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
+                    if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
+                    {
+                        closestWayPointNode = path.waypointCurves[i];
+                        Debug.Log("Go left & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
+                    }
                 }
             }
         }

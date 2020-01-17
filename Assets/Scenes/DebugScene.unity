@@ -274,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 2723691105165628647, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2723691105165628647, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
         type: 3}
@@ -324,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 7930880966779077584, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7930880966779077584, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
         type: 3}
@@ -354,7 +354,12 @@ PrefabInstance:
     - target: {fileID: 3303123551774900884, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
         type: 3}
       propertyPath: rotationSmoothness
-      value: 0.08
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3303123551774900884, guid: a3f7d925ef6d1a941a2cb98c94c3c945,
+        type: 3}
+      propertyPath: moveAfterRotationDegreeThreshold
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7035680775994309960, guid: a3f7d925ef6d1a941a2cb98c94c3c945, type: 3}
