@@ -120,7 +120,6 @@ public class Player : MonoBehaviour
 
         if (hasMovementControls)
         {
-            //Debug.Log(Vector3.Angle(transform.eulerAngles, closestWayPointNode.waypointPosition.position));
             if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
                 characterController.Move(moveDirection * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation,
