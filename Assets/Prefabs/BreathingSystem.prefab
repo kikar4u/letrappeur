@@ -370,6 +370,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: TriggerBox
       objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 4480566234277384459, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: m_LocalPosition.x
