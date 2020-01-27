@@ -21,9 +21,6 @@ public class BreathingSystem : MonoBehaviour
     public float controledBreathSpeed;
     [Range(0.2f, 2f)]
     public float outerCircleSpeed;
-    //public float scaleTimeStep;
-    //public float capPlayerInnerCircleMax;
-    //public float capPlayerInnerCircleMin;
 
     #region Input
     float LeftTrigger;
@@ -53,7 +50,7 @@ public class BreathingSystem : MonoBehaviour
 
     [Header("Mouvement pendant la respiration")]
     public bool canWalkDuringBreathing;
-    [Range(0, 0.1f)]
+    [Range(0, 180f)]
     [HideInInspector] public float walkSpeedDuringBreathing;
     void Start()
     {
@@ -101,7 +98,7 @@ public class BreathingSystem : MonoBehaviour
             pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
             if (canWalkDuringBreathing)
             {
-                player.characterController.Move(Vector3.right * walkSpeedDuringBreathing);
+                player.WalkFollowingPath(walkSpeedDuringBreathing);
             }
             //Debug.Log(pointsAmount);
             if (pointsAmount >= goalAmount)
@@ -133,7 +130,6 @@ public class BreathingSystem : MonoBehaviour
         {
             outerCircleTransform.localScale += new Vector3(Speed * breathCurve.Evaluate(Time.time) * Time.deltaTime, Speed * breathCurve.Evaluate(Time.time) * Time.deltaTime, 1.0f);
             outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathCurve[0].value, breathCurve[breathCurve.length - 1].value), Mathf.Clamp(outerCircleTransform.localScale.y, breathCurve[0].value, breathCurve[breathCurve.length - 1].value), 1.0f);
-            Debug.Log(outerCircleTransform.localScale);
             yield return new WaitForSeconds(0.05f);
             if (outerCircleTransform.localScale.x >= breathCurve[breathCurve.length - 1].value || outerCircleTransform.localScale.x <= breathCurve[0].value)
             {

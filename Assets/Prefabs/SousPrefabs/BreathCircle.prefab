@@ -362,9 +362,9 @@ MonoBehaviour:
   playerCircle: {fileID: 6508800210682578077}
   minPlayerCircleScale: 0.5
   donutCircle: {fileID: 5020577773153880526}
-  releasedBreathSpeed: 0
-  controledBreathSpeed: 0
-  outerCircleSpeed: 0
+  releasedBreathSpeed: 0.85
+  controledBreathSpeed: 1.11
+  outerCircleSpeed: 0.77
   breathCurve:
     serializedVersion: 2
     m_Curve:

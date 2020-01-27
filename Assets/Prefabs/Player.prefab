@@ -124,6 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c07acf1f2d6ee645a12f92a7996a5fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
+  characterController: {fileID: 0}
+  speed: 30
   jumpSpeed: 8
   gravity: 20
+  hasMovementControls: 0
+  rotationSmoothness: 0
+  moveAfterRotationDegreeThreshold: 0
+  checkpointPosition: {x: 0, y: 0, z: 0}

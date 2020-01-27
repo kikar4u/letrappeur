@@ -57,10 +57,8 @@ public class TriggerBreathing : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger");
         if (!breathingSystem.hasBeenInstantiated && other.gameObject.tag == "Player")
         {
-            Debug.Log("Player trigger");
             breathingSystem.gameObject.SetActive(true);
             breathingSystem.hasBeenInstantiated = true;
         }
