@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     [HideInInspector] public bool hasMovementControls;
+    [HideInInspector] public bool canMove;
     private PathCurve path;
     private WaypointCurve closestWayPointNode;
     private int direction;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
         characterController = GetComponent<CharacterController>();
         hasMovementControls = true;
+        canMove = true;
         closestWayPointNode = path.waypointCurves[0];
         transform.position = closestWayPointNode.waypointPosition.transform.position;
     }
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
             Respawn();
         }
 
-        if (!hasMovementControls)
+        if (!hasMovementControls && canMove)
         {
             Rotate();
         }
@@ -98,6 +100,17 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Waypoint")
+        {
+            if (other.gameObject == path.waypointCurves[0].waypointPosition && direction == -1 || other.gameObject == path.waypointCurves[path.waypointCurves.Length - 1].waypointPosition && direction == 1)
+            {
+                canMove = false;
+            }
+        }
+    }
+
     public void WalkFollowingPath(float _speed)
     {
         if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
@@ -114,7 +127,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && canMove)
         {
             //If we want to move relatively to the next waypoint
             // moveDirection = new Vector3(
@@ -140,15 +153,14 @@ public class Player : MonoBehaviour
             }
 
             moveDirection *= _speed;
+            Rotate();
         }
-
         moveDirection.y -= gravity * Time.deltaTime;
 
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
         {
             characterController.Move(moveDirection * Time.deltaTime);
         }
-        Rotate();
     }
 
     public void Rotate()
@@ -167,7 +179,14 @@ public class Player : MonoBehaviour
             //On verifie qu'on ne soit pas à une extrémité
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
             {
+                if (!canMove)
+                    canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
+            }
+            else
+            {
+                Debug.Log("On est à une limite");
+                canMove = false;
             }
         }
         //Si on va à gauche
@@ -175,7 +194,14 @@ public class Player : MonoBehaviour
         {
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) > 0)
             {
+                if (!canMove)
+                    canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) - 1];
+            }
+            else
+            {
+                Debug.Log("On est à une limite");
+                canMove = false;
             }
         }
     }
