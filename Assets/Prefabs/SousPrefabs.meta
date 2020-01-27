@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Prefabs/SousPrefabs.meta
 guid: 81bab53e8e544bf478cf3d7824186f5b
+=======
+guid: b0789f75a491c2c458a4eaa353ed06f3
+>>>>>>> 70edc85b2970b56fdbd2dc2288c5bf54ec1a7974:Assets/Cinematic.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
