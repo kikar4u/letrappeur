@@ -22,10 +22,10 @@ public class BreathingSystem : MonoBehaviour
     [Range(0.2f, 2f)]
     public float outerCircleSpeed;
 
+    #endregion
     #region Input
     float LeftTrigger;
     float RightTrigger;
-    #endregion
     #endregion
 
     #region Curve
@@ -42,9 +42,16 @@ public class BreathingSystem : MonoBehaviour
 
     #region Success
     [Header("Success Conditions")]
-    public float goalAmount;
+    public float requiredTimeSpendInsideBounds;
     public float pointsPerSecond;
     private float pointsAmount;
+    #endregion
+
+    #region Lose
+    [Header("Lose Conditions")]
+    [Tooltip("Au bout de X secondes, le joueur aura raté.")]
+    public float requiredTimeSpendOutsideBounds;
+    private float outsideBoundsTimer;
     #endregion
     [HideInInspector] public bool hasBeenInstantiated;
 
@@ -54,6 +61,7 @@ public class BreathingSystem : MonoBehaviour
     [HideInInspector] public float walkSpeedDuringBreathing;
     void Start()
     {
+        outsideBoundsTimer = 0f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.hasMovementControls = false;
         playerCircleTransform = playerCircle.GetComponent<RectTransform>();
@@ -64,14 +72,27 @@ public class BreathingSystem : MonoBehaviour
 
         pointsAmount = 0f;
         hasBeenInstantiated = false;
-
     }
 
     private void Update()
     {
-        LeftTrigger = Input.GetAxis("LeftTrigger");
-        RightTrigger = Input.GetAxis("RightTrigger");
+        float LeftTrigger = Input.GetAxis("LeftTrigger");
+        float RightTrigger = Input.GetAxis("RightTrigger");
 
+        //SmoothBreathing(LeftTrigger, RightTrigger);
+        RelativeBreathing(LeftTrigger, RightTrigger);
+        CheckCircleInBounds();
+    }
+
+    private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
+    {
+        float lerpValue = Mathf.Lerp(breathCurve[0].value, breathCurve[breathCurve.length - 1].value, leftTriggerInput + rightTriggerInput);
+        Vector3 scale = new Vector3(lerpValue, lerpValue, 0f);
+        playerCircleTransform.localScale = scale;
+    }
+
+    private void SmoothBreathing(float leftTriggerInput, float rightTriggerInput)
+    {
         // si leurs valeurs sont plus grand (donc appui de la part du joueur) on grandit le cercle
         if (LeftTrigger >= 0.1f || RightTrigger >= 0.1f)
         {
@@ -90,30 +111,7 @@ public class BreathingSystem : MonoBehaviour
         //Cap circle player
         playerCircleTransform.localScale = new Vector3(Mathf.Clamp(playerCircleTransform.localScale.x, minPlayerCircleScale, breathCurve[breathCurve.length - 1].value), Mathf.Clamp(playerCircleTransform.localScale.y, minPlayerCircleScale, breathCurve.keys[breathCurve.length - 1].value), 1.0f);
 
-        //Si le cercle du player est dans le cercle de l'outer
-        if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
-        && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
-        {
-            //Le joueur respire bien
-            pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
-            if (canWalkDuringBreathing)
-            {
-                player.WalkFollowingPath(walkSpeedDuringBreathing);
-            }
-            //Debug.Log(pointsAmount);
-            if (pointsAmount >= goalAmount)
-            {
-                player.hasMovementControls = true;
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            //Le joueur respire mal
-
-        }
     }
-
     public void CallBreathingSystem(float breathSpeed2, float scaleTimeStep2, float capPlayerInnerCircleMax2, float capPlayerInnerMin2, AnimationCurve breathCurve2, float speedCirclePlayer2)
     {
 
@@ -124,6 +122,49 @@ public class BreathingSystem : MonoBehaviour
         speedCirclePlayer = speedCirclePlayer2;
 
     }
+
+    private void CheckCircleInBounds()
+    {
+        //Si le cercle du player est dans le cercle de l'outer
+        if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
+                && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
+        {
+            //Le joueur respire bien
+            pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
+
+            //On est gentil avec le joueur : si il est à l'intérieur et que son outsideTimer est supérieur à 0, il diminue 
+            if (outsideBoundsTimer >= 0f)
+            {
+                outsideBoundsTimer -= Time.deltaTime;
+                Mathf.Clamp(outsideBoundsTimer, 0f, Mathf.Infinity);
+                Debug.Log(outsideBoundsTimer);
+            }
+            if (canWalkDuringBreathing)
+            {
+                player.WalkFollowingPath(walkSpeedDuringBreathing);
+            }
+            //Debug.Log(pointsAmount);
+            if (pointsAmount >= requiredTimeSpendInsideBounds)
+            {
+                player.hasMovementControls = true;
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            //Le joueur respire mal
+            outsideBoundsTimer += Time.deltaTime;
+            if (outsideBoundsTimer <= requiredTimeSpendOutsideBounds)
+            {
+                Debug.Log(outsideBoundsTimer);
+            }
+            if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
+            {
+                Debug.Log("J'ai perdu...");
+            }
+        }
+    }
+
     public IEnumerator BreathScaling(float Speed)
     {
         while (true)
