@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 0.0001
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4844,7 +4844,7 @@ GameObject:
   - component: {fileID: 1160395272442005622}
   - component: {fileID: 1160395272442005385}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Blizzard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4857,14 +4857,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160395272442005621}
-  m_LocalRotation: {x: -0, y: -0.72130084, z: -0, w: 0.69262195}
+  m_LocalRotation: {x: 0, y: -0.721301, z: 0, w: 0.6926217}
   m_LocalPosition: {x: -0.60104084, y: 13, z: 19.650496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1160395271979184563}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -47.324, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -92.324005, z: 0}
 --- !u!198 &1160395272442005623
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5698,7 +5698,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 150
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2

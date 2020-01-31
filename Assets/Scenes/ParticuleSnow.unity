@@ -5127,6 +5127,66 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1539944798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539944801}
+  - component: {fileID: 1539944800}
+  - component: {fileID: 1539944799}
+  m_Layer: 0
+  m_Name: BlizzardTriggered
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1539944799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539944798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cda4a6f8008f414eb443531128b48da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blizzardObject: {fileID: 2082442767}
+  weather: 0
+  speed: 0
+--- !u!65 &1539944800
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539944798}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1539944801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539944798}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.1, y: 1.25, z: -0.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627499757 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7921771790213512997, guid: 73e24a650e053204d9546fcf1b853a93,
@@ -10039,6 +10099,12 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &2082442767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1160395272442005621, guid: 62332abfd181356489b3df5c93b2fd26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1160395273802166152}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1160395273802166152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10111,5 +10177,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: ab73bbeaca1714c489dec6056717cb81, type: 2}
+    - target: {fileID: 1160395272442005623, guid: 62332abfd181356489b3df5c93b2fd26,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160395271979184562, guid: 62332abfd181356489b3df5c93b2fd26,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160395271979184562, guid: 62332abfd181356489b3df5c93b2fd26,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62332abfd181356489b3df5c93b2fd26, type: 3}
