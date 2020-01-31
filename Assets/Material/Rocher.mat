@@ -8,23 +8,31 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rocher
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 44e3aeb5178bad244b60beb161622706,
+    type: 3}
   m_ShaderKeywords: _SPECULAR_SETUP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2050
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_13D44C23:
+        m_Texture: {fileID: 2800000, guid: 70b758db94526334780e4131f99b6ec6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - Texture2D_651779F1:
-        m_Texture: {fileID: 2800000, guid: d6288dc57dbeaf245947cf4566316671, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_8CAAA02E:
+        m_Texture: {fileID: 2800000, guid: 859496093b7632749a844ba18bdb0216, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_920F3153:
         m_Texture: {fileID: 2800000, guid: 859496093b7632749a844ba18bdb0216, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -57,7 +65,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_664FFF17: 1
+    - Vector1_237B75A8: 1.8
+    - Vector1_29C729E5: 5.5
+    - Vector1_664FFF17: 0.5
+    - Vector1_CBC9EB24: 0.48
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
@@ -95,7 +106,8 @@ Material:
     - _WorkflowMode: 0
     - _ZWrite: 1
     m_Colors:
-    - Vector3_E8188622: {r: 1, g: 1, b: 1, a: 0}
+    - Vector3_8A2BB433: {r: 1, g: 1, b: 1, a: 0}
+    - Vector3_E8188622: {r: 1, g: 1.83, b: 0.71, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneManagers : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,8 @@ public class SceneManager : MonoBehaviour
     }
     public void PlayGame()
     {
-
+        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("GameManager"));
+        SceneManager.LoadScene("Level_1");
     }
     public void Options()
     {
