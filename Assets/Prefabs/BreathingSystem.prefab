@@ -131,6 +131,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182845967978411528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739513705058247362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105522097fefd4545ba7b35c657d5a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCircle: {fileID: 7739513705135131714}
+  minPlayerCircleScale: 0.5
+  donutCircle: {fileID: 8401198033314693393}
+  releasedBreathSpeed: 1.04
+  controledBreathSpeed: 1.25
+  outerCircleSpeed: 0.86
+  breathCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.2988205
+      value: 1.00462
+      inSlope: 4.3058324
+      outSlope: 4.3058324
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7147839
+      value: 3.5329404
+      inSlope: 4.0340934
+      outSlope: 4.0340934
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2572036
+    - serializedVersion: 3
+      time: 0.9990387
+      value: 4.008664
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speedCirclePlayer: 2
+  outerMarginCollider: {fileID: 7739513707125162064}
+  innerMarginCollider: {fileID: 7739513706581283535}
+  playerBreathCollider: {fileID: 7739513705135131712}
+  goalAmount: 2000
+  pointsPerSecond: 200
+  hasBeenInstantiated: 0
+  canWalkDuringBreathing: 0
+  walkSpeedDuringBreathing: 0
 --- !u!1001 &3547607235177859295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,26 +407,57 @@ PrefabInstance:
       propertyPath: speedCirclePlayer
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8737063863657677907, guid: 98bcb9051e092dd4ab988a22e62ff9b4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 98bcb9051e092dd4ab988a22e62ff9b4, type: 3}
+--- !u!1 &7739513705058247362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6508800210739816989, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3547607235177859295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &263619627892288474 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3644310796209939205, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
     type: 3}
   m_PrefabInstance: {fileID: 3547607235177859295}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5223024039678053516 stripped
+--- !u!114 &7739513705135131714 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8737063863657677907, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+  m_CorrespondingSourceObject: {fileID: 6508800210682578077, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
     type: 3}
   m_PrefabInstance: {fileID: 3547607235177859295}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 105522097fefd4545ba7b35c657d5a1b, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &7739513705135131712 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6508800210682578079, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3547607235177859295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8401198033314693393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5020577773153880526, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3547607235177859295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7739513706581283535 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6508800209217821200, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3547607235177859295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!58 &7739513707125162064 stripped
+CircleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6508800208675506319, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  m_PrefabInstance: {fileID: 3547607235177859295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4075215558324054457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -435,7 +535,7 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingSystem
       value: 
-      objectReference: {fileID: 5223024039678053516}
+      objectReference: {fileID: 1182845967978411528}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faccafac50dd34e468a89f6c92de9eb9, type: 3}
 --- !u!4 &477445011055212722 stripped

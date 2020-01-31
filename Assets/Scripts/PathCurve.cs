@@ -16,15 +16,15 @@ public class PathCurve : MonoBehaviour
     {
         for (int i = 1; i < waypointCurves.Length; i++)
         {
-            A = waypointCurves[i].waypointPosition.position;
+            A = waypointCurves[i].waypointPosition.transform.position;
             B = waypointCurves[i].bezierFirstPointPosition.position;
             C = waypointCurves[i].bezierSecondPointPosition.position;
             D = waypointCurves[i - 1].bezierFirstPointPosition.position;
             E = waypointCurves[i - 1].bezierSecondPointPosition.position;
-            F = waypointCurves[i - 1].waypointPosition.position;
+            F = waypointCurves[i - 1].waypointPosition.transform.position;
 
             //The Bezier curve's color
-            Gizmos.color = Color.white;
+            Gizmos.color = Color.green;
 
             //The start position of the line
             Vector3 lastPos = A;

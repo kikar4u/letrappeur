@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     [HideInInspector] public bool hasMovementControls;
+    [HideInInspector] public bool canMove;
     private PathCurve path;
     private WaypointCurve closestWayPointNode;
     private int direction;
@@ -23,16 +24,12 @@ public class Player : MonoBehaviour
     [Range(0, 180)]
     [SerializeField] private float moveAfterRotationDegreeThreshold;
     private float forwardWayPointAngle;
-    #endregion
-
-    #region Stats
-
+    private Vector3 moveDirection;
     #endregion
 
     #region Checkpoint
     public Vector3 checkpointPosition;
     #endregion
-    private Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
@@ -40,30 +37,35 @@ public class Player : MonoBehaviour
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
         characterController = GetComponent<CharacterController>();
         hasMovementControls = true;
+        canMove = true;
         closestWayPointNode = path.waypointCurves[0];
-
-        transform.position = closestWayPointNode.waypointPosition.position;
+        transform.position = closestWayPointNode.waypointPosition.transform.position;
     }
 
     void Update()
     {
         //CharacterWalk();
-        CharacterWalkFollowingPath();
-        forwardWayPointAngle = Vector3.Angle(new Vector3(closestWayPointNode.waypointPosition.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
+        gameObject.GetComponent<InteractionRaycast>().interactionAnim();
+        if (hasMovementControls)
+        {
+            WalkFollowingPath(speed);
+        }
+        forwardWayPointAngle = Vector3.Angle(new Vector3(closestWayPointNode.waypointPosition.transform.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.transform.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
+
         if (Input.GetKeyDown("p"))
         {
             Respawn();
         }
-        gameObject.GetComponent<InteractionRaycast>().interactionAnim();
 
+        if (!hasMovementControls && canMove)
+        {
+            Rotate();
+        }
     }
     void CharacterWalk()
     {
         if (characterController.isGrounded)
         {
-            // We are grounded, so recalculate
-            // move direction directly from axes
-
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
             moveDirection *= speed;
 
@@ -74,9 +76,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
         moveDirection.y -= gravity * Time.deltaTime;
 
         // Move the controller
@@ -86,20 +85,49 @@ public class Player : MonoBehaviour
         }
     }
 
-    void CharacterWalkFollowingPath()
+    private void OnTriggerEnter(Collider other)
     {
-        if (transform.position.x < (closestWayPointNode.waypointPosition.position.x + 0.2f) && transform.position.x > (closestWayPointNode.waypointPosition.position.x - 0.2f)
-        || Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
+        if (other.gameObject.tag == "Waypoint")
         {
-            if (Input.GetAxisRaw("Horizontal") != 0)
+            if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0)
+            {
+                if (Input.GetAxisRaw("Horizontal") != 0)
+                {
+                    direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                    UpdateWayPointTarget(direction);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Waypoint")
+        {
+            if (other.gameObject == path.waypointCurves[0].waypointPosition && direction == -1 || other.gameObject == path.waypointCurves[path.waypointCurves.Length - 1].waypointPosition && direction == 1)
+            {
+                canMove = false;
+            }
+        }
+    }
+
+    public void WalkFollowingPath(float _speed)
+    {
+        if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 && hasMovementControls)
             {
                 direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
                 UpdateWayPointTarget(direction);
             }
+            else if (!hasMovementControls)
+            {
+                direction = 1;
+                UpdateWayPointTarget(direction);
+            }
         }
 
-        moveDirection = new Vector3();
-        if (characterController.isGrounded)
+        if (characterController.isGrounded && canMove)
         {
             //If we want to move relatively to the next waypoint
             // moveDirection = new Vector3(
@@ -108,63 +136,72 @@ public class Player : MonoBehaviour
             //     Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * (closestWayPointNode.waypointPosition.position - transform.position).normalized.z);
 
             //If we want to move relatively to forward rotation
-            moveDirection = new Vector3(
-               Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * transform.forward.x,
-                0.0f,
-               Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * transform.forward.z);
+            if (hasMovementControls)
+            {
+                moveDirection = new Vector3(
+                    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.x,
+                    0.0f,
+                    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
 
-            moveDirection *= speed;
+            }
+            else
+            {
+                moveDirection = new Vector3(
+                    Time.deltaTime * transform.forward.x,
+                    0.0f,
+                    Time.deltaTime * transform.forward.z);
+            }
+
+            moveDirection *= _speed;
+            Rotate();
         }
-
         moveDirection.y -= gravity * Time.deltaTime;
 
-        if (hasMovementControls)
+        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
         {
-            if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
-                characterController.Move(moveDirection * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation,
-                Quaternion.LookRotation(new Vector3(closestWayPointNode.waypointPosition.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.position.z - transform.position.z)),
-                rotationSmoothness);
-            //transform.LookAt(closestWayPointNode.waypointPosition.position);
+            characterController.Move(moveDirection * Time.deltaTime);
         }
+    }
+
+    public void Rotate()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation,
+        Quaternion.LookRotation(new Vector3(closestWayPointNode.waypointPosition.transform.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.transform.position.z - transform.position.z)),
+        rotationSmoothness);
     }
 
     // direction > 0 = right
     void UpdateWayPointTarget(int direction)
     {
-        //If we go right
+        //Si on va à droite
         if (direction > 0)
         {
+            //On verifie qu'on ne soit pas à une extrémité
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
             {
+                if (!canMove)
+                    canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
-                //For all waypoints after the current one
-                for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i < path.waypointCurves.Length; i++)
-                {
-                    //Check the closest one
-                    if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
-                    {
-                        closestWayPointNode = path.waypointCurves[i];
-                        Debug.Log("Go right & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
-                    }
-                }
+            }
+            else
+            {
+                Debug.Log("On est à une limite");
+                canMove = false;
             }
         }
-        //If we go left
+        //Si on va à gauche
         else if (direction < 0)
         {
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) > 0)
             {
+                if (!canMove)
+                    canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) - 1];
-                //For all waypoints before the current one
-                for (int i = System.Array.IndexOf(path.waypointCurves, closestWayPointNode); i > 0; i--)
-                {
-                    if ((path.waypointCurves[i].waypointPosition.position - transform.position).magnitude < (closestWayPointNode.waypointPosition.position - transform.position).magnitude)
-                    {
-                        closestWayPointNode = path.waypointCurves[i];
-                        Debug.Log("Go left & closest waypoint = " + closestWayPointNode.waypointPosition.position + " positined at :" + closestWayPointNode.waypointPosition.position);
-                    }
-                }
+            }
+            else
+            {
+                Debug.Log("On est à une limite");
+                canMove = false;
             }
         }
     }

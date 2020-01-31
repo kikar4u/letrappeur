@@ -6,7 +6,7 @@ using UnityEngine;
 public class WaypointCurve
 {
     //The waypoint data object for the bezier curve path
-    public Transform waypointPosition;
+    public GameObject waypointPosition;
     public Transform bezierFirstPointPosition;
     public Transform bezierSecondPointPosition;
 

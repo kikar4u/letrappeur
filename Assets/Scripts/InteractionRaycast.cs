@@ -19,7 +19,7 @@ public class InteractionRaycast : MonoBehaviour
         playerPosition = transform.position;
         //Debug.Log("Position du joueur" + transform.position);
         //Debug.Log("Position locale du joueur" + transform.localPosition);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+       // Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2, layer_Mask))
         {
 
