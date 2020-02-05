@@ -9,16 +9,15 @@ public class PlayerAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
     public void ResetPos()
     {
-        Debug.Log("PROUT");
         player.transform.position = new Vector3(hips.transform.position.x, player.transform.position.y, hips.transform.position.z);
     }
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

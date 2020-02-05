@@ -48,7 +48,7 @@ public class InteractionRaycast : MonoBehaviour
         else
         {
             Debug.DrawRay(playerPosition, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
-             Debug.Log("Did not Hit");
+            //Debug.Log("Did not Hit");
         }
     }
 }

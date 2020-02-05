@@ -26,7 +26,8 @@ public class CinematicManager : MonoBehaviour
         if (mainCamera.GetComponent<VideoPlayer>().time == length)
         {
             Debug.Log("Isterminée");
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().canMove = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
+            mainCamera.clip = null;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -35,14 +36,14 @@ public class CinematicManager : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
-            //other.GetComponent<Player>().canMove = false;
-            Debug.Log("CANMOVE :" + other.GetComponent<Player>().canMove);
+            other.GetComponent<Player>().inCinematic = true;
+            other.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.IDLE);
             // on assigne le clip
             mainCamera.clip = vid;
             // et on joue la douce vidéo
             mainCamera.Play();
 
-            
+
         }
     }
 }

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     #region Components
     [HideInInspector] public CharacterController characterController;
+    Collider playerCollider;
     [HideInInspector] Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
     #endregion
@@ -15,9 +16,9 @@ public class Player : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     [HideInInspector] public bool hasMovementControls;
-    [HideInInspector] public bool canMove;
+    [HideInInspector] public bool canMove, inCinematic;
     private PathCurve path;
-    private WaypointCurve closestWayPointNode;
+    [SerializeField] private WaypointCurve closestWayPointNode;
     private int direction;
     [Range(0, 1)]
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerCollider = GetComponent<Collider>();
         trapperAnim = GetComponent<TrapperAnim>();
         direction = 0;
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
@@ -42,15 +44,16 @@ public class Player : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         hasMovementControls = true;
         canMove = true;
+        inCinematic = false;
         closestWayPointNode = path.waypointCurves[0];
         transform.position = new Vector3(closestWayPointNode.waypointPosition.transform.position.x, transform.position.y, closestWayPointNode.waypointPosition.transform.position.z);
     }
 
     void Update()
     {
-        //CharacterWalk();
         gameObject.GetComponent<InteractionRaycast>().interactionAnim();
-        if (hasMovementControls)
+
+        if (hasMovementControls && !inCinematic)
         {
             WalkFollowingPath(speed);
         }
@@ -61,7 +64,7 @@ public class Player : MonoBehaviour
             Respawn();
         }
 
-        if (!hasMovementControls && canMove)
+        if (!hasMovementControls && canMove && !inCinematic)
         {
             Rotate();
         }
@@ -71,13 +74,10 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.tag == "Waypoint")
         {
-            if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0)
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                if (Input.GetAxisRaw("Horizontal") != 0)
-                {
-                    direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-                    UpdateWayPointTarget(direction);
-                }
+                //direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
             }
         }
     }
@@ -89,23 +89,29 @@ public class Player : MonoBehaviour
             if (other.gameObject == path.waypointCurves[0].waypointPosition && direction == -1 || other.gameObject == path.waypointCurves[path.waypointCurves.Length - 1].waypointPosition && direction == 1)
             {
                 canMove = false;
+                return;
+            }
+
+            else if (closestWayPointNode.waypointPosition.GetComponent<Collider>() == other)
+            {
+                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
             }
         }
     }
 
     public void WalkFollowingPath(float _speed)
     {
-        if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
+        if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
         {
             if (Input.GetAxisRaw("Horizontal") != 0 && hasMovementControls)
             {
-                direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-                UpdateWayPointTarget(direction);
+                //direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
             }
             else if (!hasMovementControls)
             {
-                direction = 1;
-                UpdateWayPointTarget(direction);
+                //direction = 1;
+                UpdateWayPointTarget(1);
             }
         }
 
@@ -144,16 +150,13 @@ public class Player : MonoBehaviour
             characterController.Move(moveDirection * Time.deltaTime);
             if (Input.GetAxis("Horizontal") != 0f)
             {
-                animator.SetBool("Walk", true);
-                Debug.Log("Je marche !");
+                trapperAnim.SetAnimState(AnimState.WALK);
             }
         }
         if (Input.GetAxisRaw("Horizontal") == 0)
         {
-            animator.SetBool("Walk", false);
-            Debug.Log("Je ne marche pu...");
+            trapperAnim.SetAnimState(AnimState.IDLE);
         }
-
     }
 
     public void Rotate()
@@ -164,8 +167,10 @@ public class Player : MonoBehaviour
     }
 
     // direction > 0 = right
-    void UpdateWayPointTarget(int direction)
+    void UpdateWayPointTarget(int _direction)
     {
+        direction = _direction;
+
         //Si on va à droite
         if (direction > 0)
         {
@@ -173,7 +178,7 @@ public class Player : MonoBehaviour
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
             {
                 if (!canMove)
-                 canMove = true;
+                    canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
             }
             else
