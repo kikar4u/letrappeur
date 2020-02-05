@@ -79,34 +79,36 @@ public class BreathingSystem : MonoBehaviour
         float LeftTrigger = Input.GetAxis("LeftTrigger");
         float RightTrigger = Input.GetAxis("RightTrigger");
 
-        //SmoothBreathing(LeftTrigger, RightTrigger);
-        RelativeBreathing(LeftTrigger, RightTrigger);
+        SmoothBreathing(LeftTrigger, RightTrigger);
+        //RelativeBreathing(LeftTrigger, RightTrigger);
         CheckCircleInBounds();
     }
 
     private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
     {
-        float lerpValue = Mathf.Lerp(breathCurve[0].value, breathCurve[breathCurve.length - 1].value, leftTriggerInput + rightTriggerInput);
-        Vector3 scale = new Vector3(lerpValue, lerpValue, 0f);
+        float lerpValue = Mathf.Lerp(breathCurve[0].value, breathCurve[breathCurve.length - 1].value, leftTriggerInput / 2 + rightTriggerInput / 2);
+
+        Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, 0.1f), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, 0.1f), 0f);
         playerCircleTransform.localScale = scale;
     }
 
     private void SmoothBreathing(float leftTriggerInput, float rightTriggerInput)
     {
         // si leurs valeurs sont plus grand (donc appui de la part du joueur) on grandit le cercle
-        if (LeftTrigger >= 0.1f || RightTrigger >= 0.1f)
+        if (leftTriggerInput >= 0.1f || rightTriggerInput >= 0.1f)
         {
             // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-            playerCircleTransform.localScale -= new Vector3((LeftTrigger + RightTrigger) * Time.deltaTime * controledBreathSpeed, (LeftTrigger + RightTrigger) * Time.deltaTime * controledBreathSpeed, 0.0f);
-
+            playerCircleTransform.localScale += new Vector3((leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, (leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, 0.0f);
         }
         // sinon on fait rétrécir le cercle
         else
         {
             // cap pour par que le cercle ne dépasse de l'écran si le joueur ne fait rien
-            // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-            playerCircleTransform.localScale += new Vector3(releasedBreathSpeed * Time.deltaTime, releasedBreathSpeed * Time.deltaTime, 0.0f);
-
+            if (playerCircleTransform.localScale.x > outerCircleTransform.localScale.x && !CheckCircleInBounds())
+            {
+                playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * 2 * Time.deltaTime, releasedBreathSpeed * 2 * Time.deltaTime, 0.0f);
+            }
+            playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * Time.deltaTime, releasedBreathSpeed * Time.deltaTime, 0.0f);
         }
         //Cap circle player
         playerCircleTransform.localScale = new Vector3(Mathf.Clamp(playerCircleTransform.localScale.x, minPlayerCircleScale, breathCurve[breathCurve.length - 1].value), Mathf.Clamp(playerCircleTransform.localScale.y, minPlayerCircleScale, breathCurve.keys[breathCurve.length - 1].value), 1.0f);
@@ -123,7 +125,7 @@ public class BreathingSystem : MonoBehaviour
 
     }
 
-    private void CheckCircleInBounds()
+    private bool CheckCircleInBounds()
     {
         //Si le cercle du player est dans le cercle de l'outer
         if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
@@ -147,8 +149,9 @@ public class BreathingSystem : MonoBehaviour
             if (pointsAmount >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
-                Destroy(gameObject);
+                Destroy(gameObject, 0.01f);
             }
+            return true;
         }
         else
         {
@@ -162,6 +165,7 @@ public class BreathingSystem : MonoBehaviour
             {
                 Debug.Log("J'ai perdu...");
             }
+            return false;
         }
     }
 
@@ -177,7 +181,6 @@ public class BreathingSystem : MonoBehaviour
                 Speed = -Speed;
                 Debug.Log(Speed);
             }
-
         }
     }
 }
