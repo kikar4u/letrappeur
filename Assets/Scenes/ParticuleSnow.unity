@@ -10592,6 +10592,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 463006235}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2125248395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125248397}
+  - component: {fileID: 2125248396}
+  m_Layer: 0
+  m_Name: MGR-Scriptu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2125248396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125248395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb542e11a32e5134f909f783fd50f3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sons:
+  - nom: Blizzard
+    arr_sons:
+    - {fileID: 8300000, guid: 6e3d2cc1da8120d4bad66d8b7dfc806a, type: 3}
+    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+--- !u!4 &2125248397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125248395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.933594, y: 6.778414, z: 3.7761047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2129115350
 PrefabInstance:
   m_ObjectHideFlags: 0

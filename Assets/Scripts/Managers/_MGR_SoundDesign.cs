@@ -15,20 +15,20 @@ public class _MGR_SoundDesign : MonoBehaviour
     }
 
     // tous les sons à utiliser dans le jeu
-    // seront initialisés à la création du manager, dans la scène _preload
+    // seront initialisés à la création du manager
     public Son[] sons;
     // tous les audio source prêts à jouer un son
     // plusieurs peuvent être nécessaires car plusieurs sons simultanés possible (e.g. musique+son FX)
-    private List<AudioSource> p_listAudioSource;
+    //private List<AudioSource> p_listAudioSource;
     // un dictionnaire pour stocker et accéder aux son du jeu depuis leur nom
     private Dictionary<string, AudioClip[]> p_sons;
     // initialisation du manager
     void Awake()
-    { // à compéter //
+    {
         // ===>> SingletonMAnager
-        p_listAudioSource = new List<AudioSource>();
-        AudioSource source = gameObject.AddComponent<AudioSource>();
-        p_listAudioSource.Add(source);
+        //p_listAudioSource = new List<AudioSource>();
+        //AudioSource source = gameObject.AddComponent<AudioSource>();
+        //p_listAudioSource.Add(source);
         //Check if instance already exists
         if (p_instance == null)
             //if not, set instance to this
@@ -48,34 +48,24 @@ public class _MGR_SoundDesign : MonoBehaviour
     // vérifier que le son existe
     // trouver un lecteur libre (audioSource) ou en ajouter un s'ils sont tous en lecture
     // jouer le son sur le lecteur libre (avec le délai fourni)
-    public void PlaySound(string __nom)
-    { // à compéter //
+    public void PlaySound(string __nom, AudioSource audiosource)
+    {
         AudioClip[] mesSon = p_sons[__nom];
-        foreach (AudioSource audiosource in p_listAudioSource)
-        {
-
-            AudioClip audio=mesSon[Random.Range(0, mesSon.Length)];
+        AudioClip audio=mesSon[Random.Range(0, mesSon.Length)];
                 if (!audiosource.isPlaying)
                 {
                     audiosource.clip = audio;
                     audiosource.Play();
                     return;
                 }
-            
-
-        }
-        AudioSource source = gameObject.AddComponent<AudioSource>();
-        p_listAudioSource.Add(source);
-        source.clip = mesSon[Random.Range(0, mesSon.Length)];
-        source.Play();
     }
+    
+    //public void PlayMusic(AudioClip audio, GameObject source, float volume)
+    //{
 
-    public void PlayMusic(AudioClip audio, GameObject source, float volume)
-    {
-
-        source.AddComponent<AudioSource>();
-        source.GetComponent<AudioSource>().clip = audio;
-        source.GetComponent<AudioSource>().volume = volume;
-        source.GetComponent<AudioSource>().Play();
-    }
+    //    source.AddComponent<AudioSource>();
+    //    source.GetComponent<AudioSource>().clip = audio;
+    //    source.GetComponent<AudioSource>().volume = volume;
+    //    source.GetComponent<AudioSource>().Play();
+    //}
 }
