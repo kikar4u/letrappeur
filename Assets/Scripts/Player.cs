@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     #region Components
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] Animator animator;
+    [HideInInspector] public TrapperAnim trapperAnim;
     #endregion
 
     #region Movements
@@ -34,6 +35,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        trapperAnim = GetComponent<TrapperAnim>();
         direction = 0;
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
         animator = GetComponent<Animator>();
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
         }
         moveDirection.y -= gravity * Time.deltaTime;
 
-        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
+        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && canMove)
         {
             characterController.Move(moveDirection * Time.deltaTime);
             if (Input.GetAxis("Horizontal") != 0f)
@@ -171,7 +173,7 @@ public class Player : MonoBehaviour
             if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
             {
                 if (!canMove)
-                    canMove = true;
+                 canMove = true;
                 closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
             }
             else

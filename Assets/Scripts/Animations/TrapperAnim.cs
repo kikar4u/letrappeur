@@ -6,6 +6,7 @@ public enum AnimState
 {
     IDLE,
     WALK,
+    JUMP,
     BREATH
 }
 
@@ -30,6 +31,9 @@ public class TrapperAnim : MonoBehaviour
                 break;
             case AnimState.WALK:
                 animator.SetBool("Walk", true);
+                break;
+            case AnimState.JUMP:
+                animator.SetTrigger("JumpOver");
                 break;
             default:
                 break;
