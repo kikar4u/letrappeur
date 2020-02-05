@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     #region Components
     [HideInInspector] public CharacterController characterController;
+    [HideInInspector] Animator animator;
     #endregion
 
     #region Movements
@@ -35,11 +36,12 @@ public class Player : MonoBehaviour
     {
         direction = 0;
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
+        animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         hasMovementControls = true;
         canMove = true;
         closestWayPointNode = path.waypointCurves[0];
-        transform.position = closestWayPointNode.waypointPosition.transform.position;
+        transform.position = new Vector3(closestWayPointNode.waypointPosition.transform.position.x, transform.position.y, closestWayPointNode.waypointPosition.transform.position.z);
     }
 
     void Update()
@@ -60,28 +62,6 @@ public class Player : MonoBehaviour
         if (!hasMovementControls && canMove)
         {
             Rotate();
-        }
-    }
-    void CharacterWalk()
-    {
-        if (characterController.isGrounded)
-        {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
-            moveDirection *= speed;
-
-            // Système d'actions
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
-            }
-        }
-
-        moveDirection.y -= gravity * Time.deltaTime;
-
-        // Move the controller
-        if (hasMovementControls)
-        {
-            characterController.Move(moveDirection * Time.deltaTime);
         }
     }
 
@@ -129,13 +109,13 @@ public class Player : MonoBehaviour
 
         if (characterController.isGrounded && canMove)
         {
-            //If we want to move relatively to the next waypoint
+            //Si on veut bouger relativement au prochain waypoint
             // moveDirection = new Vector3(
             //     Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * (closestWayPointNode.waypointPosition.position - transform.position).normalized.x,
             //     0.0f,
             //     Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * (closestWayPointNode.waypointPosition.position - transform.position).normalized.z);
 
-            //If we want to move relatively to forward rotation
+            //Si on veut bouger en fonction de sa rotation
             if (hasMovementControls)
             {
                 moveDirection = new Vector3(
@@ -160,7 +140,18 @@ public class Player : MonoBehaviour
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
         {
             characterController.Move(moveDirection * Time.deltaTime);
+            if (Input.GetAxis("Horizontal") != 0f)
+            {
+                animator.SetBool("Walk", true);
+                Debug.Log("Je marche !");
+            }
         }
+        if (Input.GetAxisRaw("Horizontal") == 0)
+        {
+            animator.SetBool("Walk", false);
+            Debug.Log("Je ne marche pu...");
+        }
+
     }
 
     public void Rotate()
