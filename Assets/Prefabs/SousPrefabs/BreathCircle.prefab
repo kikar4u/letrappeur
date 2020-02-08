@@ -365,36 +365,13 @@ MonoBehaviour:
   releasedBreathSpeed: 0.85
   controledBreathSpeed: 1.11
   outerCircleSpeed: 0.77
-  breathCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  speedCirclePlayer: 0
+  breathingPattern: {fileID: 11400000, guid: 433ebd35996090e409dbae3c7459058c, type: 2}
   outerMarginCollider: {fileID: 6508800208675506319}
   innerMarginCollider: {fileID: 6508800209217821200}
   playerBreathCollider: {fileID: 6508800210682578079}
-  goalAmount: 0
+  requiredTimeSpendInsideBounds: 0
   pointsPerSecond: 0
+  requiredTimeSpendOutsideBounds: 0
   hasBeenInstantiated: 0
   canWalkDuringBreathing: 0
   walkSpeedDuringBreathing: 0

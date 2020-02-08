@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2297,7 +2297,7 @@ Transform:
   - {fileID: 1389336027}
   - {fileID: 1383716290}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &92103039
 GameObject:
@@ -2772,7 +2772,7 @@ Transform:
   - {fileID: 1531804403}
   - {fileID: 216011136}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &120920437
 GameObject:
@@ -2984,7 +2984,7 @@ Transform:
   - {fileID: 967869549}
   - {fileID: 1054631894}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &135866983
 GameObject:
@@ -13379,7 +13379,7 @@ PrefabInstance:
     - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
@@ -16642,7 +16642,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697953230 stripped
 GameObject:
@@ -16816,7 +16816,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.8877e-41, y: 0, z: 0, w: 2.75508e-40}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 2.75508e-40, w: -3.11e-43}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -18143,7 +18143,7 @@ Transform:
   - {fileID: 1785414965}
   - {fileID: 1325426857}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &760795657
 GameObject:
@@ -18814,7 +18814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &791606002
 Transform:
   m_ObjectHideFlags: 0
@@ -18823,7 +18823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791606001}
   m_LocalRotation: {x: -0, y: -0.6747285, z: -0, w: 0.7380661}
-  m_LocalPosition: {x: 12.48, y: 4.01, z: -2.55}
+  m_LocalPosition: {x: 12.48, y: 4.05, z: -2.55}
   m_LocalScale: {x: 0.5, y: 5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 695965562}
@@ -20575,7 +20575,7 @@ Transform:
   - {fileID: 1887414359}
   - {fileID: 1173324103}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &894100221
 GameObject:
@@ -24844,7 +24844,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1068426330
 GameObject:
@@ -25460,7 +25460,7 @@ PrefabInstance:
     - target: {fileID: 2668730176394574923, guid: 8af0a5fdf1e216e41b2fcec5acc938fc,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2668730176394574923, guid: 8af0a5fdf1e216e41b2fcec5acc938fc,
         type: 3}
@@ -27725,7 +27725,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: 19f08fe75b42d78439754990d8ccd6c9, type: 2}
   isGlobal: 1
   blendDistance: 0
-  weight: 1
+  weight: 0.191
   priority: 0
 --- !u!1 &1174927702
 GameObject:
@@ -30351,77 +30351,27 @@ PrefabInstance:
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: releasedBreathSpeed
-      value: 2
+      value: 1.008
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: controledBreathSpeed
-      value: 1.1
+      value: 1.161
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: outerCircleSpeed
-      value: 1
+      value: 1.407
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: canWalkDuringBreathing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: walkSpeedDuringBreathing
       value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[0].value
-      value: 1.0057983
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[0].time
-      value: 0.0032577515
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[1].value
-      value: 1.9266834
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[1].time
-      value: 0.3074697
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[1].inSlope
-      value: 5.883444
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[1].outSlope
-      value: 5.883444
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[1].inWeight
-      value: 0.09989729
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[2].inSlope
-      value: 4.7445416
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[2].outSlope
-      value: 4.7445416
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[2].inWeight
-      value: 0.11548064
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
@@ -30435,18 +30385,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].inSlope
+      value: 1.8333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].outSlope
+      value: 1.8333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
       propertyPath: breathCurve.m_Curve.Array.data[2].time
-      value: 0.45070547
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].inSlope
+      value: -1.8333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].outSlope
+      value: -1.8333334
       objectReference: {fileID: 0}
     - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: breathCurve.m_Curve.Array.data[2].value
-      value: 3.1507661
-      objectReference: {fileID: 0}
-    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
-        type: 3}
-      propertyPath: breathCurve.m_Curve.Array.data[2].outWeight
-      value: 0.08212322
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
@@ -30486,7 +30451,7 @@ PrefabInstance:
     - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
         type: 3}
@@ -31627,7 +31592,7 @@ Transform:
   m_Children:
   - {fileID: 3240287148460510172}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338116515
 GameObject:
@@ -34088,7 +34053,7 @@ Transform:
   m_Children:
   - {fileID: 695965562}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1449627711
 GameObject:
@@ -34868,7 +34833,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1490479842 stripped
 Transform:
@@ -40362,7 +40327,7 @@ PrefabInstance:
     - target: {fileID: 501087574342517694, guid: 386bc67414fc54e41bb47805215d0ade,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 501087574342517694, guid: 386bc67414fc54e41bb47805215d0ade,
         type: 3}
@@ -40651,7 +40616,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1717820762
 GameObject:
@@ -40869,7 +40834,7 @@ Transform:
   - {fileID: 1537001570}
   - {fileID: 1491103961}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1728763434 stripped
 Transform:
@@ -43702,6 +43667,263 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812716678}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1816212911
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5285354293096089811, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_Name
+      value: BreathingSystem (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5285354293096089811, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: releasedBreathSpeed
+      value: 1.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: controledBreathSpeed
+      value: 1.161
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: outerCircleSpeed
+      value: 1.407
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: canWalkDuringBreathing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: walkSpeedDuringBreathing
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: requiredTimeSpendInsideBounds
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: requiredTimeSpendOutsideBounds
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].inSlope
+      value: 2.4277587
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].outSlope
+      value: 2.4277587
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[2].value
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].value
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[4].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[2].time
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].time
+      value: 2.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[4].time
+      value: 2.9991632
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].value
+      value: 1.2554321
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].inSlope
+      value: -2.423216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[3].outSlope
+      value: -2.423216
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].time
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathingPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: 433ebd35996090e409dbae3c7459058c,
+        type: 2}
+    - target: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: pointsPerSecond
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 31.72345
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.867
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803688479754968885, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477445011055212722, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 477445011055212722, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: releasedBreathSpeed
+      value: 0.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: controledBreathSpeed
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: outerCircleSpeed
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[0].time
+      value: -0.00592041
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[0].value
+      value: 1.0023193
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].value
+      value: 2.0055661
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathCurve.m_Curve.Array.data[1].time
+      value: 0.42299652
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: canWalkDuringBreathing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5223024039678053516, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: walkSpeedDuringBreathing
+      value: 0.0122
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323989766586265826, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477445011055212723, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+        type: 3}
+      propertyPath: breathingSystem
+      value: 
+      objectReference: {fileID: 1816212912}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e4f4cb05d7b066a4fa905eb7455d5403, type: 3}
+--- !u!114 &1816212912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1182845967978411528, guid: e4f4cb05d7b066a4fa905eb7455d5403,
+    type: 3}
+  m_PrefabInstance: {fileID: 1816212911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105522097fefd4545ba7b35c657d5a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1818600342
 GameObject:
   m_ObjectHideFlags: 0
@@ -43906,7 +44128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1830622314
 Transform:
   m_ObjectHideFlags: 0
@@ -51394,7 +51616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2141289237
 Transform:
   m_ObjectHideFlags: 0
@@ -51708,7 +51930,7 @@ PrefabInstance:
     - target: {fileID: 8956360445079384525, guid: 2c460c1bc629857478e492f6e0bf6666,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8956360445079384525, guid: 2c460c1bc629857478e492f6e0bf6666,
         type: 3}

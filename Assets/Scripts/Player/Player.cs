@@ -6,9 +6,10 @@ public class Player : MonoBehaviour
 {
     #region Components
     [HideInInspector] public CharacterController characterController;
-    Collider playerCollider;
+    [HideInInspector] public Collider playerCollider;
     [HideInInspector] Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
+    [HideInInspector] public InteractionRaycast raycastController;
     #endregion
 
     #region Movements
@@ -37,6 +38,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerCollider = GetComponent<Collider>();
+        raycastController = GetComponent<InteractionRaycast>();
+        Debug.Log(playerCollider);
         trapperAnim = GetComponent<TrapperAnim>();
         direction = 0;
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
@@ -51,8 +54,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        gameObject.GetComponent<InteractionRaycast>().interactionAnim();
-
+        if (Input.GetButtonDown("Fire1"))
+        {
+            raycastController.interactionAnim();
+        }
         if (hasMovementControls && !inCinematic)
         {
             WalkFollowingPath(speed);
