@@ -54,7 +54,6 @@ public class BreathingSystem : MonoBehaviour
     public float requiredTimeSpendOutsideBounds;
     private float outsideBoundsTimer;
     #endregion
-    [HideInInspector] public bool hasBeenInstantiated;
 
     [Header("Mouvement pendant la respiration")]
     public bool canWalkDuringBreathing;
@@ -73,7 +72,6 @@ public class BreathingSystem : MonoBehaviour
         StartCoroutine(BreathScaling(outerCircleSpeed));
 
         pointsAmount = 0f;
-        hasBeenInstantiated = false;
 
         breathingPattern.animationCurve.preWrapMode = breathingPattern.animationWrapMode;
         breathingPattern.animationCurve.postWrapMode = breathingPattern.animationWrapMode;
@@ -146,13 +144,11 @@ public class BreathingSystem : MonoBehaviour
             {
                 outsideBoundsTimer -= Time.deltaTime;
                 Mathf.Clamp(outsideBoundsTimer, 0f, Mathf.Infinity);
-                //Debug.Log(outsideBoundsTimer);
             }
             if (canWalkDuringBreathing)
             {
                 player.WalkFollowingPath(walkSpeedDuringBreathing);
             }
-            //Debug.Log(pointsAmount);
             if (pointsAmount >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
@@ -180,7 +176,6 @@ public class BreathingSystem : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log(breathingPattern.animationCurve.Evaluate(Time.time));
             outerCircleTransform.localScale = Vector3.Lerp(outerCircleTransform.localScale, new Vector3(breathingPattern.animationCurve.Evaluate(Time.time), breathingPattern.animationCurve.Evaluate(Time.time), 1.0f), 0.350f);
             //outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), Mathf.Clamp(outerCircleTransform.localScale.y, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), 1.0f);
             yield return new WaitForSeconds(Time.deltaTime);
