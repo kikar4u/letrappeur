@@ -132,7 +132,6 @@ GameObject:
   - component: {fileID: 7890058}
   - component: {fileID: 7890057}
   - component: {fileID: 7890056}
-  - component: {fileID: 7890059}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -203,7 +202,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7890059}
+      - m_Target: {fileID: 602736021}
         m_MethodName: Options
         m_Mode: 1
         m_Arguments:
@@ -250,18 +249,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7890054}
   m_CullTransparentMesh: 0
---- !u!114 &7890059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7890054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30392c29a6a9dbc4eb8a32966160c025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &539603289
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602736020}
   - component: {fileID: 602736019}
+  - component: {fileID: 602736021}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -382,6 +370,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &602736021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602736018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30392c29a6a9dbc4eb8a32966160c025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arr_SceneName:
+  - MainMenu
+  - Level_1
 --- !u!1 &844745197
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,7 +733,6 @@ GameObject:
   - component: {fileID: 1743733515}
   - component: {fileID: 1743733514}
   - component: {fileID: 1743733513}
-  - component: {fileID: 1743733516}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -801,15 +803,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1743733516}
-        m_MethodName: PlayGame
-        m_Mode: 1
+      - m_Target: {fileID: 602736021}
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level_1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1743733514
@@ -848,18 +850,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743733511}
   m_CullTransparentMesh: 0
---- !u!114 &1743733516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743733511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30392c29a6a9dbc4eb8a32966160c025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1888329465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1099,6 @@ GameObject:
   - component: {fileID: 2077186772}
   - component: {fileID: 2077186771}
   - component: {fileID: 2077186770}
-  - component: {fileID: 2077186773}
   m_Layer: 5
   m_Name: Quitter
   m_TagString: Untagged
@@ -1180,7 +1169,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2077186773}
+      - m_Target: {fileID: 602736021}
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -1227,15 +1216,3 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077186768}
   m_CullTransparentMesh: 0
---- !u!114 &2077186773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077186768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30392c29a6a9dbc4eb8a32966160c025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

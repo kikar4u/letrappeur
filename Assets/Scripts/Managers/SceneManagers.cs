@@ -5,7 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagers : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string[] arr_SceneName;      // tableau des scenes
+
+    private static SceneManagers p_instance = null;
+    public static SceneManagers Instance { get { return p_instance; } }
+
+    void Awake()
+    {
+
+        // ===>> SingletonMAnager
+
+        //Check if instance already exists
+        if (p_instance == null)
+            //if not, set instance to this
+            p_instance = this;
+        //If instance already exists and it's not this:
+        else if (p_instance != this)
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            Destroy(gameObject);
+
+    }
+
+    //Start is called before the first frame update
     void Start()
     {
         
@@ -28,5 +49,10 @@ public class SceneManagers : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void LoadScene(string __nom_scene)
+    {
+        SceneManager.LoadScene(__nom_scene);
     }
 }
