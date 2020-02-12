@@ -19,7 +19,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool hasMovementControls;
     [HideInInspector] public bool canMove, inCinematic;
     private PathCurve path;
-    [SerializeField] private WaypointCurve closestWayPointNode;
+    [SerializeField] private WaypointCurve nextWaypoint;
+    [SerializeField] private WaypointCurve lastWaypoint;
     private int direction;
     [Range(0, 1)]
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveAfterRotationDegreeThreshold;
     private float forwardWayPointAngle;
     private Vector3 moveDirection;
+    [SerializeField] private float segmentBetweenWaypoint;
     #endregion
 
     #region Checkpoint
@@ -37,19 +39,28 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        #region Components
         playerCollider = GetComponent<Collider>();
         raycastController = GetComponent<InteractionRaycast>();
-        Debug.Log(playerCollider);
         trapperAnim = GetComponent<TrapperAnim>();
-        direction = 0;
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+
+        #endregion
+
+        #region MoveControl
         hasMovementControls = true;
         canMove = true;
         inCinematic = false;
-        closestWayPointNode = path.waypointCurves[0];
-        transform.position = new Vector3(closestWayPointNode.waypointPosition.transform.position.x, transform.position.y, closestWayPointNode.waypointPosition.transform.position.z);
+        direction = 0;
+        segmentBetweenWaypoint = 0;
+
+        #endregion
+        nextWaypoint = path.waypointCurves[1];
+        lastWaypoint = path.waypointCurves[0];
+        //transform.position = new Vector3(nextWaypoint.waypointPosition.transform.position.x, transform.position.y, nextWaypoint.waypointPosition.transform.position.z);
+        transform.position = lastWaypoint.waypointPosition.transform.position;
     }
 
     void Update()
@@ -58,21 +69,38 @@ public class Player : MonoBehaviour
         {
             raycastController.interactionAnim();
         }
-        if (hasMovementControls && !inCinematic)
+        if (hasMovementControls && !inCinematic && Input.GetAxisRaw("Horizontal") != 0)
         {
             WalkFollowingPath(speed);
+
+            if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
+            {
+                if (hasMovementControls)
+                {
+                    direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                    //direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+                    //SwapWaypointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
+
+                }
+                else
+                {
+                    SwapWaypointTarget(1);
+                }
+            }
         }
-        forwardWayPointAngle = Vector3.Angle(new Vector3(closestWayPointNode.waypointPosition.transform.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.transform.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
+        if (!characterController.isGrounded)
+        {
+            characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
+        }
+
+        forwardWayPointAngle = Vector3.Angle(new Vector3(nextWaypoint.waypointPosition.transform.position.x - transform.position.x, 0f, nextWaypoint.waypointPosition.transform.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
 
         if (Input.GetKeyDown("p"))
         {
             Respawn();
         }
 
-        if (!hasMovementControls && canMove && !inCinematic)
-        {
-            Rotate();
-        }
+        //Rotate();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,8 +109,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                //direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
+                //ChangeWaypointTarget();
             }
         }
     }
@@ -93,66 +120,63 @@ public class Player : MonoBehaviour
         {
             if (other.gameObject == path.waypointCurves[0].waypointPosition && direction == -1 || other.gameObject == path.waypointCurves[path.waypointCurves.Length - 1].waypointPosition && direction == 1)
             {
-                canMove = false;
-                return;
+                //canMove = false;
+                //return;
             }
 
-            else if (closestWayPointNode.waypointPosition.GetComponent<Collider>() == other)
+            else if (nextWaypoint.waypointPosition.GetComponent<Collider>() == other)
             {
-                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
+                //SwapWaypointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
             }
         }
     }
 
     public void WalkFollowingPath(float _speed)
     {
-        if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
-        {
-            if (Input.GetAxisRaw("Horizontal") != 0 && hasMovementControls)
-            {
-                //direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-                UpdateWayPointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
-            }
-            else if (!hasMovementControls)
-            {
-                //direction = 1;
-                UpdateWayPointTarget(1);
-            }
-        }
 
         if (characterController.isGrounded && canMove)
         {
-            //Si on veut bouger relativement au prochain waypoint
-            // moveDirection = new Vector3(
-            //     Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * (closestWayPointNode.waypointPosition.position - transform.position).normalized.x,
-            //     0.0f,
-            //     Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * speed * (closestWayPointNode.waypointPosition.position - transform.position).normalized.z);
-
             //Si on veut bouger en fonction de sa rotation
-            if (hasMovementControls)
-            {
-                moveDirection = new Vector3(
-                    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.x,
-                    0.0f,
-                    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
+            //moveDirection = new Vector3(
+            //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.x,
+            //    0.0f,
+            //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
 
-            }
-            else
-            {
-                moveDirection = new Vector3(
-                    Time.deltaTime * transform.forward.x,
-                    0.0f,
-                    Time.deltaTime * transform.forward.z);
-            }
+            segmentBetweenWaypoint = Mathf.Clamp01(segmentBetweenWaypoint);
+            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * direction * 1f * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+            Vector3 lastMoveDir = moveDirection;
+            moveDirection = Mathf.Pow(1 - segmentBetweenWaypoint, 3)
+               * lastWaypoint.waypointPosition.transform.position +
+                3 * Mathf.Pow(1 - segmentBetweenWaypoint, 2) * segmentBetweenWaypoint
+                * lastWaypoint.bezierSecondPointPosition.transform.position +
+                3 * (1 - segmentBetweenWaypoint) * Mathf.Pow(segmentBetweenWaypoint, 2)
+                * nextWaypoint.bezierFirstPointPosition.position
+                + Mathf.Pow(segmentBetweenWaypoint, 3) * nextWaypoint.waypointPosition.transform.position;
 
-            moveDirection *= _speed;
-            Rotate();
+            Rotate(moveDirection);
+            transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
+            //Debug.Log("SegmentBetweenWaypoint :" + segmentBetweenWaypoint);
+
+            if (segmentBetweenWaypoint > 1 || segmentBetweenWaypoint < 0)
+            {
+                ChangeWaypointTarget();
+            }
         }
+        //else if (!hasMovementControls)
+        //{
+        //    moveDirection = new Vector3(
+        //        Time.deltaTime * transform.forward.x,
+        //        0.0f,
+        //        Time.deltaTime * transform.forward.z);
+        //}
+
+        //moveDirection *= _speed;
         moveDirection.y -= gravity * Time.deltaTime;
+
 
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && canMove)
         {
-            characterController.Move(moveDirection * Time.deltaTime);
+            //characterController.Move(moveDirection * Time.deltaTime);
             if (Input.GetAxis("Horizontal") != 0f)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
@@ -164,27 +188,53 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Rotate()
+    public void Rotate(Vector3 target)
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,
-        Quaternion.LookRotation(new Vector3(closestWayPointNode.waypointPosition.transform.position.x - transform.position.x, 0f, closestWayPointNode.waypointPosition.transform.position.z - transform.position.z)),
+        Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)),
         rotationSmoothness);
     }
 
     // direction > 0 = right
-    void UpdateWayPointTarget(int _direction)
+    void SwapWaypointTarget(int _direction)
     {
-        direction = _direction;
-
+        WaypointCurve waypointSwitch;
         //Si on va à droite
         if (direction > 0)
         {
             //On verifie qu'on ne soit pas à une extrémité
-            if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) < path.waypointCurves.Length - 1)
+            if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) < path.waypointCurves.Length - 1)
             {
                 if (!canMove)
                     canMove = true;
-                closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) + 1];
+                //nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) + 1];
+                waypointSwitch = nextWaypoint;
+                nextWaypoint = lastWaypoint;
+                lastWaypoint = waypointSwitch;
+
+                segmentBetweenWaypoint = 1 - segmentBetweenWaypoint;
+                Debug.Log("Swap de points waypoint cible : " + System.Array.IndexOf(path.waypointCurves, nextWaypoint));
+                Debug.Log("Swap de points last waypoint : " + System.Array.IndexOf(path.waypointCurves, lastWaypoint));
+            }
+            else
+            {
+                canMove = false;
+            }
+        }
+        //Si on va à gauche
+        else if (direction < 0)
+        {
+            if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) > 0)
+            {
+                if (!canMove)
+                    canMove = true;
+                //nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) - 1];
+                waypointSwitch = nextWaypoint;
+                nextWaypoint = lastWaypoint;
+                lastWaypoint = waypointSwitch;
+                segmentBetweenWaypoint = 1 - segmentBetweenWaypoint;
+                Debug.Log("Swap de points waypoint cible : " + System.Array.IndexOf(path.waypointCurves, nextWaypoint));
+                Debug.Log("Swap de points last waypoint : " + System.Array.IndexOf(path.waypointCurves, lastWaypoint));
             }
             else
             {
@@ -192,20 +242,31 @@ public class Player : MonoBehaviour
                 canMove = false;
             }
         }
-        //Si on va à gauche
-        else if (direction < 0)
+    }
+
+    void ChangeWaypointTarget()
+    {
+        switch (direction)
         {
-            if (System.Array.IndexOf(path.waypointCurves, closestWayPointNode) > 0)
-            {
-                if (!canMove)
-                    canMove = true;
-                closestWayPointNode = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, closestWayPointNode) - 1];
-            }
-            else
-            {
-                Debug.Log("On est à une limite");
-                canMove = false;
-            }
+            case 1:
+                if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) < path.waypointCurves.Length - 1)
+                {
+                    lastWaypoint = nextWaypoint;
+                    nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) + 1];
+                    segmentBetweenWaypoint = 0;
+                }
+                break;
+
+            case -1:
+                if (System.Array.IndexOf(path.waypointCurves, lastWaypoint) > 0)
+                {
+                    nextWaypoint = lastWaypoint;
+                    lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) - 1];
+                    segmentBetweenWaypoint = 1;
+                }
+                break;
+            default:
+                break;
         }
     }
 
