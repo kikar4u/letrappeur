@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
-        terrainMask = LayerMask.GetMask("Terrain");
+        terrainMask = LayerMask.GetMask("Ground");
 
         #endregion
 
@@ -116,7 +116,6 @@ public class Player : MonoBehaviour
 
     public void WalkFollowingPath(float _speed)
     {
-        //
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
         {
 
@@ -139,7 +138,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
 
             RaycastHit hit;
-            //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 2, Color.yellow, 2f);
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 2, Color.yellow, 2f);
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 2, out hit, 3, terrainMask))
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
@@ -210,8 +209,6 @@ public class Player : MonoBehaviour
                 nextWaypoint = lastWaypoint;
                 lastWaypoint = waypointSwitch;
                 segmentBetweenWaypoint = 1 - segmentBetweenWaypoint;
-                Debug.Log("Swap de points waypoint cible : " + System.Array.IndexOf(path.waypointCurves, nextWaypoint));
-                Debug.Log("Swap de points last waypoint : " + System.Array.IndexOf(path.waypointCurves, lastWaypoint));
             }
             else
             {

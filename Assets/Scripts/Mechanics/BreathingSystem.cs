@@ -93,16 +93,17 @@ public class BreathingSystem : MonoBehaviour
         float LeftTrigger = Input.GetAxis("LeftTrigger");
         float RightTrigger = Input.GetAxis("RightTrigger");
 
-        SmoothBreathing(LeftTrigger, RightTrigger);
-        //RelativeBreathing(LeftTrigger, RightTrigger);
-        CheckCircleInBounds();
+        //SmoothBreathing(LeftTrigger, RightTrigger);
+        RelativeBreathing(LeftTrigger, RightTrigger);
+        //CheckCircleInBounds();
     }
 
     private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
     {
-        float lerpValue = Mathf.Lerp(breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value, leftTriggerInput / 2 + rightTriggerInput / 2);
+        float lerpValue = Mathf.Lerp(breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[2].value, leftTriggerInput / 2 + rightTriggerInput / 2);
+        //float lerpValue = leftTriggerInput / 2 + rightTriggerInput / 2;
 
-        Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, 0.1f), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, 0.1f), 0f);
+        Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, 2f * Time.deltaTime), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, 2f * Time.deltaTime), 0f);
         playerCircleTransform.localScale = scale;
     }
 
