@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Movements
-    public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
+    [Range(0, 1)]
+    public float speed;
     public float gravity = 20.0f;
     [HideInInspector] public bool hasMovementControls;
     [HideInInspector] public bool canMove, inCinematic;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private WaypointCurve nextWaypoint;
     [SerializeField] private WaypointCurve lastWaypoint;
     private int direction;
-    [Range(0, 1)]
+    [Range(0, 0.1f)]
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
     [SerializeField] private float rotationSmoothness;
     [Tooltip("Angle entre le forward du personnage avec la position du prochain waypoint sous lequel le joueur pourra bouger")]
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     private float forwardWayPointAngle;
     private Vector3 moveDirection;
     [SerializeField] private float segmentBetweenWaypoint;
+    [HideInInspector] public float movementOffset;
     #endregion
 
     #region Checkpoint
@@ -88,6 +89,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            movementOffset = 0;
+        }
         if (!characterController.isGrounded)
         {
             characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
@@ -134,17 +139,19 @@ public class Player : MonoBehaviour
     public void WalkFollowingPath(float _speed)
     {
 
-        if (characterController.isGrounded && canMove)
+        if (/*characterController.isGrounded &&*/ canMove)
         {
             //Si on veut bouger en fonction de sa rotation
+            //Debug.Log(Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
+
             //moveDirection = new Vector3(
             //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.x,
             //    0.0f,
             //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
 
             segmentBetweenWaypoint = Mathf.Clamp01(segmentBetweenWaypoint);
-            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * direction * 1f * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
-            Vector3 lastMoveDir = moveDirection;
+            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+
             moveDirection = Mathf.Pow(1 - segmentBetweenWaypoint, 3)
                * lastWaypoint.waypointPosition.transform.position +
                 3 * Mathf.Pow(1 - segmentBetweenWaypoint, 2) * segmentBetweenWaypoint
@@ -153,7 +160,10 @@ public class Player : MonoBehaviour
                 * nextWaypoint.bezierFirstPointPosition.position
                 + Mathf.Pow(segmentBetweenWaypoint, 3) * nextWaypoint.waypointPosition.transform.position;
 
+            //moveDirection -= transform.position;
+
             Rotate(moveDirection);
+            movementOffset = (moveDirection - transform.position).magnitude;
             transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
             //Debug.Log("SegmentBetweenWaypoint :" + segmentBetweenWaypoint);
 
@@ -171,12 +181,13 @@ public class Player : MonoBehaviour
         //}
 
         //moveDirection *= _speed;
-        moveDirection.y -= gravity * Time.deltaTime;
+        //moveDirection.y -= gravity * Time.deltaTime;
 
 
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && canMove)
         {
-            //characterController.Move(moveDirection * Time.deltaTime);
+            //characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
+            //characterController.Move(new Vector3(moveDirection.x, -gravity * Time.deltaTime, moveDirection.z));
             if (Input.GetAxis("Horizontal") != 0f)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
