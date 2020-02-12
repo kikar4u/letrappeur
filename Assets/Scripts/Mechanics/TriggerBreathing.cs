@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class TriggerBreathing : MonoBehaviour
 {
+    bool triggered;
     [SerializeField] BreathingSystem breathingSystem;
 
     private void Start()
     {
+        triggered = false;
         breathingSystem.gameObject.SetActive(false);
     }
     /*Player player;
@@ -57,10 +59,10 @@ public class TriggerBreathing : MonoBehaviour
     }*/
     private void OnTriggerEnter(Collider other)
     {
-        if (!breathingSystem.hasBeenInstantiated && other.gameObject.tag == "Player")
+        if (!triggered && other.gameObject.tag == "Player")
         {
             breathingSystem.gameObject.SetActive(true);
-            breathingSystem.hasBeenInstantiated = true;
+            triggered = true;
         }
     }
 }
