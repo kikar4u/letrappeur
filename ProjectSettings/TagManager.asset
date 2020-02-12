@@ -4,11 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Test
-  - Path
-  - Waypoint
-  - GameManager
   - Obstacles
+  - Waypoint
+  - Path
   layers:
   - Default
   - TransparentFX
@@ -18,10 +16,10 @@ TagManager:
   - UI
   - 
   - 
-  - InteractiveObjects
+  - Ground
   - PostProcessing
-  - Terrain
-  - Player
+  - 
+  - 
   - 
   - 
   - 

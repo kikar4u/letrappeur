@@ -7,16 +7,20 @@ public class DrawWithMouse : MonoBehaviour
     [SerializeField] Camera _Camera;
     [SerializeField] Shader _drawShader;
     [SerializeField] GameObject _terrain;
+    [SerializeField] BoxCollider PlayerCollider;
     // Start is called before the first frame update
     private RenderTexture _splatMap;
     private Material _snowMaterial, _drawMaterial;
     private RaycastHit _hit;
+    public Transform[] _foot;
+    int _layerMask;
     [Range(1,500)]
     [SerializeField] float _brushSize;
     [Range(0, 1)]
     [SerializeField] float _brushStrength;
     void Start()
     {
+        _layerMask = LayerMask.GetMask("Ground");
         _drawMaterial = new Material(_drawShader);
         _drawMaterial.SetVector("_Color", Color.red);
         _snowMaterial = _terrain.GetComponent<MeshRenderer>().material;
@@ -27,10 +31,12 @@ public class DrawWithMouse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        for (int i = 0; i < _foot.Length; i++)
         {
-            if (Physics.Raycast(_Camera.ScreenPointToRay(Input.mousePosition), out _hit))
+            Debug.DrawRay(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y, _foot[i].position.z), -Vector3.up , Color.yellow);
+            if (Physics.Raycast(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y, _foot[i].position.z), -Vector3.up , out _hit, 0.5f, _layerMask))
             {
+                Debug.DrawRay(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y, _foot[i].position.z), -Vector3.up , Color.red);
                 _drawMaterial.SetVector("_Coordinate", new Vector4(_hit.textureCoord.x, _hit.textureCoord.y, 0, 0));
                 _drawMaterial.SetFloat("_Strength", _brushStrength);
                 _drawMaterial.SetFloat("_Size", _brushSize);
@@ -38,12 +44,12 @@ public class DrawWithMouse : MonoBehaviour
                 Graphics.Blit(_splatMap, temp);
                 Graphics.Blit(temp, _splatMap, _drawMaterial);
                 RenderTexture.ReleaseTemporary(temp);
-                
+
             }
         }
     }
     private void OnGUI()
     {
-        GUI.DrawTexture(new Rect(0, 0, 256, 256), _splatMap, ScaleMode.ScaleToFit, false, 1);
+        GUI.DrawTexture(new Rect(0, 0, 128, 128), _splatMap, ScaleMode.ScaleToFit, false, 1);
     }
 }
