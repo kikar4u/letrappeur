@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Movements
-    [Range(0, 1)]
+    [Range(1, 100)]
     public float speed;
     public float gravity = 20.0f;
     [HideInInspector] public bool canMove, inCinematic, hasMovementControls;
@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     [SerializeField] private WaypointCurve nextWaypoint;
     [SerializeField] private WaypointCurve lastWaypoint;
     private int direction;
-    [Range(0, 0.1f)]
 
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
     [SerializeField] private float rotationSmoothness;
@@ -31,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveAfterRotationDegreeThreshold;
     private float forwardWayPointAngle;
     private Vector3 moveDirection;
+    private Vector3 nextMoveDirection;
     [SerializeField] private float segmentBetweenWaypoint;
     [HideInInspector] public float movementOffset;
 
@@ -75,8 +75,8 @@ public class Player : MonoBehaviour
         {
             raycastController.interactionAnim();
         }
-
-        if (hasMovementControls && !inCinematic && Input.GetAxisRaw("Horizontal") != 0)
+        Rotate(nextMoveDirection);
+        if (hasMovementControls && !inCinematic && Input.GetAxisRaw("Horizontal") != 0 && canMove)
         {
             WalkFollowingPath(speed);
 
@@ -98,6 +98,7 @@ public class Player : MonoBehaviour
         {
             movementOffset = 0;
             trapperAnim.SetAnimState(AnimState.IDLE);
+            Rotate(nextMoveDirection);
 
         }
         if (!characterController.isGrounded)
@@ -105,27 +106,20 @@ public class Player : MonoBehaviour
             characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
         }
 
-        forwardWayPointAngle = Vector3.Angle(new Vector3(nextWaypoint.waypointPosition.transform.position.x - transform.position.x, 0f, nextWaypoint.waypointPosition.transform.position.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
+        forwardWayPointAngle = Vector3.Angle(new Vector3(nextMoveDirection.x - transform.position.x, 0f, nextMoveDirection.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
 
         if (Input.GetKeyDown("p"))
         {
             Respawn();
         }
-
-        //Rotate();
     }
 
     public void WalkFollowingPath(float _speed)
     {
-        if (canMove && forwardWayPointAngle < moveAfterRotationDegreeThreshold)
+        //
+        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
         {
-            //Si on veut bouger en fonction de sa rotation
-            //Debug.Log(Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
 
-            //moveDirection = new Vector3(
-            //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.x,
-            //    0.0f,
-            //    Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * transform.forward.z);
             if (Input.GetAxis("Horizontal") != 0f)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
@@ -136,15 +130,9 @@ public class Player : MonoBehaviour
             }
 
             segmentBetweenWaypoint = Mathf.Clamp01(segmentBetweenWaypoint);
-            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
 
-            moveDirection = Mathf.Pow(1 - segmentBetweenWaypoint, 3)
-               * lastWaypoint.waypointPosition.transform.position +
-                3 * Mathf.Pow(1 - segmentBetweenWaypoint, 2) * segmentBetweenWaypoint
-                * lastWaypoint.bezierSecondPointPosition.transform.position +
-                3 * (1 - segmentBetweenWaypoint) * Mathf.Pow(segmentBetweenWaypoint, 2)
-                * nextWaypoint.bezierFirstPointPosition.position
-                + Mathf.Pow(segmentBetweenWaypoint, 3) * nextWaypoint.waypointPosition.transform.position;
+            moveDirection = CalculateCurvePoint(segmentBetweenWaypoint);
 
             Rotate(moveDirection);
             movementOffset = (moveDirection - transform.position).magnitude;
@@ -162,17 +150,26 @@ public class Player : MonoBehaviour
                 ChangeWaypointTarget();
             }
         }
-        else
-        {
-            Rotate(moveDirection);
-        }
+
+        nextMoveDirection = CalculateCurvePoint(segmentBetweenWaypoint + speed * Time.deltaTime * direction * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position));
+    }
+
+    Vector3 CalculateCurvePoint(float segment)
+    {
+        return Mathf.Pow(1 - segment, 3)
+               * lastWaypoint.waypointPosition.transform.position +
+                3 * Mathf.Pow(1 - segment, 2) * segment
+                * lastWaypoint.bezierSecondPointPosition.transform.position +
+                3 * (1 - segment) * Mathf.Pow(segment, 2)
+                * nextWaypoint.bezierFirstPointPosition.position
+                + Mathf.Pow(segment, 3) * nextWaypoint.waypointPosition.transform.position;
     }
 
     public void Rotate(Vector3 target)
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,
-        Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)),
-        rotationSmoothness);
+        Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)), rotationSmoothness);
+
     }
 
     // direction > 0 = right
