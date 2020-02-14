@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [Range(1, 100)]
     public float speed;
     public float gravity = 20.0f;
-    [HideInInspector] public bool canMove, inCinematic, hasMovementControls;
+    [HideInInspector] public bool canMove, inCinematic, hasMovementControls, blocked;
     private PathCurve path;
     [SerializeField] private WaypointCurve nextWaypoint;
     [SerializeField] private WaypointCurve lastWaypoint;
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveAfterRotationDegreeThreshold;
     private float forwardWayPointAngle;
     private Vector3 moveDirection;
-    private Vector3 nextMoveDirection;
+    public Vector3 nextMoveDirection;
     [SerializeField] private float segmentBetweenWaypoint;
     [HideInInspector] public float movementOffset;
 
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
 
     public void WalkFollowingPath(float _speed)
     {
-        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold)
+        if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
         {
 
             if (Input.GetAxis("Horizontal") != 0f)
@@ -138,8 +138,8 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
 
             RaycastHit hit;
-            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 2, Color.yellow, 2f);
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 2, out hit, 3, terrainMask))
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
             {
                 transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
             }
@@ -149,19 +149,20 @@ public class Player : MonoBehaviour
                 ChangeWaypointTarget();
             }
         }
-
         nextMoveDirection = CalculateCurvePoint(segmentBetweenWaypoint + speed * Time.deltaTime * direction * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position));
     }
 
     Vector3 CalculateCurvePoint(float segment)
     {
-        return Mathf.Pow(1 - segment, 3)
+        Vector3 nextMoveDir = Mathf.Pow(1 - segment, 3)
                * lastWaypoint.waypointPosition.transform.position +
                 3 * Mathf.Pow(1 - segment, 2) * segment
                 * lastWaypoint.bezierSecondPointPosition.transform.position +
                 3 * (1 - segment) * Mathf.Pow(segment, 2)
                 * nextWaypoint.bezierFirstPointPosition.position
                 + Mathf.Pow(segment, 3) * nextWaypoint.waypointPosition.transform.position;
+
+        return new Vector3(nextMoveDir.x, transform.position.y, nextMoveDir.z);
     }
 
     public void Rotate(Vector3 target)
