@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 2254144784244151775}
   - component: {fileID: 3437121401443899373}
   - component: {fileID: 8990497459778591138}
+  - component: {fileID: 2209736275264971118}
   m_Layer: 0
   m_Name: Guard02
   m_TagString: Player
@@ -1553,6 +1554,25 @@ MonoBehaviour:
   - {fileID: 3032709382825890046}
   _brushSize: 5
   _brushStrength: 1
+--- !u!114 &2209736275264971118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8157970275226436730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d9f2e70ef63334cad2cc1f0484e579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirectionalLight: {fileID: 0}
+  player: {fileID: 1410109561498348272}
+  ratioLight: 0.05
+  dayAtTheBeginning: 0
+  dayAtTheEnd: 90
+  luminosityAtTheBeginning: 5
+  luminosityAtTheEnd: 25
 --- !u!1 &8740631932414907048
 GameObject:
   m_ObjectHideFlags: 0
