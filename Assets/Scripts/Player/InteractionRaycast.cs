@@ -18,7 +18,7 @@ public class InteractionRaycast : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * 5, Color.blue);
+        Debug.DrawRay(player.transform.position, (player.nextMoveDirection - player.transform.position) * 5, Color.blue);
         Debug.Log("Player transform : " + player.transform.position);
         Debug.Log("Nextmovedir " + player.nextMoveDirection);
         Debug.Log(player.nextMoveDirection - player.transform.position);
@@ -34,26 +34,25 @@ public class InteractionRaycast : MonoBehaviour
     }
     public void interactionAnim()
     {
-        Vector3 playerPosition = new Vector3(transform.position.x, player.GetComponent<Collider>().bounds.center.y, transform.position.z);
-        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-        if (Physics.Raycast(playerPosition, transform.TransformDirection(Vector3.forward), out hit, 2, layer_Mask))
+        //Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * hit.distance, Color.yellow);
+        if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 1, layer_Mask))
         {
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "InteractiveObjects")
             {
                 obstacle = hit.collider.gameObject.transform.position;
                 Debug.Log("La position de l'obstacle" + obstacle);
-                transform.position += playerPosition + obstacle;
+                transform.position += player.transform.position + obstacle;
                 Debug.Log("La position du joueur + obstacle" + transform.position);
                 Debug.Log("action confirmée");
                 GetComponent<Player>().trapperAnim.SetAnimState(AnimState.JUMP);
 
-                Debug.DrawRay(playerPosition, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 // Debug.Log("hit");
             }
         }
         else
         {
-            Debug.DrawRay(playerPosition, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
+            Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
             //Debug.Log("Did not Hit");
         }
     }
