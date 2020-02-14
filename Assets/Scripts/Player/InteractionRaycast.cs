@@ -19,18 +19,27 @@ public class InteractionRaycast : MonoBehaviour
     private void Update()
     {
         Debug.DrawRay(player.transform.position, (player.nextMoveDirection - player.transform.position) * 5, Color.blue);
-        Debug.Log("Player transform : " + player.transform.position);
-        Debug.Log("Nextmovedir " + player.nextMoveDirection);
-        Debug.Log(player.nextMoveDirection - player.transform.position);
-        if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 0.5f, layer_Mask))
+        //Debug.Log("Player transform : " + player.transform.position);
+        //Debug.Log("Nextmovedir " + player.nextMoveDirection);
+        //Debug.Log(player.nextMoveDirection - player.transform.position);
+        Debug.Log(player.trapperAnim.GetCurrentState());
+        if (player.trapperAnim.GetCurrentState() != AnimState.ESCALADE)
         {
-            Debug.Log("Raycast triggered");
-            player.blocked = true;
+            if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 0.5f, layer_Mask))
+            {
+                Debug.Log("Raycast triggered");
+                player.blocked = true;
+            }
+            else
+            {
+                player.blocked = false;
+            }
         }
         else
         {
             player.blocked = false;
         }
+
     }
     public void interactionAnim()
     {
@@ -40,12 +49,11 @@ public class InteractionRaycast : MonoBehaviour
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "InteractiveObjects")
             {
                 obstacle = hit.collider.gameObject.transform.position;
-                Debug.Log("La position de l'obstacle" + obstacle);
-                transform.position += player.transform.position + obstacle;
-                Debug.Log("La position du joueur + obstacle" + transform.position);
-                Debug.Log("action confirmée");
-                GetComponent<Player>().trapperAnim.SetAnimState(AnimState.JUMP);
-
+                //Debug.Log("La position de l'obstacle" + obstacle);
+                //Debug.Log("La position du joueur + obstacle" + transform.position);
+                //Debug.Log("action confirmée");
+                GetComponent<Player>().trapperAnim.SetAnimState(AnimState.ESCALADE);
+                player.trapperAnim.SetCurrentInteractiveObject(hit.collider.gameObject.GetComponent<InteractiveObject>());
                 Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                 // Debug.Log("hit");
             }

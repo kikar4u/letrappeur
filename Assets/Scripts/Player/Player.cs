@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else
+        else if(trapperAnim.GetCurrentState() !=AnimState.ESCALADE)
         {
             movementOffset = 0;
             trapperAnim.SetAnimState(AnimState.IDLE);
@@ -119,17 +119,20 @@ public class Player : MonoBehaviour
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
         {
 
-            if (Input.GetAxis("Horizontal") != 0f)
+            if (Input.GetAxis("Horizontal") != 0f && trapperAnim.GetCurrentState() != AnimState.ESCALADE)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
             }
-            else
-            {
-                trapperAnim.SetAnimState(AnimState.IDLE);
-            }
 
             segmentBetweenWaypoint = Mathf.Clamp01(segmentBetweenWaypoint);
-            segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+            if (Input.GetAxisRaw("Horizontal") != 0f)
+            {
+                segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+            }
+            else if(trapperAnim.GetCurrentState() == AnimState.ESCALADE)
+            {
+                segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+            }
 
             moveDirection = CalculateCurvePoint(segmentBetweenWaypoint);
 
