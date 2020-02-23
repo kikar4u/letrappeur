@@ -10,27 +10,25 @@ public class BreathingSystem : MonoBehaviour
     // cercle player
     [SerializeField] Image playerCircle;
     RectTransform playerCircleTransform;
-    [SerializeField] private float minPlayerCircleScale;
+    private float minPlayerCircleScale;
     // cercle avatar
     [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
 
-    [Range(0.2f, 2f)]
-    public float releasedBreathSpeed;
-    [Range(0.2f, 2f)]
-    public float controledBreathSpeed;
-    [Range(0.2f, 2f)]
-    public float outerCircleSpeed;
+    //float releasedBreathSpeed;
+    //float controledBreathSpeed;
+    [HideInInspector] public float outerCircleSpeed;
 
     #endregion
     #region Input
-    float LeftTrigger;
-    float RightTrigger;
+    float leftTrigger;
+    float rightTrigger;
     #endregion
 
     #region Curve
-    public BreathingPattern breathingPattern;
-    private float highestValueInCurve;
+    [HideInInspector] public BreathingUnit[] breathingUnits;
+    BreathingUnit currentBreathing;
+    [HideInInspector] public float highestValueInCurve;
     //public float speedCirclePlayer;
     #endregion
 
@@ -42,104 +40,131 @@ public class BreathingSystem : MonoBehaviour
     #endregion
 
     #region Success
-    [Header("Success Conditions")]
-    public float requiredTimeSpendInsideBounds;
-    public float pointsPerSecond;
-    private float pointsAmount;
+    [HideInInspector] public float requiredTimeSpendInsideBounds;
+    float insideBoundsTimer;
     #endregion
 
     #region Lose
-    [Header("Lose Conditions")]
-    [Tooltip("Au bout de X secondes, le joueur aura raté.")]
-    public float requiredTimeSpendOutsideBounds;
-    private float outsideBoundsTimer;
+    [HideInInspector] public float requiredTimeSpendOutsideBounds;
+    [HideInInspector] public float outsideBoundsTimer;
     #endregion
 
     [Header("Mouvement pendant la respiration")]
-    public bool canWalkDuringBreathing;
-    [Range(0, 180f)]
-    [HideInInspector] public float walkSpeedDuringBreathing;
+    bool canWalkDuringBreathing;
+    float walkSpeedDuringBreathing;
 
     void Start()
     {
         outsideBoundsTimer = 0f;
+        insideBoundsTimer = 0f;
+        rightTrigger = 0f;
+        leftTrigger = 0f;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         player.hasMovementControls = false;
         playerCircleTransform = playerCircle.GetComponent<RectTransform>();
         outerCircleTransform = donutCircle.GetComponent<RectTransform>();
 
-        outerCircleTransform.localScale = new Vector3(breathingPattern.animationCurve[1].value, breathingPattern.animationCurve[1].value, 1.0f);
-        StartCoroutine(BreathScaling(outerCircleSpeed));
+        if (currentBreathing == null && breathingUnits.Length > 0)
+            currentBreathing = breathingUnits[0];
 
-        pointsAmount = 0f;
+        if (breathingUnits.Length == 1)
+            StartCoroutine(UniqueBreathScaling(outerCircleSpeed));
+        else if (breathingUnits.Length > 1)
+            StartCoroutine(MultipleBreathScaling(outerCircleSpeed));
 
-        breathingPattern.animationCurve.preWrapMode = breathingPattern.animationWrapMode;
-        breathingPattern.animationCurve.postWrapMode = breathingPattern.animationWrapMode;
 
-        highestValueInCurve = 0f;
-        //Récupère le point le plus haut de la courbe
-        for (int i = 0; i < breathingPattern.animationCurve.length; i++)
+        outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[1].value, currentBreathing.breathingPattern.animationCurve[1].value, 1.0f);
+    }
+
+    public void PopulateBreathingSystem(float _outerCircleSpeed, BreathingUnit[] _breathingUnits, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _walkSpeedDuringBreathing = 0f)
+    {
+        outerCircleSpeed = _outerCircleSpeed;
+        breathingUnits = _breathingUnits;
+        for (int i = 0; i < breathingUnits.Length; i++)
         {
-            if (breathingPattern.animationCurve[i].value > highestValueInCurve)
+            breathingUnits[i].breathingPattern.animationCurve.preWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
+            breathingUnits[i].breathingPattern.animationCurve.postWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
+        }
+        requiredTimeSpendInsideBounds = _requiredTimeSpendInsideBounds;
+        requiredTimeSpendOutsideBounds = _requiredTimeSpendOutsideBounds;
+        canWalkDuringBreathing = _canWalkDuringBreathing;
+
+        //Récupère le point le plus haut de la courbe
+        highestValueInCurve = 0f;
+        if (breathingUnits.Length == 1)
+        {
+            for (int i = 0; i < breathingUnits[0].breathingPattern.animationCurve.length; i++)
             {
-                highestValueInCurve = breathingPattern.animationCurve[i].value;
+                if (breathingUnits[0].breathingPattern.animationCurve[i].value > highestValueInCurve)
+                {
+                    highestValueInCurve = breathingUnits[0].breathingPattern.animationCurve[i].value;
+                }
+                if (breathingUnits[0].breathingPattern.animationCurve[i].value < minPlayerCircleScale)
+                {
+                    minPlayerCircleScale = breathingUnits[0].breathingPattern.animationCurve[i].value;
+                }
             }
         }
     }
 
     private void Update()
     {
-
-        float LeftTrigger = Input.GetAxis("LeftTrigger");
-        float RightTrigger = Input.GetAxis("RightTrigger");
+        leftTrigger = Input.GetAxis("LeftTrigger");
+        rightTrigger = Input.GetAxis("RightTrigger");
 
         //SmoothBreathing(LeftTrigger, RightTrigger);
-        RelativeBreathing(LeftTrigger, RightTrigger);
+        RelativeBreathing(leftTrigger, rightTrigger);
         //CheckCircleInBounds();
     }
 
     private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
     {
-        float lerpValue = Mathf.Lerp(breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[2].value, leftTriggerInput / 2 + rightTriggerInput / 2);
-        //float lerpValue = leftTriggerInput / 2 + rightTriggerInput / 2;
+        if (currentBreathing != null)
+        {
+            float lerpValue = Mathf.Lerp(currentBreathing.breathingPattern.animationCurve[0].value, highestValueInCurve, leftTriggerInput / 2 + rightTriggerInput / 2);
 
-        Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, 2f * Time.deltaTime), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, 2f * Time.deltaTime), 0f);
-        playerCircleTransform.localScale = scale;
+            Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), 0f);
+            playerCircleTransform.localScale = scale;
+        }
     }
 
-    private void SmoothBreathing(float leftTriggerInput, float rightTriggerInput)
+    //private void SmoothBreathing(float leftTriggerInput, float rightTriggerInput)
+    //{
+    //    // si leurs valeurs sont plus grand (donc appui de la part du joueur) on grandit le cercle
+    //    if (leftTriggerInput >= 0.1f || rightTriggerInput >= 0.1f)
+    //    {
+    //        // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
+    //        playerCircleTransform.localScale += new Vector3((leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, (leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, 0.0f);
+    //    }
+    //    // sinon on fait rétrécir le cercle
+    //    else
+    //    {
+    //        // cap pour par que le cercle ne dépasse de l'écran si le joueur ne fait rien
+    //        if (playerCircleTransform.localScale.x > outerCircleTransform.localScale.x /*&& !CheckCircleInBounds()*/)
+    //        {
+    //            //playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * 2 * Time.deltaTime, releasedBreathSpeed * 2 * Time.deltaTime, 0.0f);
+    //            playerCircleTransform.localScale = Vector3.Lerp(playerCircleTransform.localScale, new Vector3(currentBreathingPattern.animationCurve.Evaluate(Time.time), currentBreathingPattern.animationCurve.Evaluate(Time.time), 0f), 0.250f);
+    //        }
+    //        //playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * Time.deltaTime, releasedBreathSpeed * Time.deltaTime, 0.0f);
+    //    }
+    //    //Cap circle player
+    //    playerCircleTransform.localScale = new Vector3(Mathf.Clamp(playerCircleTransform.localScale.x, minPlayerCircleScale, highestValueInCurve), Mathf.Clamp(playerCircleTransform.localScale.y, minPlayerCircleScale, highestValueInCurve), 1.0f);
+    //}
+
+    private bool CheckPatternSuccess(float successTime)
     {
-        // si leurs valeurs sont plus grand (donc appui de la part du joueur) on grandit le cercle
-        if (leftTriggerInput >= 0.1f || rightTriggerInput >= 0.1f)
-        {
-            // BUG : les conditions font buguer le système, avec les conditions le cercle n'est plus contrôlable, du moins, il bloque à une certaines distance
-            playerCircleTransform.localScale += new Vector3((leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, (leftTriggerInput + rightTriggerInput) * Time.deltaTime * controledBreathSpeed, 0.0f);
-        }
-        // sinon on fait rétrécir le cercle
+        if (successTime > (currentBreathing.breathingPattern.animationCurve[currentBreathing.breathingPattern.animationCurve.length - 1].time * currentBreathing.percentSuccessNeeded))
+            return true;
         else
-        {
-            // cap pour par que le cercle ne dépasse de l'écran si le joueur ne fait rien
-            if (playerCircleTransform.localScale.x > outerCircleTransform.localScale.x /*&& !CheckCircleInBounds()*/)
-            {
-                //playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * 2 * Time.deltaTime, releasedBreathSpeed * 2 * Time.deltaTime, 0.0f);
-                playerCircleTransform.localScale = Vector3.Lerp(playerCircleTransform.localScale, new Vector3(breathingPattern.animationCurve.Evaluate(Time.time), breathingPattern.animationCurve.Evaluate(Time.time), 0f), 0.250f);
-            }
-            //playerCircleTransform.localScale -= new Vector3(releasedBreathSpeed * Time.deltaTime, releasedBreathSpeed * Time.deltaTime, 0.0f);
-        }
-        //Cap circle player
-        playerCircleTransform.localScale = new Vector3(Mathf.Clamp(playerCircleTransform.localScale.x, minPlayerCircleScale, highestValueInCurve), Mathf.Clamp(playerCircleTransform.localScale.y, minPlayerCircleScale, highestValueInCurve), 1.0f);
-
+            return false;
     }
 
-    private bool CheckCircleInBounds()
+    private void UpdateUniqueBreathingSuccessCondition(bool success)
     {
-        //Si le cercle du player est dans le cercle de l'outer
-        if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
-                && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
+        if (success)
         {
             //Le joueur respire bien
-            pointsAmount += pointsPerSecond / (1f / Time.deltaTime);
-
+            insideBoundsTimer += Time.deltaTime;
             //On est gentil avec le joueur : si il est à l'intérieur et que son outsideTimer est supérieur à 0, il diminue 
             if (outsideBoundsTimer >= 0f)
             {
@@ -150,12 +175,11 @@ public class BreathingSystem : MonoBehaviour
             {
                 player.WalkFollowingPath(walkSpeedDuringBreathing);
             }
-            if (pointsAmount >= requiredTimeSpendInsideBounds)
+            if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
                 Destroy(gameObject, 0.01f);
             }
-            return true;
         }
         else
         {
@@ -169,22 +193,76 @@ public class BreathingSystem : MonoBehaviour
             {
                 //Debug.Log("J'ai perdu...");
             }
-            return false;
         }
     }
+    private bool CheckCircleInBounds()
+    {
+        //Si le cercle du player est dans le cercle de l'outer
+        if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
+                && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
+            return true;
+        else
+            return false;
+    }
 
-    public IEnumerator BreathScaling(float Speed)
+    public IEnumerator UniqueBreathScaling(float Speed)
     {
         while (true)
         {
-            outerCircleTransform.localScale = Vector3.Lerp(outerCircleTransform.localScale, new Vector3(breathingPattern.animationCurve.Evaluate(Time.time), breathingPattern.animationCurve.Evaluate(Time.time), 1.0f), 0.350f);
+            outerCircleTransform.localScale = Vector3.Lerp(outerCircleTransform.localScale, new Vector3(currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), 1.0f), 0.350f);
             //outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), Mathf.Clamp(outerCircleTransform.localScale.y, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), 1.0f);
             yield return new WaitForSeconds(Time.deltaTime);
-            if (outerCircleTransform.localScale.x >= breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value || outerCircleTransform.localScale.x <= breathingPattern.animationCurve[0].value)
-            {
-                //Speed = -Speed;
-                //Debug.Log(Speed);
-            }
+            UpdateUniqueBreathingSuccessCondition(CheckCircleInBounds());
         }
+    }
+
+    public IEnumerator MultipleBreathScaling(float Speed)
+    {
+        float counterTime = 0f;
+        float counterSuccessTime = 0f;
+        for (int i = 0; i < breathingUnits.Length; i++)
+        {
+            if (breathingUnits[i] != currentBreathing)
+                currentBreathing = breathingUnits[i];
+
+            for (int j = 0; j < breathingUnits[i].breathingPattern.animationCurve.length; j++)
+            {
+                if (breathingUnits[i].breathingPattern.animationCurve[j].value > highestValueInCurve)
+                {
+                    highestValueInCurve = breathingUnits[i].breathingPattern.animationCurve[j].value;
+                }
+                if (breathingUnits[i].breathingPattern.animationCurve[j].value < minPlayerCircleScale)
+                {
+                    minPlayerCircleScale = breathingUnits[i].breathingPattern.animationCurve[j].value;
+                }
+            }
+
+            while (counterTime <= breathingUnits[i].breathingPattern.animationCurve[breathingUnits[i].breathingPattern.animationCurve.length - 1].time)
+            {
+                outerCircleTransform.localScale = Vector3.Lerp(outerCircleTransform.localScale, new Vector3(currentBreathing.breathingPattern.animationCurve.Evaluate(counterTime), currentBreathing.breathingPattern.animationCurve.Evaluate(counterTime), 1.0f), 0.350f);
+                if (CheckCircleInBounds())
+                {
+                    counterSuccessTime += Time.deltaTime;
+                }
+                yield return null;
+                counterTime += Time.deltaTime;
+            }
+            counterTime = 0f;
+
+            if (CheckPatternSuccess(counterSuccessTime))
+            {
+                //On a réussi
+                Debug.Log("success");
+            }
+            else
+            {
+                //On s'est fail
+                Debug.Log("fail");
+                i--;
+            }
+            counterSuccessTime = 0f;
+        }
+        Debug.Log("fini");
+        Destroy(gameObject);
     }
 }

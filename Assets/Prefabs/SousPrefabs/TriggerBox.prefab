@@ -57,4 +57,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4958f60137a694dbb9f0af14b0c209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breathingSystem: {fileID: 0}
+  breathingSystem: {fileID: 8737063863657677907, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  circlesPrefab: {fileID: 6508800210739816989, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+  releasedBreathSpeed: 0.322
+  controledBreathSpeed: 0.483
+  outerCircleSpeed: 0.673
+  breathingPattern: {fileID: 0}
+  requiredTimeSpendInsideBounds: 0
+  pointsPerSecond: 0
+  requiredTimeSpendOutsideBounds: 0
+  canWalkDuringBreathing: 0
+  walkSpeedDuringBreathing: 0

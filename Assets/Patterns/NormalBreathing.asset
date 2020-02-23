@@ -70,6 +70,7 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     m_PreInfinity: 0
-    m_PostInfinity: 1
+    m_PostInfinity: 0
     m_RotationOrder: 4
   animationWrapMode: 4
+  percentSuccessNeeded: 0

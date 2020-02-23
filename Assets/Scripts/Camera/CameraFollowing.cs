@@ -9,20 +9,27 @@ public class CameraFollowing : MonoBehaviour
     #endregion
 
     #region Variables
-    [SerializeField] float cameraSlideSpeed;
+    [Range(0f, 1f)]
+    [Tooltip("Coefficient d'interpolation de déplacement de la caméra")]
+    [SerializeField] float cameraSlideSmoothness;
+    [Range(0f, 1f)]
+    [Tooltip("Coefficient d'interpolation de rotation de la caméra")]
+    [SerializeField] float cameraRotationSmoothness;
     Quaternion initialRotation;
-    float xOffset;
+    Vector3 offset;
+    [HideInInspector] public bool focusedOnPlayer;
     #endregion
 
     private void Start()
     {
         initialRotation = transform.rotation;
+        focusedOnPlayer = true;
 
-        xOffset = targetToFollow.position.x - transform.position.x;
+        offset = targetToFollow.position - transform.position;
     }
     void Update()
     {
-        if (targetToFollow != null)
+        if (targetToFollow != null && focusedOnPlayer)
         {
             FollowTarget();
         }
@@ -30,8 +37,18 @@ public class CameraFollowing : MonoBehaviour
 
     private void FollowTarget()
     {
-        Vector3 finalPosition = new Vector3(targetToFollow.position.x - xOffset, transform.position.y, transform.position.z);
-        Vector3 smoothPosition = Vector3.Lerp(transform.position, finalPosition, cameraSlideSpeed);
+        Vector3 finalPosition = targetToFollow.position - offset;
+        Vector3 smoothPosition = Vector3.Lerp(transform.position, finalPosition, cameraSlideSmoothness);
         transform.position = smoothPosition;
+
+        if (initialRotation != transform.rotation)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, initialRotation, cameraRotationSmoothness);
+        }
+    }
+
+    public Quaternion GetInitialCameraRotation()
+    {
+        return initialRotation;
     }
 }

@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         terrainMask = LayerMask.GetMask("Ground");
-
         #endregion
 
         #region MoveControl
@@ -76,7 +75,7 @@ public class Player : MonoBehaviour
             raycastController.interactionAnim();
         }
         Rotate(nextMoveDirection);
-        if (hasMovementControls && !inCinematic && Input.GetAxisRaw("Horizontal") != 0 && canMove)
+        if (hasMovementControls && !inCinematic && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && canMove)
         {
             WalkFollowingPath(speed);
 
@@ -94,7 +93,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if(trapperAnim.GetCurrentState() !=AnimState.ESCALADE)
+        else if (trapperAnim.GetCurrentState() != AnimState.ESCALADE)
         {
             movementOffset = 0;
             trapperAnim.SetAnimState(AnimState.IDLE);
@@ -118,7 +117,6 @@ public class Player : MonoBehaviour
     {
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
         {
-
             if (Input.GetAxis("Horizontal") != 0f && trapperAnim.GetCurrentState() != AnimState.ESCALADE)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
@@ -129,7 +127,7 @@ public class Player : MonoBehaviour
             {
                 segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
             }
-            else if(trapperAnim.GetCurrentState() == AnimState.ESCALADE)
+            else if (trapperAnim.GetCurrentState() == AnimState.ESCALADE)
             {
                 segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
             }

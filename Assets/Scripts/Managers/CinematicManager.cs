@@ -19,7 +19,8 @@ public class CinematicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isFinished();
+        if (mainCamera.clip != null)
+            isFinished();
     }
     void isFinished()
     {

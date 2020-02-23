@@ -27,7 +27,6 @@ public class TrapperAnim : MonoBehaviour
     {
         if (currentState == AnimState.ESCALADE && currentInteractiveObject != null)
         {
-            Debug.Log("FJSQDIOFJIOQSDJFIQSDJFIODS");
             GetComponent<Player>().WalkFollowingPath(currentInteractiveObject.speedDuringClimb);
         }
     }
@@ -53,7 +52,6 @@ public class TrapperAnim : MonoBehaviour
                 break;
             case AnimState.ESCALADE:
                 animator.SetTrigger("ESCALADE");
-                
                 break;
             default:
                 break;
