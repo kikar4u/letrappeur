@@ -5,10 +5,20 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert2
+    second: {fileID: 2100000, guid: 3dba11bb0104a6f4188a67f0329c3125, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: UV
     second: {fileID: 2800000, guid: d61ba9fc014294e4aab5250034b934ae, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: UV chalet
+    second: {fileID: 2800000, guid: 4be587a199931ba42ad35935efce823c, type: 3}
   materials:
     importMaterials: 1
     materialName: 0

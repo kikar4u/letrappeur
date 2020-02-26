@@ -12,8 +12,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.000
+    second: {fileID: 2100000, guid: 1eb8379dff03ae8468308b56a4463f49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 4ab289aee498b794ba25d5865d58a17e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 79aff3b3942b45e41a0696623572e2f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Wood
     second: {fileID: 2100000, guid: 1b9c977b1af95c44b95ea7308b64ddb7, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: emissive-map
+    second: {fileID: 2800000, guid: 618a6119397965a479e48d4f04b81bc5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: uv_update2.0
+    second: {fileID: 2800000, guid: 43282cf8c4976914f889d958a09efda0, type: 3}
   materials:
     importMaterials: 1
     materialName: 0
@@ -78,7 +103,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 3
