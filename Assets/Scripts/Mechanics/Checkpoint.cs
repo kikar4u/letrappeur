@@ -30,10 +30,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            block.SetColor("_EmissionColor", Color.white);
-            block.SetColor("_BaseColor", Color.white);
-            // You can cache a reference to the renderer to avoid searching for it.
-            GetComponent<Renderer>().SetPropertyBlock(block);
+            GetComponent<Animation>().Play("CheckpointAnimation");
 
             AddCheckpoint(collider.gameObject.GetComponent<Player>());
         }
