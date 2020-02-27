@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     public float gravity = 20.0f;
     [HideInInspector] public bool canMove, inCinematic, hasMovementControls, blocked;
     private PathCurve path;
-    [SerializeField] private WaypointCurve nextWaypoint;
-    [SerializeField] private WaypointCurve lastWaypoint;
+    private CurvedPositionInfo currentCurvedPosInfo;
+    private CurvedPositionInfo respawnCurvedPosInfo;
     private int direction;
 
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
@@ -30,19 +30,21 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveAfterRotationDegreeThreshold;
     private float forwardWayPointAngle;
     private Vector3 moveDirection;
-    public Vector3 nextMoveDirection;
-    [SerializeField] private float segmentBetweenWaypoint;
+    [HideInInspector] public Vector3 nextMoveDirection;
     [HideInInspector] public float movementOffset;
 
     LayerMask terrainMask;
     #endregion
 
     #region Checkpoint
-    public Vector3 checkpointPosition;
+    Vector3 lastCheckpointPosition;
     #endregion
 
     void Start()
     {
+        currentCurvedPosInfo = new CurvedPositionInfo();
+        respawnCurvedPosInfo = new CurvedPositionInfo();
+
         #region Components
         playerCollider = GetComponent<Collider>();
         raycastController = GetComponent<InteractionRaycast>();
@@ -58,14 +60,14 @@ public class Player : MonoBehaviour
         canMove = true;
         inCinematic = false;
         direction = 0;
-        segmentBetweenWaypoint = 0;
+        currentCurvedPosInfo.segmentBetweenWaypoint = 0;
 
         #endregion
-        nextWaypoint = path.waypointCurves[1];
-        lastWaypoint = path.waypointCurves[0];
+        currentCurvedPosInfo.nextWaypoint = path.waypointCurves[1];
+        currentCurvedPosInfo.lastWaypoint = path.waypointCurves[0];
 
-        transform.position = lastWaypoint.waypointPosition.transform.position;
-
+        transform.position = currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position;
+        Fader.Instance.respawnDelegate += Respawn;
     }
 
     void Update()
@@ -109,7 +111,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown("p"))
         {
-            Respawn();
+            Fader.Instance.FadeIn();
         }
     }
 
@@ -122,17 +124,18 @@ public class Player : MonoBehaviour
                 trapperAnim.SetAnimState(AnimState.WALK);
             }
 
-            segmentBetweenWaypoint = Mathf.Clamp01(segmentBetweenWaypoint);
+            currentCurvedPosInfo.segmentBetweenWaypoint = Mathf.Clamp01(currentCurvedPosInfo.segmentBetweenWaypoint);
             if (Input.GetAxisRaw("Horizontal") != 0f)
             {
-                segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+                currentCurvedPosInfo.segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position);
             }
             else if (trapperAnim.GetCurrentState() == AnimState.ESCALADE)
             {
-                segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position);
+                currentCurvedPosInfo.segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position);
             }
 
-            moveDirection = CalculateCurvePoint(segmentBetweenWaypoint);
+            moveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint);
+            moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
 
             Rotate(moveDirection);
             movementOffset = (moveDirection - transform.position).magnitude;
@@ -145,32 +148,20 @@ public class Player : MonoBehaviour
                 transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
             }
 
-            if (segmentBetweenWaypoint > 1 || segmentBetweenWaypoint < 0)
+            if (currentCurvedPosInfo.segmentBetweenWaypoint > 1 || currentCurvedPosInfo.segmentBetweenWaypoint < 0)
             {
                 ChangeWaypointTarget();
             }
         }
-        nextMoveDirection = CalculateCurvePoint(segmentBetweenWaypoint + speed * Time.deltaTime * direction * 1 / Vector3.Distance(lastWaypoint.waypointPosition.transform.position, nextWaypoint.waypointPosition.transform.position));
+        nextMoveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint + speed * Time.deltaTime * direction * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position));
+        nextMoveDirection = new Vector3(nextMoveDirection.x, transform.position.y, nextMoveDirection.z);
     }
 
-    Vector3 CalculateCurvePoint(float segment)
-    {
-        Vector3 nextMoveDir = Mathf.Pow(1 - segment, 3)
-               * lastWaypoint.waypointPosition.transform.position +
-                3 * Mathf.Pow(1 - segment, 2) * segment
-                * lastWaypoint.bezierSecondPointPosition.transform.position +
-                3 * (1 - segment) * Mathf.Pow(segment, 2)
-                * nextWaypoint.bezierFirstPointPosition.position
-                + Mathf.Pow(segment, 3) * nextWaypoint.waypointPosition.transform.position;
-
-        return new Vector3(nextMoveDir.x, transform.position.y, nextMoveDir.z);
-    }
 
     public void Rotate(Vector3 target)
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,
         Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)), rotationSmoothness);
-
     }
 
     // direction > 0 = right
@@ -181,18 +172,18 @@ public class Player : MonoBehaviour
         if (direction > 0)
         {
             //On verifie qu'on ne soit pas à une extrémité
-            if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) < path.waypointCurves.Length - 1)
+            if (System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) < path.waypointCurves.Length - 1)
             {
                 if (!canMove)
                     canMove = true;
                 //nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) + 1];
-                waypointSwitch = nextWaypoint;
-                nextWaypoint = lastWaypoint;
-                lastWaypoint = waypointSwitch;
+                waypointSwitch = currentCurvedPosInfo.nextWaypoint;
+                currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
+                currentCurvedPosInfo.lastWaypoint = waypointSwitch;
 
-                segmentBetweenWaypoint = 1 - segmentBetweenWaypoint;
-                Debug.Log("Swap de points waypoint cible : " + System.Array.IndexOf(path.waypointCurves, nextWaypoint));
-                Debug.Log("Swap de points last waypoint : " + System.Array.IndexOf(path.waypointCurves, lastWaypoint));
+                currentCurvedPosInfo.segmentBetweenWaypoint = 1 - currentCurvedPosInfo.segmentBetweenWaypoint;
+                Debug.Log("Swap de points waypoint cible : " + System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint));
+                Debug.Log("Swap de points last waypoint : " + System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.lastWaypoint));
             }
             else
             {
@@ -202,15 +193,15 @@ public class Player : MonoBehaviour
         //Si on va à gauche
         else if (direction < 0)
         {
-            if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) > 0)
+            if (System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) > 0)
             {
                 if (!canMove)
                     canMove = true;
                 //nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) - 1];
-                waypointSwitch = nextWaypoint;
-                nextWaypoint = lastWaypoint;
-                lastWaypoint = waypointSwitch;
-                segmentBetweenWaypoint = 1 - segmentBetweenWaypoint;
+                waypointSwitch = currentCurvedPosInfo.nextWaypoint;
+                currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
+                currentCurvedPosInfo.lastWaypoint = waypointSwitch;
+                currentCurvedPosInfo.segmentBetweenWaypoint = 1 - currentCurvedPosInfo.segmentBetweenWaypoint;
             }
             else
             {
@@ -226,20 +217,20 @@ public class Player : MonoBehaviour
         switch (direction)
         {
             case 1:
-                if (System.Array.IndexOf(path.waypointCurves, nextWaypoint) < path.waypointCurves.Length - 1)
+                if (System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) < path.waypointCurves.Length - 1)
                 {
-                    lastWaypoint = nextWaypoint;
-                    nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) + 1];
-                    segmentBetweenWaypoint = 0;
+                    currentCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.nextWaypoint;
+                    currentCurvedPosInfo.nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) + 1];
+                    currentCurvedPosInfo.segmentBetweenWaypoint = 0;
                 }
                 break;
 
             case -1:
-                if (System.Array.IndexOf(path.waypointCurves, lastWaypoint) > 0)
+                if (System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.lastWaypoint) > 0)
                 {
-                    nextWaypoint = lastWaypoint;
-                    lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, nextWaypoint) - 1];
-                    segmentBetweenWaypoint = 1;
+                    currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
+                    currentCurvedPosInfo.lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) - 1];
+                    currentCurvedPosInfo.segmentBetweenWaypoint = 1;
                 }
                 break;
             default:
@@ -249,7 +240,10 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
-        transform.position = checkpointPosition;
+        currentCurvedPosInfo.SetValues(respawnCurvedPosInfo);
+
+        Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(respawnCurvedPosInfo.segmentBetweenWaypoint);
+        transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
     }
 
     public int GetDirection()
@@ -257,31 +251,10 @@ public class Player : MonoBehaviour
         return direction;
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Waypoint")
-    //    {
-    //        if (Input.GetAxisRaw("Horizontal") != 0)
-    //        {
-    //            //ChangeWaypointTarget();
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerStay(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Waypoint")
-    //    {
-    //        if (other.gameObject == path.waypointCurves[0].waypointPosition && direction == -1 || other.gameObject == path.waypointCurves[path.waypointCurves.Length - 1].waypointPosition && direction == 1)
-    //        {
-    //            //canMove = false;
-    //            //return;
-    //        }
-
-    //        else if (nextWaypoint.waypointPosition.GetComponent<Collider>() == other)
-    //        {
-    //            //SwapWaypointTarget(Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")));
-    //        }
-    //    }
-    //}
+    public void SaveCurrentPosInfo()
+    {
+        respawnCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.lastWaypoint;
+        respawnCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.nextWaypoint;
+        respawnCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint;
+    }
 }

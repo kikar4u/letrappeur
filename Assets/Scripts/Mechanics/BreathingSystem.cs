@@ -47,6 +47,7 @@ public class BreathingSystem : MonoBehaviour
     #region Lose
     [HideInInspector] public float requiredTimeSpendOutsideBounds;
     [HideInInspector] public float outsideBoundsTimer;
+    [HideInInspector] public int requiredFailedToLose;
     #endregion
 
     [Header("Mouvement pendant la respiration")]
@@ -76,9 +77,8 @@ public class BreathingSystem : MonoBehaviour
         outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[1].value, currentBreathing.breathingPattern.animationCurve[1].value, 1.0f);
     }
 
-    public void PopulateBreathingSystem(float _outerCircleSpeed, BreathingUnit[] _breathingUnits, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _walkSpeedDuringBreathing = 0f)
+    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _walkSpeedDuringBreathing = 0f)
     {
-        outerCircleSpeed = _outerCircleSpeed;
         breathingUnits = _breathingUnits;
         for (int i = 0; i < breathingUnits.Length; i++)
         {
@@ -88,6 +88,7 @@ public class BreathingSystem : MonoBehaviour
         requiredTimeSpendInsideBounds = _requiredTimeSpendInsideBounds;
         requiredTimeSpendOutsideBounds = _requiredTimeSpendOutsideBounds;
         canWalkDuringBreathing = _canWalkDuringBreathing;
+        requiredFailedToLose = _requiredFailedToLose;
 
         //Récupère le point le plus haut de la courbe
         highestValueInCurve = 0f;
@@ -171,10 +172,7 @@ public class BreathingSystem : MonoBehaviour
                 outsideBoundsTimer -= Time.deltaTime;
                 Mathf.Clamp(outsideBoundsTimer, 0f, Mathf.Infinity);
             }
-            if (canWalkDuringBreathing)
-            {
-                player.WalkFollowingPath(walkSpeedDuringBreathing);
-            }
+
             if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
@@ -191,7 +189,9 @@ public class BreathingSystem : MonoBehaviour
             }
             if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
             {
+                Fader.Instance.FadeIn();
                 //Debug.Log("J'ai perdu...");
+
             }
         }
     }
@@ -200,7 +200,14 @@ public class BreathingSystem : MonoBehaviour
         //Si le cercle du player est dans le cercle de l'outer
         if (outerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f))
                 && !innerMarginCollider.bounds.Contains(new Vector3(playerBreathCollider.bounds.max.x, playerBreathCollider.bounds.center.y, 0f)))
+        {
+            if (canWalkDuringBreathing)
+            {
+                player.WalkFollowingPath(walkSpeedDuringBreathing);
+            }
+
             return true;
+        }
         else
             return false;
     }
@@ -220,6 +227,7 @@ public class BreathingSystem : MonoBehaviour
     {
         float counterTime = 0f;
         float counterSuccessTime = 0f;
+        int patternFailed = 0;
         for (int i = 0; i < breathingUnits.Length; i++)
         {
             if (breathingUnits[i] != currentBreathing)
@@ -258,6 +266,15 @@ public class BreathingSystem : MonoBehaviour
             {
                 //On s'est fail
                 Debug.Log("fail");
+                patternFailed++;
+                if (patternFailed == requiredFailedToLose)
+                {
+                    //On a perdu
+                    Fader.Instance.FadeIn();
+                    player.Respawn();
+                    Destroy(gameObject);
+                    break;
+                }
                 i--;
             }
             counterSuccessTime = 0f;

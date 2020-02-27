@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class TriggerMoveCamera : MonoBehaviour
 {
-    [SerializeField] float smoothness;
     Camera cam;
     public Transform targetPosition;
+    [SerializeField] AnimationCurve animationCurve;
+
 
     private void Start()
     {
@@ -17,14 +18,12 @@ public class TriggerMoveCamera : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("something enter");
         if (other.gameObject.tag == "Player")
         {
             if (cam.GetComponent<CameraFollowing>().focusedOnPlayer)
             {
-                Debug.Log(cam);
                 cam.GetComponent<CameraFollowing>().focusedOnPlayer = false;
-                StartCoroutine(MoveCamera(targetPosition));
+                StartCoroutine(MoveCameraToSpot(targetPosition));
             }
         }
     }
@@ -35,19 +34,44 @@ public class TriggerMoveCamera : MonoBehaviour
         {
             if (!cam.GetComponent<CameraFollowing>().focusedOnPlayer)
             {
-                cam.GetComponent<CameraFollowing>().focusedOnPlayer = true;
-                StopCoroutine(nameof(MoveCamera));
+                StartCoroutine(nameof(MoveCameraToPlayer));
             }
         }
     }
 
-    IEnumerator MoveCamera(Transform newPos)
+    IEnumerator MoveCameraToSpot(Transform newPos)
     {
-        while (cam.transform.position != newPos.position && !cam.GetComponent<CameraFollowing>().focusedOnPlayer)
+        float timeLimit = animationCurve.keys[animationCurve.length - 1].time;
+        float timeCount = 0f;
+        Vector3 initialCameraPosition = cam.transform.position;
+        Quaternion initialCameraRotation = cam.transform.rotation;
+        while (timeCount < timeLimit)
         {
-            cam.transform.position = Vector3.Lerp(cam.transform.position, newPos.position, smoothness * Time.deltaTime);
-            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, newPos.rotation, smoothness * Time.deltaTime);
+            timeCount += Time.deltaTime;
+            cam.transform.position = Vector3.Lerp(initialCameraPosition, newPos.position, animationCurve.Evaluate(timeCount));
+            cam.transform.rotation = Quaternion.Lerp(initialCameraRotation, newPos.rotation, animationCurve.Evaluate(timeCount));
+
             yield return null;
         }
+
+        StopCoroutine(nameof(MoveCameraToSpot));
+    }
+
+    IEnumerator MoveCameraToPlayer()
+    {
+        float timeLimit = animationCurve.keys[animationCurve.length - 1].time;
+        float timeCount = 0f;
+        Vector3 initialCameraPosition = cam.transform.position;
+        Quaternion initialCameraRotation = cam.transform.rotation;
+        while (timeCount < timeLimit)
+        {
+            timeCount += Time.deltaTime;
+            cam.transform.position = Vector3.Lerp(initialCameraPosition, GameObject.FindGameObjectWithTag("Player").transform.position - cam.GetComponent<CameraFollowing>().GetCameraToPlayerOffset(), animationCurve.Evaluate(timeCount));
+            cam.transform.rotation = Quaternion.Lerp(initialCameraRotation, cam.GetComponent<CameraFollowing>().GetInitialRotation(), animationCurve.Evaluate(timeCount));
+
+            yield return null;
+        }
+        cam.GetComponent<CameraFollowing>().focusedOnPlayer = true;
+        StopCoroutine(nameof(MoveCameraToPlayer));
     }
 }

@@ -12,8 +12,8 @@ public class TriggerBreathing : MonoBehaviour
     public float releasedBreathSpeed;
     [Range(0.2f, 2f)]
     public float controledBreathSpeed;*/
-    [Range(0.2f, 2f)]
-    public float outerCircleSpeed;
+    //[Range(0.2f, 2f)]
+    //public float outerCircleSpeed;
 
     #region Curve
     public BreathingUnit[] breathingUnits;
@@ -30,7 +30,7 @@ public class TriggerBreathing : MonoBehaviour
     [Tooltip("Au bout de X secondes, le joueur aura raté.")]
     [HideInInspector] public float requiredTimeSpendOutsideBounds;
     [Range(1, 5)]
-    int requiredFailedToLose;
+    [HideInInspector] public int requiredFailedToLose;
     #endregion
 
     [Header("Mouvement pendant la respiration")]
@@ -51,7 +51,7 @@ public class TriggerBreathing : MonoBehaviour
             //breathingSystem.gameObject.SetActive(true);
             triggered = true;
             GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
-            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(outerCircleSpeed, breathingUnits, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, walkSpeedDuringBreathing);
+            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, walkSpeedDuringBreathing);
             BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
         }
     }

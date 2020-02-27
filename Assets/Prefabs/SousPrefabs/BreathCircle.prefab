@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -362,15 +362,15 @@ MonoBehaviour:
   playerCircle: {fileID: 6508800210682578077}
   donutCircle: {fileID: 5020577773153880526}
   outerCircleSpeed: 0.673
-  breathingPattern: {fileID: 11400000, guid: 3e9c460859040f645be8d86ce2c5830a, type: 2}
+  breathingUnits: []
   highestValueInCurve: 4
   outerMarginCollider: {fileID: 6508800208675506319}
   innerMarginCollider: {fileID: 6508800209217821200}
   playerBreathCollider: {fileID: 6508800210682578079}
   requiredTimeSpendInsideBounds: 0
-  pointsPerSecond: 0
   requiredTimeSpendOutsideBounds: 0
   outsideBoundsTimer: 0
+  requiredFailedToLose: 0
 --- !u!223 &2788448680402097961
 Canvas:
   m_ObjectHideFlags: 0

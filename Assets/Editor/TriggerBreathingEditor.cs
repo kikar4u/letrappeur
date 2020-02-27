@@ -11,6 +11,7 @@ public class TriggerBreathingEditor : Editor
     SerializedProperty breathingUnits;
     SerializedProperty requiredTimeSpendOutsideBounds;
     SerializedProperty requiredTimeSpendInsideBounds;
+    SerializedProperty requiredFailedToLose;
 
     private void OnEnable()
     {
@@ -19,6 +20,7 @@ public class TriggerBreathingEditor : Editor
         breathingUnits = serializedObject.FindProperty("breathingUnits");
         requiredTimeSpendOutsideBounds = serializedObject.FindProperty("requiredTimeSpendOutsideBounds");
         requiredTimeSpendInsideBounds = serializedObject.FindProperty("requiredTimeSpendInsideBounds");
+        requiredFailedToLose = serializedObject.FindProperty("requiredFailedToLose");
     }
     public override void OnInspectorGUI()
     {
@@ -35,12 +37,12 @@ public class TriggerBreathingEditor : Editor
             //triggerBreathing.requiredTimeSpendOutsideBounds = EditorGUILayout.FloatField("Required time outside bounds to lose   :", requiredTimeSpendOutsideBounds.floatValue);
             //triggerBreathing.requiredTimeSpendInsideBounds = EditorGUILayout.FloatField("Required time inside bounds to win   :", requiredTimeSpendInsideBounds.floatValue);
 
-            EditorGUILayout.PropertyField(requiredTimeSpendOutsideBounds, GUIContent.none);
-            EditorGUILayout.PropertyField(requiredTimeSpendInsideBounds, GUIContent.none);
+            EditorGUILayout.PropertyField(requiredTimeSpendOutsideBounds, new GUIContent("Temps nécessaire pour perdre"));
+            EditorGUILayout.PropertyField(requiredTimeSpendInsideBounds, new GUIContent("Temps nécessaire pour réussir"));
         }
-        else
+        else if (triggerBreathing.breathingUnits.Length > 1)
         {
-
+            EditorGUILayout.PropertyField(requiredFailedToLose, new GUIContent("Nbr de pattern raté pour perdre"));
         }
 
         if (GUI.changed)

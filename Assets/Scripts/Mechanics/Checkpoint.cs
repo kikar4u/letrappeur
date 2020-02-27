@@ -19,13 +19,6 @@ public class Checkpoint : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-       
-    }
-
     void OnTriggerEnter(Collider collider)
     {
         if (collider.CompareTag("Player"))
@@ -38,7 +31,8 @@ public class Checkpoint : MonoBehaviour
 
     void AddCheckpoint(Player player)
     {
-        player.checkpointPosition = transform.position;
-       // Destroy(this);
+        player.SaveCurrentPosInfo();
+        Debug.Log("New checkpoint position set :" + player.transform.position);
+        Destroy(this.GetComponent<Collider>());
     }
 }
