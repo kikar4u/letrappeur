@@ -10,21 +10,23 @@ public class BreathingSystem : MonoBehaviour
     // cercle player
     [SerializeField] Image playerCircle;
     RectTransform playerCircleTransform;
-    private float minPlayerCircleScale;
+    [HideInInspector] public float minPlayerCircleScale;
     // cercle avatar
     [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
-
-    //float releasedBreathSpeed;
-    //float controledBreathSpeed;
     [HideInInspector] public float outerCircleSpeed;
 
+    private bool ready;
     #endregion
+
     #region Input
     float leftTrigger;
     float rightTrigger;
     #endregion
 
+    #region Animation
+    Animator animator;
+    #endregion
     #region Curve
     [HideInInspector] public BreathingUnit[] breathingUnits;
     BreathingUnit currentBreathing;
@@ -48,14 +50,36 @@ public class BreathingSystem : MonoBehaviour
     [HideInInspector] public float requiredTimeSpendOutsideBounds;
     [HideInInspector] public float outsideBoundsTimer;
     [HideInInspector] public int requiredFailedToLose;
+    [SerializeField] AnimationCurve jiggleAnimationCurve;
     #endregion
 
     [Header("Mouvement pendant la respiration")]
     bool canWalkDuringBreathing;
     float walkSpeedDuringBreathing;
 
+    bool stutter = false;
+    bool checkingBlocked = false;
+    float blockThreshold = 0.5f;
+
+    public void SetReady()
+    {
+        ready = true;
+    }
+
+    public void BreathingOver()
+    {
+        StopAllCoroutines();
+        ready = false;
+    }
+
+    public void RemoveBreathingHUD()
+    {
+        Destroy(gameObject);
+    }
+
     void Start()
     {
+        ready = false;
         outsideBoundsTimer = 0f;
         insideBoundsTimer = 0f;
         rightTrigger = 0f;
@@ -64,17 +88,17 @@ public class BreathingSystem : MonoBehaviour
         player.hasMovementControls = false;
         playerCircleTransform = playerCircle.GetComponent<RectTransform>();
         outerCircleTransform = donutCircle.GetComponent<RectTransform>();
+        animator = GetComponent<Animator>();
 
         if (currentBreathing == null && breathingUnits.Length > 0)
             currentBreathing = breathingUnits[0];
+
+        outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[1].value, currentBreathing.breathingPattern.animationCurve[1].value, 1.0f);
 
         if (breathingUnits.Length == 1)
             StartCoroutine(UniqueBreathScaling(outerCircleSpeed));
         else if (breathingUnits.Length > 1)
             StartCoroutine(MultipleBreathScaling(outerCircleSpeed));
-
-
-        outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[1].value, currentBreathing.breathingPattern.animationCurve[1].value, 1.0f);
     }
 
     public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _walkSpeedDuringBreathing = 0f)
@@ -92,6 +116,7 @@ public class BreathingSystem : MonoBehaviour
 
         //Récupère le point le plus haut de la courbe
         highestValueInCurve = 0f;
+        minPlayerCircleScale = float.MaxValue;
         if (breathingUnits.Length == 1)
         {
             for (int i = 0; i < breathingUnits[0].breathingPattern.animationCurve.length; i++)
@@ -110,21 +135,34 @@ public class BreathingSystem : MonoBehaviour
 
     private void Update()
     {
-        leftTrigger = Input.GetAxis("LeftTrigger");
-        rightTrigger = Input.GetAxis("RightTrigger");
-
-        //SmoothBreathing(LeftTrigger, RightTrigger);
-        RelativeBreathing(leftTrigger, rightTrigger);
-        //CheckCircleInBounds();
+        if (ready)
+        {
+            leftTrigger = Input.GetAxis("LeftTrigger");
+            rightTrigger = Input.GetAxis("RightTrigger");
+            if (!stutter && !checkingBlocked)
+            {
+                checkingBlocked = true;
+                StartCoroutine(CheckStutter((leftTrigger + rightTrigger) / 2));
+            }
+            //SmoothBreathing(LeftTrigger, RightTrigger);
+            if (!stutter)
+                RelativeBreathing(leftTrigger, rightTrigger);
+            else
+                Debug.Log("stutter");
+        }
     }
 
     private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
     {
         if (currentBreathing != null)
         {
-            float lerpValue = Mathf.Lerp(currentBreathing.breathingPattern.animationCurve[0].value, highestValueInCurve, leftTriggerInput / 2 + rightTriggerInput / 2);
+            float inputsAverage = leftTriggerInput / 2 + rightTriggerInput / 2;
+            float inputsToValueOnCurve = Mathf.Lerp(minPlayerCircleScale, highestValueInCurve, inputsAverage);
 
-            Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), 0f);
+            Vector3 scale = new Vector3(
+                Mathf.Lerp(playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / 2 * Time.deltaTime),
+                Mathf.Lerp(playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / 2 * Time.deltaTime),
+                0f);
             playerCircleTransform.localScale = scale;
         }
     }
@@ -176,25 +214,22 @@ public class BreathingSystem : MonoBehaviour
             if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
-                Destroy(gameObject, 0.01f);
+                animator.SetTrigger("Over");
             }
         }
         else
         {
             //Le joueur respire mal
             outsideBoundsTimer += Time.deltaTime;
-            if (outsideBoundsTimer <= requiredTimeSpendOutsideBounds)
-            {
-                //Debug.Log(outsideBoundsTimer);
-            }
             if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
             {
                 Fader.Instance.FadeIn();
+                animator.SetTrigger("Over");
                 //Debug.Log("J'ai perdu...");
-
             }
         }
     }
+
     private bool CheckCircleInBounds()
     {
         //Si le cercle du player est dans le cercle de l'outer
@@ -211,6 +246,8 @@ public class BreathingSystem : MonoBehaviour
         else
             return false;
     }
+
+    #region Coroutines
 
     public IEnumerator UniqueBreathScaling(float Speed)
     {
@@ -279,7 +316,53 @@ public class BreathingSystem : MonoBehaviour
             }
             counterSuccessTime = 0f;
         }
-        Debug.Log("fini");
-        Destroy(gameObject);
+        player.hasMovementControls = true;
+        animator.SetTrigger("Over");
     }
+
+    private IEnumerator CheckStutter(float previousInput)
+    {
+        //Debug.Log("Previous :" + previousInput);
+        yield return new WaitForSeconds(0.02f);
+        float currentTriggerInput = (Input.GetAxis("LeftTrigger") + Input.GetAxis("RightTrigger")) / 2;
+        //Debug.Log("Current :" + currentTriggerInput);
+
+        //Debug.Log(Mathf.Abs(previousInput - currentTriggerInput));
+
+        if (Mathf.Abs(previousInput - currentTriggerInput) > blockThreshold)
+        {
+            stutter = true;
+            StartCoroutine(Jiggle(previousInput));
+            XInputDotNetPure.GamePad.SetVibration(0, 5f, 5f);
+        }
+        if (!stutter)
+            checkingBlocked = false;
+        //else
+        //{
+        //    yield return new WaitForSeconds(1f);
+        //   stutter = false;
+        //}
+    }
+
+    private IEnumerator Jiggle(float previousInput)
+    {
+        float counter = 0f;
+        while (counter < jiggleAnimationCurve.keys[jiggleAnimationCurve.length - 1].time)
+        {
+            counter += Time.deltaTime;
+
+            //float lerpValue = Mathf.Lerp(currentBreathing.breathingPattern.animationCurve[0].value, highestValueInCurve, previousInput);
+
+            //Vector3 scale = new Vector3(Mathf.Lerp(playerCircleTransform.localScale.x, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), Mathf.Lerp(playerCircleTransform.localScale.y, lerpValue, Mathf.InverseLerp(minPlayerCircleScale / highestValueInCurve, 1, lerpValue) * Time.deltaTime * 2), 0f);
+            //playerCircleTransform.localScale = scale;
+            playerCircleTransform.localScale += new Vector3(jiggleAnimationCurve.Evaluate(counter), jiggleAnimationCurve.Evaluate(counter), 1);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        XInputDotNetPure.GamePad.SetVibration(0, 0.0f, 0.0f);
+        stutter = false;
+        checkingBlocked = false;
+    }
+
+    #endregion
+
 }

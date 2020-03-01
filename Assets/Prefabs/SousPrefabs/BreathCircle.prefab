@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 8737063863657677907}
   - component: {fileID: 2788448680402097961}
   - component: {fileID: 2807112682991664908}
+  - component: {fileID: 148364710812144006}
   m_Layer: 0
   m_Name: BreathCircle
   m_TagString: Untagged
@@ -360,17 +361,107 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCircle: {fileID: 6508800210682578077}
+  minPlayerCircleScale: 0
   donutCircle: {fileID: 5020577773153880526}
   outerCircleSpeed: 0.673
-  breathingUnits: []
-  highestValueInCurve: 4
+  breathingUnits:
+  - breathingPattern: {fileID: 11400000, guid: 433ebd35996090e409dbae3c7459058c, type: 2}
+    percentSuccessNeeded: 0.711
+  highestValueInCurve: 6
   outerMarginCollider: {fileID: 6508800208675506319}
   innerMarginCollider: {fileID: 6508800209217821200}
   playerBreathCollider: {fileID: 6508800210682578079}
-  requiredTimeSpendInsideBounds: 0
-  requiredTimeSpendOutsideBounds: 0
+  requiredTimeSpendInsideBounds: 15
+  requiredTimeSpendOutsideBounds: 15
   outsideBoundsTimer: 0
   requiredFailedToLose: 0
+  jiggleAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.14134215
+      value: -0.1508789
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.30463
+      value: 0.21362686
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.39655384
+      value: -0.20553279
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.58730453
+      value: 0.22794622
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.70556897
+      value: -0.21948087
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8225036
+      value: 0.3042388
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99440575
+      value: -0.23866475
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.1380103
+      value: 0.012329102
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!223 &2788448680402097961
 Canvas:
   m_ObjectHideFlags: 0
@@ -414,3 +505,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!95 &148364710812144006
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6508800210739816989}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a657c5edcdf1c434f8692d39ad3447c1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
