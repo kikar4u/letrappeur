@@ -17,6 +17,7 @@ public class TriggerBreathing : MonoBehaviour
 
     #region Curve
     public BreathingUnit[] breathingUnits;
+    [SerializeField] float playerCircleSpeed;
     //public float speedCirclePlayer;
     #endregion
 
@@ -51,7 +52,7 @@ public class TriggerBreathing : MonoBehaviour
             //breathingSystem.gameObject.SetActive(true);
             triggered = true;
             GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
-            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, walkSpeedDuringBreathing);
+            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, walkSpeedDuringBreathing);
             BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
         }
     }
