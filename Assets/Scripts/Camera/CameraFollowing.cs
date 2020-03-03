@@ -16,7 +16,7 @@ public class CameraFollowing : MonoBehaviour
     [Tooltip("Coefficient d'interpolation de rotation de la caméra")]
     [SerializeField] float cameraRotationSmoothness;
     Quaternion initialRotation;
-    [SerializeField] Vector3 offset;
+    Vector3 offset;
     [HideInInspector] public bool focusedOnPlayer;
     #endregion
 

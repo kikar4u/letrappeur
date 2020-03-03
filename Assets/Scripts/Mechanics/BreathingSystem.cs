@@ -17,6 +17,8 @@ public class BreathingSystem : MonoBehaviour
     [SerializeField] GameObject donutCircle;
     RectTransform outerCircleTransform;
     [HideInInspector] public float outerCircleSpeed;
+    [Range(1, 15)]
+    [HideInInspector] public float playerCircleSpeed;
 
     private bool ready;
     #endregion
@@ -113,7 +115,7 @@ public class BreathingSystem : MonoBehaviour
             StartCoroutine(MultipleBreathScaling(outerCircleSpeed));
     }
 
-    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _walkSpeedDuringBreathing = 0f)
+    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, float _walkSpeedDuringBreathing = 0f)
     {
         breathingUnits = _breathingUnits;
         for (int i = 0; i < breathingUnits.Length; i++)
@@ -121,6 +123,7 @@ public class BreathingSystem : MonoBehaviour
             breathingUnits[i].breathingPattern.animationCurve.preWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
             breathingUnits[i].breathingPattern.animationCurve.postWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
         }
+        playerCircleSpeed = _playerCircleSpeed;
         requiredTimeSpendInsideBounds = _requiredTimeSpendInsideBounds;
         requiredTimeSpendOutsideBounds = _requiredTimeSpendOutsideBounds;
         canWalkDuringBreathing = _canWalkDuringBreathing;
@@ -172,8 +175,8 @@ public class BreathingSystem : MonoBehaviour
             float inputsToValueOnCurve = Mathf.Lerp(minPlayerCircleScale, highestValueInCurve, inputsAverage);
 
             Vector3 scale = new Vector3(
-                Mathf.Lerp(playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / 2 * Time.deltaTime),
-                Mathf.Lerp(playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / 2 * Time.deltaTime),
+                Mathf.Lerp(playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
+                Mathf.Lerp(playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
                 0f);
             playerCircleTransform.localScale = scale;
         }
