@@ -803,26 +803,16 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   trapperAnim: {fileID: 0}
   raycastController: {fileID: 0}
-  speed: 300
+  speed: 2
   gravity: 20
   canMove: 0
   inCinematic: 0
   hasMovementControls: 1
   blocked: 0
-  nextWaypoint:
-    waypointPosition: {fileID: 0}
-    bezierFirstPointPosition: {fileID: 0}
-    bezierSecondPointPosition: {fileID: 0}
-  lastWaypoint:
-    waypointPosition: {fileID: 0}
-    bezierFirstPointPosition: {fileID: 0}
-    bezierSecondPointPosition: {fileID: 0}
   rotationSmoothness: 0.1
   moveAfterRotationDegreeThreshold: 40
   nextMoveDirection: {x: 0, y: 0, z: 0}
-  segmentBetweenWaypoint: 0
   movementOffset: 0
-  checkpointPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &7887666716664685560
 MonoBehaviour:
   m_ObjectHideFlags: 0
