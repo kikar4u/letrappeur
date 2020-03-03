@@ -462,6 +462,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  blockThreshold: 0.5
+  timeCheckOffset: 0.02
 --- !u!223 &2788448680402097961
 Canvas:
   m_ObjectHideFlags: 0
