@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BreathingSystem : MonoBehaviour
 {
+    const float VIBRATION_INTENSITY = 0.5f;
+
     Player player;
     #region Circles
     // cercle player
@@ -59,7 +61,11 @@ public class BreathingSystem : MonoBehaviour
 
     bool stutter = false;
     bool checkingBlocked = false;
-    float blockThreshold = 0.5f;
+    [Header("Stutter")]
+    [Range(0f, 1f)]
+    [SerializeField] float blockThreshold;
+    [Range(0f, 1f)]
+    [SerializeField] float timeCheckOffset;
 
     public void SetReady()
     {
@@ -79,6 +85,12 @@ public class BreathingSystem : MonoBehaviour
 
     void Start()
     {
+        if (blockThreshold == 0f)
+            blockThreshold = 0.5f;
+
+        if (timeCheckOffset == 0f)
+            timeCheckOffset = 0.02f;
+
         ready = false;
         outsideBoundsTimer = 0f;
         insideBoundsTimer = 0f;
@@ -323,7 +335,7 @@ public class BreathingSystem : MonoBehaviour
     private IEnumerator CheckStutter(float previousInput)
     {
         //Debug.Log("Previous :" + previousInput);
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(timeCheckOffset);
         float currentTriggerInput = (Input.GetAxis("LeftTrigger") + Input.GetAxis("RightTrigger")) / 2;
         //Debug.Log("Current :" + currentTriggerInput);
 
@@ -333,7 +345,7 @@ public class BreathingSystem : MonoBehaviour
         {
             stutter = true;
             StartCoroutine(Jiggle(previousInput));
-            XInputDotNetPure.GamePad.SetVibration(0, 5f, 5f);
+            XInputDotNetPure.GamePad.SetVibration(0, VIBRATION_INTENSITY, VIBRATION_INTENSITY);
         }
         if (!stutter)
             checkingBlocked = false;
