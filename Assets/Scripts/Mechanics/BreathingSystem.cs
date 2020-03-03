@@ -175,8 +175,8 @@ public class BreathingSystem : MonoBehaviour
             float inputsToValueOnCurve = Mathf.Lerp(minPlayerCircleScale, highestValueInCurve, inputsAverage);
 
             Vector3 scale = new Vector3(
-                Mathf.Lerp(playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / playerCircleSpeed * Time.deltaTime),
-                Mathf.Lerp(playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) / playerCircleSpeed * Time.deltaTime),
+                Mathf.Lerp(playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
+                Mathf.Lerp(playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
                 0f);
             playerCircleTransform.localScale = scale;
         }
