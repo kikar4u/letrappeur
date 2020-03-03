@@ -309,8 +309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b019d5a9aeb1d4ab8dc089f04f19b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetToFollow: {fileID: 0}
-  cameraSlideSpeed: 0.125
+  targetToFollow: {fileID: 6869025025596295888, guid: ceaa4999d3905794f8e1b7a0e8c429ad,
+    type: 3}
+  cameraSlideSmoothness: 0.109
+  cameraRotationSmoothness: 0.055
+  offset: {x: 0, y: 0, z: 0}
+  focusedOnPlayer: 0
 --- !u!1001 &9189453508293172840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,11 +322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7921771790213512992}
     m_Modifications:
-    - target: {fileID: 1160395272442005621, guid: 62332abfd181356489b3df5c93b2fd26,
-        type: 3}
-      propertyPath: m_Name
-      value: Blizzard
-      objectReference: {fileID: 0}
     - target: {fileID: 1160395272442005384, guid: 62332abfd181356489b3df5c93b2fd26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -377,6 +376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1160395272442005621, guid: 62332abfd181356489b3df5c93b2fd26,
+        type: 3}
+      propertyPath: m_Name
+      value: Blizzard
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62332abfd181356489b3df5c93b2fd26, type: 3}
