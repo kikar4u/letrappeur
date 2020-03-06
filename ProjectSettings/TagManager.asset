@@ -9,6 +9,8 @@ TagManager:
   - Path
   - BreathingCanvas
   - Fader
+  - SoundManager
+  - rock
   layers:
   - Default
   - TransparentFX
