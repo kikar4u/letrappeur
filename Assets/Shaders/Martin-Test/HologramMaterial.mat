@@ -24,6 +24,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Transparency: 0.25
+    - _Amount: 0.432
+    - _Amplitude: 0.973
+    - _CutoutThresh: 0.373
+    - _CutoutThreshBlue: 0
+    - _CutoutThreshGreen: 0
+    - _CutoutThreshRed: 0
+    - _Distance: 0.249
+    - _Speed: 1
+    - _Transparency: 0.335
     m_Colors:
-    - _TintColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.26254895, g: 0.9090286, b: 0.9433962, a: 1}

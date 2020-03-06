@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4758413637042529394}
   - component: {fileID: 4839738936001428946}
   - component: {fileID: 8100198720608947879}
+  - component: {fileID: 8824834078366266307}
   m_Layer: 0
   m_Name: RandomRock
   m_TagString: Untagged
@@ -101,4 +102,18 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3352039761262327327}
+  m_Mesh: {fileID: -5495902117074765545, guid: 28e4836d5a60320458bf1b058c302711, type: 3}
+--- !u!64 &8824834078366266307
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3352039761262327327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
   m_Mesh: {fileID: -5495902117074765545, guid: 28e4836d5a60320458bf1b058c302711, type: 3}
