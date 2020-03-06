@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (trapperAnim.GetCurrentState() != AnimState.ESCALADE)
+        else if (trapperAnim.GetCurrentState() != AnimState.CLIMB)
         {
             movementOffset = 0;
             trapperAnim.SetAnimState(AnimState.IDLE);
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("SoundManager").GetComponent<_MGR_SoundDesign>().
        PlaySound("FootStepRock", GetComponent<AudioSource>());
-         
+
         }
         else
         {
@@ -135,7 +135,7 @@ public class Player : MonoBehaviour
     {
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
         {
-            if (Input.GetAxis("Horizontal") != 0f && trapperAnim.GetCurrentState() != AnimState.ESCALADE)
+            if (Input.GetAxis("Horizontal") != 0f && trapperAnim.GetCurrentState() != AnimState.CLIMB)
             {
                 trapperAnim.SetAnimState(AnimState.WALK);
             }
@@ -145,7 +145,7 @@ public class Player : MonoBehaviour
             {
                 currentCurvedPosInfo.segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * Time.deltaTime * direction * _speed * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position);
             }
-            else if (trapperAnim.GetCurrentState() == AnimState.ESCALADE)
+            else if (trapperAnim.GetCurrentState() == AnimState.CLIMB)
             {
                 currentCurvedPosInfo.segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position);
             }
