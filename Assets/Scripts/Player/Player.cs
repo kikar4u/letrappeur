@@ -114,7 +114,23 @@ public class Player : MonoBehaviour
             Fader.Instance.FadeIn();
         }
     }
+    public void PlayFootstep()
+    {
+        RaycastHit hit;
+        // faire une détection de si c'est de la pierre ou pas
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask) && hit.transform.tag == "rock")
+        {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<_MGR_SoundDesign>().
+       PlaySound("FootStepRock", GetComponent<AudioSource>());
+         
+        }
+        else
+        {
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<_MGR_SoundDesign>().
+                PlaySound("FootStepSnow", GetComponent<AudioSource>());
+        }
 
+    }
     public void WalkFollowingPath(float _speed)
     {
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
