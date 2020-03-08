@@ -10,6 +10,7 @@ public class RandomTransformObjectEditor : Editor
     {
         DrawDefaultInspector();
         RandomTransformObject randomTransformObject = (RandomTransformObject)target;
+
         if (GUILayout.Button("Randomize Rotation"))
         {
             randomTransformObject.RandomizeRotation();
