@@ -31,6 +31,7 @@ public class BreathingSystem : MonoBehaviour
     #region Animation
     Animator animator;
     #endregion
+
     #region Curve
     [HideInInspector] public BreathingUnit[] breathingUnits;
     BreathingUnit currentBreathing;
@@ -131,7 +132,7 @@ public class BreathingSystem : MonoBehaviour
         requiredTimeSpendOutsideBounds = _requiredTimeSpendOutsideBounds;
         canWalkDuringBreathing = _canWalkDuringBreathing;
         requiredFailedToLose = _requiredFailedToLose;
-
+        walkSpeedDuringBreathing = _walkSpeedDuringBreathing;
         //Récupère le point le plus haut de la courbe
         highestValueInCurve = 0f;
         minPlayerCircleScale = float.MaxValue;
@@ -241,6 +242,7 @@ public class BreathingSystem : MonoBehaviour
             outsideBoundsTimer += Time.deltaTime;
             if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
             {
+                Fader.Instance.respawnDelegate += player.Respawn;
                 Fader.Instance.FadeIn();
                 animator.SetTrigger("Over");
                 //Debug.Log("J'ai perdu...");
@@ -256,6 +258,10 @@ public class BreathingSystem : MonoBehaviour
         {
             if (canWalkDuringBreathing)
             {
+                if (player.trapperAnim.GetCurrentState() != AnimState.PASSIVE_WALK)
+                {
+                    player.trapperAnim.SetAnimState(AnimState.PASSIVE_WALK);
+                }
                 player.WalkFollowingPath(walkSpeedDuringBreathing);
             }
 
@@ -335,9 +341,9 @@ public class BreathingSystem : MonoBehaviour
                 if (patternFailed == requiredFailedToLose)
                 {
                     //On a perdu
+                    Fader.Instance.respawnDelegate += player.Respawn;
                     Fader.Instance.FadeIn();
                     animator.SetTrigger("Over");
-                    player.Respawn();
                     break;
                 }
                 i--;
@@ -366,11 +372,7 @@ public class BreathingSystem : MonoBehaviour
         }
         if (!stutter)
             checkingBlocked = false;
-        //else
-        //{
-        //    yield return new WaitForSeconds(1f);
-        //   stutter = false;
-        //}
+
     }
 
     private IEnumerator Jiggle(float previousInput)

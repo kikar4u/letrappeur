@@ -29,14 +29,19 @@ public class SceneManagers : MonoBehaviour
     //Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+    void OnLevelWasLoaded(int level)
+    {
+        //Réaffecter le breathing canvas dans le breathingManager
+    }
+
     public void PlayGame()
     {
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("GameManager"));
@@ -44,7 +49,7 @@ public class SceneManagers : MonoBehaviour
     }
     public void Options()
     {
-       
+
     }
     public void ExitGame()
     {

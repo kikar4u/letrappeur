@@ -6,14 +6,6 @@ using UnityEngine.UI;
 public class TriggerBreathing : MonoBehaviour
 {
     bool triggered;
-    //[SerializeField] BreathingSystem breathingSystem;
-
-    /*[Range(0.2f, 2f)]
-    public float releasedBreathSpeed;
-    [Range(0.2f, 2f)]
-    public float controledBreathSpeed;*/
-    //[Range(0.2f, 2f)]
-    //public float outerCircleSpeed;
 
     #region Curve
     public BreathingUnit[] breathingUnits;
@@ -36,20 +28,18 @@ public class TriggerBreathing : MonoBehaviour
 
     [Header("Mouvement pendant la respiration")]
     public bool canWalkDuringBreathing;
-    [Range(0, 180f)]
+    [Range(0, 5f)]
     [HideInInspector] public float walkSpeedDuringBreathing;
 
     private void Start()
     {
         triggered = false;
-        //breathingSystem.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!triggered && other.gameObject.tag == "Player")
         {
-            //breathingSystem.gameObject.SetActive(true);
             other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
             triggered = true;
             GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;

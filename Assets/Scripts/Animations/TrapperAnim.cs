@@ -6,6 +6,7 @@ public enum AnimState
 {
     IDLE,
     WALK,
+    PASSIVE_WALK,
     CLIMB,
     BREATH,
     CHOP
@@ -45,17 +46,24 @@ public class TrapperAnim : MonoBehaviour
 
     public void SetAnimState(AnimState newState)
     {
-        //switch (currentState)
-        //{
-        //    case AnimState.WALK:
-        //        animator.SetBool("Walk", false);
-        //        break;
-        //    case AnimState.BREATH:
-        //        animator.SetBool("Breath", false);
-        //        break;
-        //    default:
-        //        break;
-        //}
+        if (newState == currentState)
+        {
+            return;
+        }
+        switch (currentState)
+        {
+            case AnimState.WALK:
+                animator.SetBool("Walk", false);
+                break;
+            case AnimState.PASSIVE_WALK:
+                animator.SetBool("Walk", false);
+                break;
+            case AnimState.BREATH:
+                animator.SetBool("Breath", false);
+                break;
+            default:
+                break;
+        }
         currentState = newState;
 
         switch (currentState)
@@ -66,6 +74,9 @@ public class TrapperAnim : MonoBehaviour
                 animator.SetBool("Walk", false);
                 break;
             case AnimState.WALK:
+                animator.SetBool("Walk", true);
+                break;
+            case AnimState.PASSIVE_WALK:
                 animator.SetBool("Walk", true);
                 break;
             case AnimState.CLIMB:

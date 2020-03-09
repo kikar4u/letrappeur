@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         currentCurvedPosInfo.nextWaypoint = path.waypointCurves[1];
         currentCurvedPosInfo.lastWaypoint = path.waypointCurves[0];
         currentCurvedPosInfo.segmentBetweenWaypoint = 0;
-        respawnCurvedPosInfo = currentCurvedPosInfo;
+        SaveCurrentPosInfo();
         transform.position = currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position;
         Fader.Instance.respawnDelegate += Respawn;
     }
@@ -147,7 +147,7 @@ public class Player : MonoBehaviour
                     trapperAnim.SetAnimState(AnimState.WALK);
                 }
             }
-            else if (trapperAnim.GetCurrentState() == AnimState.CLIMB || trapperAnim.GetCurrentState() == AnimState.BREATH)
+            else if (trapperAnim.GetCurrentState() == AnimState.CLIMB || trapperAnim.GetCurrentState() == AnimState.PASSIVE_WALK)
             {
                 currentCurvedPosInfo.segmentBetweenWaypoint += Time.deltaTime * direction * _speed * 1 / Vector3.Distance(currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position, currentCurvedPosInfo.nextWaypoint.waypointPosition.transform.position);
                 Debug.Log("Move by breathing or climb : " + _speed);
@@ -261,11 +261,9 @@ public class Player : MonoBehaviour
     public void Respawn()
     {
         currentCurvedPosInfo.SetValues(respawnCurvedPosInfo);
-        Debug.Log(respawnCurvedPosInfo.lastWaypoint);
-        Debug.Log(respawnCurvedPosInfo.nextWaypoint);
-        Debug.Log(respawnCurvedPosInfo.segmentBetweenWaypoint);
         Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(respawnCurvedPosInfo.segmentBetweenWaypoint);
         transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+        Fader.Instance.respawnDelegate -= Respawn;
     }
 
     public int GetDirection()
@@ -275,6 +273,7 @@ public class Player : MonoBehaviour
 
     public void SaveCurrentPosInfo()
     {
+        Debug.Log("Position saved");
         respawnCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.lastWaypoint;
         respawnCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.nextWaypoint;
         respawnCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint;

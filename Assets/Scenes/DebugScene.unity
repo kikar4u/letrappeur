@@ -3002,7 +3002,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: walkSpeedDuringBreathing
-      value: 18.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
