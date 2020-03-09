@@ -34,9 +34,9 @@ public class BreathingManager : MonoBehaviour
             breathingCanvas = GameObject.FindGameObjectWithTag("BreathingCanvas");
     }
 
-    public void CreateBreathingCircles(GameObject breathingSystem)
+    public GameObject CreateBreathingCircles(GameObject breathingSystem)
     {
-        Instantiate(breathingSystem, breathingCanvas.transform);
+        return Instantiate(breathingSystem, breathingCanvas.transform);
     }
 
 }

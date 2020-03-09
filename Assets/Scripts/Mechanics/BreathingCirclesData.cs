@@ -4,13 +4,29 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 
-[Serializable]
-public class BreathingCirclesData
+public class BreathingCirclesData : MonoBehaviour
 {
     // cercle player
-    [SerializeField] Image playerCircle;
-    RectTransform playerCircleTransform;
+    public Image playerCircle;
+    public RectTransform playerCircleTransform;
     // cercle avatar
-    [SerializeField] GameObject donutCircle;
-    RectTransform outerCircleTransform;
+    public GameObject donutCircle;
+    public RectTransform outerCircleTransform;
+
+    #region Collider
+    [Header("Colliders")]
+    public Collider2D outerMarginCollider;
+    public Collider2D innerMarginCollider;
+    public Collider2D playerBreathCollider;
+    #endregion
+
+    #region Stutter
+    public AnimationCurve jiggleAnimationCurve;
+
+    [Header("Stutter")]
+    [Range(0f, 1f)]
+    public float blockThreshold;
+    [Range(0f, 1f)]
+    public float timeCheckOffset;
+    #endregion
 }

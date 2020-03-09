@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum AnimType
+{
+    BLIZZARD,
+    NORMAL,
+    CHOPPING
+}
+
 public class TriggerBreathing : MonoBehaviour
 {
     bool triggered;
+    public AnimType animType;
 
     #region Curve
     public BreathingUnit[] breathingUnits;
@@ -43,12 +51,27 @@ public class TriggerBreathing : MonoBehaviour
             other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
             triggered = true;
             GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
-            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
-            BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
+
+            //prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+            GameObject breathingCircles = BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
+
+            switch (animType)
+            {
+                case AnimType.BLIZZARD:
+                    breathingCircles.AddComponent<BreathingBlizzard>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    break;
+                case AnimType.NORMAL:
+                    breathingCircles.AddComponent<BreathingNormal>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    break;
+                case AnimType.CHOPPING:
+                    other.GetComponent<TrapperAnim>().SetAnimState(AnimState.CHOP);
+                    breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    break;
+            }
         }
     }
 
-    public void Reset()
+    public void ReTrigger()
     {
         triggered = false;
     }

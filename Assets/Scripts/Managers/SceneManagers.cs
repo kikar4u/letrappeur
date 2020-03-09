@@ -37,10 +37,10 @@ public class SceneManagers : MonoBehaviour
     {
 
     }
-    void OnLevelWasLoaded(int level)
-    {
-        //Réaffecter le breathing canvas dans le breathingManager
-    }
+    //void OnLevelWasLoaded(int level)
+    //{
+    //    //Réaffecter le breathing canvas dans le breathingManager
+    //}
 
     public void PlayGame()
     {

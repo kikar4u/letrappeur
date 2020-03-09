@@ -28,4 +28,18 @@ public class CurvedPositionInfo
         lastWaypoint = newCurvedPositionInfo.lastWaypoint;
         segmentBetweenWaypoint = newCurvedPositionInfo.segmentBetweenWaypoint;
     }
+
+    public float GetCurvedLength(float ratio)
+    {
+        Vector3 previousPos = lastWaypoint.waypointPosition.transform.position;
+        float length = 0f;
+        float actualStep = 0f;
+        while (actualStep <= 1f)
+        {
+            length += Vector3.Distance(previousPos, CalculateCurvePoint(actualStep));
+            previousPos = CalculateCurvePoint(actualStep);
+            actualStep += ratio;
+        }
+        return length;
+    }
 }

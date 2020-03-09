@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreathingTree : BreathingSystem
+public class BreathingBlizzard : BreathingSystem
 {
     protected override bool CheckCircleInBounds()
     {
@@ -31,18 +31,5 @@ public class BreathingTree : BreathingSystem
             }
             return false;
         }
-    }
-
-    protected override bool CheckPatternSuccess(float successTime)
-    {
-        if (successTime > (currentBreathing.breathingPattern.animationCurve[currentBreathing.breathingPattern.animationCurve.length - 1].time * currentBreathing.percentSuccessNeeded))
-        {
-            //on vient de reussir un pattern
-            Debug.Log("CHOP");
-            player.trapperAnim.Chop();
-            return true;
-        }
-        else
-            return false;
     }
 }
