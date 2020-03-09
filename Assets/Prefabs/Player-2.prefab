@@ -727,6 +727,7 @@ GameObject:
   - component: {fileID: 8206438398825299407}
   - component: {fileID: 2491777318419706752}
   - component: {fileID: 4682253662298901324}
+  - component: {fileID: 5118546592191642455}
   m_Layer: 0
   m_Name: Player-2
   m_TagString: Player
@@ -843,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632795710e237ce4f94e80841ff9d904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hips: {fileID: 0}
+  hips: {fileID: 5866943049157277513}
   player: {fileID: 3415651789423177304}
 --- !u!95 &8206438398825299407
 Animator:
@@ -904,6 +905,22 @@ MonoBehaviour:
   dayAtTheEnd: 90
   luminosityAtTheBeginning: 5
   luminosityAtTheEnd: 25
+--- !u!54 &5118546592191642455
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415651789423177304}
+  serializedVersion: 2
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3655208304100564689
 GameObject:
   m_ObjectHideFlags: 0

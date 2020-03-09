@@ -50,10 +50,16 @@ public class TriggerBreathing : MonoBehaviour
         if (!triggered && other.gameObject.tag == "Player")
         {
             //breathingSystem.gameObject.SetActive(true);
+            other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
             triggered = true;
             GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
-            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, walkSpeedDuringBreathing);
+            prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
             BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
         }
+    }
+
+    public void Reset()
+    {
+        triggered = false;
     }
 }

@@ -12,7 +12,6 @@ public class InteractionRaycast : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
-        // Bit shift the index of the layer (8) to get a bit mask
         layer_Mask = LayerMask.GetMask("InteractiveObjects", "BlockingObjects");
     }
 
@@ -39,7 +38,7 @@ public class InteractionRaycast : MonoBehaviour
     }
     public void interactionAnim()
     {
-        //Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * hit.distance, Color.yellow);
+        Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * hit.distance, Color.yellow);
         if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 1, layer_Mask))
         {
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "InteractiveObjects")

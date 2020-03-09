@@ -58,8 +58,8 @@ public class BreathingSystem : MonoBehaviour
     #endregion
 
     [Header("Mouvement pendant la respiration")]
-    bool canWalkDuringBreathing;
-    float walkSpeedDuringBreathing;
+    [HideInInspector] public bool canWalkDuringBreathing;
+    [HideInInspector] public float walkSpeedDuringBreathing;
 
     bool stutter = false;
     bool checkingBlocked = false;
@@ -68,6 +68,8 @@ public class BreathingSystem : MonoBehaviour
     [SerializeField] float blockThreshold;
     [Range(0f, 1f)]
     [SerializeField] float timeCheckOffset;
+
+    [HideInInspector] public TriggerBreathing triggerBreathing;
 
     public void SetReady()
     {
@@ -115,9 +117,10 @@ public class BreathingSystem : MonoBehaviour
             StartCoroutine(MultipleBreathScaling(outerCircleSpeed));
     }
 
-    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, float _walkSpeedDuringBreathing = 0f)
+    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, TriggerBreathing _triggerBreathing, float _walkSpeedDuringBreathing = 0f)
     {
         breathingUnits = _breathingUnits;
+        triggerBreathing = _triggerBreathing;
         for (int i = 0; i < breathingUnits.Length; i++)
         {
             breathingUnits[i].breathingPattern.animationCurve.preWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
@@ -259,7 +262,17 @@ public class BreathingSystem : MonoBehaviour
             return true;
         }
         else
+        {
+            if (canWalkDuringBreathing)
+            {
+                if (player.trapperAnim.GetCurrentState() != AnimState.BREATH)
+                {
+                    player.trapperAnim.SetAnimState(AnimState.BREATH);
+                }
+            }
             return false;
+        }
+
     }
 
     #region Coroutines
@@ -323,8 +336,8 @@ public class BreathingSystem : MonoBehaviour
                 {
                     //On a perdu
                     Fader.Instance.FadeIn();
+                    animator.SetTrigger("Over");
                     player.Respawn();
-                    Destroy(gameObject);
                     break;
                 }
                 i--;
@@ -333,6 +346,7 @@ public class BreathingSystem : MonoBehaviour
         }
         player.hasMovementControls = true;
         animator.SetTrigger("Over");
+        triggerBreathing.Reset();
     }
 
     private IEnumerator CheckStutter(float previousInput)

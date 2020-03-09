@@ -6,7 +6,6 @@ public enum AnimState
 {
     IDLE,
     WALK,
-    JUMP,
     CLIMB,
     BREATH,
     CHOP
@@ -28,9 +27,9 @@ public class TrapperAnim : MonoBehaviour
     {
         if (currentState == AnimState.CLIMB && currentInteractiveObject != null)
         {
+            GetComponent<Player>().canMove = false;
             GetComponent<Player>().WalkFollowingPath(currentInteractiveObject.speedDuringClimb);
 
-            GetComponent<Player>().canMove = false;
         }
         else
         {
@@ -46,6 +45,17 @@ public class TrapperAnim : MonoBehaviour
 
     public void SetAnimState(AnimState newState)
     {
+        //switch (currentState)
+        //{
+        //    case AnimState.WALK:
+        //        animator.SetBool("Walk", false);
+        //        break;
+        //    case AnimState.BREATH:
+        //        animator.SetBool("Breath", false);
+        //        break;
+        //    default:
+        //        break;
+        //}
         currentState = newState;
 
         switch (currentState)
@@ -60,6 +70,9 @@ public class TrapperAnim : MonoBehaviour
                 break;
             case AnimState.CLIMB:
                 animator.SetTrigger("StartClimb");
+                break;
+            case AnimState.BREATH:
+                animator.SetBool("Breath", true);
                 break;
             default:
                 break;
