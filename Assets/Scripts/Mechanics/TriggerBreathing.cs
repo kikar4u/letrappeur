@@ -52,26 +52,58 @@ public class TriggerBreathing : MonoBehaviour
         {
             other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
             triggered = true;
-            GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
-
-            //prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
-            GameObject breathingCircles = BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
-
+            AudioClip startBreathingClip;
             switch (animType)
             {
                 case AnimType.BLIZZARD:
-                    breathingCircles.AddComponent<BreathingBlizzard>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
                 case AnimType.NORMAL:
-                    breathingCircles.AddComponent<BreathingNormal>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
                 case AnimType.CHOPPING:
                     other.GetComponent<TrapperAnim>().SetAnimState(AnimState.CHOP);
-                    breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                    startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
+                    break;
+                default:
+                    startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
             }
-            BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
+            other.GetComponent<Player>().audioSource.loop = false;
+            _MGR_SoundDesign.Instance.PlaySpecificSound(startBreathingClip, other.gameObject.GetComponent<Player>().audioSource);
+            StartCoroutine(InstantationTimeOffset(startBreathingClip.length));
         }
+    }
+
+    IEnumerator InstantationTimeOffset(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
+
+        //prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+        GameObject breathingCircles = BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
+        AudioClip duringBreathingClip;
+        switch (animType)
+        {
+            case AnimType.BLIZZARD:
+                breathingCircles.AddComponent<BreathingBlizzard>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
+                break;
+            case AnimType.NORMAL:
+                breathingCircles.AddComponent<BreathingNormal>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
+                break;
+            case AnimType.CHOPPING:
+                breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
+                duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
+                break;
+            default:
+                duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
+                break;
+        }
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource.loop = true;
+        BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
+        _MGR_SoundDesign.Instance.PlaySpecificSound(duringBreathingClip, GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource);
     }
 
     public void ReTrigger()

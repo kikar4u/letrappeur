@@ -56,7 +56,6 @@ public class Fader : MonoBehaviour
 
     public void FadeOutActions()
     {
-        Debug.Log(fadeOutDelegate);
         if (fadeOutDelegate != null)
         {
             fadeOutDelegate();

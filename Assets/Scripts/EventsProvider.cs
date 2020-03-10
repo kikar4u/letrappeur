@@ -7,7 +7,6 @@ public class EventsProvider : MonoBehaviour
 {
     public void LaunchCinematic(VideoClip clip)
     {
-        Debug.Log("Called");
         Fader.Instance.FadeIn();
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;

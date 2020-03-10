@@ -51,15 +51,27 @@ public class _MGR_SoundDesign : MonoBehaviour
     public void PlaySound(string __nom, AudioSource audiosource)
     {
         AudioClip[] mesSon = p_sons[__nom];
-        AudioClip audio=mesSon[Random.Range(0, mesSon.Length)];
-                if (!audiosource.isPlaying)
-                {
-                    audiosource.clip = audio;
-                    audiosource.Play();
-                    return;
-                }
+        AudioClip audio = mesSon[Random.Range(0, mesSon.Length)];
+        if (!audiosource.isPlaying)
+        {
+            audiosource.clip = audio;
+            audiosource.Play();
+            return;
+        }
     }
-    
+
+    //Joue un son spécifique
+    public void PlaySpecificSound(AudioClip _clip, AudioSource audiosource)
+    {
+        audiosource.clip = _clip;
+        audiosource.Play();
+    }
+
+    public AudioClip GetSpecificClip(string name)
+    {
+        return p_sons[name][0];
+    }
+
     //public void PlayMusic(AudioClip audio, GameObject source, float volume)
     //{
 

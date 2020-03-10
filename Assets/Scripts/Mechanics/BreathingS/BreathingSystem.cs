@@ -67,6 +67,29 @@ public class BreathingSystem : MonoBehaviour
         StopAllCoroutines();
         ready = false;
         BreathingManager.Instance.SetCurrentBreathing(null);
+
+        player.audioSource.loop = false;
+        if (haveSucceeded)
+        {
+            AudioClip releaseClip;
+            switch (triggerBreathing.animType)
+            {
+                case AnimType.BLIZZARD:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("BlizzardBreathRelease");
+                    break;
+                case AnimType.CHOPPING:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
+                    break;
+                case AnimType.NORMAL:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
+                    break;
+                default:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
+                    break;
+            }
+            _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+
+        }
     }
 
     public void RemoveBreathingHUD()

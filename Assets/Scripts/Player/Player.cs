@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
     [HideInInspector] public InteractionRaycast raycastController;
+    [HideInInspector] public AudioSource audioSource;
     #endregion
 
     #region Movements
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         terrainMask = LayerMask.GetMask("Ground");
+        audioSource = GetComponent<AudioSource>();
         #endregion
 
         //Initialisation des informations des waypoints
