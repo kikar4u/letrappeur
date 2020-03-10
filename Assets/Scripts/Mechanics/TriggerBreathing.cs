@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public enum AnimType
 {
@@ -24,6 +25,7 @@ public class TriggerBreathing : MonoBehaviour
     #region Success
     [Header("Success Conditions")]
     [HideInInspector] public float requiredTimeSpendInsideBounds;
+    public UnityEvent successEndEvent;
     #endregion
 
     #region Lose
@@ -68,6 +70,7 @@ public class TriggerBreathing : MonoBehaviour
                     breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
                     break;
             }
+            BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
         }
     }
 

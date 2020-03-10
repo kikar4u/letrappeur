@@ -8,9 +8,9 @@ public class Fader : MonoBehaviour
     Animator fadeAnimator;
     Player player;
 
-    public delegate void RespawnDelegate();
+    public delegate void FadeOutDelegate();
 
-    public RespawnDelegate respawnDelegate;
+    public FadeOutDelegate fadeOutDelegate;
 
     private static Fader _instance;
     public static Fader Instance
@@ -39,18 +39,28 @@ public class Fader : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
+    public Animator GetAnimator()
+    {
+        return fadeAnimator;
+    }
+
     public void FadeIn()
     {
         fadeAnimator.SetTrigger("Fade");
     }
 
-    public void RespawnActions()
+    public void FadeOut()
     {
-        if (respawnDelegate != null)
-        {
-            respawnDelegate();
-            Debug.Log(respawnDelegate);
-        }
+        fadeAnimator.SetTrigger("FadeOut");
     }
 
+    public void FadeOutActions()
+    {
+        Debug.Log(fadeOutDelegate);
+        if (fadeOutDelegate != null)
+        {
+            fadeOutDelegate();
+            fadeOutDelegate = null;
+        }
+    }
 }
