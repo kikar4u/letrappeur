@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BreathingSystem : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class BreathingSystem : MonoBehaviour
     #region Success
     [HideInInspector] public float requiredTimeSpendInsideBounds;
     float insideBoundsTimer;
+    bool haveSucceeded;
     #endregion
 
     #region Lose
@@ -64,11 +66,44 @@ public class BreathingSystem : MonoBehaviour
     {
         StopAllCoroutines();
         ready = false;
+        BreathingManager.Instance.SetCurrentBreathing(null);
+
+        player.audioSource.loop = false;
+        if (haveSucceeded)
+        {
+            AudioClip releaseClip;
+            switch (triggerBreathing.animType)
+            {
+                case AnimType.BLIZZARD:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("BlizzardBreathRelease");
+                    break;
+                case AnimType.CHOPPING:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
+                    break;
+                case AnimType.NORMAL:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
+                    break;
+                default:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
+                    break;
+            }
+            _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+
+        }
     }
 
     public void RemoveBreathingHUD()
     {
         Destroy(gameObject);
+
+        if (haveSucceeded)
+        {
+            if (triggerBreathing.successEndEvent != null)
+            {
+                triggerBreathing.successEndEvent.Invoke();
+            }
+            BreathingManager.Instance.SetCurrentBreathing(null);
+        }
     }
 
     void Start()
@@ -78,7 +113,7 @@ public class BreathingSystem : MonoBehaviour
 
         if (breathingCirclesData.timeCheckOffset == 0f)
             breathingCirclesData.timeCheckOffset = 0.02f;
-
+        haveSucceeded = false;
         ready = false;
         outsideBoundsTimer = 0f;
         insideBoundsTimer = 0f;
@@ -145,7 +180,6 @@ public class BreathingSystem : MonoBehaviour
             if (!stutter && !checkingBlocked)
             {
                 checkingBlocked = true;
-                Debug.Log(breathingCirclesData);
                 StartCoroutine(CheckStutter((leftTrigger + rightTrigger) / 2));
             }
             //SmoothBreathing(LeftTrigger, RightTrigger);
@@ -195,7 +229,9 @@ public class BreathingSystem : MonoBehaviour
             if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
             {
                 player.hasMovementControls = true;
+                haveSucceeded = true;
                 animator.SetTrigger("Over");
+
             }
         }
         else
@@ -204,7 +240,7 @@ public class BreathingSystem : MonoBehaviour
             outsideBoundsTimer += Time.deltaTime;
             if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
             {
-                Fader.Instance.respawnDelegate += player.Respawn;
+                Fader.Instance.fadeOutDelegate += player.Respawn;
                 Fader.Instance.FadeIn();
                 animator.SetTrigger("Over");
                 //Debug.Log("J'ai perdu...");
@@ -306,10 +342,11 @@ public class BreathingSystem : MonoBehaviour
                 if (patternFailed == requiredFailedToLose)
                 {
                     //On a perdu
-                    Fader.Instance.respawnDelegate += player.Respawn;
+                    Fader.Instance.fadeOutDelegate += player.Respawn;
                     triggerBreathing.ReTrigger();
                     Fader.Instance.FadeIn();
                     animator.SetTrigger("Over");
+                    BreathingManager.Instance.SetCurrentBreathing(null);
                     break;
                 }
                 i--;
@@ -317,8 +354,9 @@ public class BreathingSystem : MonoBehaviour
             counterSuccessTime = 0f;
         }
         player.hasMovementControls = true;
+        haveSucceeded = true;
         animator.SetTrigger("Over");
-        Debug.Log(triggerBreathing);
+        BreathingManager.Instance.SetCurrentBreathing(null);
     }
 
     public IEnumerator CheckStutter(float previousInput)

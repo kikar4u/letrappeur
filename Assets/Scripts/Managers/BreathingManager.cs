@@ -25,8 +25,10 @@ public class BreathingManager : MonoBehaviour
         }
     }
 
-    [SerializeField] GameObject breathingCanvas;
+    GameObject breathingCanvas;
     public GameObject breathingPrefab;
+
+    BreathingSystem currentBreathingSystem;
 
     private void Start()
     {
@@ -39,4 +41,19 @@ public class BreathingManager : MonoBehaviour
         return Instantiate(breathingSystem, breathingCanvas.transform);
     }
 
+    public void SetBreathingCanvas()
+    {
+        if (breathingCanvas == null)
+            breathingCanvas = GameObject.FindGameObjectWithTag("BreathingCanvas");
+    }
+
+    public void SetCurrentBreathing(BreathingSystem breathingSystem)
+    {
+        currentBreathingSystem = breathingSystem;
+    }
+
+    public BreathingSystem GetCurrentBreathing()
+    {
+        return currentBreathingSystem;
+    }
 }
