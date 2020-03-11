@@ -22,6 +22,14 @@ public class TriggerBlizzard : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        animatorSnow.ResetTrigger("SnowToNone");
+        animatorFog.ResetTrigger("FogToNone");
+        animatorSnow.ResetTrigger("BlizzardToSnow");
+        animatorFog.ResetTrigger("BlizzardToFog");
+        animatorSnow.ResetTrigger("NoneToSnow");
+        animatorFog.ResetTrigger("NoneToFog");
+        animatorSnow.ResetTrigger("SnowToBlizzard");
+        animatorFog.ResetTrigger("FogToBlizzard");
         {
             //Debug.Log("Entre dans trigger");
             if (other.gameObject.CompareTag("Player"))
