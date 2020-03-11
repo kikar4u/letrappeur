@@ -52,7 +52,6 @@ public class TriggerBlizzard : MonoBehaviour
                         //Debug.Log("none to snow");
                         animatorSnow.SetTrigger("NoneToSnow");
                         animatorFog.SetTrigger("NoneToFog");
-                        Debug.Log("ça le déclenche...1");
                     }
                     if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("SnowState2"))
                     {
@@ -60,6 +59,8 @@ public class TriggerBlizzard : MonoBehaviour
                         animatorSnow.SetTrigger("BlizzardToSnow");
                         animatorFog.SetTrigger("BlizzardToFog");
                     }
+                    //animatorSnow.ResetTrigger("NoneToSnow");
+                    //animatorFog.ResetTrigger("NoneToFog");
 
                 }
 
@@ -70,7 +71,6 @@ public class TriggerBlizzard : MonoBehaviour
                     {
                         animatorSnow.SetTrigger("NoneToSnow");
                         animatorFog.SetTrigger("NoneToFog");
-                        Debug.Log("ça le déclenche...2");
                     }
                     //Debug.Log("snow to blizzard");
                     animatorSnow.SetTrigger("SnowToBlizzard");
