@@ -7,7 +7,7 @@ public class DrawWithMouse : MonoBehaviour
     [SerializeField] Camera _Camera;
     [SerializeField] Shader _drawShader;
     [SerializeField] GameObject _terrain;
-    [SerializeField] CapsuleCollider PlayerCollider;
+    [SerializeField] BoxCollider PlayerCollider;
     // Start is called before the first frame update
     private RenderTexture _splatMap;
     private Material _snowMaterial, _drawMaterial;
