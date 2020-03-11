@@ -17,7 +17,7 @@ public class InteractionRaycast : MonoBehaviour
 
     private void Update()
     {
-        Debug.DrawRay(player.transform.position, (player.nextMoveDirection - player.transform.position) * 5, Color.blue);
+        //Debug.DrawRay(player.transform.position, (player.nextMoveDirection - player.transform.position) * 5, Color.blue);
 
         if (player.trapperAnim.GetCurrentState() != AnimState.CLIMB)
         {
@@ -38,7 +38,7 @@ public class InteractionRaycast : MonoBehaviour
     }
     public void interactionAnim()
     {
-        Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * hit.distance, Color.yellow);
+        //Debug.DrawRay(transform.position, (player.nextMoveDirection - player.transform.position) * hit.distance, Color.yellow);
         if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 1, layer_Mask))
         {
             if (LayerMask.LayerToName(hit.collider.gameObject.layer) == "InteractiveObjects")

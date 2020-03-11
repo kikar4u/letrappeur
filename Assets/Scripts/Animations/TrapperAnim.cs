@@ -6,6 +6,7 @@ public enum AnimState
 {
     IDLE,
     WALK,
+    PASSIVE_WALK,
     CLIMB,
     BREATH,
     CHOP
@@ -45,17 +46,29 @@ public class TrapperAnim : MonoBehaviour
 
     public void SetAnimState(AnimState newState)
     {
-        //switch (currentState)
-        //{
-        //    case AnimState.WALK:
-        //        animator.SetBool("Walk", false);
-        //        break;
-        //    case AnimState.BREATH:
-        //        animator.SetBool("Breath", false);
-        //        break;
-        //    default:
-        //        break;
-        //}
+        if (newState == currentState)
+        {
+            return;
+        }
+        switch (currentState)
+        {
+            case AnimState.WALK:
+                animator.SetBool("Walk", false);
+
+                break;
+            case AnimState.PASSIVE_WALK:
+                animator.SetBool("Walk", false);
+                break;
+            case AnimState.BREATH:
+                animator.SetBool("Breath", false);
+                break;
+            case AnimState.CHOP:
+                animator.SetBool("Chopping", false);
+                UpdateAnimSpeed(1f);
+                break;
+            default:
+                break;
+        }
         currentState = newState;
 
         switch (currentState)
@@ -63,16 +76,27 @@ public class TrapperAnim : MonoBehaviour
             case AnimState.IDLE:
                 if (currentInteractiveObject != null)
                     currentInteractiveObject = null;
-                animator.SetBool("Walk", false);
+                UpdateAnimSpeed(1f);
                 break;
             case AnimState.WALK:
                 animator.SetBool("Walk", true);
+                UpdateAnimSpeed(1f);
+                break;
+            case AnimState.PASSIVE_WALK:
+                animator.SetBool("Walk", true);
+                UpdateAnimSpeed(0.5f);
                 break;
             case AnimState.CLIMB:
                 animator.SetTrigger("StartClimb");
+                UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.BREATH:
                 animator.SetBool("Breath", true);
+                UpdateAnimSpeed(1f);
+                break;
+            case AnimState.CHOP:
+                animator.SetBool("Chopping", true);
+                UpdateAnimSpeed(1f);
                 break;
             default:
                 break;
@@ -82,5 +106,18 @@ public class TrapperAnim : MonoBehaviour
     public AnimState GetCurrentState()
     {
         return currentState;
+    }
+
+    public void Chop()
+    {
+        if (GetCurrentState() == AnimState.CHOP)
+        {
+            animator.SetTrigger("Chop");
+        }
+    }
+
+    private void UpdateAnimSpeed(float speed)
+    {
+        animator.speed = speed;
     }
 }

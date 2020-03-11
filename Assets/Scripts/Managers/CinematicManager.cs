@@ -5,46 +5,49 @@ using UnityEngine.Video;
 
 public class CinematicManager : MonoBehaviour
 {
-    [SerializeField] VideoClip vid;
+    private static CinematicManager _instance = null;
+    public static CinematicManager Instance { get { return _instance; } }
+
     VideoPlayer mainCamera;
-    double length;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
+    {
+        if (_instance == null)
+            _instance = this;
+        else if (_instance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void SetVideoPlayer()
     {
         // on récupère le videoplayer sur la main camera
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<VideoPlayer>();
-        length = vid.length;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LaunchCinematic(VideoClip video)
     {
-        if (mainCamera.clip != null)
-            isFinished();
+        //Lance une vidéo de cinématique
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = true;
+        mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
+        mainCamera.clip = video;
+        mainCamera.Play();
+        StartCoroutine(CheckCinematic(video.length));
     }
-    void isFinished()
+
+    IEnumerator CheckCinematic(double videoClipLength)
     {
-        if (mainCamera.GetComponent<VideoPlayer>().time == length)
+        while (mainCamera.clip != null)
         {
-            Debug.Log("Isterminée");
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
-            mainCamera.clip = null;
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        // on vérifie que c'est bien le joueur
-        if (other.gameObject.tag == "Player")
-        {
-            mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
-            other.GetComponent<Player>().inCinematic = true;
-            other.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.IDLE);
-            // on assigne le clip
-            mainCamera.clip = vid;
-            // et on joue la douce vidéo
-            mainCamera.Play();
-
-
+            if (mainCamera.GetComponent<VideoPlayer>().time >= videoClipLength)
+            {
+                Fader.Instance.FadeOut();
+                mainCamera.clip = null;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
+            }
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }

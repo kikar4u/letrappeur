@@ -12,9 +12,6 @@ public class SceneManagers : MonoBehaviour
 
     void Awake()
     {
-
-        // ===>> SingletonMAnager
-
         //Check if instance already exists
         if (p_instance == null)
             //if not, set instance to this
@@ -26,17 +23,16 @@ public class SceneManagers : MonoBehaviour
 
     }
 
-    //Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        SceneManager.sceneLoaded += PopulateManagers;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //void OnLevelWasLoaded(int level)
+    //{
+    //    //Réaffecter le breathing canvas dans le breathingManager
+    //}
+
     public void PlayGame()
     {
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("GameManager"));
@@ -44,8 +40,9 @@ public class SceneManagers : MonoBehaviour
     }
     public void Options()
     {
-       
+
     }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -54,5 +51,13 @@ public class SceneManagers : MonoBehaviour
     public void LoadScene(string __nom_scene)
     {
         SceneManager.LoadScene(__nom_scene);
+    }
+
+    private void PopulateManagers(Scene scene, LoadSceneMode sceneMode)
+    {
+        //Peuple les différentes variables des managers propres à la scene
+        CinematicManager.Instance.SetVideoPlayer();
+        BreathingManager.Instance.SetBreathingCanvas();
+        SceneManager.sceneLoaded -= PopulateManagers;
     }
 }
