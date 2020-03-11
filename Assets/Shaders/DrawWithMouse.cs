@@ -33,10 +33,10 @@ public class DrawWithMouse : MonoBehaviour
     {
         for (int i = 0; i < _foot.Length; i++)
         {
-            Debug.DrawRay(new Vector3(_foot[i].position.x, _foot[i].position.y, _foot[i].position.z), -Vector3.up, Color.yellow);
-            if (Physics.Raycast(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y, _foot[i].position.z), -Vector3.up, out _hit, 1f, _layerMask))
+            Debug.DrawRay(new Vector3(_foot[i].position.x, _foot[i].position.y + 0.5f, _foot[i].position.z), -Vector3.up, Color.yellow);
+            if (Physics.Raycast(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y +0.5f, _foot[i].position.z), -Vector3.up, out _hit, 1f, _layerMask))
             {
-                Debug.DrawRay(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y, _foot[i].position.z), -Vector3.up, Color.red);
+                Debug.DrawRay(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y + 0.5f, _foot[i].position.z), -Vector3.up, Color.red);
                 _drawMaterial.SetVector("_Coordinate", new Vector4(_hit.textureCoord.x, _hit.textureCoord.y, 0, 0));
                 _drawMaterial.SetFloat("_Strength", _brushStrength);
                 _drawMaterial.SetFloat("_Size", _brushSize);
