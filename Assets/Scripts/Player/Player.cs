@@ -76,7 +76,6 @@ public class Player : MonoBehaviour
 
         SaveCurrentPosInfo();
         transform.position = currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position;
-        Fader.Instance.fadeOutDelegate += Respawn;
 
     }
 
@@ -86,6 +85,7 @@ public class Player : MonoBehaviour
         {
             raycastController.interactionAnim();
         }
+        Debug.Log(hasMovementControls);
         if (hasMovementControls && !inCinematic && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && canMove)
         {
             WalkFollowingPath(speed);
@@ -253,6 +253,7 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
+        hasMovementControls = true;
         trapperAnim.SetAnimState(AnimState.IDLE);
         currentCurvedPosInfo.SetValues(respawnCurvedPosInfo);
         Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(respawnCurvedPosInfo.segmentBetweenWaypoint);

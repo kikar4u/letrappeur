@@ -67,11 +67,16 @@ public class BreathingSystem : MonoBehaviour
         StopAllCoroutines();
         ready = false;
         BreathingManager.Instance.SetCurrentBreathing(null);
+        if (triggerBreathing.doCameraShake)
+        {
+            if (Camera.main.GetComponent<CameraShakin>().GetContinuousShake())
+                Camera.main.GetComponent<CameraShakin>().ToggleContinuousShake();
+        }
 
         player.audioSource.loop = false;
+        AudioClip releaseClip;
         if (haveSucceeded)
         {
-            AudioClip releaseClip;
             switch (triggerBreathing.animType)
             {
                 case AnimType.BLIZZARD:
@@ -88,7 +93,27 @@ public class BreathingSystem : MonoBehaviour
                     break;
             }
             _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
-
+        }
+        else
+        {
+            switch (triggerBreathing.animType)
+            {
+                case AnimType.BLIZZARD:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
+                    break;
+                case AnimType.CHOPPING:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
+                    break;
+                case AnimType.NORMAL:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
+                    break;
+                default:
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
+                    break;
+            }
+            _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+            Fader.Instance.fadeOutDelegate += player.Respawn;
+            Fader.Instance.FadeIn();
         }
     }
 
@@ -215,35 +240,36 @@ public class BreathingSystem : MonoBehaviour
 
     private void UpdateUniqueBreathingSuccessCondition(bool success)
     {
-        if (success)
+        if (ready)
         {
-            //Le joueur respire bien
-            insideBoundsTimer += Time.deltaTime;
-            //On est gentil avec le joueur : si il est à l'intérieur et que son outsideTimer est supérieur à 0, il diminue 
-            if (outsideBoundsTimer >= 0f)
+            if (success)
             {
-                outsideBoundsTimer -= Time.deltaTime;
-                Mathf.Clamp(outsideBoundsTimer, 0f, Mathf.Infinity);
-            }
+                //Le joueur respire bien
+                insideBoundsTimer += Time.deltaTime;
+                //On est gentil avec le joueur : si il est à l'intérieur et que son outsideTimer est supérieur à 0, il diminue 
+                if (outsideBoundsTimer >= 0f)
+                {
+                    outsideBoundsTimer -= Time.deltaTime;
+                    Mathf.Clamp(outsideBoundsTimer, 0f, Mathf.Infinity);
+                }
 
-            if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
-            {
-                player.hasMovementControls = true;
-                haveSucceeded = true;
-                animator.SetTrigger("Over");
+                if (insideBoundsTimer >= requiredTimeSpendInsideBounds)
+                {
+                    player.hasMovementControls = true;
+                    haveSucceeded = true;
+                    animator.SetTrigger("Over");
 
+                }
             }
-        }
-        else
-        {
-            //Le joueur respire mal
-            outsideBoundsTimer += Time.deltaTime;
-            if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
+            else
             {
-                Fader.Instance.fadeOutDelegate += player.Respawn;
-                Fader.Instance.FadeIn();
-                animator.SetTrigger("Over");
-                //Debug.Log("J'ai perdu...");
+                //Le joueur respire mal
+                outsideBoundsTimer += Time.deltaTime;
+                if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
+                {
+                    animator.SetTrigger("Over");
+                    Debug.Log("J'ai perdu...");
+                }
             }
         }
     }
@@ -291,7 +317,8 @@ public class BreathingSystem : MonoBehaviour
                 0.350f);
             //outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), Mathf.Clamp(outerCircleTransform.localScale.y, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), 1.0f);
             yield return new WaitForSeconds(Time.deltaTime);
-            UpdateUniqueBreathingSuccessCondition(CheckCircleInBounds());
+            if (ready)
+                UpdateUniqueBreathingSuccessCondition(CheckCircleInBounds());
         }
     }
 
@@ -347,6 +374,7 @@ public class BreathingSystem : MonoBehaviour
                     Fader.Instance.FadeIn();
                     animator.SetTrigger("Over");
                     BreathingManager.Instance.SetCurrentBreathing(null);
+                    _MGR_SoundDesign.Instance.PlaySpecificSound(_MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath"), player.audioSource);
                     break;
                 }
                 i--;

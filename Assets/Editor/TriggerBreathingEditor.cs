@@ -12,6 +12,8 @@ public class TriggerBreathingEditor : Editor
     SerializedProperty requiredTimeSpendOutsideBounds;
     SerializedProperty requiredTimeSpendInsideBounds;
     SerializedProperty requiredFailedToLose;
+    SerializedProperty doCameraShake;
+    SerializedProperty shakeIntensity;
 
     private void OnEnable()
     {
@@ -21,6 +23,8 @@ public class TriggerBreathingEditor : Editor
         requiredTimeSpendOutsideBounds = serializedObject.FindProperty("requiredTimeSpendOutsideBounds");
         requiredTimeSpendInsideBounds = serializedObject.FindProperty("requiredTimeSpendInsideBounds");
         requiredFailedToLose = serializedObject.FindProperty("requiredFailedToLose");
+        doCameraShake = serializedObject.FindProperty("doCameraShake");
+        shakeIntensity = serializedObject.FindProperty("shakeIntensity");
     }
     public override void OnInspectorGUI()
     {
@@ -30,6 +34,10 @@ public class TriggerBreathingEditor : Editor
         if (triggerBreathing.canWalkDuringBreathing)
         {
             triggerBreathing.walkSpeedDuringBreathing = EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f, 180f);
+        }
+        if (triggerBreathing.doCameraShake)
+        {
+            triggerBreathing.shakeIntensity = EditorGUILayout.Slider("Camera shake intensity", shakeIntensity.floatValue, 0f, 15f);
         }
 
         if (triggerBreathing.breathingUnits.Length == 1)

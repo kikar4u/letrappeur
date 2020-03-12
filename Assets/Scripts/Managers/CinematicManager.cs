@@ -9,6 +9,7 @@ public class CinematicManager : MonoBehaviour
     public static CinematicManager Instance { get { return _instance; } }
 
     VideoPlayer mainCamera;
+    [SerializeField] GameObject postProcessVolumesContainer;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class CinematicManager : MonoBehaviour
         mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
         mainCamera.clip = video;
         mainCamera.Play();
+        postProcessVolumesContainer.SetActive(false);
         StartCoroutine(CheckCinematic(video.length));
     }
 
@@ -46,8 +48,14 @@ public class CinematicManager : MonoBehaviour
                 Fader.Instance.FadeOut();
                 mainCamera.clip = null;
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
+                postProcessVolumesContainer.SetActive(true);
             }
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    public void Populate()
+    {
+        postProcessVolumesContainer = GameObject.FindGameObjectWithTag("PostProcessVolumes");
     }
 }

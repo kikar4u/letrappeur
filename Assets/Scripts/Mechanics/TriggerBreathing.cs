@@ -41,6 +41,12 @@ public class TriggerBreathing : MonoBehaviour
     [Range(0, 5f)]
     [HideInInspector] public float walkSpeedDuringBreathing;
 
+
+    #region Juice/Polish
+    public bool doCameraShake;
+    [HideInInspector] public float shakeIntensity;
+    #endregion
+
     private void Start()
     {
         triggered = false;
@@ -72,6 +78,11 @@ public class TriggerBreathing : MonoBehaviour
             other.GetComponent<Player>().audioSource.loop = false;
             _MGR_SoundDesign.Instance.PlaySpecificSound(startBreathingClip, other.gameObject.GetComponent<Player>().audioSource);
             StartCoroutine(InstantationTimeOffset(startBreathingClip.length));
+
+            if (doCameraShake)
+            {
+                Camera.main.GetComponent<CameraShakin>().Shake(shakeIntensity);
+            }
         }
     }
 
@@ -104,6 +115,7 @@ public class TriggerBreathing : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource.loop = true;
         BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
         _MGR_SoundDesign.Instance.PlaySpecificSound(duringBreathingClip, GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource);
+
     }
 
     public void ReTrigger()

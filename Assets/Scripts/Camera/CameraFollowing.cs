@@ -47,6 +47,11 @@ public class CameraFollowing : MonoBehaviour
         }
     }
 
+    public Vector3 GetCameraPosition()
+    {
+        return targetToFollow.localPosition - offset;
+    }
+
     public Vector3 GetCameraToPlayerOffset()
     {
         return offset;

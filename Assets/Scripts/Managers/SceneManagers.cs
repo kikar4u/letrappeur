@@ -57,7 +57,9 @@ public class SceneManagers : MonoBehaviour
     {
         //Peuple les différentes variables des managers propres à la scene
         CinematicManager.Instance.SetVideoPlayer();
+        CinematicManager.Instance.Populate();
         BreathingManager.Instance.SetBreathingCanvas();
         SceneManager.sceneLoaded -= PopulateManagers;
+
     }
 }
