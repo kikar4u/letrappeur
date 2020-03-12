@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2417246019932373533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2417246019932373531}
+  - component: {fileID: 2417246019932373530}
+  - component: {fileID: 2417246019932373528}
+  - component: {fileID: 2417246019932373535}
+  - component: {fileID: 2417246019932373534}
+  - component: {fileID: 2417246019932373529}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2417246019932373531
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.7936602, y: 1.4674459, z: -0.32656336}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2417246019932373530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30392c29a6a9dbc4eb8a32966160c025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arr_SceneName: []
+--- !u!114 &2417246019932373528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45f29a89acc2d2d4780f5b59a72a91cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breathingPrefab: {fileID: 6508800210739816989, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
+    type: 3}
+--- !u!114 &2417246019932373535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb542e11a32e5134f909f783fd50f3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sons:
+  - nom: StartPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
+  - nom: DuringPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
+  - nom: NormalBreathRelease
+    arr_sons:
+    - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
+  - nom: FailedBreath
+    arr_sons:
+    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+--- !u!114 &2417246019932373534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0b469230fd9914abc08326325f783b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2417246019932373529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f139b1a9e06d748ac00636d1b17ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  postProcessVolumesContainer: {fileID: 0}
