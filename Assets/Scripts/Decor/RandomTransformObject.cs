@@ -10,7 +10,6 @@ public class RandomTransformObject : MonoBehaviour
     private void OnEnable()
     {
         initialScale = transform.localScale;
-        Debug.Log("OnEnable");
     }
     public void RandomizeRotation()
     {

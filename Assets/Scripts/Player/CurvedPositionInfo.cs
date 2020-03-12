@@ -50,7 +50,8 @@ public class CurvedPositionInfo
         float actualStep = 0f;
         while (actualStep <= 1f)
         {
-            length += Vector3.Distance(previousPos, CalculateCurvePoint(actualStep));
+            Vector3 actualStepCurvePoint = CalculateCurvePoint(actualStep);
+            length += Vector3.Distance(new Vector3(previousPos.x, 0f, previousPos.z), new Vector3(actualStepCurvePoint.x, 0f, actualStepCurvePoint.z));
             previousPos = CalculateCurvePoint(actualStep);
             actualStep += RATIO;
         }
