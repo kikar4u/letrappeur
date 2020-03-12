@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2417246019932373531}
   - component: {fileID: 2417246019932373530}
   - component: {fileID: 2417246019932373528}
-  - component: {fileID: 2417246019932373535}
   - component: {fileID: 2417246019932373534}
   - component: {fileID: 2417246019932373529}
+  - component: {fileID: 500744783719465161}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -62,31 +62,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breathingPrefab: {fileID: 6508800210739816989, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
     type: 3}
---- !u!114 &2417246019932373535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2417246019932373533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb542e11a32e5134f909f783fd50f3a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sons:
-  - nom: StartPanic
-    arr_sons:
-    - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
-  - nom: DuringPanic
-    arr_sons:
-    - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
-  - nom: NormalBreathRelease
-    arr_sons:
-    - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
-  - nom: FailedBreath
-    arr_sons:
-    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
 --- !u!114 &2417246019932373534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +87,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   postProcessVolumesContainer: {fileID: 0}
+--- !u!114 &500744783719465161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb542e11a32e5134f909f783fd50f3a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sons:
+  - nom: Music
+    arr_sons:
+    - {fileID: 8300000, guid: 6e3d2cc1da8120d4bad66d8b7dfc806a, type: 3}
+  - nom: FootStepSnow
+    arr_sons:
+    - {fileID: 8300000, guid: bad229a253a01a441a0435755f40db4d, type: 3}
+    - {fileID: 8300000, guid: 00029a1a330ba734c949cc8267691451, type: 3}
+    - {fileID: 8300000, guid: 622c6bfa9b078554fb6338cddcdbf297, type: 3}
+    - {fileID: 8300000, guid: 7ead463e2fca7454cb7818806c60c0af, type: 3}
+    - {fileID: 8300000, guid: f4c0f2e38ce046a4795d0001188bfb30, type: 3}
+  - nom: FootStepRock
+    arr_sons:
+    - {fileID: 8300000, guid: 3dc922ad636561c4cbca23184a1e2eac, type: 3}
+    - {fileID: 8300000, guid: 08c89c4627b0ec2488fe8a8258f66cb0, type: 3}
+    - {fileID: 8300000, guid: e8e71d6e9c7de5847b002aa429c918fc, type: 3}
+    - {fileID: 8300000, guid: fd6d17e442639ad42865b79aaa9f540b, type: 3}
+    - {fileID: 8300000, guid: d212ebbcba6bc2c4ab5600e28800e504, type: 3}
+    - {fileID: 8300000, guid: 779647a6a207d694ea1f99a16e7744e8, type: 3}
+    - {fileID: 8300000, guid: 87c608c485e3a564993334a65a4dc8e4, type: 3}
+    - {fileID: 8300000, guid: 4c822e1b6b5caf04a89cbf6dddc1dae9, type: 3}
+  - nom: Ambiance
+    arr_sons:
+    - {fileID: 8300000, guid: 399b011ad6846cf438284e1548046585, type: 3}
+    - {fileID: 8300000, guid: 8e1bd2cc6c18de248968a53e0edba49d, type: 3}
+    - {fileID: 8300000, guid: 8fea1ac4365b3914e94f62060648d2c2, type: 3}
+    - {fileID: 8300000, guid: 266914d3bc5174946b9dcba661e97509, type: 3}
+  - nom: Blizzard
+    arr_sons:
+    - {fileID: 8300000, guid: eb19215f4e28fe94191cda77272894a9, type: 3}
+  - nom: "Cin\xE9matique"
+    arr_sons:
+    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+  - nom: StartPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
+  - nom: DuringPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
+  - nom: NormalBreathRelease
+    arr_sons:
+    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+  - nom: FailedBreath
+    arr_sons:
+    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
