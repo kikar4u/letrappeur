@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Movements
-    [Range(1, 100)]
+    [Range(0, 100)]
     public float speed;
     public float gravity = 20.0f;
     //Booléens de contrôles du mouvement
@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
         {
             raycastController.interactionAnim();
         }
-        Debug.Log(hasMovementControls);
         if (hasMovementControls && !inCinematic && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && canMove)
         {
             WalkFollowingPath(speed);
@@ -135,8 +134,9 @@ public class Player : MonoBehaviour
     }
     private float CalculateSpeedOnCurve(float _speed)
     {
-        return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();
+        return direction * _speed / currentCurvedPosInfo.GetCurvedLength();
     }
+
     public void WalkFollowingPath(float _speed)
     {
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
@@ -145,8 +145,8 @@ public class Player : MonoBehaviour
             {
                 currentCurvedPosInfo.segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * CalculateSpeedOnCurve(_speed);
 
-                //Debug.Log(currentCurvedPosInfo.segmentBetweenWaypoint);
-                //Debug.Log("Value : " + Mathf.Abs(Input.GetAxisRaw("Horizontal")) * CalculateSpeedOnCurve(_speed));
+                Debug.Log(currentCurvedPosInfo.segmentBetweenWaypoint);
+                Debug.Log("Value : " + Mathf.Abs(Input.GetAxisRaw("Horizontal")) * CalculateSpeedOnCurve(_speed));
                 if (trapperAnim.GetCurrentState() != AnimState.WALK)
                 {
                     trapperAnim.SetAnimState(AnimState.WALK);
@@ -165,6 +165,7 @@ public class Player : MonoBehaviour
 
             //Debug.Log(currentCurvedPosInfo.GetCurvedLength());
             moveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint);
+            Debug.Log(moveDirection - transform.position);
             moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
             Rotate(moveDirection);
             movementOffset = Vector3.Distance(moveDirection, transform.position);

@@ -144,3 +144,6 @@ MonoBehaviour:
   - nom: FailedBreath
     arr_sons:
     - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+  - nom: BlizzardBreathRelease
+    arr_sons:
+    - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
