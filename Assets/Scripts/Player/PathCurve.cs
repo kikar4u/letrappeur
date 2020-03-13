@@ -9,11 +9,13 @@ public class PathCurve : MonoBehaviour
 
     public WaypointCurve[] waypointCurves;
 
+    private CurvedPositionInfo[] curves;
     Vector3 A, B, C, D, E, F;
 
     //Display without having to press play
     void OnDrawGizmos()
     {
+
         for (int i = 1; i < waypointCurves.Length; i++)
         {
             A = waypointCurves[i].waypointPosition.transform.position;
@@ -54,6 +56,20 @@ public class PathCurve : MonoBehaviour
             Gizmos.DrawLine(D, F);
             Gizmos.DrawLine(E, F);
         }
+    }
+
+    private void Awake()
+    {
+        curves = new CurvedPositionInfo[waypointCurves.Length - 1];
+        for (int i = 0; i < curves.Length; i++)
+        {
+            curves[i] = new CurvedPositionInfo(waypointCurves[i], waypointCurves[i + 1], i);
+        }
+    }
+
+    public CurvedPositionInfo GetCurvePosInfoAtIndex(int id)
+    {
+        return curves[id];
     }
 
     Vector3 DeCasteljausAlgorithm(float t)

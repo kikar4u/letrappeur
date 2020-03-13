@@ -61,10 +61,9 @@ public class Player : MonoBehaviour
         terrainMask = LayerMask.GetMask("Ground");
         audioSource = GetComponent<AudioSource>();
         #endregion
-
         //Initialisation des informations des waypoints
-        currentCurvedPosInfo = new CurvedPositionInfo(path.waypointCurves[0], path.waypointCurves[1]);
-        respawnCurvedPosInfo = new CurvedPositionInfo(path.waypointCurves[0], path.waypointCurves[1]);
+        currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(0);
+        respawnCurvedPosInfo = path.GetCurvePosInfoAtIndex(0);
         //nextCurvedPosInfo = new CurvedPositionInfo(path.waypointCurves[1], path.waypointCurves[2]);
 
         #region MoveControl
@@ -134,7 +133,7 @@ public class Player : MonoBehaviour
     }
     private float CalculateSpeedOnCurve(float _speed)
     {
-        return direction * _speed / currentCurvedPosInfo.GetCurvedLength();
+        return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();
     }
 
     public void WalkFollowingPath(float _speed)
@@ -157,15 +156,15 @@ public class Player : MonoBehaviour
                 currentCurvedPosInfo.segmentBetweenWaypoint += CalculateSpeedOnCurve(_speed);
             }
 
-            if (currentCurvedPosInfo.segmentBetweenWaypoint >= 1f || currentCurvedPosInfo.segmentBetweenWaypoint <= 0f)
+            if (currentCurvedPosInfo.segmentBetweenWaypoint > 1f || currentCurvedPosInfo.segmentBetweenWaypoint < 0f)
             {
-                ChangeWaypointTarget();
+                ChangeWaypointTarget(direction);
             }
             currentCurvedPosInfo.segmentBetweenWaypoint = Mathf.Clamp01(currentCurvedPosInfo.segmentBetweenWaypoint);
 
             //Debug.Log(currentCurvedPosInfo.GetCurvedLength());
             moveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint);
-            Debug.Log(moveDirection - transform.position);
+            Debug.Log("Magnitude : " + (new Vector3(moveDirection.x, transform.position.y, moveDirection.z) - transform.position).magnitude);
             moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
             Rotate(moveDirection);
             movementOffset = Vector3.Distance(moveDirection, transform.position);
@@ -209,21 +208,23 @@ public class Player : MonoBehaviour
         Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)), rotationSmoothness);
     }
 
-    void ChangeWaypointTarget()
+    void ChangeWaypointTarget(int _direction)
     {
         //Actualise le waypoint suivant et précédent
-        switch (direction)
+        switch (_direction)
         {
             case 1:
                 if (System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) < path.waypointCurves.Length - 1)
                 {
                     if (!canMove)
                         canMove = true;
-                    currentCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.nextWaypoint;
-                    currentCurvedPosInfo.nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) + 1];
-                    currentCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint - 1f;
-                    currentCurvedPosInfo.SetCurvedLength();
+                    //currentCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.nextWaypoint;
+                    //currentCurvedPosInfo.nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) + 1];
+                    //currentCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint - 1f;
+                    //currentCurvedPosInfo.SetCurvedLength();
 
+                    currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(currentCurvedPosInfo.id + 1);
+                    currentCurvedPosInfo.segmentBetweenWaypoint = 0f;
                 }
                 else
                 {
@@ -236,11 +237,13 @@ public class Player : MonoBehaviour
                 {
                     if (!canMove)
                         canMove = true;
-                    currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
-                    currentCurvedPosInfo.lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) - 1];
-                    currentCurvedPosInfo.segmentBetweenWaypoint = 1f - currentCurvedPosInfo.segmentBetweenWaypoint;
-                    currentCurvedPosInfo.SetCurvedLength();
+                    //currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
+                    //currentCurvedPosInfo.lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) - 1];
+                    //currentCurvedPosInfo.segmentBetweenWaypoint = 1f - currentCurvedPosInfo.segmentBetweenWaypoint;
+                    //currentCurvedPosInfo.SetCurvedLength();
 
+                    currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(currentCurvedPosInfo.id - 1);
+                    currentCurvedPosInfo.segmentBetweenWaypoint = 1f;
                 }
                 else
                 {

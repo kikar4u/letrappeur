@@ -5,8 +5,8 @@ using UnityEngine;
 public class CurvedPositionInfo
 {
     //Pas de découpe de la courbe pour calculer sa longueur au plus proche
-    const float RATIO = 0.002f;
-
+    const float RATIO = 0.0001f;
+    public int id;
     public WaypointCurve nextWaypoint;
     public WaypointCurve lastWaypoint;
 
@@ -14,10 +14,11 @@ public class CurvedPositionInfo
 
     private float curvedLength;
 
-    public CurvedPositionInfo(WaypointCurve _lastWP, WaypointCurve _nextWP)
+    public CurvedPositionInfo(WaypointCurve _lastWP, WaypointCurve _nextWP, int _id)
     {
         lastWaypoint = _lastWP;
         nextWaypoint = _nextWP;
+        id = _id;
         segmentBetweenWaypoint = 0;
         curvedLength = CalculateCurvedLength();
     }

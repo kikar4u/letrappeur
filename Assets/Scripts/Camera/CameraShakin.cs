@@ -71,7 +71,7 @@ public class CameraShakin : MonoBehaviour
         {
             intensity -= Time.deltaTime;
             newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition() + Random.insideUnitSphere * intensity;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSeconds(shakeSmoothness);
         }
         fadingShake = false;
         StopCoroutine(ShakeContinue(intensity));
