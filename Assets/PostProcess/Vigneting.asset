@@ -24,10 +24,10 @@ MonoBehaviour:
     value: {r: 0, g: 0, b: 0, a: 1}
   center:
     overrideState: 1
-    value: {x: 0.4, y: 0.94}
+    value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.157
+    value: 0.268
   smoothness:
     overrideState: 1
     value: 1
@@ -62,25 +62,25 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 53.999985, y: 99}
+    value: {x: 1, y: 46.00003}
   minLuminance:
     overrideState: 1
-    value: -0.24
+    value: 1.31
   maxLuminance:
     overrideState: 1
     value: 9
   keyValue:
     overrideState: 0
-    value: 0
+    value: 1.2
   eyeAdaptation:
     overrideState: 0
     value: 0
   speedUp:
     overrideState: 0
-    value: 14.57
+    value: 8.66
   speedDown:
     overrideState: 0
-    value: 4
+    value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

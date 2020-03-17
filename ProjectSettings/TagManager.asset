@@ -12,6 +12,7 @@ TagManager:
   - SoundManager
   - rock
   - PostProcessVolumes
+  - Vignetage
   layers:
   - Default
   - TransparentFX

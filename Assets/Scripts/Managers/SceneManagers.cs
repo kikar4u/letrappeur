@@ -60,6 +60,6 @@ public class SceneManagers : MonoBehaviour
         CinematicManager.Instance.Populate();
         BreathingManager.Instance.SetBreathingCanvas();
         SceneManager.sceneLoaded -= PopulateManagers;
-
+        PostProcessManager.Instance.InitializePostProcess();
     }
 }
