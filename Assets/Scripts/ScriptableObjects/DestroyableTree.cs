@@ -15,6 +15,7 @@ public class DestroyableTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(transform.position);
         if (Input.GetButtonDown("Fire1"))
         {
             gameObject.GetComponent<Rigidbody>().AddForce(directionForce * force);
