@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     //2 WaypointCurve du chemin et un float {0,1} interpolant la position sur la courbe
     private CurvedPositionInfo currentCurvedPosInfo;
     //private CurvedPositionInfo nextCurvedPosInfo;
-    private CurvedPositionInfo respawnCurvedPosInfo;
+    [HideInInspector] public CurvedPositionInfo respawnCurvedPosInfo;
     private int direction;
 
     [Tooltip("1 = Tourne instantanément ; 0 = Tourne pas")]
@@ -111,6 +111,13 @@ public class Player : MonoBehaviour
 
         forwardWayPointAngle = Vector3.Angle(new Vector3(nextMoveDirection.x - transform.position.x, 0f, nextMoveDirection.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
 
+
+        RaycastHit hit;
+        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
+        }
     }
     public void PlayFootstep()
     {
@@ -166,12 +173,6 @@ public class Player : MonoBehaviour
             movementOffset = Vector3.Distance(moveDirection, transform.position);
             transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
 
-            RaycastHit hit;
-            //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
-            {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
-            }
         }
 
         nextMoveDirection = SetNextMoveDir(_speed);
@@ -231,15 +232,20 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+
     }
 
     public void Respawn()
     {
         hasMovementControls = true;
         trapperAnim.SetAnimState(AnimState.IDLE);
-        currentCurvedPosInfo.SetValues(respawnCurvedPosInfo);
-        Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(respawnCurvedPosInfo.segmentBetweenWaypoint);
+        currentCurvedPosInfo = respawnCurvedPosInfo;
+
+        Debug.Log("Respawn curve ID" + currentCurvedPosInfo.id);
+        Debug.Log("Respawn curve segment" + currentCurvedPosInfo.segmentBetweenWaypoint);
+        Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint);
         transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+
         if (Fader.Instance.fadeOutDelegate != null)
             Fader.Instance.fadeOutDelegate -= Respawn;
     }
@@ -252,8 +258,9 @@ public class Player : MonoBehaviour
     public void SaveCurrentPosInfo()
     {
         //Sauvegarde la position actuelle du joueur
-        respawnCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.lastWaypoint;
-        respawnCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.nextWaypoint;
-        respawnCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint;
+        respawnCurvedPosInfo = currentCurvedPosInfo;
+        Debug.Log("Saved curve ID" + respawnCurvedPosInfo.id);
+        respawnCurvedPosInfo.SetSegmenentPoint(currentCurvedPosInfo.segmentBetweenWaypoint);
+        Debug.Log("Saved curve segment" + respawnCurvedPosInfo.segmentBetweenWaypoint);
     }
 }

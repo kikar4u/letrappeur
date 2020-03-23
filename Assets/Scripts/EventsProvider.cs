@@ -7,7 +7,7 @@ public class EventsProvider : MonoBehaviour
 {
     public void LaunchCinematic(VideoClip clip)
     {
-        Fader.Instance.FadeIn();
+        //Fader.Instance.FadeIn();
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 
@@ -23,7 +23,7 @@ public class EventsProvider : MonoBehaviour
 
     public void LaunchCinematicWithLoadNewScene(VideoClip clip)
     {
-        Fader.Instance.FadeIn();
+        //Fader.Instance.FadeIn();
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 
@@ -57,7 +57,6 @@ public class EventsProvider : MonoBehaviour
             SceneManagers.Instance.StartCoroutine(SceneManagers.Instance.LoadSceneAsync(sceneToLoad, (float)clip.length));
         }
         CinematicManager.Instance.LaunchCinematic(clip);
-        //StopCoroutine(WaitForFadeIn(animDuration, clip, loadScene));
 
     }
 

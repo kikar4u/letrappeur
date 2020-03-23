@@ -22,17 +22,13 @@ public class SceneManagers : MonoBehaviour
             //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
             Destroy(gameObject);
 
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += PopulateManagers;
     }
-
-    //void OnLevelWasLoaded(int level)
-    //{
-    //    //Réaffecter le breathing canvas dans le breathingManager
-    //}
 
     public void PlayGame()
     {
@@ -91,9 +87,8 @@ public class SceneManagers : MonoBehaviour
     {
         //Peuple les différentes variables des managers propres à la scene
         CinematicManager.Instance.SetVideoPlayer();
-        CinematicManager.Instance.Populate();
+        //CinematicManager.Instance.Populate();
         BreathingManager.Instance.SetBreathingCanvas();
-        SceneManager.sceneLoaded -= PopulateManagers;
         PostProcessManager.Instance.InitializePostProcess();
     }
 }

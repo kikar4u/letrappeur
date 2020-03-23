@@ -46,17 +46,30 @@ public class TriggerBreathing : MonoBehaviour
     #region Juice/Polish
     public bool doCameraShake;
     [HideInInspector] public float shakeIntensity;
+    public VignetingData vignetingData;
     #endregion
 
     private void Start()
     {
         triggered = false;
+
+        if (breathingUnits.Length > 1)
+        {
+            vignetingData.currentAverage = (float)(vignetingData.maxIntensity / requiredFailedToLose);
+        }
+        else
+        {
+            vignetingData.currentAverage = 0;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!triggered && other.gameObject.tag == "Player")
         {
+            PostProcessManager.Instance.SetVignetingData(vignetingData);
+            PostProcessManager.Instance.StartVigneting();
+
             other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
             triggered = true;
             AudioClip startBreathingClip;

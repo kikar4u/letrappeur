@@ -187,7 +187,27 @@ PrefabInstance:
     - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}
       propertyPath: requiredFailedToLose
-      value: 5
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
+        type: 3}
+      propertyPath: vignetingData.initialIntensity
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
+        type: 3}
+      propertyPath: vignetingData.maxIntensity
+      value: 0.675
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
+        type: 3}
+      propertyPath: vignetingData.offset
+      value: 0.0583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
+        type: 3}
+      propertyPath: vignetingData.periodTime
+      value: 3.08
       objectReference: {fileID: 0}
     - target: {fileID: 4177705398499077745, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}
@@ -6081,6 +6101,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796450523944487966, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319494423659707549, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}

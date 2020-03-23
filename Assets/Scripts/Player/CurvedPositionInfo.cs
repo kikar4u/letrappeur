@@ -42,7 +42,11 @@ public class CurvedPositionInfo
     {
         nextWaypoint = newCurvedPositionInfo.nextWaypoint;
         lastWaypoint = newCurvedPositionInfo.lastWaypoint;
-        segmentBetweenWaypoint = newCurvedPositionInfo.segmentBetweenWaypoint;
+    }
+
+    public void SetSegmenentPoint(float _segment)
+    {
+        segmentBetweenWaypoint = _segment;
     }
 
     public float CalculateCurvedLength()
