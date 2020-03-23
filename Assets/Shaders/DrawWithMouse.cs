@@ -26,6 +26,7 @@ public class DrawWithMouse : MonoBehaviour
         _snowMaterial = _terrain.GetComponent<MeshRenderer>().material;
         _splatMap = new RenderTexture(1024, 1024, 0, RenderTextureFormat.ARGBFloat);
         _snowMaterial.SetTexture("_SplatTex", _splatMap);
+
     }
 
     // Update is called once per frame
@@ -34,7 +35,7 @@ public class DrawWithMouse : MonoBehaviour
         for (int i = 0; i < _foot.Length; i++)
         {
             Debug.DrawRay(new Vector3(_foot[i].position.x, _foot[i].position.y + 0.5f, _foot[i].position.z), -Vector3.up, Color.yellow);
-            if (Physics.Raycast(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y +0.5f, _foot[i].position.z), -Vector3.up, out _hit, 1f, _layerMask))
+            if (Physics.Raycast(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y + 0.5f, _foot[i].position.z), -Vector3.up, out _hit, 1f, _layerMask))
             {
                 Debug.DrawRay(new Vector3(_foot[i].position.x, PlayerCollider.bounds.min.y + 0.5f, _foot[i].position.z), -Vector3.up, Color.red);
                 _drawMaterial.SetVector("_Coordinate", new Vector4(_hit.textureCoord.x, _hit.textureCoord.y, 0, 0));

@@ -367,7 +367,7 @@ public class BreathingSystem : MonoBehaviour
             else
             {
                 //On s'est fail
-                Debug.Log("fail");
+                Debug.Log("Pattern raté");
                 patternFailed++;
                 if (patternFailed == requiredFailedToLose)
                 {
@@ -402,7 +402,7 @@ public class BreathingSystem : MonoBehaviour
         if (Mathf.Abs(previousInput - currentTriggerInput) > breathingCirclesData.blockThreshold)
         {
             stutter = true;
-            StartCoroutine(Jiggle(previousInput));
+            StartCoroutine(Jiggle());
             XInputDotNetPure.GamePad.SetVibration(0, VIBRATION_INTENSITY, VIBRATION_INTENSITY);
         }
         if (!stutter)
@@ -410,14 +410,19 @@ public class BreathingSystem : MonoBehaviour
 
     }
 
-    private IEnumerator Jiggle(float previousInput)
+    //Coroutine de tremblement de la respiration
+    private IEnumerator Jiggle()
     {
         float counter = 0f;
+        //Le tremblement se base sur une animationCurve
         while (counter < breathingCirclesData.jiggleAnimationCurve.keys[breathingCirclesData.jiggleAnimationCurve.length - 1].time)
         {
             counter += Time.deltaTime;
 
-            breathingCirclesData.playerCircleTransform.localScale += new Vector3(breathingCirclesData.jiggleAnimationCurve.Evaluate(counter), breathingCirclesData.jiggleAnimationCurve.Evaluate(counter), 1);
+            breathingCirclesData.playerCircleTransform.localScale +=
+                new Vector3(breathingCirclesData.jiggleAnimationCurve.Evaluate(counter),
+                breathingCirclesData.jiggleAnimationCurve.Evaluate(counter),
+                1);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         XInputDotNetPure.GamePad.SetVibration(0, 0.0f, 0.0f);

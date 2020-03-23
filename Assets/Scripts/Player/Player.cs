@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
         //Initialisation des informations des waypoints
         currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(0);
         respawnCurvedPosInfo = path.GetCurvePosInfoAtIndex(0);
-        //nextCurvedPosInfo = new CurvedPositionInfo(path.waypointCurves[1], path.waypointCurves[2]);
 
         #region MoveControl
         hasMovementControls = true;
@@ -75,7 +74,6 @@ public class Player : MonoBehaviour
 
         SaveCurrentPosInfo();
         transform.position = currentCurvedPosInfo.lastWaypoint.waypointPosition.transform.position;
-
     }
 
     void Update()
@@ -122,7 +120,6 @@ public class Player : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("SoundManager").GetComponent<_MGR_SoundDesign>().
             PlaySound("FootStepRock", GetComponent<AudioSource>());
-
         }
         else
         {
@@ -144,8 +141,8 @@ public class Player : MonoBehaviour
             {
                 currentCurvedPosInfo.segmentBetweenWaypoint += Mathf.Abs(Input.GetAxis("Horizontal")) * CalculateSpeedOnCurve(_speed);
 
-                Debug.Log(currentCurvedPosInfo.segmentBetweenWaypoint);
-                Debug.Log("Value : " + Mathf.Abs(Input.GetAxisRaw("Horizontal")) * CalculateSpeedOnCurve(_speed));
+                //Debug.Log(currentCurvedPosInfo.segmentBetweenWaypoint);
+                //Debug.Log("Value : " + Mathf.Abs(Input.GetAxisRaw("Horizontal")) * CalculateSpeedOnCurve(_speed));
                 if (trapperAnim.GetCurrentState() != AnimState.WALK)
                 {
                     trapperAnim.SetAnimState(AnimState.WALK);
@@ -162,9 +159,8 @@ public class Player : MonoBehaviour
             }
             currentCurvedPosInfo.segmentBetweenWaypoint = Mathf.Clamp01(currentCurvedPosInfo.segmentBetweenWaypoint);
 
-            //Debug.Log(currentCurvedPosInfo.GetCurvedLength());
             moveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint);
-            Debug.Log("Magnitude : " + (new Vector3(moveDirection.x, transform.position.y, moveDirection.z) - transform.position).magnitude);
+            //Debug.Log("Magnitude : " + (new Vector3(moveDirection.x, transform.position.y, moveDirection.z) - transform.position).magnitude);
             moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
             Rotate(moveDirection);
             movementOffset = Vector3.Distance(moveDirection, transform.position);
@@ -185,18 +181,8 @@ public class Player : MonoBehaviour
 
     private Vector3 SetNextMoveDir(float _speed)
     {
-        //if (currentCurvedPosInfo.segmentBetweenWaypoint + (direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength()) > 1)
-        //{
-        //    nextMoveDirection = nextCurvedPosInfo.CalculateCurvePoint(direction * _speed * Time.deltaTime / nextCurvedPosInfo.GetCurvedLength());
-        //}
-        //else if (currentCurvedPosInfo.segmentBetweenWaypoint + (direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength()) < 0)
-        //{
-        //    nextMoveDirection = nextCurvedPosInfo.CalculateCurvePoint(1 - (direction * _speed * Time.deltaTime / nextCurvedPosInfo.GetCurvedLength()));
-        //}
-
         nextMoveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentCurvedPosInfo.segmentBetweenWaypoint + (direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength()));
         nextMoveDirection = new Vector3(nextMoveDirection.x, transform.position.y, nextMoveDirection.z);
-
 
         return nextMoveDirection;
     }
@@ -218,10 +204,6 @@ public class Player : MonoBehaviour
                 {
                     if (!canMove)
                         canMove = true;
-                    //currentCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.nextWaypoint;
-                    //currentCurvedPosInfo.nextWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) + 1];
-                    //currentCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint - 1f;
-                    //currentCurvedPosInfo.SetCurvedLength();
 
                     currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(currentCurvedPosInfo.id + 1);
                     currentCurvedPosInfo.segmentBetweenWaypoint = 0f;
@@ -237,10 +219,6 @@ public class Player : MonoBehaviour
                 {
                     if (!canMove)
                         canMove = true;
-                    //currentCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.lastWaypoint;
-                    //currentCurvedPosInfo.lastWaypoint = path.waypointCurves[System.Array.IndexOf(path.waypointCurves, currentCurvedPosInfo.nextWaypoint) - 1];
-                    //currentCurvedPosInfo.segmentBetweenWaypoint = 1f - currentCurvedPosInfo.segmentBetweenWaypoint;
-                    //currentCurvedPosInfo.SetCurvedLength();
 
                     currentCurvedPosInfo = path.GetCurvePosInfoAtIndex(currentCurvedPosInfo.id - 1);
                     currentCurvedPosInfo.segmentBetweenWaypoint = 1f;
@@ -274,7 +252,6 @@ public class Player : MonoBehaviour
     public void SaveCurrentPosInfo()
     {
         //Sauvegarde la position actuelle du joueur
-        Debug.Log("Position saved");
         respawnCurvedPosInfo.lastWaypoint = currentCurvedPosInfo.lastWaypoint;
         respawnCurvedPosInfo.nextWaypoint = currentCurvedPosInfo.nextWaypoint;
         respawnCurvedPosInfo.segmentBetweenWaypoint = currentCurvedPosInfo.segmentBetweenWaypoint;

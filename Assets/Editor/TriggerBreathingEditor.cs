@@ -14,6 +14,7 @@ public class TriggerBreathingEditor : Editor
     SerializedProperty requiredFailedToLose;
     SerializedProperty doCameraShake;
     SerializedProperty shakeIntensity;
+    SerializedProperty tree;
 
     private void OnEnable()
     {
@@ -25,15 +26,24 @@ public class TriggerBreathingEditor : Editor
         requiredFailedToLose = serializedObject.FindProperty("requiredFailedToLose");
         doCameraShake = serializedObject.FindProperty("doCameraShake");
         shakeIntensity = serializedObject.FindProperty("shakeIntensity");
+        tree = serializedObject.FindProperty("tree");
     }
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         TriggerBreathing triggerBreathing = (TriggerBreathing)target;
+        //Si le booléen est vrai
+
+        //if (triggerBreathing.animType == AnimType.CHOPPING)
+        //{
+        //    EditorGUILayout.PropertyField(tree, new GUIContent("Arbre à couper : "));
+        //}
 
         if (triggerBreathing.canWalkDuringBreathing)
         {
-            triggerBreathing.walkSpeedDuringBreathing = EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f, 180f);
+            //Crée un slider dans l'editeur
+            triggerBreathing.walkSpeedDuringBreathing =
+                EditorGUILayout.Slider("Walk speed during breathing ", walkSpeedDuringBreathing.floatValue, 0f, 180f);
         }
         if (triggerBreathing.doCameraShake)
         {
@@ -42,9 +52,6 @@ public class TriggerBreathingEditor : Editor
 
         if (triggerBreathing.breathingUnits.Length == 1)
         {
-            //triggerBreathing.requiredTimeSpendOutsideBounds = EditorGUILayout.FloatField("Required time outside bounds to lose   :", requiredTimeSpendOutsideBounds.floatValue);
-            //triggerBreathing.requiredTimeSpendInsideBounds = EditorGUILayout.FloatField("Required time inside bounds to win   :", requiredTimeSpendInsideBounds.floatValue);
-
             EditorGUILayout.PropertyField(requiredTimeSpendOutsideBounds, new GUIContent("Temps nécessaire pour perdre"));
             EditorGUILayout.PropertyField(requiredTimeSpendInsideBounds, new GUIContent("Temps nécessaire pour réussir"));
         }
