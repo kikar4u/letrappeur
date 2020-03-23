@@ -41,6 +41,7 @@ public class TriggerBreathing : MonoBehaviour
     [Range(0, 5f)]
     [HideInInspector] public float walkSpeedDuringBreathing;
 
+    //[HideInInspector] public DestroyableTree tree;
 
     #region Juice/Polish
     public bool doCameraShake;

@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 3a07dc338fb978f40bfb709069c9df25
-=======
-guid: b059f3ad811972946ba22c8c44a75df3
->>>>>>> d6aa4fba93f66e96a93d776e6ed7b7dfafd9ba6f
+guid: f69453c502c74e343b1d239998fe7286
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bark_Mat
+    second: {fileID: 2100000, guid: 39a4c4df559327242bda90fb8ee072fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pine_01_Mat
+    second: {fileID: 2100000, guid: 2b05e270fe47a8d469a791db47d79bf4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -64,13 +70,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
   referencedClips: []
   importAnimation: 1
   copyAvatar: 0

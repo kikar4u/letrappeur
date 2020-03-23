@@ -23,8 +23,10 @@ public class CurvedPositionInfo
         curvedLength = CalculateCurvedLength();
     }
 
+    //@segment compris entre 0 et 1
     public Vector3 CalculateCurvePoint(float segment)
     {
+        //Calcule la position du point sur la courbe de bézier 
         Vector3 nextMoveDir = Mathf.Pow(1 - segment, 3)
                * lastWaypoint.waypointPosition.transform.position +
                 3 * Mathf.Pow(1 - segment, 2) * segment
@@ -33,7 +35,7 @@ public class CurvedPositionInfo
                 * nextWaypoint.bezierFirstPointPosition.position
                 + Mathf.Pow(segment, 3) * nextWaypoint.waypointPosition.transform.position;
 
-        return new Vector3(nextMoveDir.x, nextMoveDir.y, nextMoveDir.z);
+        return nextMoveDir;
     }
 
     public void SetValues(CurvedPositionInfo newCurvedPositionInfo)

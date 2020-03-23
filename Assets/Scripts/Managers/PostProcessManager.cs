@@ -42,13 +42,11 @@ public class PostProcessManager : MonoBehaviour
         vignetingVolume.profile.TryGetSettings<Vignette>(out vigneting);
 
         fpIntensity = new FloatParameter();
-
     }
 
     public void UpdateVigneting(float intensity, float smoothness)
     {
         fpIntensity.value = intensity;
-        Debug.Log(vigneting);
         vigneting.intensity = fpIntensity;
         vigneting.smoothness = fpSmoothness;
     }

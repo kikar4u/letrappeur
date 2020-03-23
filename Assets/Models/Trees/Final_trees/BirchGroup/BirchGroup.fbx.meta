@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 569dfca4428641f4b89b57749569b2fd
-=======
-guid: 94f8c64d4cb06c54fabe134f76989f17
->>>>>>> d6aa4fba93f66e96a93d776e6ed7b7dfafd9ba6f
+guid: 4846a2a28b3a064419d8c7e7f306aeec
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BirchGroup_Mat
+    second: {fileID: 2100000, guid: d076f6bfcd2277744acc65da96e68e25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_Mat
+    second: {fileID: 2100000, guid: 9eda5891b292f134e80c12acf823621e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -64,13 +70,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
   referencedClips: []
   importAnimation: 1
   copyAvatar: 0

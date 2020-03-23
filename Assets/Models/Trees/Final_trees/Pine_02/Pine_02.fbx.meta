@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 2cc7e35a3fd7163429d371a06f6c1911
-=======
-guid: e9c6e7f6baf89c1499f224795f407c9e
->>>>>>> d6aa4fba93f66e96a93d776e6ed7b7dfafd9ba6f
+guid: 8283df37c0283a14b90756df242086b5
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pine_02_Mat
+    second: {fileID: 2100000, guid: d85d72fdbf81a664fb5fea6813c43a10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trunk_Mat
+    second: {fileID: 2100000, guid: 51bed0255b6c6f24482100cdb2ae647b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -64,13 +70,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
   referencedClips: []
   importAnimation: 1
   copyAvatar: 0

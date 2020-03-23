@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2417246019932373534}
   - component: {fileID: 2417246019932373529}
   - component: {fileID: 500744783719465161}
+  - component: {fileID: 7207323461498237086}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -147,3 +148,15 @@ MonoBehaviour:
   - nom: BlizzardBreathRelease
     arr_sons:
     - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
+--- !u!114 &7207323461498237086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee14fa92c23bec84fa78da0a8b55acbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
