@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 09c1f396cd3117249a89cead78e3d695
-=======
-guid: 7a1aa6ffe3cd3254696f2d9858bd0d35
->>>>>>> d6aa4fba93f66e96a93d776e6ed7b7dfafd9ba6f
+guid: 409025ddef06b4c45a9688e2bbcc5bdb
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_Mat
+    second: {fileID: 2100000, guid: 884e62ff25b7a0c4ebe5c6bde5b28b06, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -64,13 +65,13 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
-    tangentImportMode: 3
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 2
   referencedClips: []
   importAnimation: 1
   copyAvatar: 0
