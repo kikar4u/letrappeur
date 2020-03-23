@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,6 +39,24 @@ public class SceneManagers : MonoBehaviour
         DontDestroyOnLoad(GameObject.FindGameObjectWithTag("GameManager"));
         SceneManager.LoadScene("Level_1");
     }
+
+    public void LoadSceneAsync(string sceneName)
+    {
+        //Scene sceneToLoad = SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
+        //Debug.Log("load la scene :" + sceneToLoad.name + " qui a pour index : " + sceneToLoad.buildIndex);
+        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName(sceneName).buildIndex);
+        while (!asyncLoadScene.isDone)
+            Debug.Log(asyncLoadScene.progress);
+    }
+
+    public IEnumerator LoadSceneAsync(int sceneIndex, float timeToWait)
+    {
+        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(2);
+        asyncLoadScene.allowSceneActivation = false;
+        yield return new WaitForSeconds(timeToWait);
+        asyncLoadScene.allowSceneActivation = true;
+    }
+
     public void Options()
     {
 
@@ -51,6 +70,21 @@ public class SceneManagers : MonoBehaviour
     public void LoadScene(string __nom_scene)
     {
         SceneManager.LoadScene(__nom_scene);
+    }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    public int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public int GetScenesCount()
+    {
+        return SceneManager.sceneCountInBuildSettings;
     }
 
     private void PopulateManagers(Scene scene, LoadSceneMode sceneMode)

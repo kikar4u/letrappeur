@@ -83,10 +83,11 @@ public class BreathingSystem : MonoBehaviour
                     releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("BlizzardBreathRelease");
                     _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
                     break;
-                //case AnimType.CHOPPING:
-                //    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
-                //    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
-                //    break;
+                case AnimType.CHOPPING:
+                    //releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
+                    //_MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    player.trapperAnim.SetAnimState(AnimState.IDLE);
+                    break;
                 case AnimType.NORMAL:
                     releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
                     _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
