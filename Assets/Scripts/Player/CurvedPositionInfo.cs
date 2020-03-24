@@ -10,8 +10,6 @@ public class CurvedPositionInfo
     public WaypointCurve nextWaypoint;
     public WaypointCurve lastWaypoint;
 
-    public float segmentBetweenWaypoint;
-
     private float curvedLength;
 
     public CurvedPositionInfo(WaypointCurve _lastWP, WaypointCurve _nextWP, int _id)
@@ -19,7 +17,6 @@ public class CurvedPositionInfo
         lastWaypoint = _lastWP;
         nextWaypoint = _nextWP;
         id = _id;
-        segmentBetweenWaypoint = 0;
         curvedLength = CalculateCurvedLength();
     }
 
@@ -42,8 +39,12 @@ public class CurvedPositionInfo
     {
         nextWaypoint = newCurvedPositionInfo.nextWaypoint;
         lastWaypoint = newCurvedPositionInfo.lastWaypoint;
-        segmentBetweenWaypoint = newCurvedPositionInfo.segmentBetweenWaypoint;
     }
+
+    //public void SetSegmenentPoint(float _segment)
+    //{
+    //    segmentBetweenWaypoint = _segment;
+    //}
 
     public float CalculateCurvedLength()
     {

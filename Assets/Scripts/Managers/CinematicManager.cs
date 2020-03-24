@@ -8,7 +8,7 @@ public class CinematicManager : MonoBehaviour
     private static CinematicManager _instance = null;
     public static CinematicManager Instance { get { return _instance; } }
 
-    VideoPlayer mainCamera;
+    [SerializeField] VideoPlayer mainCamera;
     [SerializeField] GameObject postProcessVolumesContainer;
 
     private void Awake()
@@ -25,6 +25,7 @@ public class CinematicManager : MonoBehaviour
     {
         // on récupère le videoplayer sur la main camera
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<VideoPlayer>();
+        postProcessVolumesContainer = GameObject.FindGameObjectWithTag("PostProcessVolumes");
 
     }
 
@@ -50,12 +51,15 @@ public class CinematicManager : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
                 postProcessVolumesContainer.SetActive(true);
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return null;
         }
+        StopCoroutine(CheckCinematic(videoClipLength));
     }
 
-    public void Populate()
-    {
-        postProcessVolumesContainer = GameObject.FindGameObjectWithTag("PostProcessVolumes");
-    }
+    //public void Populate()
+    //{
+    //    Debug.Log("Populate cinematic manager");
+    //    postProcessVolumesContainer = GameObject.FindGameObjectWithTag("PostProcessVolumes");
+    //    mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<VideoPlayer>();
+    //}
 }

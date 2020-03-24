@@ -112,7 +112,14 @@ public class TrapperAnim : MonoBehaviour
     {
         if (GetCurrentState() == AnimState.CHOP)
         {
-            animator.SetTrigger("Chop");
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("AxeMelee"))
+            {
+                animator.Play("AxeMelee", -1, 0f);
+            }
+            else
+            {
+                animator.SetTrigger("Chop");
+            }
         }
     }
 

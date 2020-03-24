@@ -83,10 +83,11 @@ public class BreathingSystem : MonoBehaviour
                     releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("BlizzardBreathRelease");
                     _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
                     break;
-                //case AnimType.CHOPPING:
-                //    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
-                //    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
-                //    break;
+                case AnimType.CHOPPING:
+                    //releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
+                    //_MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    player.trapperAnim.SetAnimState(AnimState.IDLE);
+                    break;
                 case AnimType.NORMAL:
                     releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
                     _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
@@ -122,7 +123,6 @@ public class BreathingSystem : MonoBehaviour
 
     public void RemoveBreathingHUD()
     {
-        Destroy(gameObject);
 
         if (haveSucceeded)
         {
@@ -132,6 +132,8 @@ public class BreathingSystem : MonoBehaviour
             }
             BreathingManager.Instance.SetCurrentBreathing(null);
         }
+        PostProcessManager.Instance.StopVigneting();
+        Destroy(gameObject);
     }
 
     void Start()
@@ -261,7 +263,6 @@ public class BreathingSystem : MonoBehaviour
                     player.hasMovementControls = true;
                     haveSucceeded = true;
                     animator.SetTrigger("Over");
-
                 }
             }
             else
@@ -363,6 +364,14 @@ public class BreathingSystem : MonoBehaviour
             {
                 //On a réussi
                 Debug.Log("success");
+                if (patternFailed > 0)
+                {
+                    patternFailed--;
+                }
+                if (i == breathingUnits.Length - 1)
+                {
+                    haveSucceeded = true;
+                }
             }
             else
             {
@@ -374,7 +383,6 @@ public class BreathingSystem : MonoBehaviour
                     //On a perdu
                     Fader.Instance.fadeOutDelegate += player.Respawn;
                     triggerBreathing.ReTrigger();
-                    Fader.Instance.FadeIn();
                     animator.SetTrigger("Over");
                     BreathingManager.Instance.SetCurrentBreathing(null);
                     _MGR_SoundDesign.Instance.PlaySpecificSound(_MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath"), player.audioSource);
@@ -383,9 +391,12 @@ public class BreathingSystem : MonoBehaviour
                 i--;
             }
             counterSuccessTime = 0f;
+            PostProcessManager.Instance.SlideVignetingToIntensity(
+                (PostProcessManager.Instance.GetCurrentVignetingData().maxIntensity / requiredFailedToLose)
+                + (PostProcessManager.Instance.GetCurrentVignetingData().maxIntensity * patternFailed / requiredFailedToLose));
         }
+        Debug.Log("Succeed ? :" + haveSucceeded);
         player.hasMovementControls = true;
-        haveSucceeded = true;
         animator.SetTrigger("Over");
         BreathingManager.Instance.SetCurrentBreathing(null);
     }

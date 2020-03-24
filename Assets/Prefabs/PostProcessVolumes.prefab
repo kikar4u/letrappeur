@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5052347034959731182}
   m_Layer: 9
   m_Name: PostProcess-Vigneting
-  m_TagString: Untagged
+  m_TagString: Vignetage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,9 +7,10 @@ public class EventsProvider : MonoBehaviour
 {
     public void LaunchCinematic(VideoClip clip)
     {
-        Fader.Instance.FadeIn();
+        //Fader.Instance.FadeIn();
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
+
         for (int i = 0; i < rac.animationClips.Length; i++)
         {
             if (rac.animationClips[i].name == "FadeIn")
@@ -17,13 +18,46 @@ public class EventsProvider : MonoBehaviour
                 animDuration = rac.animationClips[i].length;
             }
         }
-        StartCoroutine(WaitForFadeIn(animDuration, clip));
+        StartCoroutine(WaitForFadeIn(animDuration, clip, false));
     }
 
-    IEnumerator WaitForFadeIn(float animDuration, VideoClip clip)
+    public void LaunchCinematicWithLoadNewScene(VideoClip clip)
     {
-        yield return new WaitForSeconds(animDuration);
-        CinematicManager.Instance.LaunchCinematic(clip);
-        StopCoroutine(WaitForFadeIn(animDuration, clip));
+        //Fader.Instance.FadeIn();
+        RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
+        float animDuration = 0;
+
+        for (int i = 0; i < rac.animationClips.Length; i++)
+        {
+            if (rac.animationClips[i].name == "FadeIn")
+            {
+                animDuration = rac.animationClips[i].length;
+            }
+        }
+        Debug.Log("currentSceneindex " + SceneManagers.Instance.GetCurrentSceneIndex());
+        Debug.Log("scenes count " + SceneManagers.Instance.GetScenesCount());
+        if (SceneManagers.Instance.GetCurrentSceneIndex() < SceneManagers.Instance.GetScenesCount() - 1)
+            StartCoroutine(WaitForFadeIn(animDuration, clip, true, SceneManagers.Instance.GetCurrentSceneIndex() + 1));
+        else
+        {
+            Debug.Log("No next scene to load");
+        }
     }
+
+    IEnumerator WaitForFadeIn(float animDuration, VideoClip clip, bool loadScene, int sceneToLoad = 0)
+    {
+        //Attend la fin du fade
+        yield return new WaitForSeconds(animDuration);
+
+        //Si on change de scene
+        if (loadScene)
+        {
+            Debug.Log("Start lancement scene :" + sceneToLoad);
+            //Appelle la coroutine qui load asynchronement
+            SceneManagers.Instance.StartCoroutine(SceneManagers.Instance.LoadSceneAsync(sceneToLoad, (float)clip.length));
+        }
+        CinematicManager.Instance.LaunchCinematic(clip);
+
+    }
+
 }
