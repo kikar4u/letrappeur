@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f139b1a9e06d748ac00636d1b17ead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   postProcessVolumesContainer: {fileID: 0}
 --- !u!114 &500744783719465161
 MonoBehaviour:
@@ -148,6 +149,9 @@ MonoBehaviour:
   - nom: BlizzardBreathRelease
     arr_sons:
     - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
+  - nom: CheckpointSound
+    arr_sons:
+    - {fileID: 8300000, guid: 3d79b80eee49b8e4c83b29a94cb07a05, type: 3}
 --- !u!114 &7207323461498237086
 MonoBehaviour:
   m_ObjectHideFlags: 0
