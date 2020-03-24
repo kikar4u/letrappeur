@@ -28631,14 +28631,16 @@ AnimationClip:
   - time: 0.51666665
     functionName: PlayFootstep
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 3415651789423177304, guid: a1e030b06d0d0c04b8673db8139a3aff,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.3666667
     functionName: PlayFootstep
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 3415651789423177304, guid: a1e030b06d0d0c04b8673db8139a3aff,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

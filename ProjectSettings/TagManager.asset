@@ -9,10 +9,10 @@ TagManager:
   - Path
   - BreathingCanvas
   - Fader
-  - SoundManager
   - rock
   - PostProcessVolumes
   - Vignetage
+  - Managers
   layers:
   - Default
   - TransparentFX
