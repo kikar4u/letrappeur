@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: m_Name
-      value: BlizzardBreathing
+      value: BlizzardBreathing Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
