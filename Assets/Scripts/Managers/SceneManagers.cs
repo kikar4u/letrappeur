@@ -86,9 +86,13 @@ public class SceneManagers : MonoBehaviour
     private void PopulateManagers(Scene scene, LoadSceneMode sceneMode)
     {
         //Peuple les différentes variables des managers propres à la scene
-        CinematicManager.Instance.SetVideoPlayer();
-        //CinematicManager.Instance.Populate();
-        BreathingManager.Instance.SetBreathingCanvas();
-        PostProcessManager.Instance.InitializePostProcess();
+        if (CinematicManager.Instance != null)
+            CinematicManager.Instance.SetVideoPlayer();
+
+        if (BreathingManager.Instance != null)
+            BreathingManager.Instance.SetBreathingCanvas();
+
+        if (PostProcessManager.Instance != null)
+            PostProcessManager.Instance.InitializePostProcess();
     }
 }
