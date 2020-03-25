@@ -209,6 +209,11 @@ PrefabInstance:
       propertyPath: vignetingData.periodTime
       value: 3.08
       objectReference: {fileID: 0}
+    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
+        type: 3}
+      propertyPath: vignetingData.stepIntensity
+      value: 0.198
+      objectReference: {fileID: 0}
     - target: {fileID: 4177705398499077745, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5634,7 +5639,7 @@ PrefabInstance:
     - target: {fileID: 5602914057705357522, guid: a1e030b06d0d0c04b8673db8139a3aff,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 15.7
       objectReference: {fileID: 0}
     - target: {fileID: 6869025025596295888, guid: a1e030b06d0d0c04b8673db8139a3aff,
         type: 3}
@@ -6366,7 +6371,7 @@ PrefabInstance:
     - target: {fileID: 3796450523944487966, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6319494423659707549, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
