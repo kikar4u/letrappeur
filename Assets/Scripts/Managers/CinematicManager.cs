@@ -31,7 +31,8 @@ public class CinematicManager : MonoBehaviour
 
     public void LaunchCinematic(VideoClip video)
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = true;
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = true;
         //Lance une vidéo de cinématique
         mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
         mainCamera.clip = video;

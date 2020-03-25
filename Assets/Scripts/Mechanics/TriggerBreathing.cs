@@ -55,7 +55,7 @@ public class TriggerBreathing : MonoBehaviour
 
         if (breathingUnits.Length > 1)
         {
-            vignetingData.currentAverage = (float)(vignetingData.maxIntensity / requiredFailedToLose);
+            vignetingData.currentAverage = vignetingData.initialIntensity;
         }
         else
         {

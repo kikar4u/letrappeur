@@ -34,8 +34,6 @@ public class EventsProvider : MonoBehaviour
                 animDuration = rac.animationClips[i].length;
             }
         }
-        Debug.Log("currentSceneindex " + SceneManagers.Instance.GetCurrentSceneIndex());
-        Debug.Log("scenes count " + SceneManagers.Instance.GetScenesCount());
         if (SceneManagers.Instance.GetCurrentSceneIndex() < SceneManagers.Instance.GetScenesCount() - 1)
             StartCoroutine(WaitForFadeIn(animDuration, clip, true, SceneManagers.Instance.GetCurrentSceneIndex() + 1));
         else
@@ -52,7 +50,6 @@ public class EventsProvider : MonoBehaviour
         //Si on change de scene
         if (loadScene)
         {
-            Debug.Log("Start lancement scene :" + sceneToLoad);
             //Appelle la coroutine qui load asynchronement
             SceneManagers.Instance.StartCoroutine(SceneManagers.Instance.LoadSceneAsync(sceneToLoad, (float)clip.length));
         }

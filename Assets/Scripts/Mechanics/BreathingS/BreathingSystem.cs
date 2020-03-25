@@ -97,6 +97,7 @@ public class BreathingSystem : MonoBehaviour
                     _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
                     break;
             }
+            player.hasMovementControls = true;
         }
         else
         {
@@ -392,11 +393,10 @@ public class BreathingSystem : MonoBehaviour
             }
             counterSuccessTime = 0f;
             PostProcessManager.Instance.SlideVignetingToIntensity(
-                (PostProcessManager.Instance.GetCurrentVignetingData().maxIntensity / requiredFailedToLose)
-                + (PostProcessManager.Instance.GetCurrentVignetingData().maxIntensity * patternFailed / requiredFailedToLose));
+                (PostProcessManager.Instance.GetCurrentVignetingData().initialIntensity)
+                + (PostProcessManager.Instance.GetCurrentVignetingData().stepIntensity * patternFailed));
         }
         Debug.Log("Succeed ? :" + haveSucceeded);
-        player.hasMovementControls = true;
         animator.SetTrigger("Over");
         BreathingManager.Instance.SetCurrentBreathing(null);
     }

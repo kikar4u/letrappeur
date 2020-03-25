@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class Fader : MonoBehaviour
 {
     Animator fadeAnimator;
-    Player player;
+    //Player player;
 
     public delegate void FadeOutDelegate();
 
@@ -31,12 +32,13 @@ public class Fader : MonoBehaviour
             Destroy(gameObject);
         }
 
+        GetComponent<Image>().color = new Color(1, 1, 1, 1);
     }
 
     private void Start()
     {
         fadeAnimator = GameObject.FindGameObjectWithTag("Fader").GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     public Animator GetAnimator()
