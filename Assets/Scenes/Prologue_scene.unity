@@ -187,7 +187,7 @@ PrefabInstance:
     - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}
       propertyPath: requiredFailedToLose
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}

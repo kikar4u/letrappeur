@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: m_Name
-      value: CavernBreathing
+      value: CavernBreathing Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -87,6 +92,46 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingUnits.Array.data[2].percentSuccessNeeded
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: requiredFailedToLose
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: vignetingData.maxIntensity
+      value: 0.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: vignetingData.offset
+      value: 0.0623
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: vignetingData.periodTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: doCameraShake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: shakeIntensity
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: vignetingData.initialIntensity
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: vignetingData.stepIntensity
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384459, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
