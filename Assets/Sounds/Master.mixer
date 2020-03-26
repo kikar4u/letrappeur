@@ -222,28 +222,20 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters:
-  - guid: 7fac4080afd94e447bd74d1a1de423e8
-    name: Ambiance
-  - guid: 4dc8626cf7260144cbeeca0b2c3784f2
-    name: Master
-  - guid: 6cdee2965ec75f6419abaa987de2458b
-    name: Musique
-  - guid: dfd9e05acafd1b946b8253b4c7e6d8e8
-    name: SFX
+  m_ExposedParameters: []
   m_AudioMixerGroupViews:
   - guids:
     - 14b69b2a057bec840b8b5a83bd37cf6d
-    - a34cd2ea3d1318d4b8a153308207eb08
     - 58ea7a9177ab9244ba247bf5b1ffbb64
-    - eea8997dd8fd92b41a4aa92053591b51
+    - a34cd2ea3d1318d4b8a153308207eb08
     - ccd7fea5ddf9abd4482526ac92c7a50b
+    - e6515903d7ce3594893cc2815a1b01a4
+    - eea8997dd8fd92b41a4aa92053591b51
     - 32c75b45de9fe4a4b9f7e95040a8a10c
     - 706f16c6603284643844d26cbffe127b
     - e50ed61e95daab34eb6374cd517ee6ba
     - 310f7fa7b6fe5bd4d9ee7ab955594636
     - c69c52886f7b34c46be0985cfd8f6134
-    - e6515903d7ce3594893cc2815a1b01a4
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -294,13 +286,11 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 9ceb4a8913b7d0c4fb148761424b9ea9
   m_FloatValues:
-    7fac4080afd94e447bd74d1a1de423e8: -1.03
     4899fcd0cf4ee134dbf152f64a6ad92c: 1
     2d41ba3456edc424684759c2a4fabccc: -4.9356413
     6cdee2965ec75f6419abaa987de2458b: -0.002441872
     b0b0b60b42cdc5c4d9aeb0fd657a06b1: -0.16685188
-    5a7e943c5868117448780c97d6b4d06d: -0.002441872
-    4dc8626cf7260144cbeeca0b2c3784f2: 0.04171297
+    5a7e943c5868117448780c97d6b4d06d: 0.23288241
     c578640dfd1154946b857124998d80a9: 1.4800004
     dff59f5ef4e3eb9458ddfa1170a3c216: 0.7520715
     a095ac6f5d290f64f8d1cb2a27ebdff8: 25.160225
@@ -412,7 +402,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 4653137772942406834}
-  m_UserColorIndex: 1
+  m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
