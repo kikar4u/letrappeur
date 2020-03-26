@@ -223,6 +223,7 @@ public class BreathingSystem : MonoBehaviour
 
     private void RelativeBreathing(float leftTriggerInput, float rightTriggerInput)
     {
+
         if (currentBreathing != null)
         {
             float inputsAverage = leftTriggerInput / 2 + rightTriggerInput / 2;
@@ -233,6 +234,10 @@ public class BreathingSystem : MonoBehaviour
                 Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
                 0f);
             breathingCirclesData.playerCircleTransform.localScale = scale;
+
+            //Particles du cercle le suivant
+            //breathingCirclesData.particles.transform.localScale = breathingCirclesData.playerCircle.transform.localScale * GameObject.FindGameObjectWithTag("BreathingCanvas").transform.localScale.x;
+
         }
     }
 
@@ -282,8 +287,8 @@ public class BreathingSystem : MonoBehaviour
     protected virtual bool CheckCircleInBounds()
     {
         //Si le cercle du player est dans le cercle de l'outer
-        if (breathingCirclesData.outerMarginCollider.bounds.Contains(new Vector3(breathingCirclesData.playerBreathCollider.bounds.max.x, breathingCirclesData.playerBreathCollider.bounds.center.y, 0f))
-                && !breathingCirclesData.innerMarginCollider.bounds.Contains(new Vector3(breathingCirclesData.playerBreathCollider.bounds.max.x, breathingCirclesData.playerBreathCollider.bounds.center.y, 0f)))
+        if (breathingCirclesData.outerMarginCollider.bounds.Contains(new Vector3(breathingCirclesData.playerBreathCollider.bounds.max.x, breathingCirclesData.playerBreathCollider.bounds.center.y, breathingCirclesData.playerBreathCollider.bounds.max.z))
+        && !breathingCirclesData.innerMarginCollider.bounds.Contains(new Vector3(breathingCirclesData.playerBreathCollider.bounds.max.x, breathingCirclesData.playerBreathCollider.bounds.center.y, breathingCirclesData.playerBreathCollider.bounds.max.z)))
         {
             if (canWalkDuringBreathing)
             {
@@ -368,6 +373,11 @@ public class BreathingSystem : MonoBehaviour
                 if (patternFailed > 0)
                 {
                     patternFailed--;
+                }
+                if (i != breathingUnits.Length - 1)
+                {
+                    breathingCirclesData.particles.transform.localScale = breathingCirclesData.playerCircle.transform.localScale * GameObject.FindGameObjectWithTag("BreathingCanvas").transform.localScale.x;
+                    breathingCirclesData.particles.Play();
                 }
                 if (i == breathingUnits.Length - 1)
                 {
