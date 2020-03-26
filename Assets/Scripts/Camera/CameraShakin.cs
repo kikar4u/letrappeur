@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraShakin : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class CameraShakin : MonoBehaviour
     private bool continuousShake;
     private bool fadingShake;
 
+    public bool alwaysShake;
+
     [Range(0f, 1f)]
     public float fadeShakeFrequence;
-    [Range(0f, 1f)]
+    [Range(0f, 10f)]
     public float shakeSmoothness;
     Vector3 newPos;
 
@@ -29,9 +32,25 @@ public class CameraShakin : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (alwaysShake)
+        {
+            StartCoroutine(SmoothShake(shakeSmoothness, fadeShakeFrequence));
+        }
+    }
+
     void OnEnable()
     {
         continuousShake = false;
+    }
+
+    private void Update()
+    {
+        if (continuousShake || fadingShake)
+        {
+            camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
+        }
     }
 
     public void Shake(float duration, float intensity, float decreaseFactor)
@@ -77,25 +96,19 @@ public class CameraShakin : MonoBehaviour
         StopCoroutine(ShakeContinue(intensity));
     }
 
-    private void Update()
+    IEnumerator SmoothShake(float frequency, float intensity)
     {
-        if (continuousShake || fadingShake)
-        {
-            camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
-        }
-    }
+        Vector3 initialPos = transform.position;
+        newPos = Random.insideUnitSphere * shakeSmoothness + initialPos;
 
-    public IEnumerator FadeShake(float factor)
-    {
-        continuousShake = false;
-        float lerpV = 0f;
-        //while (lerpV <= 1)
-        //{
-        //    Debug.Log(Vector3.Lerp(camTransform.localPosition, camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition(), lerpV));
-        //    lerpV += factor;
-        //    camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition(), lerpV);
-        yield return new WaitForSeconds(shakeSmoothness);
-        //}
+        while (true)
+        {
+            newPos = Random.insideUnitSphere * intensity + initialPos;
+            transform.DOMove(newPos, frequency).SetEase(Ease.InOutCubic);
+            yield return new WaitForSeconds(frequency);
+            transform.DOMove(initialPos, frequency).SetEase(Ease.InOutCubic);
+            yield return new WaitForSeconds(frequency);
+        }
     }
 
     public bool GetContinuousShake()

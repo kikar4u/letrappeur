@@ -19,6 +19,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider SFX;
     [SerializeField] Slider masterMix;
     [SerializeField] AudioMixer mixer;
+
+    [Tooltip("Mettez-y toutes les audiosources du menu")]
+    [SerializeField] AudioSource[] sources;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -27,7 +30,7 @@ public class MenuManager : MonoBehaviour
 
         for (int i = 0; i < QualitySettings.names.Length; i++)
         {
-            
+
             Debug.Log(QualitySettings.names.Length);
             settings.Add(QualitySettings.names[i]);
             leDicoDesSettings.Add(i, QualitySettings.names[i]);
@@ -66,9 +69,17 @@ public class MenuManager : MonoBehaviour
                 Music.value = musicValue;
                 Debug.Log("caca prout" + musicValue);
             }
+
         }
-       
+        Fader.Instance.fadeOutDelegate += FadeSounds;
+
     }
+
+    private void FadeSounds()
+    {
+        _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
+    }
+
     public void changeSlider(Slider slider)
     {
         //Debug.Log(mixer);
@@ -100,7 +111,7 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void ExitGame()
     {

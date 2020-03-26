@@ -36,18 +36,18 @@ public class SceneManagers : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
-    public void LoadSceneAsync(string sceneName)
-    {
-        //Scene sceneToLoad = SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
-        //Debug.Log("load la scene :" + sceneToLoad.name + " qui a pour index : " + sceneToLoad.buildIndex);
-        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName(sceneName).buildIndex);
-        while (!asyncLoadScene.isDone)
-            Debug.Log(asyncLoadScene.progress);
-    }
+    //public void LoadSceneAsync(string sceneName)
+    //{
+    //    //Scene sceneToLoad = SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
+    //    //Debug.Log("load la scene :" + sceneToLoad.name + " qui a pour index : " + sceneToLoad.buildIndex);
+    //    AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName(sceneName).buildIndex);
+    //    while (!asyncLoadScene.isDone)
+    //        Debug.Log(asyncLoadScene.progress);
+    //}
 
     public IEnumerator LoadSceneAsync(int sceneIndex, float timeToWait)
     {
-        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(2);
+        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(sceneIndex);
         asyncLoadScene.allowSceneActivation = false;
         yield return new WaitForSeconds(timeToWait);
         asyncLoadScene.allowSceneActivation = true;
@@ -75,6 +75,7 @@ public class SceneManagers : MonoBehaviour
 
     public int GetCurrentSceneIndex()
     {
+        Debug.Log("Current scene index : " + SceneManager.GetActiveScene().buildIndex);
         return SceneManager.GetActiveScene().buildIndex;
     }
 

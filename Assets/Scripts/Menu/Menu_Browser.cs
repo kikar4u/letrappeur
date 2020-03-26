@@ -4,15 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public class Menu_Browser : MonoBehaviour
+public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] Button[] menuButtons;
     [SerializeField] UnityEvent playEvents;
     [SerializeField] Canvas mainCanvas;
 
+    bool nothingSelected;
+
     void Start()
     {
+        nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
         Fader.Instance.fadeOutDelegate += playEvents.Invoke;
         Fader.Instance.fadeOutDelegate += HideCanvas;
@@ -25,4 +29,37 @@ public class Menu_Browser : MonoBehaviour
         mainCanvas.gameObject.SetActive(false);
     }
 
+    public void HoverDeselect()
+    {
+        Debug.Log("HoverDeselect");
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    public void SetNothingSelected(bool noButtonsSelected)
+    {
+        nothingSelected = noButtonsSelected;
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void Update()
+    {
+        if (nothingSelected)
+        {
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                menuButtons[menuButtons.Length - 1].Select();
+                nothingSelected = false;
+            }
+            else if (Input.GetAxisRaw("Vertical") < 0)
+            {
+                menuButtons[0].Select();
+                nothingSelected = false;
+            }
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        nothingSelected = true;
+    }
 }
