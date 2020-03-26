@@ -5,6 +5,8 @@ using UnityEngine;
 public class DestroyableTree : MonoBehaviour
 {
     Animator animator;
+    [SerializeField] AudioClip audioclip;
+    [SerializeField] AudioSource audiosource;
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class DestroyableTree : MonoBehaviour
     public void TriggerAnimation(string name)
     {
         animator.SetTrigger(name);
+        GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().PlaySpecificSound(audioclip, audiosource);
     }
 
     public void SetNewLayer(string layerName)
