@@ -3064,7 +3064,7 @@ PrefabInstance:
     - target: {fileID: 5052347035170500862, guid: d2ef864e049e92d4cb6b72c8d2285756,
         type: 3}
       propertyPath: isGlobal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5052347035170500862, guid: d2ef864e049e92d4cb6b72c8d2285756,
         type: 3}
@@ -3796,6 +3796,10 @@ MonoBehaviour:
   - {fileID: 1743733513}
   - {fileID: 7890056}
   - {fileID: 2077186770}
+  playEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  mainCanvas: {fileID: 0}
 --- !u!1001 &1168558377
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4579,6 +4583,10 @@ MonoBehaviour:
   - {fileID: 503115540}
   - {fileID: 403864560}
   - {fileID: 1719295570}
+  playEvents:
+    m_PersistentCalls:
+      m_Calls: []
+  mainCanvas: {fileID: 0}
 --- !u!114 &1284289374
 MonoBehaviour:
   m_ObjectHideFlags: 0

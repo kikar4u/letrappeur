@@ -6,18 +6,20 @@ using UnityEngine.UI;
 
 public class BreathingCirclesData : MonoBehaviour
 {
-    // cercle player
-    public Image playerCircle;
+
+    public GameObject playerCircle;
     public RectTransform playerCircleTransform;
     // cercle avatar
     public GameObject donutCircle;
     public RectTransform outerCircleTransform;
 
+    public ParticleSystem particles;
+
     #region Collider
     [Header("Colliders")]
-    public Collider2D outerMarginCollider;
-    public Collider2D innerMarginCollider;
-    public Collider2D playerBreathCollider;
+    public Collider outerMarginCollider;
+    public Collider innerMarginCollider;
+    public Collider playerBreathCollider;
     #endregion
 
     #region Stutter

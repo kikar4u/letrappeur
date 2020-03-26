@@ -145,7 +145,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
   - nom: FailedBreath
     arr_sons:
-    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+    - {fileID: 8300000, guid: 16ea063041442a8448b6f2df88fbf449, type: 3}
   - nom: BlizzardBreathRelease
     arr_sons:
     - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
@@ -156,6 +156,26 @@ MonoBehaviour:
     arr_sons:
     - {fileID: 8300000, guid: f49d65c8652206d4aa76ae6e27e1ff37, type: 3}
     - {fileID: 8300000, guid: e855baa34fe98d04d90afa7898a8f9ea, type: 3}
+  - nom: FootStepWood
+    arr_sons:
+    - {fileID: 8300000, guid: adeaf2935755874459f502f7e047e026, type: 3}
+    - {fileID: 8300000, guid: 17f65c7989ce6734e9b526bda74b2107, type: 3}
+    - {fileID: 8300000, guid: 8cc2c03f930b00e41acb21c1597969a9, type: 3}
+    - {fileID: 8300000, guid: 124401ca03dd29b49be84994ed5a4b91, type: 3}
+  - nom: CrackleWood
+    arr_sons:
+    - {fileID: 8300000, guid: f53b58d989b4ad447a2a62670632b618, type: 3}
+    - {fileID: 8300000, guid: 7fbba91260563ec41b28e0d305e7f697, type: 3}
+    - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
+  - nom: AxeHit
+    arr_sons:
+    - {fileID: 8300000, guid: f53b58d989b4ad447a2a62670632b618, type: 3}
+    - {fileID: 8300000, guid: 7fbba91260563ec41b28e0d305e7f697, type: 3}
+    - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
+    - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
+  - nom: Victory
+    arr_sons:
+    - {fileID: 8300000, guid: 2cd2c007784ba054fa72a7686fcb58a0, type: 3}
 --- !u!114 &7207323461498237086
 MonoBehaviour:
   m_ObjectHideFlags: 0

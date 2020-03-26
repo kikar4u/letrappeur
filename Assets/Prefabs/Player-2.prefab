@@ -799,8 +799,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   trapperAnim: {fileID: 0}
   raycastController: {fileID: 0}
-  audioSource: {fileID: 0}
-  speed: 2
+  audioSource: {fileID: 1327825717873524077}
+  audioSourceOtherFX: {fileID: 2345659264511275070}
+  speed: 1.2
   gravity: 20
   canMove: 0
   inCinematic: 0
@@ -903,7 +904,7 @@ MonoBehaviour:
   DirectionalLight: {fileID: 0}
   player: {fileID: 5602914057705357522}
   ratioLight: 0.05
-  dayAtTheBeginning: 0
+  dayAtTheBeginning: 10
   dayAtTheEnd: 90
   luminosityAtTheBeginning: 5
   luminosityAtTheEnd: 25
