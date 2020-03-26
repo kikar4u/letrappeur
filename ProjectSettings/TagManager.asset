@@ -13,6 +13,7 @@ TagManager:
   - PostProcessVolumes
   - Vignetage
   - Managers
+  - Wood
   layers:
   - Default
   - TransparentFX
