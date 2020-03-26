@@ -218,6 +218,7 @@ MonoBehaviour:
   playerCircleTransform: {fileID: 6916668122184981540}
   donutCircle: {fileID: 6916668122539744609}
   outerCircleTransform: {fileID: 6916668122539744614}
+  particles: {fileID: 0}
   outerMarginCollider: {fileID: 6916668122453887600}
   innerMarginCollider: {fileID: 6916668121396146560}
   playerBreathCollider: {fileID: 6916668122184981979}
@@ -426,8 +427,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.29196337, g: 0.7552689, b: 0.764151, a: 1}
-      key1: {r: 0.21808916, g: 0.8113208, b: 0.16456035, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.9386792, g: 1, b: 0.9909155, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -3221,12 +3221,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2417246019932373528, guid: 233e15aef50399444b3f9a0c4531277e,
-        type: 3}
-      propertyPath: breathingPrefab
-      value: 
-      objectReference: {fileID: 6508800210739816989, guid: 98bcb9051e092dd4ab988a22e62ff9b4,
-        type: 3}
     - target: {fileID: 2417246019932373531, guid: 233e15aef50399444b3f9a0c4531277e,
         type: 3}
       propertyPath: m_LocalPosition.x
