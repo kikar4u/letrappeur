@@ -32,34 +32,42 @@ public class MenuManager : MonoBehaviour
             settings.Add(QualitySettings.names[i]);
             leDicoDesSettings.Add(i, QualitySettings.names[i]);
         }
-        graphics.AddOptions(settings);
+        if (graphics != null)
+        {
+            graphics.AddOptions(settings);
+        }
+
     }
     private void Start()
     {
-        float masterValue;
-        if (mixer.GetFloat("Master", out masterValue))
+        if (masterMix != null)
         {
-            masterMix.value = masterValue;
-            Debug.Log("caca prout" + masterValue);
+            float masterValue;
+            if (mixer.GetFloat("Master", out masterValue))
+            {
+                masterMix.value = masterValue;
+                Debug.Log("caca prout" + masterValue);
+            }
+            float AmbianceValue;
+            if (mixer.GetFloat("Ambiance", out AmbianceValue))
+            {
+                AmbientVolume.value = AmbianceValue;
+                Debug.Log("caca prout" + AmbianceValue);
+            }
+            float SFXValue;
+            if (mixer.GetFloat("SFX", out SFXValue))
+            {
+                SFX.value = SFXValue;
+                Debug.Log("caca prout" + SFXValue);
+            }
+            float musicValue;
+            if (mixer.GetFloat("Musique", out musicValue))
+            {
+                Music.value = musicValue;
+                Debug.Log("caca prout" + musicValue);
+            }
         }
-        float AmbianceValue;
-        if (mixer.GetFloat("Ambiance", out AmbianceValue))
-        {
-            AmbientVolume.value = AmbianceValue;
-            Debug.Log("caca prout" + AmbianceValue);
-        }
-        float SFXValue;
-        if (mixer.GetFloat("SFX", out SFXValue))
-        {
-            SFX.value = SFXValue;
-            Debug.Log("caca prout" + SFXValue);
-        }
-        float musicValue;
-        if (mixer.GetFloat("Musique", out musicValue))
-        {
-            Music.value = musicValue;
-            Debug.Log("caca prout" + musicValue);
-        }
+       
     }
     public void changeSlider(Slider slider)
     {

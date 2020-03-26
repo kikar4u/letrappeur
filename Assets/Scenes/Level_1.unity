@@ -7048,10 +7048,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     - target: {fileID: 4118570343382581461, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
@@ -15257,10 +15267,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     - target: {fileID: 4118570343382581461, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
@@ -19303,10 +19323,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364210953405337423, guid: f5da0af656481764485f8cae2e79dd00,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wood
       objectReference: {fileID: 0}
     - target: {fileID: 4118570343382581461, guid: f5da0af656481764485f8cae2e79dd00,
         type: 3}
@@ -24506,7 +24536,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
+  m_BoundingSphereOverride: {x: 2.6615e-41, y: 1.02e-43, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -36480,8 +36510,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103933258}
-  m_LocalRotation: {x: 0.041338038, y: -0.051832017, z: -0.0019371842, w: -0.997798}
-  m_LocalPosition: {x: 146.11249, y: 9.244406, z: -6.819918}
+  m_LocalRotation: {x: 0.1915675, y: 0.085268475, z: 0.016708447, w: -0.9776257}
+  m_LocalPosition: {x: 124.32452, y: 7.550644, z: -6.060684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
