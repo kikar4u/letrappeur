@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
     [HideInInspector] public InteractionRaycast raycastController;
-    [HideInInspector] public AudioSource audioSource;
+    public  AudioSource audioSource;
+    [SerializeField]  AudioSource audioSourceOtherFX;
     #endregion
 
     #region Movements
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
         terrainMask = LayerMask.GetMask("Ground");
-        audioSource = GetComponent<AudioSource>();
+        
         #endregion
 
         //Initialisation des informations des waypoints
@@ -134,14 +135,33 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask) && hit.transform.tag == "rock")
         {
             GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                PlaySound("FootStepRock", GetComponent<AudioSource>());
+                PlaySound("FootStepRock", audioSource);
+        }
+        if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask) && hit.transform.tag == "Wood")
+        {
+            GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
+                PlaySound("FootStepWood", audioSource);
+            //Debug.Log("Im in there fuckers");
+            if (UnityEngine.Random.Range(0, 4) == 1)
+            {
+                GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
+                    PlaySound("CrackleWood", audioSourceOtherFX);
+            }
+
         }
         else
         {
             GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                PlaySound("FootStepSnow", GetComponent<AudioSource>());
+                PlaySound("FootStepSnow", audioSource);
         }
 
+    }
+    public void EquipAxe(AudioClip _clip)
+    {
+        
+        Debug.Log("I'm here fuckers");
+            _MGR_SoundDesign.Instance.
+                PlaySpecificSound(_clip,audioSourceOtherFX);
     }
     private float CalculateSpeedOnCurve(float _speed)
     {
