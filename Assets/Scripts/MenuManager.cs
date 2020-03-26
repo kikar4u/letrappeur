@@ -19,7 +19,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider SFX;
     [SerializeField] Slider masterMix;
     [SerializeField] AudioMixer mixer;
-
     [Tooltip("Mettez-y toutes les audiosources du menu")]
     [SerializeField] AudioSource[] sources;
     // Start is called before the first frame update
@@ -69,17 +68,14 @@ public class MenuManager : MonoBehaviour
                 Music.value = musicValue;
                 Debug.Log("caca prout" + musicValue);
             }
-
         }
         Fader.Instance.fadeOutDelegate += FadeSounds;
 
     }
-
     private void FadeSounds()
     {
         _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
     }
-
     public void changeSlider(Slider slider)
     {
         //Debug.Log(mixer);
