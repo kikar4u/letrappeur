@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class _MGR_SoundDesign : MonoBehaviour
 {
@@ -63,13 +64,24 @@ public class _MGR_SoundDesign : MonoBehaviour
     //Joue un son spécifique
     public void PlaySpecificSound(AudioClip _clip, AudioSource audiosource)
     {
-        audiosource.clip = _clip;
-        audiosource.Play();
+        if (audiosource.clip != _clip)
+        {
+            audiosource.clip = _clip;
+            audiosource.Play();
+        }
     }
 
     public AudioClip GetSpecificClip(string name)
     {
         return p_sons[name][0];
+    }
+
+    public void FadeOutSounds(AudioSource[] sources, float fadeTime)
+    {
+        for (int i = 0; i < sources.Length; i++)
+        {
+            sources[i].DOFade(0, fadeTime);
+        }
     }
 
     //public void PlayMusic(AudioClip audio, GameObject source, float volume)
