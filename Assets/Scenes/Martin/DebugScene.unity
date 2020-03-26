@@ -224,35 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8543348998862257325, guid: dd65216f1d9424344b95af6a55e932d8,
-        type: 3}
-      propertyPath: vignetingData.initialIntensity
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543348998862257325, guid: dd65216f1d9424344b95af6a55e932d8,
-        type: 3}
-      propertyPath: vignetingData.stepIntensity
-      value: 0.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543348998862257325, guid: dd65216f1d9424344b95af6a55e932d8,
-        type: 3}
-      propertyPath: doCameraShake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543348998862257325, guid: dd65216f1d9424344b95af6a55e932d8,
-        type: 3}
-      propertyPath: shakeIntensity
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8543348998862257327, guid: dd65216f1d9424344b95af6a55e932d8,
         type: 3}
       propertyPath: m_Name
       value: CavernBreathing Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 8543348998862257327, guid: dd65216f1d9424344b95af6a55e932d8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd65216f1d9424344b95af6a55e932d8, type: 3}
@@ -2877,26 +2852,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlizzardBreathing Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 3516599206686743154, guid: c16e21a2a6e205b4688d8a1c62141da6,
-        type: 3}
-      propertyPath: doCameraShake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516599206686743154, guid: c16e21a2a6e205b4688d8a1c62141da6,
-        type: 3}
-      propertyPath: shakeIntensity
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516599206686743154, guid: c16e21a2a6e205b4688d8a1c62141da6,
-        type: 3}
-      propertyPath: vignetingData.initialIntensity
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 3516599206686743154, guid: c16e21a2a6e205b4688d8a1c62141da6,
-        type: 3}
-      propertyPath: vignetingData.stepIntensity
-      value: 0.11
-      objectReference: {fileID: 0}
     - target: {fileID: 3516599206686743155, guid: c16e21a2a6e205b4688d8a1c62141da6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3020,16 +2975,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2679060309414722483, guid: 53c633eeecf3ce542b2f579a05a874c7,
-        type: 3}
-      propertyPath: vignetingData.initialIntensity
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 2679060309414722483, guid: 53c633eeecf3ce542b2f579a05a874c7,
-        type: 3}
-      propertyPath: vignetingData.stepIntensity
-      value: 0.11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53c633eeecf3ce542b2f579a05a874c7, type: 3}
@@ -3518,16 +3463,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 32063318}
     m_Modifications:
-    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
-        type: 3}
-      propertyPath: vignetingData.initialIntensity
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 4177705398499077744, guid: 023a9dc76fc105a42bce070ef4e2328d,
-        type: 3}
-      propertyPath: vignetingData.stepIntensity
-      value: 0.11
-      objectReference: {fileID: 0}
     - target: {fileID: 4177705398499077745, guid: 023a9dc76fc105a42bce070ef4e2328d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3587,11 +3522,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TutorielBreathing Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 4177705398499077746, guid: 023a9dc76fc105a42bce070ef4e2328d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 023a9dc76fc105a42bce070ef4e2328d, type: 3}
