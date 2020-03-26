@@ -8,6 +8,7 @@ public class InteractionRaycast : MonoBehaviour
     LayerMask layer_Mask;
     Vector3 obstacle;
     Player player;
+    
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class InteractionRaycast : MonoBehaviour
             {
                 obstacle = hit.collider.gameObject.transform.position;
                 GetComponent<Player>().trapperAnim.SetAnimState(AnimState.CLIMB);
+                GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().PlaySound("OverPassObstacle", GetComponent<AudioSource>());
                 player.trapperAnim.SetCurrentInteractiveObject(hit.collider.gameObject.GetComponent<InteractiveObject>());
                 Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             }
