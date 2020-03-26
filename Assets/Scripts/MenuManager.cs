@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Linq;
+using TMPro;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
-<<<<<<< HEAD
     Dictionary<int, string> leDicoDesSettings = new Dictionary<int, string>();
     List<string> settings = new List<string>();
     [SerializeField] TMP_Dropdown graphics;
@@ -17,7 +20,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] Slider masterMix;
     [SerializeField] AudioMixer mixer;
 
-    [Tooltip("Mettez tous les sons dans ce tableau pour fade leur volume lors de la cinématique :)")]
+    [Tooltip("Mettez-y toutes les audiosources du menu")]
     [SerializeField] AudioSource[] sources;
     // Start is called before the first frame update
     private void Awake()
@@ -66,12 +69,13 @@ public class MenuManager : MonoBehaviour
                 Music.value = musicValue;
                 Debug.Log("caca prout" + musicValue);
             }
-        }
 
-        Fader.Instance.fadeOutDelegate += FadeOutSounds;
+        }
+        Fader.Instance.fadeOutDelegate += FadeSounds;
+
     }
 
-    private void FadeOutSounds()
+    private void FadeSounds()
     {
         _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
     }
@@ -99,26 +103,16 @@ public class MenuManager : MonoBehaviour
         }
     }
     public void ChangeGraphicSettings()
-=======
-    // Start is called before the first frame update
-    void Start()
->>>>>>> 3bbff2783a5366910e20663662eb353446b85a40
     {
-        
+        QualitySettings.SetQualityLevel(graphics.value, true);
+        Debug.Log("Current : " + QualitySettings.GetQualityLevel());
     }
 
-<<<<<<< HEAD
-=======
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    public void Options()
-    {
 
     }
->>>>>>> 3bbff2783a5366910e20663662eb353446b85a40
     public void ExitGame()
     {
         Application.Quit();
