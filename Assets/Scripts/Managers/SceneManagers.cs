@@ -75,7 +75,7 @@ public class SceneManagers : MonoBehaviour
 
     public int GetCurrentSceneIndex()
     {
-        Debug.Log("Current scene index : " + SceneManager.GetActiveScene().buildIndex);
+        //Debug.Log("Current scene index : " + SceneManager.GetActiveScene().buildIndex);
         return SceneManager.GetActiveScene().buildIndex;
     }
 

@@ -369,7 +369,7 @@ public class BreathingSystem : MonoBehaviour
             if (CheckPatternSuccess(counterSuccessTime))
             {
                 //On a réussi
-                Debug.Log("success");
+                //Debug.Log("success");
                 if (patternFailed > 0)
                 {
                     patternFailed--;
@@ -387,7 +387,7 @@ public class BreathingSystem : MonoBehaviour
             else
             {
                 //On s'est fail
-                Debug.Log("Pattern raté");
+                //Debug.Log("Pattern raté");
                 patternFailed++;
                 if (patternFailed == requiredFailedToLose)
                 {
@@ -406,7 +406,7 @@ public class BreathingSystem : MonoBehaviour
                 (PostProcessManager.Instance.GetCurrentVignetingData().initialIntensity)
                 + (PostProcessManager.Instance.GetCurrentVignetingData().stepIntensity * patternFailed));
         }
-        Debug.Log("Succeed ? :" + haveSucceeded);
+        //Debug.Log("Succeed ? :" + haveSucceeded);
         animator.SetTrigger("Over");
         BreathingManager.Instance.SetCurrentBreathing(null);
     }

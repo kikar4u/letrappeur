@@ -23,6 +23,22 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
         menuButtons[0].Select();
     }
+    private void OnEnable()
+    {
+        for (int i = 0; i < menuButtons.Length; i++)
+        {
+            if (menuButtons[i].gameObject.tag == "Options")
+            {
+                menuButtons[i].onClick.RemoveAllListeners();
+                menuButtons[i].onClick.AddListener(CallLoadScene);
+            }
+        }
+    }
+
+    private void CallLoadScene()
+    {
+        SceneManagers.Instance.LoadScene("MenuAlternatif");
+    }
 
     private void HideCanvas()
     {
@@ -31,7 +47,6 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
     public void HoverDeselect()
     {
-        Debug.Log("HoverDeselect");
         EventSystem.current.SetSelectedGameObject(null);
     }
 
@@ -62,4 +77,6 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     {
         nothingSelected = true;
     }
+
+
 }

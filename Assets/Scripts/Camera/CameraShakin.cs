@@ -80,7 +80,6 @@ public class CameraShakin : MonoBehaviour
     {
         while (GetContinuousShake())
         {
-            Debug.Log("Dans shakecontinue :" + GetContinuousShake());
             newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition() + Random.insideUnitSphere * intensity;
 
             yield return new WaitForSeconds(fadeShakeFrequence);

@@ -74,7 +74,7 @@ public class PostProcessManager : MonoBehaviour
         }
         startIntensity = vigneting.intensity.value;
         lerpValue = 0f;
-        Debug.Log("Stopvigneting");
+        //Debug.Log("Stopvigneting");
         while (lerpValue < 1f)
         {
             vigneting.intensity.value = Mathf.Lerp(startIntensity, 0f, lerpValue);

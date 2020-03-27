@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         characterController = GetComponent<CharacterController>();
         terrainMask = LayerMask.GetMask("Ground");
-        Debug.Log(animator.gameObject);
 
         #endregion
 
