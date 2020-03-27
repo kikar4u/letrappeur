@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 823288928943504678}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16, y: 16, z: 16}
+  m_LocalScale: {x: 20, y: 20.000011, z: 20}
   m_Children:
   - {fileID: 3106012558746243129}
   m_Father: {fileID: 0}
@@ -285,8 +285,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.005
-      minScalar: 1
+      scalar: 0.01
+      minScalar: 0.03
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4710,7 +4710,11 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< HEAD
+  - {fileID: 2100000, guid: 25c17439235418d458b3da9f0809b979, type: 2}
+=======
   - {fileID: 2100000, guid: 98a1d1c1a0fb9e545b16b0717b10d90d, type: 2}
+>>>>>>> debug
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4842,6 +4846,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a1b0c5ca87e98ac49a5a6e6e169413e5, type: 2}
+    - target: {fileID: 3061514662589243326, guid: 0bab16feb410d944da63f978321b34f7,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bab16feb410d944da63f978321b34f7, type: 3}
 --- !u!4 &3106012558746243129 stripped

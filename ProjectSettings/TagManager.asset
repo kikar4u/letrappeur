@@ -14,6 +14,7 @@ TagManager:
   - Vignetage
   - Managers
   - Wood
+  - UI
   layers:
   - Default
   - TransparentFX
