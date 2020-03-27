@@ -24,6 +24,7 @@ public class InteractionRaycast : MonoBehaviour
         {
             if (Physics.Raycast(player.transform.position, (player.nextMoveDirection - player.transform.position), out hit, 0.5f, layer_Mask))
             {
+                Debug.Log("HIT : " + hit);
                 player.blocked = true;
             }
             else

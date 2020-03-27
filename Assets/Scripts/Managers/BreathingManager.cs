@@ -44,7 +44,11 @@ public class BreathingManager : MonoBehaviour
     public void SetBreathingCanvas()
     {
         if (breathingCanvas == null)
+        {
             breathingCanvas = GameObject.FindGameObjectWithTag("BreathingCanvas");
+            breathingCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+            breathingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+        }
     }
 
     public void SetCurrentBreathing(BreathingSystem breathingSystem)

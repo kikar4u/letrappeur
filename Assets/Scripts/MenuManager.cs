@@ -24,8 +24,6 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
 
-
-
         for (int i = 0; i < QualitySettings.names.Length; i++)
         {
 
@@ -37,44 +35,36 @@ public class MenuManager : MonoBehaviour
         {
             graphics.AddOptions(settings);
         }
-         if (masterMix != null)
+        if (masterMix != null)
         {
             float masterValue;
             if (mixer.GetFloat("Master", out masterValue))
             {
                 masterMix.value = masterValue;
-                Debug.Log("caca prout" + masterValue);
-                Debug.Log("PUTAIN DE MERDE COUILLE");
             }
             float AmbianceValue;
             if (mixer.GetFloat("Ambiance", out AmbianceValue))
             {
                 AmbientVolume.value = AmbianceValue;
-                Debug.Log("caca prout" + AmbianceValue);
             }
             float SFXValue;
             if (mixer.GetFloat("SFX", out SFXValue))
             {
                 SFX.value = SFXValue;
-                Debug.Log("caca prout" + SFXValue);
             }
             float musicValue;
             if (mixer.GetFloat("Musique", out musicValue))
             {
                 Music.value = musicValue;
-                Debug.Log("caca prout" + musicValue);
             }
 
         }
 
-
-
-       
     }
     private void Start()
     {
 
-       
+        Fader.Instance.fadeOutDelegate += FadeSounds;
 
     }
     private void FadeSounds()

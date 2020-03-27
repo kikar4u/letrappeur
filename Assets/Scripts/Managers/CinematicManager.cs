@@ -37,6 +37,15 @@ public class CinematicManager : MonoBehaviour
         mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
         mainCamera.clip = video;
         mainCamera.Play();
+        CursorHandler.Instance.SetCursorVisibility(false);
+
+        AudioSource[] sources = new AudioSource[GameObject.FindObjectsOfType<AudioSource>().Length];
+        for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
+        {
+            if (FindObjectsOfType<AudioSource>()[i].isPlaying)
+                sources[i] = FindObjectsOfType<AudioSource>()[i];
+        }
+        _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
         postProcessVolumesContainer.SetActive(false);
         StartCoroutine(CheckCinematic(video.length));
     }
@@ -49,7 +58,8 @@ public class CinematicManager : MonoBehaviour
             {
                 Fader.Instance.FadeOut();
                 mainCamera.clip = null;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
+                if (GameObject.FindGameObjectWithTag("Player") != null)
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
                 postProcessVolumesContainer.SetActive(true);
             }
             yield return null;

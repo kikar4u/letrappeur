@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2417246019932373529}
   - component: {fileID: 500744783719465161}
   - component: {fileID: 7207323461498237086}
+  - component: {fileID: 3756481306825630981}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Managers
@@ -144,7 +145,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
   - nom: NormalBreathRelease
     arr_sons:
-    - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
+    - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
   - nom: FailedBreath
     arr_sons:
     - {fileID: 8300000, guid: 16ea063041442a8448b6f2df88fbf449, type: 3}
@@ -190,3 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee14fa92c23bec84fa78da0a8b55acbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3756481306825630981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a902c0283f7d41f409169d033af70843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 0e4bd40488b256e4eb1d1b9940b681a7, type: 3}

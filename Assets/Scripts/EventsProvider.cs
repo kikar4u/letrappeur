@@ -34,11 +34,11 @@ public class EventsProvider : MonoBehaviour
                 animDuration = rac.animationClips[i].length;
             }
         }
-        if (SceneManagers.Instance.GetCurrentSceneIndex() < SceneManagers.Instance.GetScenesCount() - 1)
+        if (SceneManagers.Instance.GetCurrentSceneIndex() < SceneManagers.Instance.GetScenesCount() - 2)
             StartCoroutine(WaitForFadeIn(animDuration, clip, true, SceneManagers.Instance.GetCurrentSceneIndex() + 1));
         else
         {
-            Debug.Log("No next scene to load");
+            StartCoroutine(WaitForFadeIn(animDuration, clip, true));
         }
     }
 
