@@ -8,7 +8,7 @@ public class InteractionRaycast : MonoBehaviour
     LayerMask layer_Mask;
     Vector3 obstacle;
     Player player;
-    
+
 
     void Start()
     {

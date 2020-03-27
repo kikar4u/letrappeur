@@ -7,12 +7,12 @@ public class Player : MonoBehaviour
 {
     #region Components
     [HideInInspector] CharacterController characterController;
-    [HideInInspector] Collider playerCollider;
+    [HideInInspector] public Collider playerCollider;
     [HideInInspector] public Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
     [HideInInspector] public InteractionRaycast raycastController;
-    public  AudioSource audioSource;
-    [SerializeField]  AudioSource audioSourceOtherFX;
+    public AudioSource audioSource;
+    public AudioSource audioSourceOtherFX;
     #endregion
 
     #region Movements
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Vector3 nextMoveDirection;
     [HideInInspector] public float movementOffset;
 
-    LayerMask terrainMask;
+    [HideInInspector] public LayerMask terrainMask;
     #endregion
 
     #region Checkpoint
@@ -56,14 +56,15 @@ public class Player : MonoBehaviour
     void Start()
     {
         #region Components
-        playerCollider = GetComponent<Collider>();
+        playerCollider = GetComponentInChildren<Collider>();
         raycastController = GetComponent<InteractionRaycast>();
-        trapperAnim = GetComponent<TrapperAnim>();
+        trapperAnim = GetComponentInChildren<TrapperAnim>();
         path = GameObject.FindGameObjectWithTag("Path").GetComponent<PathCurve>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         characterController = GetComponent<CharacterController>();
         terrainMask = LayerMask.GetMask("Ground");
-        
+        Debug.Log(animator.gameObject);
+
         #endregion
 
         //Initialisation des informations des waypoints
@@ -122,47 +123,13 @@ public class Player : MonoBehaviour
 
 
         RaycastHit hit;
-        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
         {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
         }
     }
-    public void PlayFootstep()
-    {
-        RaycastHit hit;
-        // faire une détection de si c'est de la pierre ou pas
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask) && hit.transform.tag == "rock")
-        {
-            GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                PlaySound("FootStepRock", audioSource);
-        }
-        if(Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask) && hit.transform.tag == "Wood")
-        {
-            GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                PlaySound("FootStepWood", audioSource);
-            //Debug.Log("Im in there fuckers");
-            if (UnityEngine.Random.Range(0, 4) == 1)
-            {
-                GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                    PlaySound("CrackleWood", audioSourceOtherFX);
-            }
 
-        }
-        else
-        {
-            GameObject.FindGameObjectWithTag("Managers").GetComponent<_MGR_SoundDesign>().
-                PlaySound("FootStepSnow", audioSource);
-        }
-
-    }
-    public void EquipAxe(AudioClip _clip)
-    {
-        
-        Debug.Log("I'm here fuckers");
-            _MGR_SoundDesign.Instance.
-                PlaySpecificSound(_clip,audioSourceOtherFX);
-    }
     private float CalculateSpeedOnCurve(float _speed)
     {
         return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();

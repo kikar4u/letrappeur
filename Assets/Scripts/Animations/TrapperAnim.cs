@@ -14,28 +14,28 @@ public enum AnimState
 
 public class TrapperAnim : MonoBehaviour
 {
-    Animator animator;
+    Player player;
     AnimState currentState;
 
     InteractiveObject currentInteractiveObject;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        player = GetComponentInParent<Player>();
         currentState = AnimState.IDLE;
     }
     private void Update()
     {
         if (currentState == AnimState.CLIMB && currentInteractiveObject != null)
         {
-            GetComponent<Player>().canMove = false;
-            GetComponent<Player>().WalkFollowingPath(currentInteractiveObject.speedDuringClimb);
+            player.canMove = false;
+            player.WalkFollowingPath(currentInteractiveObject.speedDuringClimb);
 
         }
         else
         {
-            if (!GetComponent<Player>().canMove)
-                GetComponent<Player>().canMove = true;
+            if (!player.canMove)
+                player.canMove = true;
         }
     }
 
@@ -53,17 +53,17 @@ public class TrapperAnim : MonoBehaviour
         switch (currentState)
         {
             case AnimState.WALK:
-                animator.SetBool("Walk", false);
+                player.animator.SetBool("Walk", false);
 
                 break;
             case AnimState.PASSIVE_WALK:
-                animator.SetBool("Walk", false);
+                player.animator.SetBool("Walk", false);
                 break;
             case AnimState.BREATH:
-                animator.SetBool("Breath", false);
+                player.animator.SetBool("Breath", false);
                 break;
             case AnimState.CHOP:
-                animator.SetBool("Chopping", false);
+                player.animator.SetBool("Chopping", false);
                 UpdateAnimSpeed(1f);
                 break;
             default:
@@ -79,23 +79,23 @@ public class TrapperAnim : MonoBehaviour
                 UpdateAnimSpeed(1f);
                 break;
             case AnimState.WALK:
-                animator.SetBool("Walk", true);
+                player.animator.SetBool("Walk", true);
                 UpdateAnimSpeed(1f);
                 break;
             case AnimState.PASSIVE_WALK:
-                animator.SetBool("Walk", true);
+                player.animator.SetBool("Walk", true);
                 UpdateAnimSpeed(0.5f);
                 break;
             case AnimState.CLIMB:
-                animator.SetTrigger("StartClimb");
+                player.animator.SetTrigger("StartClimb");
                 UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.BREATH:
-                animator.SetBool("Breath", true);
+                player.animator.SetBool("Breath", true);
                 UpdateAnimSpeed(1f);
                 break;
             case AnimState.CHOP:
-                animator.SetBool("Chopping", true);
+                player.animator.SetBool("Chopping", true);
                 UpdateAnimSpeed(1f);
                 break;
             default:
@@ -112,19 +112,19 @@ public class TrapperAnim : MonoBehaviour
     {
         if (GetCurrentState() == AnimState.CHOP)
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("AxeMelee"))
+            if (player.animator.GetCurrentAnimatorStateInfo(0).IsName("AxeMelee"))
             {
-                animator.Play("AxeMelee", -1, 0f);
+                player.animator.Play("AxeMelee", -1, 0f);
             }
             else
             {
-                animator.SetTrigger("Chop");
+                player.animator.SetTrigger("Chop");
             }
         }
     }
 
     private void UpdateAnimSpeed(float speed)
     {
-        animator.speed = speed;
+        player.animator.speed = speed;
     }
 }

@@ -70,7 +70,7 @@ public class TriggerBreathing : MonoBehaviour
             PostProcessManager.Instance.SetVignetingData(vignetingData);
             PostProcessManager.Instance.StartVigneting();
 
-            other.gameObject.GetComponent<TrapperAnim>().SetAnimState(AnimState.BREATH);
+            other.gameObject.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.BREATH);
             triggered = true;
             AudioClip startBreathingClip;
             switch (animType)
@@ -82,7 +82,7 @@ public class TriggerBreathing : MonoBehaviour
                     startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
                 case AnimType.CHOPPING:
-                    other.GetComponent<TrapperAnim>().SetAnimState(AnimState.CHOP);
+                    other.gameObject.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.CHOP);
                     startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
                 default:
