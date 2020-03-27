@@ -24,7 +24,6 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-
         currentSettings = QualitySettings.GetQualityLevel();
 
         for (int i = 0; i < QualitySettings.names.Length; i++)
@@ -39,9 +38,6 @@ public class MenuManager : MonoBehaviour
             graphics.AddOptions(settings);
         }
 
-    }
-    private void Start()
-    {
         if (masterMix != null)
         {
             float masterValue;
@@ -70,6 +66,12 @@ public class MenuManager : MonoBehaviour
             }
         }
         Fader.Instance.fadeOutDelegate += FadeSounds;
+
+    }
+    void Start()
+    {
+
+
 
     }
     private void FadeSounds()

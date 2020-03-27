@@ -210,3 +210,7 @@ MonoBehaviour:
   SFX: {fileID: 0}
   masterMix: {fileID: 0}
   mixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
+  sources:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
