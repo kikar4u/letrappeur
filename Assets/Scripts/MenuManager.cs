@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     Dictionary<int, string> leDicoDesSettings = new Dictionary<int, string>();
     List<string> settings = new List<string>();
     [SerializeField] TMP_Dropdown graphics;
-    [SerializeField] TMP_Text label;
     int currentSettings;
 
     [SerializeField] Slider AmbientVolume;
@@ -24,7 +23,8 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        currentSettings = QualitySettings.GetQualityLevel();
+
+
 
         for (int i = 0; i < QualitySettings.names.Length; i++)
         {
@@ -37,14 +37,14 @@ public class MenuManager : MonoBehaviour
         {
             graphics.AddOptions(settings);
         }
-
-        if (masterMix != null)
+         if (masterMix != null)
         {
             float masterValue;
             if (mixer.GetFloat("Master", out masterValue))
             {
                 masterMix.value = masterValue;
                 Debug.Log("caca prout" + masterValue);
+                Debug.Log("PUTAIN DE MERDE COUILLE");
             }
             float AmbianceValue;
             if (mixer.GetFloat("Ambiance", out AmbianceValue))
@@ -64,14 +64,17 @@ public class MenuManager : MonoBehaviour
                 Music.value = musicValue;
                 Debug.Log("caca prout" + musicValue);
             }
-        }
-        Fader.Instance.fadeOutDelegate += FadeSounds;
 
+        }
+
+
+
+       
     }
-    void Start()
+    private void Start()
     {
 
-
+       
 
     }
     private void FadeSounds()
