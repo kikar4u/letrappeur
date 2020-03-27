@@ -903,11 +903,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DirectionalLight: {fileID: 0}
   player: {fileID: 5602914057705357522}
-  ratioLight: 0.05
+  ratioLight: 0.2
   dayAtTheBeginning: 10
   dayAtTheEnd: 90
   luminosityAtTheBeginning: 5
-  luminosityAtTheEnd: 25
+  luminosityAtTheEnd: 20
 --- !u!54 &5118546592191642455
 Rigidbody:
   m_ObjectHideFlags: 0
