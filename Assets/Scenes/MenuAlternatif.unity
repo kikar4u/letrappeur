@@ -1758,8 +1758,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7720477842235085826, guid: 233e15aef50399444b3f9a0c4531277e,
-          type: 3}
+      - m_Target: {fileID: 373184983}
         m_MethodName: changeSlider
         m_Mode: 2
         m_Arguments:
@@ -2187,6 +2186,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368071386}
   m_CullTransparentMesh: 0
+--- !u!1 &373184982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373184984}
+  - component: {fileID: 373184983}
+  m_Layer: 0
+  m_Name: OptionsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &373184983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373184982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e40a5c142136c49931b6427f43653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphics: {fileID: 1905052300}
+  label: {fileID: 0}
+  AmbientVolume: {fileID: 278908228}
+  Music: {fileID: 1798620603}
+  SFX: {fileID: 695870279}
+  masterMix: {fileID: 1402677967}
+  mixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
+  sources: []
+--- !u!4 &373184984
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373184982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 72.77426, y: -7.436775, z: 18.096222}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403864555
 GameObject:
   m_ObjectHideFlags: 0
@@ -3809,7 +3859,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1804765706}
+      - m_Target: {fileID: 373184983}
         m_MethodName: changeSlider
         m_Mode: 2
         m_Arguments:
@@ -5859,7 +5909,7 @@ GameObject:
   - component: {fileID: 1162013277}
   m_Layer: 5
   m_Name: OverlayMenuHUD
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7544,7 +7594,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1804765706}
+      - m_Target: {fileID: 373184983}
         m_MethodName: changeSlider
         m_Mode: 2
         m_Arguments:
@@ -8986,8 +9036,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7720477842235085826, guid: 233e15aef50399444b3f9a0c4531277e,
-          type: 3}
+      - m_Target: {fileID: 373184983}
         m_MethodName: changeSlider
         m_Mode: 2
         m_Arguments:
@@ -9283,18 +9332,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1802039641}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1804765706 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7720477842235085826, guid: 233e15aef50399444b3f9a0c4531277e,
-    type: 3}
-  m_PrefabInstance: {fileID: 265378925}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e40a5c142136c49931b6427f43653f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1839589539
 GameObject:
   m_ObjectHideFlags: 0
@@ -10316,7 +10353,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1804765706}
+      - m_Target: {fileID: 373184983}
         m_MethodName: ChangeGraphicSettings
         m_Mode: 1
         m_Arguments:

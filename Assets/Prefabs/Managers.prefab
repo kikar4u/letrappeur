@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2417246019932373529}
   - component: {fileID: 500744783719465161}
   - component: {fileID: 7207323461498237086}
-  - component: {fileID: 7720477842235085826}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Managers
@@ -191,26 +190,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee14fa92c23bec84fa78da0a8b55acbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7720477842235085826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2417246019932373533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e40a5c142136c49931b6427f43653f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graphics: {fileID: 0}
-  label: {fileID: 0}
-  AmbientVolume: {fileID: 0}
-  Music: {fileID: 0}
-  SFX: {fileID: 0}
-  masterMix: {fileID: 0}
-  mixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
-  sources:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
