@@ -3189,29 +3189,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2011816840473976183, guid: 8561224857c11b84aa04ffc1585bfa35,
         type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011816840473976183, guid: 8561224857c11b84aa04ffc1585bfa35,
-        type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1170527926}
-    - target: {fileID: 2011816840473976183, guid: 8561224857c11b84aa04ffc1585bfa35,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011816840473976183, guid: 8561224857c11b84aa04ffc1585bfa35,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 530628205
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011816840473976183, guid: 8561224857c11b84aa04ffc1585bfa35,
-        type: 3}
-      propertyPath: m_PlaneDistance
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8561224857c11b84aa04ffc1585bfa35, type: 3}
 --- !u!1001 &2417246020988184500
