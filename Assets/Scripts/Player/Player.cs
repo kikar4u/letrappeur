@@ -113,20 +113,20 @@ public class Player : MonoBehaviour
             trapperAnim.SetAnimState(AnimState.IDLE);
         }
 
-        if (!characterController.isGrounded)
-        {
-            characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
-        }
+        //if (!characterController.isGrounded)
+        //{
+        //    characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
+        //}
 
         forwardWayPointAngle = Vector3.Angle(new Vector3(nextMoveDirection.x - transform.position.x, 0f, nextMoveDirection.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
 
 
-        RaycastHit hit;
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
-        {
-            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
-        }
+        //RaycastHit hit;
+        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+        //if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
+        //{
+        //    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
+        //}
     }
 
     private float CalculateSpeedOnCurve(float _speed)
@@ -165,8 +165,17 @@ public class Player : MonoBehaviour
             moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
             Rotate(moveDirection);
             movementOffset = Vector3.Distance(moveDirection, transform.position);
-            transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
 
+            RaycastHit hit;
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
+            {
+                transform.position = new Vector3(moveDirection.x, hit.point.y, moveDirection.z);
+            }
+            else
+            {
+                transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
+            }
         }
 
         nextMoveDirection = SetNextMoveDir(_speed);
