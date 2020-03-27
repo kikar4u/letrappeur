@@ -384,6 +384,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5908519630366446756, guid: 94962096387ee8048a78583edb9d5583,
+        type: 3}
+      propertyPath: _terrain
+      value: 
+      objectReference: {fileID: 1053822192}
     - target: {fileID: 6632958087497828732, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}
       propertyPath: m_Name
@@ -15877,6 +15882,11 @@ PrefabInstance:
       propertyPath: PlayerCollider
       value: 
       objectReference: {fileID: 2055458199}
+    - target: {fileID: 2491777318419706752, guid: a1e030b06d0d0c04b8673db8139a3aff,
+        type: 3}
+      propertyPath: _brushSize
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 3415651789423177304, guid: a1e030b06d0d0c04b8673db8139a3aff,
         type: 3}
       propertyPath: m_Name

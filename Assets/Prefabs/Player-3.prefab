@@ -168,11 +168,11 @@ MonoBehaviour:
   _Camera: {fileID: 0}
   _drawShader: {fileID: 4800000, guid: dbe1dcf1a59015042ab5d61a688e0cea, type: 3}
   _terrain: {fileID: 0}
-  PlayerCollider: {fileID: 0}
+  PlayerCollider: {fileID: 968975840379705406}
   _foot:
-  - {fileID: 0}
-  - {fileID: 0}
-  _brushSize: 5
+  - {fileID: 7334680918237447639}
+  - {fileID: 6506255331144965289}
+  _brushSize: 0.05
   _brushStrength: 1
 --- !u!114 &3715858840344538216
 MonoBehaviour:
@@ -1077,6 +1077,18 @@ Transform:
 --- !u!1 &7109114813722827133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7943378556525867576, guid: 213edc521212ce5429ae30d7e87723eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8316975367318967477}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7334680918237447639 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7592558355049508510, guid: 213edc521212ce5429ae30d7e87723eb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8316975367318967477}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6506255331144965289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2963660786538088476, guid: 213edc521212ce5429ae30d7e87723eb,
     type: 3}
   m_PrefabInstance: {fileID: 8316975367318967477}
   m_PrefabAsset: {fileID: 0}
