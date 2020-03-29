@@ -21,7 +21,7 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: fb6566c21f717904f83743a5a76dd0b0, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _CubeTex:
         m_Texture: {fileID: 0}
@@ -32,12 +32,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e6f8288974c664a309d6c66de636978c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ba61c4f7121c634a97ec5347e4a03a3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ReflectionTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 20, y: 20}
         m_Offset: {x: 0, y: 0}
     - _RefractionTex:
         m_Texture: {fileID: 0}
@@ -60,31 +60,31 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _FresnelScale: 1.27
+    - _FresnelScale: 2.7
     - _GerstnerIntensity: 0.1
     - _HeightDisplacement: 2.3370318
     - _NormalsDisplacement: 72.72728
-    - _Shininess: 29
+    - _Shininess: 61
     m_Colors:
-    - _AnimationDirection: {r: 2, g: 1, b: -1, a: 1}
-    - _AnimationTiling: {r: 0.4, g: 0.39099997, b: 0.56, a: 0.7}
-    - _BaseColor: {r: 0, g: 0.19218327, b: 0.21698111, a: 0.84705883}
-    - _BumpDirection: {r: -10, g: 200, b: -10, a: 50}
-    - _BumpTiling: {r: 0.08, g: 0.09, b: 0.06, a: 0.08}
+    - _AnimationDirection: {r: 2.19, g: 1.95, b: -1, a: 1}
+    - _AnimationTiling: {r: -1.35, g: 1.06, b: 0.56, a: 0.7}
+    - _BaseColor: {r: 0.15864186, g: 0.27671033, b: 0.2924528, a: 0.84705883}
+    - _BumpDirection: {r: -7.64, g: 200, b: -10, a: 50}
+    - _BumpTiling: {r: 0.25, g: 0.09, b: 0.06, a: 0.08}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthColor: {r: 0.29811764, g: 0.36611718, b: 0.39552242, a: 0.34509805}
-    - _DistortParams: {r: 1.0285715, g: 0.20187221, b: 2.766625, a: -0.41714284}
+    - _DistortParams: {r: 1.36, g: 0.20187221, b: 0.56, a: -0.36}
     - _Foam: {r: 0.3275862, g: 0.7471264, b: 0, a: 0}
-    - _GAmplitude: {r: 0.3, g: 0.2, b: 0, a: 0.25}
+    - _GAmplitude: {r: -0.2, g: 0.2, b: 0, a: 0.25}
     - _GDirectionAB: {r: 0.11, g: -1, b: 0.05, a: 0.25}
     - _GDirectionCD: {r: -0.3, g: -0.9, b: 0.5, a: 0.5}
-    - _GFrequency: {r: 0.3, g: 0.1, b: 0, a: 0.245}
-    - _GSpeed: {r: 4, g: 2, b: 1, a: 1}
-    - _GSteepness: {r: 0.1, g: 0.1, b: 0.1, a: 1}
-    - _InvFadeParemeter: {r: 0.27508128, g: 0.08562102, b: 0.09414239, a: 0.48031002}
-    - _ReflectionColor: {r: 0, g: 0, b: 0, a: 0.5529412}
+    - _GFrequency: {r: -1.97, g: 0.1, b: 0, a: 0.245}
+    - _GSpeed: {r: 11.09, g: 2, b: 1, a: 1}
+    - _GSteepness: {r: 5.33, g: 0.1, b: 0.1, a: 1}
+    - _InvFadeParemeter: {r: 0.27, g: -0.96, b: 0.29, a: 0.48031002}
+    - _ReflectionColor: {r: 0.19607845, g: 0.23137257, b: 0.29411766, a: 0.5529412}
     - _RefractionFog: {r: 0.8681778, g: 0.8797176, b: 0.8880597, a: 1}
-    - _SpecularColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 0.025587406, g: 0.11216573, b: 0.23584908, a: 1}
     - _WorldLightDir: {r: 0.013992369, g: -0.17359081, b: -0.9847186, a: 0}
 --- !u!1002 &2100001
 EditorExtensionImpl:
