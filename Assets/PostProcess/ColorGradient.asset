@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb84e30e02715445aeb9959894e3b4d, type: 3}
   m_Name: ColorGrading
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   enabled:
     overrideState: 1
     value: 1
@@ -76,20 +76,20 @@ MonoBehaviour:
     overrideState: 0
     value: -4
   mixerRedOutRedIn:
-    overrideState: 0
-    value: 114
+    overrideState: 1
+    value: 89
   mixerRedOutGreenIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 89
   mixerRedOutBlueIn:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 102
   mixerGreenOutRedIn:
     overrideState: 0
-    value: 0
+    value: -27
   mixerGreenOutGreenIn:
     overrideState: 0
-    value: 100
+    value: 91
   mixerGreenOutBlueIn:
     overrideState: 0
     value: 0
@@ -103,14 +103,14 @@ MonoBehaviour:
     overrideState: 0
     value: 100
   lift:
-    overrideState: 0
-    value: {x: 0.4324472, y: 0.78401244, z: 1, w: 0}
+    overrideState: 1
+    value: {x: 1, y: 0.15083057, z: 0.33813962, w: -0.043258827}
   gamma:
-    overrideState: 0
-    value: {x: 1, y: 0.99769866, z: 0.7034124, w: 0}
+    overrideState: 1
+    value: {x: 0.36445904, y: 0, z: 1, w: 0.10814707}
   gain:
     overrideState: 0
-    value: {x: 0.9172447, y: 1, z: 0.7841047, w: 0}
+    value: {x: 1, y: 0.292985, z: 0.28261107, w: -0.02883922}
   masterCurve:
     overrideState: 0
     value:

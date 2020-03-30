@@ -13,10 +13,11 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     [SerializeField] UnityEvent playEvents;
     [SerializeField] Canvas mainCanvas;
 
-    bool nothingSelected;
+    bool nothingSelected, started;
 
     void Start()
     {
+        started = false;
         menu = GameObject.FindGameObjectWithTag("MenuPrincipal");
         nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
@@ -24,7 +25,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         Fader.Instance.fadeOutDelegate += HideCanvas;
 
         menuButtons[0].Select();
-
+        started = true;
     }
     private void OnEnable()
     {
@@ -51,7 +52,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
     public void HoverDeselect()
     {
-        _MGR_SoundDesign.Instance.InterruptAndPlaySound("MenuButtonsHover", Camera.main.GetComponent<AudioSource>());
+        PlayHighlightSound();
         EventSystem.current.SetSelectedGameObject(null);
     }
 
@@ -87,5 +88,16 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     {
         MenuManager.Instance.options.SetActive(true);
         menu.SetActive(false);
+    }
+
+    void PlayHighlightSound()
+    {
+        _MGR_SoundDesign.Instance.InterruptAndPlaySound("MenuButtonsHover", Camera.main.GetComponent<AudioSource>());
+    }
+
+    public void Highlight()
+    {
+        if (started)
+            PlayHighlightSound();
     }
 }
