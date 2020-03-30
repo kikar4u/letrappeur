@@ -64,6 +64,16 @@ public class _MGR_SoundDesign : MonoBehaviour
         }
     }
 
+    public void InterruptAndPlaySound(string __nom, AudioSource audiosource)
+    {
+        AudioClip[] mesSon = p_sons[__nom];
+        AudioClip audio = mesSon[Random.Range(0, mesSon.Length)];
+
+        audiosource.clip = audio;
+        audiosource.Play();
+
+    }
+
     //Joue un son spécifique
     public void PlaySpecificSound(AudioClip _clip, AudioSource audiosource)
     {

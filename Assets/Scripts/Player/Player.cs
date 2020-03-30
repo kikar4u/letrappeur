@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     #region Movements
     [Range(0, 100)]
     public float speed;
-    public float gravity = 20.0f;
+    //public float gravity = 20.0f;
     //Booléens de contrôles du mouvement
     // @ canmove : Le joueur est à l'extrémité du chemin
     // @ inCinematic : Le joueur est dans une cinématique

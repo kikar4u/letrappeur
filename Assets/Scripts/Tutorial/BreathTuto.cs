@@ -28,6 +28,7 @@ public class BreathTuto : MonoBehaviour
             canvas.gameObject.SetActive(true);
             animator.SetTrigger("Show");
 
+            _MGR_SoundDesign.Instance.PlaySound("HUDTutoFadeIn", Camera.main.GetComponent<AudioSource>());
             _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -masterAudioAttenuation, 1f);
         }
     }
@@ -50,6 +51,7 @@ public class BreathTuto : MonoBehaviour
     public void Retake()
     {
         Time.timeScale = 1f;
+        _MGR_SoundDesign.Instance.PlaySound("HUDTutoFadeOut", Camera.main.GetComponent<AudioSource>());
         _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", masterAudioAttenuation, 1f);
     }
 }
