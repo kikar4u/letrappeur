@@ -16,6 +16,8 @@ TagManager:
   - Wood
   - UI
   - Options
+  - MenuPrincipal
+  - MenuPrincipalCanvas
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 
 public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 {
+    GameObject menu;
     [SerializeField] Button[] menuButtons;
     [SerializeField] UnityEvent playEvents;
     [SerializeField] Canvas mainCanvas;
@@ -16,6 +17,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
     void Start()
     {
+        menu = GameObject.FindGameObjectWithTag("MenuPrincipal");
         nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
         Fader.Instance.fadeOutDelegate += playEvents.Invoke;
@@ -30,17 +32,17 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         {
             if (menuButtons[i].gameObject.tag == "Options")
             {
-                menuButtons[i].onClick.RemoveAllListeners();
-                menuButtons[i].onClick.AddListener(CallLoadScene);
+                //menuButtons[i].onClick.RemoveAllListeners();
+                //menuButtons[i].onClick.AddListener(MenuManager.Instance.HideOptions);
 
             }
         }
     }
 
-    private void CallLoadScene()
-    {
-        SceneManagers.Instance.LoadScene("MenuAlternatif");
-    }
+    //private void CallLoadScene()
+    //{
+    //    SceneManagers.Instance.LoadScene("MenuAlternatif");
+    //}
 
     private void HideCanvas()
     {
@@ -79,5 +81,11 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         nothingSelected = true;
+    }
+
+    public void ShowOptions()
+    {
+        MenuManager.Instance.options.SetActive(true);
+        menu.SetActive(false);
     }
 }

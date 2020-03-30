@@ -92,6 +92,19 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if ((Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape)) && !inCinematic)
+        {
+            if (MenuManager.Instance.options.activeSelf)
+            {
+                MenuManager.Instance.HideOptions();
+                CursorHandler.Instance.SetCursorVisibility(false);
+            }
+            else
+            {
+                CursorHandler.Instance.SetCursorVisibility(true);
+                MenuManager.Instance.ShowOptions(true);
+            }
+        }
 
         if (Input.GetButtonDown("Fire1"))
         {

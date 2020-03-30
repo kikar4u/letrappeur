@@ -32,12 +32,16 @@ public class Fader : MonoBehaviour
             Destroy(gameObject);
         }
 
-        GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        transform.Find("Fader").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+    }
     private void Start()
     {
-        fadeAnimator = GameObject.FindGameObjectWithTag("Fader").GetComponent<Animator>();
+        fadeAnimator = GetComponentInChildren<Animator>();
         //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 

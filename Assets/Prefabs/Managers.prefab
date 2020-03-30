@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 500744783719465161}
   - component: {fileID: 7207323461498237086}
   - component: {fileID: 3756481306825630981}
+  - component: {fileID: 265378927}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Managers
@@ -216,3 +217,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorTexture: {fileID: 2800000, guid: 0e4bd40488b256e4eb1d1b9940b681a7, type: 3}
+--- !u!114 &265378927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2417246019932373533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e40a5c142136c49931b6427f43653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: {fileID: 0}
+  graphics: {fileID: 0}
+  AmbientVolume: {fileID: 0}
+  Music: {fileID: 0}
+  SFX: {fileID: 0}
+  masterMix: {fileID: 0}
+  mixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
+  sources: []

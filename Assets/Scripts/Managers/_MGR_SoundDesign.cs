@@ -101,7 +101,16 @@ public class _MGR_SoundDesign : MonoBehaviour
     {
         float value = 0f;
         masterMixer.GetFloat(mixerName, out value);
+
         masterMixer.DOSetFloat(mixerName, value + endValue, duration);
+    }
+
+    public void ChangeMixerVolume(string mixerName, float endValue)
+    {
+        float value = 0f;
+        masterMixer.GetFloat(mixerName, out value);
+
+        masterMixer.SetFloat(mixerName, value + endValue);
     }
 
     //public void PlayMusic(AudioClip audio, GameObject source, float volume)

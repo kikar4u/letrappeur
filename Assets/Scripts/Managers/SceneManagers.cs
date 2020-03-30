@@ -51,19 +51,16 @@ public class SceneManagers : MonoBehaviour
         asyncLoadScene.allowSceneActivation = false;
         yield return new WaitForSeconds(timeToWait);
         asyncLoadScene.allowSceneActivation = true;
-    }
-
-    public void Options()
-    {
-
+        Fader.Instance.GetAnimator().Play(Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, -1);
     }
 
     public void ExitGame()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#endif
+#else
         Application.Quit();
+#endif
     }
 
     public void LoadScene(string __nom_scene)

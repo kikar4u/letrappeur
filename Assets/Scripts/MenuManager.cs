@@ -8,21 +8,43 @@ using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
+    private static MenuManager _instance;
+    public static MenuManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    #region Options
+    public GameObject options;
     Dictionary<int, string> leDicoDesSettings = new Dictionary<int, string>();
     List<string> settings = new List<string>();
     [SerializeField] TMP_Dropdown graphics;
     int currentSettings;
-
     [SerializeField] Slider AmbientVolume;
     [SerializeField] Slider Music;
     [SerializeField] Slider SFX;
     [SerializeField] Slider masterMix;
     [SerializeField] AudioMixer mixer;
+
+    #endregion
     [Tooltip("Mettez-y toutes les audiosources du menu")]
     [SerializeField] AudioSource[] sources;
     // Start is called before the first frame update
     private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(this);
+        }
+
+        DontDestroyOnLoad(this);
 
         for (int i = 0; i < QualitySettings.names.Length; i++)
         {
@@ -57,15 +79,22 @@ public class MenuManager : MonoBehaviour
             {
                 Music.value = musicValue;
             }
-
         }
-
     }
+
+    private void OnEnable()
+    {
+        //GameObject _options = GameObject.FindGameObjectWithTag("Options");
+        //if (_options != null && options == null)
+        //{
+        //    options = _options;
+        //}
+        //Debug.Log(options.name);
+    }
+
     private void Start()
     {
-
         Fader.Instance.fadeOutDelegate += FadeSounds;
-
     }
     private void FadeSounds()
     {
@@ -102,10 +131,48 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        ////Si on est pas dans le menu principal
+        //if (Input.GetKeyDown(KeyCode.Escape) && SceneManagers.Instance.GetCurrentSceneIndex() != 0)
+        //{
+        //    //Si le joueur est pas en cinématique
+        //    Player player = FindObjectOfType<Player>();
+        //    if (player != null)
+        //    {
+        //        if (!player.inCinematic)
+        //        {
+        //            ShowOptions(true);
+        //        }
+        //    }
+        //}
     }
     public void ExitGame()
     {
         Application.Quit();
     }
+
+    public void ShowOptions(bool shouldPauseGame)
+    {
+        options.SetActive(true);
+        if (shouldPauseGame)
+        {
+            _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -15f);
+            Time.timeScale = 0;
+        }
+    }
+
+    public void HideOptions()
+    {
+        options.SetActive(false);
+
+        if (SceneManagers.Instance.GetCurrentSceneIndex() == 0)
+        {
+            GameObject.FindGameObjectWithTag("MenuPrincipalCanvas").transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", 15f);
+            Time.timeScale = 1;
+        }
+    }
+
 }
