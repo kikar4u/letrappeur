@@ -10,6 +10,7 @@ public class BreathTuto : MonoBehaviour
     Canvas canvas;
     bool entered;
     [HideInInspector] public bool confirmed;
+    [SerializeField] float masterAudioAttenuation;
 
     private void Start()
     {
@@ -27,13 +28,13 @@ public class BreathTuto : MonoBehaviour
             canvas.gameObject.SetActive(true);
             animator.SetTrigger("Show");
 
-            _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -20f, 1f);
+            _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -masterAudioAttenuation, 1f);
         }
     }
 
     private void Update()
     {
-        if (entered && Input.GetMouseButtonDown(0))
+        if (entered && Input.GetMouseButtonDown(0) && !confirmed)
         {
             animator.SetTrigger("Hide");
             Retake();
@@ -49,5 +50,6 @@ public class BreathTuto : MonoBehaviour
     public void Retake()
     {
         Time.timeScale = 1f;
+        _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", masterAudioAttenuation, 1f);
     }
 }

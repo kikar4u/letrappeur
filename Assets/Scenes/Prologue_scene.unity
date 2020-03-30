@@ -6528,6 +6528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   confirmed: 0
+  masterAudioAttenuation: 20
 --- !u!1001 &915052609
 PrefabInstance:
   m_ObjectHideFlags: 0
