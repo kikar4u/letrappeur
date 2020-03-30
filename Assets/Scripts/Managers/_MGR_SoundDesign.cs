@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Audio;
 
 public class _MGR_SoundDesign : MonoBehaviour
 {
     private static _MGR_SoundDesign p_instance = null;
     public static _MGR_SoundDesign Instance { get { return p_instance; } }
+    public AudioMixer masterMixer;
 
     [System.Serializable]
     public class Son
@@ -45,6 +47,7 @@ public class _MGR_SoundDesign : MonoBehaviour
         foreach (Son _son in sons)
             p_sons.Add(_son.nom, _son.arr_sons);
     }
+
     // jouer un son du jeu
     // vérifier que le son existe
     // trouver un lecteur libre (audioSource) ou en ajouter un s'ils sont tous en lecture
@@ -82,6 +85,13 @@ public class _MGR_SoundDesign : MonoBehaviour
         {
             sources[i].DOFade(0, fadeTime);
         }
+    }
+
+    public void ChangeMixerVolume(string mixerName, float endValue, float duration)
+    {
+        float value = 0f;
+        masterMixer.GetFloat(mixerName, out value);
+        masterMixer.DOSetFloat(mixerName, value + endValue, duration);
     }
 
     //public void PlayMusic(AudioClip audio, GameObject source, float volume)
