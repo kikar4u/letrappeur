@@ -7090,6 +7090,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SharedHUD
       objectReference: {fileID: 0}
+    - target: {fileID: 6070565823537338538, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 265378927}
+    - target: {fileID: 6070565823537338538, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 6070565823537338539, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -7144,6 +7154,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070565824189707945, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 265378927}
+    - target: {fileID: 6070565824189707945, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 6070565824189707950, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
@@ -7220,6 +7240,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6070565824649707094, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 265378927}
+    - target: {fileID: 6070565824649707094, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changeSlider
+      objectReference: {fileID: 0}
     - target: {fileID: 6070565824649707095, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -7239,6 +7269,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070565824742502753, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 265378927}
+    - target: {fileID: 6070565824742502753, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeGraphicSettings
       objectReference: {fileID: 0}
     - target: {fileID: 6070565824748105927, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
@@ -7289,6 +7329,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070565825313558818, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 265378927}
+    - target: {fileID: 6070565825313558818, guid: 8ef332681f21ae54eb57bd62eaef760f,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: changeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 6070565825313558819, guid: 8ef332681f21ae54eb57bd62eaef760f,
         type: 3}
