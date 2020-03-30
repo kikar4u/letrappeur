@@ -22,6 +22,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         Fader.Instance.fadeOutDelegate += HideCanvas;
 
         menuButtons[0].Select();
+
     }
     private void OnEnable()
     {
@@ -31,6 +32,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
             {
                 menuButtons[i].onClick.RemoveAllListeners();
                 menuButtons[i].onClick.AddListener(CallLoadScene);
+
             }
         }
     }
@@ -47,6 +49,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
     public void HoverDeselect()
     {
+        _MGR_SoundDesign.Instance.InterruptAndPlaySound("MenuButtonsHover", Camera.main.GetComponent<AudioSource>());
         EventSystem.current.SetSelectedGameObject(null);
     }
 
@@ -77,6 +80,4 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     {
         nothingSelected = true;
     }
-
-
 }

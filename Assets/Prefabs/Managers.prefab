@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb542e11a32e5134f909f783fd50f3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
   sons:
   - nom: Music
     arr_sons:
@@ -179,6 +180,17 @@ MonoBehaviour:
   - nom: Victory
     arr_sons:
     - {fileID: 8300000, guid: 2cd2c007784ba054fa72a7686fcb58a0, type: 3}
+  - nom: MenuButtonsHover
+    arr_sons:
+    - {fileID: 8300000, guid: 0c18acb091fc65643bb0cfd61444d7c3, type: 3}
+    - {fileID: 8300000, guid: 865c86b28e05ddd41ac31725668ed265, type: 3}
+    - {fileID: 8300000, guid: e5f7958b830dd864c8386cc6d0892705, type: 3}
+  - nom: HUDTutoFadeIn
+    arr_sons:
+    - {fileID: 8300000, guid: b2b4b2c5c3736db439f495dd58551426, type: 3}
+  - nom: HUDTutoFadeOut
+    arr_sons:
+    - {fileID: 8300000, guid: a4a613fa447999f4685080b980769f3c, type: 3}
 --- !u!114 &7207323461498237086
 MonoBehaviour:
   m_ObjectHideFlags: 0
