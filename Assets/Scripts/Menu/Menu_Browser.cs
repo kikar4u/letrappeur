@@ -26,16 +26,13 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
         menuButtons[0].Select();
         started = true;
-    }
-    private void OnEnable()
-    {
+
         for (int i = 0; i < menuButtons.Length; i++)
         {
-            if (menuButtons[i].gameObject.tag == "Options")
+            if (menuButtons[i].gameObject.tag == "Quitter")
             {
-                //menuButtons[i].onClick.RemoveAllListeners();
-                //menuButtons[i].onClick.AddListener(MenuManager.Instance.HideOptions);
-
+                menuButtons[i].onClick.RemoveAllListeners();
+                menuButtons[i].onClick.AddListener(SceneManagers.Instance.ExitGame);
             }
         }
     }

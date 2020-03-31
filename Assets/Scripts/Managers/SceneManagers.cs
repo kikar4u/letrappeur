@@ -58,9 +58,8 @@ public class SceneManagers : MonoBehaviour
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
 #endif
+        Application.Quit();
     }
 
     public void LoadScene(string __nom_scene)
