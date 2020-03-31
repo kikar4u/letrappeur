@@ -156,6 +156,7 @@ public class MenuManager : MonoBehaviour
         if (shouldPauseGame)
         {
             _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -15f);
+            CursorHandler.Instance.SetCursorVisibility(true);
             Time.timeScale = 0;
         }
     }
@@ -171,6 +172,7 @@ public class MenuManager : MonoBehaviour
         else
         {
             _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", 15f);
+            CursorHandler.Instance.SetCursorVisibility(false);
             Time.timeScale = 1;
         }
     }

@@ -35,7 +35,7 @@ public class BreathTuto : MonoBehaviour
 
     private void Update()
     {
-        if (entered && Input.GetMouseButtonDown(0) && !confirmed)
+        if (entered && Input.GetButtonDown("Fire1") && !confirmed)
         {
             animator.SetTrigger("Hide");
             Retake();

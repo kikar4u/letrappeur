@@ -7,7 +7,6 @@ using System;
 public class Fader : MonoBehaviour
 {
     Animator fadeAnimator;
-    //Player player;
 
     public delegate void FadeOutDelegate();
 
@@ -37,12 +36,11 @@ public class Fader : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.Find("Fader").GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        //transform.Find("Fader").GetComponent<Image>().color = new Color(1, 1, 1, 1);
     }
     private void Start()
     {
-        fadeAnimator = GetComponentInChildren<Animator>();
-        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        fadeAnimator = GetComponent<Animator>();
     }
 
     public Animator GetAnimator()
