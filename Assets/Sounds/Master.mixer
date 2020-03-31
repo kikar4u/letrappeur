@@ -122,6 +122,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-4285348426427574410
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 295e1178098c05148972f42a60b8d641
+  m_EffectName: Attenuation
+  m_MixLevel: 3dc7cdda8bb74f741b816f293a4088e1
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-4149928921880758282
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -229,6 +243,8 @@ AudioMixerController:
     name: Master
   - guid: 6cdee2965ec75f6419abaa987de2458b
     name: Musique
+  - guid: af84c1ec25c486d4e934d3ec91f9a165
+    name: PitchBlend
   - guid: dfd9e05acafd1b946b8253b4c7e6d8e8
     name: SFX
   m_AudioMixerGroupViews:
@@ -244,6 +260,7 @@ AudioMixerController:
     - 310f7fa7b6fe5bd4d9ee7ab955594636
     - c69c52886f7b34c46be0985cfd8f6134
     - e6515903d7ce3594893cc2815a1b01a4
+    - 263b74d20dc69d042afb45be2e972874
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -344,6 +361,28 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &2194959386723332926
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 5273c81e38520ac4b96331b4549a3660
+  m_EffectName: Pitch Shifter
+  m_MixLevel: abe79413f0994224bb65db39fa27c94a
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: af84c1ec25c486d4e934d3ec91f9a165
+  - m_ParameterName: FFT size
+    m_GUID: 0e821e5ceb365ba4f8f494bf5582cb59
+  - m_ParameterName: Overlap
+    m_GUID: d3adc74c8ffa6454caa7d1dae63b5e5e
+  - m_ParameterName: Max channels
+    m_GUID: 6ff23809041ffcb44b8b4a73daea0e71
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &2497326877021426958
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -407,6 +446,7 @@ AudioMixerGroupController:
   m_GroupID: 58ea7a9177ab9244ba247bf5b1ffbb64
   m_Children:
   - {fileID: -3785630948166754961}
+  - {fileID: 9005619867264103583}
   m_Volume: dfd9e05acafd1b946b8253b4c7e6d8e8
   m_Pitch: dda92e47f53bbf94c8484e7a95ed3eee
   m_Send: 00000000000000000000000000000000
@@ -431,6 +471,26 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -5963855637861500048}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &9005619867264103583
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Respiration
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 263b74d20dc69d042afb45be2e972874
+  m_Children: []
+  m_Volume: ca3166ba7e384f54f82257e7321c73fe
+  m_Pitch: 6fde1bdf2acf8ba40a4ccf2739ef1052
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4285348426427574410}
+  - {fileID: 2194959386723332926}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
