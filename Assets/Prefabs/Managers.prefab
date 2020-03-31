@@ -144,10 +144,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
   - nom: DuringPanic
     arr_sons:
-    - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
+    - {fileID: 8300000, guid: da7326a92b0e75741b54a966c15c5081, type: 3}
   - nom: NormalBreathRelease
     arr_sons:
-    - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
+    - {fileID: 8300000, guid: 721c65dc76576fa4e945ce1f2c2abcd6, type: 3}
   - nom: FailedBreath
     arr_sons:
     - {fileID: 8300000, guid: 16ea063041442a8448b6f2df88fbf449, type: 3}
@@ -192,6 +192,42 @@ MonoBehaviour:
   - nom: HUDTutoFadeOut
     arr_sons:
     - {fileID: 8300000, guid: a4a613fa447999f4685080b980769f3c, type: 3}
+  - nom: BreathInPanic
+    arr_sons:
+    - {fileID: 8300000, guid: c955a645550b0844ca988aa4b21d5225, type: 3}
+    - {fileID: 8300000, guid: a866f1d6eca0f64419e547e1e331bf21, type: 3}
+    - {fileID: 8300000, guid: 92acf5a95d447bb46a76fbcf115ad9e4, type: 3}
+    - {fileID: 8300000, guid: 5188d5e294efbee408c82374862f85a8, type: 3}
+    - {fileID: 8300000, guid: 2c2e070d47424aa48950abdfd9d5230a, type: 3}
+  - nom: BreathOutPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 50bbc1811994396418bcacab0eabdda0, type: 3}
+    - {fileID: 8300000, guid: 790e077001c64f24c8365aaf32eaa59a, type: 3}
+    - {fileID: 8300000, guid: 53cfbe352776ffc4ea07b9d91966a1ef, type: 3}
+    - {fileID: 8300000, guid: c3f5a59c32ad2be47809729ab87b0ae7, type: 3}
+  - nom: BreathInBackToCalm
+    arr_sons:
+    - {fileID: 8300000, guid: 70d7cff05e370724a810169f298461d1, type: 3}
+    - {fileID: 8300000, guid: d47f6b7b98cab0248a7a0a44b8a05961, type: 3}
+    - {fileID: 8300000, guid: 10e6c8f1a4ec3d14898811c49e6c06c7, type: 3}
+    - {fileID: 8300000, guid: 388b04f618db84942b8d7900e7223503, type: 3}
+    - {fileID: 8300000, guid: e27f91e0d7f2b6f47b5b975e04643151, type: 3}
+  - nom: BreathOutBackToCalm
+    arr_sons:
+    - {fileID: 8300000, guid: e13def38ab5f9ba458a19385112a1f0c, type: 3}
+    - {fileID: 8300000, guid: e5abe2c341fa45f45ad4bc3fe1434b16, type: 3}
+    - {fileID: 8300000, guid: 973208084c1fe2c44b90b8781e86adaf, type: 3}
+    - {fileID: 8300000, guid: 4f8047ebf08faa0468a018090b0384a1, type: 3}
+    - {fileID: 8300000, guid: 0936b1d57460a134fbe70de2f74b4cb6, type: 3}
+  - nom: BreathInBackToVeryCalm
+    arr_sons:
+    - {fileID: 8300000, guid: 4f23103fdd569794ca1662cd9b5aa0f5, type: 3}
+    - {fileID: 8300000, guid: 9fc31268ebd12374cb7a644436748bb4, type: 3}
+  - nom: BreathOutBackToVeryCalm
+    arr_sons:
+    - {fileID: 8300000, guid: c7541370d3d302247a2ec3568f85b8b2, type: 3}
+    - {fileID: 8300000, guid: 7496c97c29e92c040a218ce1b882881c, type: 3}
+    - {fileID: 8300000, guid: c326a701e9dc48f478b78d644d3802ec, type: 3}
 --- !u!114 &7207323461498237086
 MonoBehaviour:
   m_ObjectHideFlags: 0
