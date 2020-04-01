@@ -7,6 +7,7 @@ public enum AnimState
     IDLE,
     WALK,
     PASSIVE_WALK,
+    BLIZZARD_WALK,
     CLIMB,
     BREATH,
     CHOP
@@ -29,7 +30,7 @@ public class TrapperAnim : MonoBehaviour
         if (currentState == AnimState.CLIMB && currentInteractiveObject != null)
         {
             player.canMove = false;
-            player.WalkFollowingPath(currentInteractiveObject.speedDuringClimb);
+            player.WalkFollowingPath(currentInteractiveObject.speedDuringClimb, false);
 
         }
         else
@@ -54,7 +55,9 @@ public class TrapperAnim : MonoBehaviour
         {
             case AnimState.WALK:
                 player.animator.SetBool("Walk", false);
-
+                break;
+            case AnimState.BLIZZARD_WALK:
+                player.animator.SetBool("BlizzardWalk", false);
                 break;
             case AnimState.PASSIVE_WALK:
                 player.animator.SetBool("Walk", false);
@@ -81,6 +84,10 @@ public class TrapperAnim : MonoBehaviour
             case AnimState.WALK:
                 player.animator.SetBool("Walk", true);
                 UpdateAnimSpeed(1f);
+                break;
+            case AnimState.BLIZZARD_WALK:
+                player.animator.SetBool("BlizzardWalk", true);
+                UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.PASSIVE_WALK:
                 player.animator.SetBool("Walk", true);

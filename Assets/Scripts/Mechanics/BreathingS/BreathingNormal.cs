@@ -15,7 +15,7 @@ public class BreathingNormal : BreathingSystem
                 {
                     player.trapperAnim.SetAnimState(AnimState.PASSIVE_WALK);
                 }
-                player.WalkFollowingPath(walkSpeedDuringBreathing);
+                player.WalkFollowingPath(walkSpeedDuringBreathing, false);
             }
             return true;
         }

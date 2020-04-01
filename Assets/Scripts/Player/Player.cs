@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
         //Si le personnage peut bouger de lui-même
         if (hasMovementControls && !inCinematic && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && canMove)
         {
-            WalkFollowingPath(speed);
+            WalkFollowingPath(speed, true);
 
             if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
             {
@@ -134,26 +134,28 @@ public class Player : MonoBehaviour
         return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();
     }
 
-    public void WalkFollowingPath(float _speed)
+    //Déplace le personnage sur la courbe des waypoints en fonction d'une vitesse donnée
+    public void WalkFollowingPath(float _speed, bool controled)
     {
+        //Si le personnage est suffisamment en face de son chemin et qu'il n'est pas bloqué
         if (forwardWayPointAngle < moveAfterRotationDegreeThreshold && !blocked)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0f && (trapperAnim.GetCurrentState() == AnimState.WALK || trapperAnim.GetCurrentState() == AnimState.IDLE))
+            //Si on bouge avec le joystick ET qu'on a le contrôle du personne avec le joystick
+            if (Input.GetAxisRaw("Horizontal") != 0f && controled)
             {
                 currentSegment += Mathf.Abs(Input.GetAxis("Horizontal")) * CalculateSpeedOnCurve(_speed);
 
-                //Debug.Log(currentCurvedPosInfo.segmentBetweenWaypoint);
-                //Debug.Log("Value : " + Mathf.Abs(Input.GetAxisRaw("Horizontal")) * CalculateSpeedOnCurve(_speed));
                 if (trapperAnim.GetCurrentState() != AnimState.WALK)
                 {
                     trapperAnim.SetAnimState(AnimState.WALK);
                 }
             }
-            else if (trapperAnim.GetCurrentState() == AnimState.CLIMB || trapperAnim.GetCurrentState() == AnimState.PASSIVE_WALK)
+            //Si on a pas le contrôle
+            else if (!controled)
             {
                 currentSegment += CalculateSpeedOnCurve(_speed);
             }
-
+            //Si le segment sort de la range [0,1], on update le waypoint cible
             if (currentSegment > 1f || currentSegment < 0f)
             {
                 ChangeWaypointTarget(direction);
@@ -166,6 +168,7 @@ public class Player : MonoBehaviour
             Rotate(moveDirection);
             movementOffset = Vector3.Distance(moveDirection, transform.position);
 
+            //Permet de garder les pieds sur terre
             RaycastHit hit;
             Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
             if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))

@@ -85,6 +85,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     {
         MenuManager.Instance.options.SetActive(true);
         menu.SetActive(false);
+        nothingSelected = true;
     }
 
     void PlayHighlightSound()

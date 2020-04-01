@@ -57,11 +57,13 @@ public class BreathingSystem : MonoBehaviour
 
     [HideInInspector] public TriggerBreathing triggerBreathing;
 
+    //Anim event : Déclenche le début de l'interaction possible du joueur
     public void SetReady()
     {
         ready = true;
     }
 
+    //Animm event : Déclenche la fin de la respiration, le HUD fade out
     public void BreathingOver()
     {
         StopAllCoroutines();
@@ -122,9 +124,9 @@ public class BreathingSystem : MonoBehaviour
         }
     }
 
+    //Anim event : Quand le HUD a fade out, le retire de la scène
     public void RemoveBreathingHUD()
     {
-
         if (haveSucceeded)
         {
             if (triggerBreathing.successEndEvent != null)
@@ -139,11 +141,14 @@ public class BreathingSystem : MonoBehaviour
 
     void Start()
     {
+        //Si pas de seuil de bloquage pour le begayage si on appuie trop fort d'un coup, met 0.5 par défaut
         if (breathingCirclesData.blockThreshold == 0f)
             breathingCirclesData.blockThreshold = 0.5f;
 
+        //De même pour l'intervalle de verification
         if (breathingCirclesData.timeCheckOffset == 0f)
             breathingCirclesData.timeCheckOffset = 0.02f;
+
         haveSucceeded = false;
         ready = false;
         outsideBoundsTimer = 0f;
@@ -152,14 +157,14 @@ public class BreathingSystem : MonoBehaviour
         leftTrigger = 0f;
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        player.hasMovementControls = false;
+        //player.hasMovementControls = false;
         breathingCirclesData.playerCircleTransform = breathingCirclesData.playerCircle.GetComponent<RectTransform>();
         breathingCirclesData.outerCircleTransform = breathingCirclesData.donutCircle.GetComponent<RectTransform>();
 
         if (currentBreathing == null && breathingUnits.Length > 0)
             currentBreathing = breathingUnits[0];
 
-        breathingCirclesData.outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[1].value, currentBreathing.breathingPattern.animationCurve[1].value, 1.0f);
+        breathingCirclesData.outerCircleTransform.localScale = new Vector3(currentBreathing.breathingPattern.animationCurve[0].value, currentBreathing.breathingPattern.animationCurve[0].value, 1.0f);
 
         if (breathingUnits.Length == 1)
             StartCoroutine(UniqueBreathScaling(outerCircleSpeed));
@@ -296,7 +301,7 @@ public class BreathingSystem : MonoBehaviour
                 {
                     player.trapperAnim.SetAnimState(AnimState.PASSIVE_WALK);
                 }
-                player.WalkFollowingPath(walkSpeedDuringBreathing);
+                player.WalkFollowingPath(walkSpeedDuringBreathing, false);
             }
 
             return true;
@@ -321,10 +326,11 @@ public class BreathingSystem : MonoBehaviour
     {
         while (true)
         {
-            breathingCirclesData.outerCircleTransform.localScale = Vector3.Lerp(
-                breathingCirclesData.outerCircleTransform.localScale,
-                new Vector3(currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), 1.0f),
-                0.350f);
+            if (ready)
+                breathingCirclesData.outerCircleTransform.localScale = Vector3.Lerp(
+                    breathingCirclesData.outerCircleTransform.localScale,
+                    new Vector3(currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), currentBreathing.breathingPattern.animationCurve.Evaluate(Time.time), 1.0f),
+                    0.350f);
             //outerCircleTransform.localScale = new Vector3(Mathf.Clamp(outerCircleTransform.localScale.x, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), Mathf.Clamp(outerCircleTransform.localScale.y, breathingPattern.animationCurve[0].value, breathingPattern.animationCurve[breathingPattern.animationCurve.length - 1].value), 1.0f);
             yield return new WaitForSeconds(Time.deltaTime);
             if (ready)
@@ -337,6 +343,8 @@ public class BreathingSystem : MonoBehaviour
         float counterTime = 0f;
         float counterSuccessTime = 0f;
         int patternFailed = 0;
+        while (!ready)
+            yield return null;
         for (int i = 0; i < breathingUnits.Length; i++)
         {
             if (breathingUnits[i] != currentBreathing)

@@ -69,7 +69,7 @@ public class TriggerBreathing : MonoBehaviour
         {
             PostProcessManager.Instance.SetVignetingData(vignetingData);
             PostProcessManager.Instance.StartVigneting();
-
+            other.gameObject.GetComponent<Player>().hasMovementControls = false;
             other.gameObject.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.BREATH);
             triggered = true;
             AudioClip startBreathingClip;
@@ -107,6 +107,7 @@ public class TriggerBreathing : MonoBehaviour
 
         //prefabToInstantiate.GetComponent<BreathingSystem>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
         GameObject breathingCircles = BreathingManager.Instance.CreateBreathingCircles(prefabToInstantiate);
+        breathingCircles.GetComponent<BreathingCirclesData>().outerCircleTransform.localScale = new Vector3(breathingUnits[0].breathingPattern.animationCurve[0].value, breathingUnits[0].breathingPattern.animationCurve[0].value, 0f);
         AudioClip duringBreathingClip;
         switch (animType)
         {

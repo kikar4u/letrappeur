@@ -11,11 +11,12 @@ public class BreathingBlizzard : BreathingSystem
         {
             if (canWalkDuringBreathing)
             {
-                if (player.trapperAnim.GetCurrentState() != AnimState.PASSIVE_WALK)
+                Debug.Log("Walk in blizzard");
+                if (player.trapperAnim.GetCurrentState() != AnimState.BLIZZARD_WALK)
                 {
-                    player.trapperAnim.SetAnimState(AnimState.PASSIVE_WALK);
+                    player.trapperAnim.SetAnimState(AnimState.BLIZZARD_WALK);
                 }
-                player.WalkFollowingPath(walkSpeedDuringBreathing);
+                player.WalkFollowingPath(walkSpeedDuringBreathing, false);
             }
 
             return true;
