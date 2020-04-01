@@ -92,33 +92,30 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Ouvre les options
         if ((Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape)) && !inCinematic)
         {
             if (MenuManager.Instance.options.activeSelf)
                 MenuManager.Instance.HideOptions();
             else
                 MenuManager.Instance.ShowOptions(true);
-
         }
 
+        //Vérifie l'interaction
         if (Input.GetButtonDown("Fire1"))
         {
             raycastController.interactionAnim();
         }
+        //Si le personnage peut bouger de lui-même
         if (hasMovementControls && !inCinematic && Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != 0 && canMove)
         {
             WalkFollowingPath(speed);
-
 
             if (Mathf.RoundToInt(Input.GetAxisRaw("Horizontal")) != direction)
             {
                 if (hasMovementControls)
                 {
                     direction = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-                }
-                else
-                {
-                    //SwapWaypointTarget(1);
                 }
             }
         }
@@ -128,21 +125,10 @@ public class Player : MonoBehaviour
             trapperAnim.SetAnimState(AnimState.IDLE);
         }
 
-        //if (!characterController.isGrounded)
-        //{
-        //    characterController.Move(new Vector3(0, -gravity * Time.deltaTime, 0));
-        //}
-
         forwardWayPointAngle = Vector3.Angle(new Vector3(nextMoveDirection.x - transform.position.x, 0f, nextMoveDirection.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
-
-        //RaycastHit hit;
-        //Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
-        //if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
-        //{
-        //    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, hit.point.y, transform.position.z), 1);
-        //}
     }
 
+    //Retourne la vitesse du personnage relative à la longueur de la courbe
     private float CalculateSpeedOnCurve(float _speed)
     {
         return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();
@@ -258,10 +244,14 @@ public class Player : MonoBehaviour
         trapperAnim.SetAnimState(AnimState.IDLE);
         currentCurvedPosInfo = respawnCurvedPosInfo;
         currentSegment = respawnSegment;
-        Debug.Log("Respawn curve ID" + currentCurvedPosInfo.id);
-        Debug.Log("Respawn curve segment" + currentSegment);
+
         Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(currentSegment);
-        transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+
+        RaycastHit hit;
+        if (Physics.Raycast(new Vector3(newPos.x, transform.position.y + playerCollider.bounds.size.y, newPos.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
+        {
+            transform.position = new Vector3(newPos.x, hit.point.y, newPos.z);
+        }
 
         if (Fader.Instance.fadeOutDelegate != null)
             Fader.Instance.fadeOutDelegate -= Respawn;
