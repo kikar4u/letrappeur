@@ -3,7 +3,10 @@ guid: 0ec784813e8fa5b45960a5f745e74db9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - breathingCirclesData: {instanceID: 0}
+  - breathMixer: {instanceID: 0}
+  - triggerBreathing: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

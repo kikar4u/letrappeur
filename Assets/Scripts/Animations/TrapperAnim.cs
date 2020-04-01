@@ -51,6 +51,7 @@ public class TrapperAnim : MonoBehaviour
         {
             return;
         }
+        //Selon le précédent état, on retire le booléen associé dans l'animator
         switch (currentState)
         {
             case AnimState.WALK:
@@ -79,15 +80,15 @@ public class TrapperAnim : MonoBehaviour
             case AnimState.IDLE:
                 if (currentInteractiveObject != null)
                     currentInteractiveObject = null;
-                UpdateAnimSpeed(1f);
+                //UpdateAnimSpeed(1f);
                 break;
             case AnimState.WALK:
                 player.animator.SetBool("Walk", true);
-                UpdateAnimSpeed(1f);
+                //UpdateAnimSpeed(1f);
                 break;
             case AnimState.BLIZZARD_WALK:
                 player.animator.SetBool("BlizzardWalk", true);
-                UpdateAnimSpeed(0.8f);
+                //UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.PASSIVE_WALK:
                 player.animator.SetBool("Walk", true);
@@ -95,11 +96,11 @@ public class TrapperAnim : MonoBehaviour
                 break;
             case AnimState.CLIMB:
                 player.animator.SetTrigger("StartClimb");
-                UpdateAnimSpeed(0.8f);
+                //UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.BREATH:
                 player.animator.SetBool("Breath", true);
-                UpdateAnimSpeed(1f);
+                //UpdateAnimSpeed(1f);
                 break;
             case AnimState.CHOP:
                 player.animator.SetBool("Chopping", true);
@@ -130,6 +131,7 @@ public class TrapperAnim : MonoBehaviour
         }
     }
 
+    //Permet de changer la vitesse de l'animation, au besoin.
     private void UpdateAnimSpeed(float speed)
     {
         player.animator.speed = speed;

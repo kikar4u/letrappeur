@@ -6,6 +6,8 @@ using UnityEngine.Video;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+//Ce script permet de gérer la sélection des boutons du menu, à la manette et souris
+
 public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 {
     GameObject menu;
@@ -21,6 +23,8 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         menu = GameObject.FindGameObjectWithTag("MenuPrincipal");
         nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
+
+        //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
         Fader.Instance.fadeOutDelegate += playEvents.Invoke;
         Fader.Instance.fadeOutDelegate += HideCanvas;
 
@@ -29,6 +33,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
         for (int i = 0; i < menuButtons.Length; i++)
         {
+            //Tricks qui permet au bouton d'avoir l'evenement sur un objet qui voyage de scène en scène, comme un Manager
             if (menuButtons[i].gameObject.tag == "Quitter")
             {
                 menuButtons[i].onClick.RemoveAllListeners();
@@ -36,11 +41,6 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
             }
         }
     }
-
-    //private void CallLoadScene()
-    //{
-    //    SceneManagers.Instance.LoadScene("MenuAlternatif");
-    //}
 
     private void HideCanvas()
     {
@@ -95,6 +95,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
 
     public void Highlight()
     {
+        //pour éviter que le petit son de hover ne se joue au lancement du jeu
         if (started)
             PlayHighlightSound();
     }

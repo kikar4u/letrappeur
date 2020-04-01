@@ -25,6 +25,7 @@ public class CameraFollowing : MonoBehaviour
         initialRotation = transform.rotation;
         focusedOnPlayer = true;
 
+        //Prend la distance entre la caméra et la cible, ce vecteur est l'offset entre les deux
         offset = targetToFollow.position - transform.position;
     }
     void Update()

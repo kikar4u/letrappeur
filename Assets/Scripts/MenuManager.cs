@@ -48,8 +48,6 @@ public class MenuManager : MonoBehaviour
 
         for (int i = 0; i < QualitySettings.names.Length; i++)
         {
-
-            Debug.Log(QualitySettings.names.Length);
             settings.Add(QualitySettings.names[i]);
             leDicoDesSettings.Add(i, QualitySettings.names[i]);
         }

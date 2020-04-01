@@ -5,13 +5,8 @@ using DG.Tweening;
 
 public class CameraShakin : MonoBehaviour
 {
-    // Transform of the camera to shake. Grabs the gameObject's transform
-    // if null.
     Transform camTransform;
 
-    // Amplitude of the shake. A larger value shakes the camera harder.
-    //public float shakeAmount = 0.7f;
-    //public float decreaseFactor = 1.0f;
     private bool continuousShake;
     private bool fadingShake;
 
@@ -34,6 +29,7 @@ public class CameraShakin : MonoBehaviour
 
     private void Start()
     {
+        //Permet le léger shake du menu
         if (alwaysShake)
         {
             StartCoroutine(SmoothShake(shakeSmoothness, fadeShakeFrequence));
@@ -65,6 +61,7 @@ public class CameraShakin : MonoBehaviour
         StartCoroutine(ShakeContinue(intensity));
     }
 
+    //Permet de faire shaker la caméra ponctuellement
     IEnumerator ShakeFixed(float duration, float intensity, float decreaseFactor)
     {
         while (duration > 0)

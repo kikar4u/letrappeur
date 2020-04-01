@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.Audio;
 
 public class BreathingSystem : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class BreathingSystem : MonoBehaviour
     protected Player player;
     #region Circles
     [HideInInspector] public BreathingCirclesData breathingCirclesData;
-    [HideInInspector] public float minPlayerCircleScale;
+    [HideInInspector] public float lowestValueInCurve;
     [HideInInspector] public float outerCircleSpeed;
     [Range(1, 15)]
     [HideInInspector] public float playerCircleSpeed;
@@ -32,7 +33,12 @@ public class BreathingSystem : MonoBehaviour
     [HideInInspector] public BreathingUnit[] breathingUnits;
     protected BreathingUnit currentBreathing;
     [HideInInspector] public float highestValueInCurve;
+    Keyframe highestCurrentKeyframe;
     //public float speedCirclePlayer;
+    #endregion
+
+    #region Son
+    [SerializeField] AudioMixer breathMixer;
     #endregion
 
     #region Success
@@ -61,6 +67,10 @@ public class BreathingSystem : MonoBehaviour
     public void SetReady()
     {
         ready = true;
+
+        PlayDynamicBreath(highestCurrentKeyframe.time - breathingUnits[0].breathingPattern.animationCurve[0].time, "BreathInPanic");
+        Debug.Log("Highest : " + highestCurrentKeyframe.time);
+        Debug.Log(breathingUnits[0].breathingPattern.animationCurve[0].time);
     }
 
     //Animm event : Déclenche la fin de la respiration, le HUD fade out
@@ -170,10 +180,14 @@ public class BreathingSystem : MonoBehaviour
             StartCoroutine(UniqueBreathScaling(outerCircleSpeed));
         else if (breathingUnits.Length > 1)
             StartCoroutine(MultipleBreathScaling(outerCircleSpeed));
+
+
+        breathMixer = _MGR_SoundDesign.Instance.masterMixer;
     }
 
     public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, TriggerBreathing _triggerBreathing, float _walkSpeedDuringBreathing = 0f)
     {
+        Debug.Log("Peopulate");
         breathingCirclesData = gameObject.GetComponent<BreathingCirclesData>();
         breathingUnits = _breathingUnits;
         triggerBreathing = _triggerBreathing;
@@ -190,21 +204,23 @@ public class BreathingSystem : MonoBehaviour
         walkSpeedDuringBreathing = _walkSpeedDuringBreathing;
         //Récupère le point le plus haut de la courbe
         highestValueInCurve = 0f;
-        minPlayerCircleScale = float.MaxValue;
-        if (breathingUnits.Length == 1)
+        lowestValueInCurve = float.MaxValue;
+
+        //if (breathingUnits.Length == 1)
+        //{
+        for (int i = 0; i < breathingUnits[0].breathingPattern.animationCurve.length; i++)
         {
-            for (int i = 0; i < breathingUnits[0].breathingPattern.animationCurve.length; i++)
+            if (breathingUnits[0].breathingPattern.animationCurve[i].value > highestValueInCurve)
             {
-                if (breathingUnits[0].breathingPattern.animationCurve[i].value > highestValueInCurve)
-                {
-                    highestValueInCurve = breathingUnits[0].breathingPattern.animationCurve[i].value;
-                }
-                if (breathingUnits[0].breathingPattern.animationCurve[i].value < minPlayerCircleScale)
-                {
-                    minPlayerCircleScale = breathingUnits[0].breathingPattern.animationCurve[i].value;
-                }
+                highestValueInCurve = breathingUnits[0].breathingPattern.animationCurve[i].value;
+                highestCurrentKeyframe = breathingUnits[0].breathingPattern.animationCurve[i];
+            }
+            if (breathingUnits[0].breathingPattern.animationCurve[i].value < lowestValueInCurve)
+            {
+                lowestValueInCurve = breathingUnits[0].breathingPattern.animationCurve[i].value;
             }
         }
+        //}
     }
 
     private void Update()
@@ -232,11 +248,11 @@ public class BreathingSystem : MonoBehaviour
         if (currentBreathing != null)
         {
             float inputsAverage = leftTriggerInput / 2 + rightTriggerInput / 2;
-            float inputsToValueOnCurve = Mathf.Lerp(minPlayerCircleScale, highestValueInCurve, inputsAverage);
+            float inputsToValueOnCurve = Mathf.Lerp(lowestValueInCurve, highestValueInCurve, inputsAverage);
 
             Vector3 scale = new Vector3(
-                Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
-                Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / minPlayerCircleScale) * playerCircleSpeed * Time.deltaTime),
+                Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / lowestValueInCurve) * playerCircleSpeed * Time.deltaTime),
+                Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.y, inputsToValueOnCurve, (highestValueInCurve / lowestValueInCurve) * playerCircleSpeed * Time.deltaTime),
                 0f);
             breathingCirclesData.playerCircleTransform.localScale = scale;
 
@@ -320,6 +336,15 @@ public class BreathingSystem : MonoBehaviour
 
     }
 
+    //Permet de modifier le pitch en fonction de l'intervalle de temps de la courbe du pattern vers la valeur la plus haute
+    void PlayDynamicBreath(float intervalTime, string soundName)
+    {
+        breathMixer.SetFloat("PitchBlend", intervalTime);
+
+        _MGR_SoundDesign.Instance.PlaySound(soundName, player.audioSourceRespiration);
+        player.audioSourceRespiration.pitch = (player.audioSourceRespiration.clip.length + player.audioSourceRespiration.clip.length / 3) / intervalTime;
+    }
+
     #region Coroutines
 
     public IEnumerator UniqueBreathScaling(float Speed)
@@ -343,6 +368,7 @@ public class BreathingSystem : MonoBehaviour
         float counterTime = 0f;
         float counterSuccessTime = 0f;
         int patternFailed = 0;
+
         while (!ready)
             yield return null;
         for (int i = 0; i < breathingUnits.Length; i++)
@@ -355,16 +381,25 @@ public class BreathingSystem : MonoBehaviour
                 if (breathingUnits[i].breathingPattern.animationCurve[j].value > highestValueInCurve)
                 {
                     highestValueInCurve = breathingUnits[i].breathingPattern.animationCurve[j].value;
+                    highestCurrentKeyframe = breathingUnits[i].breathingPattern.animationCurve[j];
                 }
-                if (breathingUnits[i].breathingPattern.animationCurve[j].value < minPlayerCircleScale)
+                if (breathingUnits[i].breathingPattern.animationCurve[j].value < lowestValueInCurve)
                 {
-                    minPlayerCircleScale = breathingUnits[i].breathingPattern.animationCurve[j].value;
+                    lowestValueInCurve = breathingUnits[i].breathingPattern.animationCurve[j].value;
                 }
             }
-
+            bool breathOutPlayed = false;
             while (counterTime <= breathingUnits[i].breathingPattern.animationCurve[breathingUnits[i].breathingPattern.animationCurve.length - 1].time)
             {
                 breathingCirclesData.outerCircleTransform.localScale = Vector3.Lerp(breathingCirclesData.outerCircleTransform.localScale, new Vector3(currentBreathing.breathingPattern.animationCurve.Evaluate(counterTime), currentBreathing.breathingPattern.animationCurve.Evaluate(counterTime), 1.0f), 0.350f);
+
+                //Joue le son d'expiration
+                if (counterTime >= highestCurrentKeyframe.time && !breathOutPlayed)
+                {
+                    PlayDynamicBreath(breathingUnits[i].breathingPattern.animationCurve[breathingUnits[i].breathingPattern.animationCurve.length - 1].time - highestCurrentKeyframe.time, "BreathOutPanic");
+                    breathOutPlayed = true;
+                }
+
                 if (CheckCircleInBounds())
                 {
                     counterSuccessTime += Time.deltaTime;
@@ -382,14 +417,18 @@ public class BreathingSystem : MonoBehaviour
                 {
                     patternFailed--;
                 }
-                if (i != breathingUnits.Length - 1)
-                {
-                    breathingCirclesData.particles.transform.localScale = breathingCirclesData.playerCircle.transform.localScale * GameObject.FindGameObjectWithTag("BreathingCanvas").transform.localScale.x;
-                    breathingCirclesData.particles.Play();
-                }
+
+                breathingCirclesData.particles.transform.localScale = breathingCirclesData.playerCircle.transform.localScale * GameObject.FindGameObjectWithTag("BreathingCanvas").transform.localScale.x;
+                breathingCirclesData.particles.Play();
+
                 if (i == breathingUnits.Length - 1)
                 {
                     haveSucceeded = true;
+                }
+                else
+                {
+                    //Joue le son d'inspiration
+                    PlayDynamicBreath(highestCurrentKeyframe.time - breathingUnits[i].breathingPattern.animationCurve[0].time, "BreathInPanic");
                 }
             }
             else
@@ -407,6 +446,11 @@ public class BreathingSystem : MonoBehaviour
                     _MGR_SoundDesign.Instance.PlaySpecificSound(_MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath"), player.audioSource);
                     break;
                 }
+                else
+                {
+                    //Joue le son d'inspiration
+                    PlayDynamicBreath(highestCurrentKeyframe.time - breathingUnits[i].breathingPattern.animationCurve[0].time, "BreathInPanic");
+                }
                 i--;
             }
             counterSuccessTime = 0f;
@@ -414,19 +458,15 @@ public class BreathingSystem : MonoBehaviour
                 (PostProcessManager.Instance.GetCurrentVignetingData().initialIntensity)
                 + (PostProcessManager.Instance.GetCurrentVignetingData().stepIntensity * patternFailed));
         }
-        //Debug.Log("Succeed ? :" + haveSucceeded);
         animator.SetTrigger("Over");
         BreathingManager.Instance.SetCurrentBreathing(null);
     }
 
+    //Vérifie constamment si le joueur est passé d'une valeur d'input à un autre trop vite
     public IEnumerator CheckStutter(float previousInput)
     {
-        //Debug.Log("Previous :" + previousInput);
         yield return new WaitForSeconds(breathingCirclesData.timeCheckOffset);
         float currentTriggerInput = (Input.GetAxis("LeftTrigger") + Input.GetAxis("RightTrigger")) / 2;
-        //Debug.Log("Current :" + currentTriggerInput);
-
-        //Debug.Log(Mathf.Abs(previousInput - currentTriggerInput));
 
         if (Mathf.Abs(previousInput - currentTriggerInput) > breathingCirclesData.blockThreshold)
         {

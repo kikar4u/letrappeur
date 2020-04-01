@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public InteractionRaycast raycastController;
     public AudioSource audioSource;
     public AudioSource audioSourceOtherFX;
+    public AudioSource audioSourceRespiration;
     #endregion
 
     #region Movements
