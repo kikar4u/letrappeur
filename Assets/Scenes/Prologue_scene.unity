@@ -16372,6 +16372,11 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Type
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497053, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16551,6 +16556,12 @@ PrefabInstance:
       propertyPath: weight
       value: 0.092
       objectReference: {fileID: 0}
+    - target: {fileID: 5052347035170500862, guid: d2ef864e049e92d4cb6b72c8d2285756,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: f999c2b396ae2f945ac81175a78bfee8,
+        type: 2}
     - target: {fileID: 5052347035958594006, guid: d2ef864e049e92d4cb6b72c8d2285756,
         type: 3}
       propertyPath: m_LocalPosition.x
