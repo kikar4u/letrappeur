@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 393722577}
-  m_IndirectSpecularColor: {r: 0.8134255, g: 0.8143422, b: 0.74628407, a: 1}
+  m_IndirectSpecularColor: {r: 0.81342643, g: 0.81434536, b: 0.74628806, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -56,7 +56,7 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
-    m_BakeResolution: 40
+    m_BakeResolution: 16
     m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
@@ -4661,6 +4661,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921771790213512999, guid: 73e24a650e053204d9546fcf1b853a93,
+        type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8042850716009289245, guid: 73e24a650e053204d9546fcf1b853a93,
         type: 3}
@@ -19725,7 +19730,7 @@ PrefabInstance:
     - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
       propertyPath: m_Intensity
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
@@ -19735,17 +19740,22 @@ PrefabInstance:
     - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
       propertyPath: m_Shadows.m_Strength
-      value: 1
+      value: 0.563
       objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
+        type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497053, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}

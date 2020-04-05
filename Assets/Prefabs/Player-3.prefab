@@ -114,8 +114,8 @@ MonoBehaviour:
   raycastController: {fileID: 0}
   audioSource: {fileID: 6991477218951600713}
   audioSourceOtherFX: {fileID: 6045697276325549850}
+  audioSourceRespiration: {fileID: 0}
   speed: 1.5
-  gravity: 20
   canMove: 0
   inCinematic: 0
   hasMovementControls: 1
@@ -177,8 +177,10 @@ MonoBehaviour:
   ratioLight: 0.05
   dayAtTheBeginning: 10
   dayAtTheEnd: 90
-  luminosityAtTheBeginning: 5
-  luminosityAtTheEnd: 25
+  luminosityAtTheBeginning: 100
+  luminosityAtTheEnd: 0
+  valueAtTheBeginning: 40
+  valueAtTheEnd: 100
 --- !u!54 &3774981901198842995
 Rigidbody:
   m_ObjectHideFlags: 0

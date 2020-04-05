@@ -11,7 +11,7 @@ public class DayGoWithCharacter : MonoBehaviour
     private Vector3 savedPosition;
     private float H, S, V;
     [SerializeField] private float dayAtTheBeginning = 0, dayAtTheEnd = 90;
-    [SerializeField] private float luminosityAtTheBeginning = 5, luminosityAtTheEnd = 25;
+    [SerializeField] private float saturationAtTheBeginning = 5, saturationAtTheEnd = 25, valueAtTheBeginning, valueAtTheEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,8 @@ public class DayGoWithCharacter : MonoBehaviour
                 {
                     DirectionalLight.transform.eulerAngles = new Vector3(Mathf.Clamp(DirectionalLight.transform.eulerAngles.x + player.movementOffset * ratioLight, dayAtTheBeginning, dayAtTheEnd), DirectionalLight.transform.eulerAngles.y, DirectionalLight.transform.eulerAngles.z);
                     Color.RGBToHSV((DirectionalLight.GetComponent<Light>().color), out H, out S, out V);
-                    S = Mathf.Lerp(luminosityAtTheBeginning / 100, luminosityAtTheEnd / 100, Mathf.InverseLerp(dayAtTheBeginning, dayAtTheEnd, DirectionalLight.transform.eulerAngles.x));
+                    S = Mathf.Lerp(saturationAtTheBeginning / 100, saturationAtTheEnd / 100, Mathf.InverseLerp(dayAtTheBeginning, dayAtTheEnd, DirectionalLight.transform.eulerAngles.x));
+                    V = Mathf.Lerp(valueAtTheBeginning / 100, valueAtTheEnd / 100, Mathf.InverseLerp(dayAtTheBeginning, dayAtTheEnd, DirectionalLight.transform.eulerAngles.x));
                     //Debug.Log(S);
                     //Debug.Log("H" +H+"S"+ S+"V"+ V);
                     DirectionalLight.GetComponent<Light>().color = Color.HSVToRGB(H, S, V);
