@@ -14,12 +14,18 @@
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "RenderType"="Opaque" 
+				"DisableBatching" = "true"
+				"IgnoreProjector" = "true"}
         LOD 200
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows vertex:disp tessellate:tessDistance
+		// on utilise noforwardadd pour corriger le problème de shadow
+		// pour que les ombres soit calculée au shadow passes aussi, dapres une question de ce monsieur là
+		// https://answers.unity.com/questions/835073/receive-shadows-with-custom-vertex-shader-shadow-p.html
+		// en gros, quand on modifie les vertex, il faut dapres ce que jai compris, recalculer les ombres après le shader
+        #pragma surface surf Standard noforwardadd addshadow vertex:disp tessellate:tessDistance
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 4.6
@@ -34,7 +40,7 @@
 
             float _Tess;
 
-            float4 tessDistance(appdata v0, appdata v1, appdata v2) {
+            float4 tessDistance(appdata_full v0, appdata_full v1, appdata_full v2) {
                 float minDist = 10.0;
                 float maxDist = 25.0;
                 return UnityDistanceBasedTess(v0.vertex, v1.vertex, v2.vertex, minDist, maxDist, _Tess);
@@ -43,7 +49,7 @@
             sampler2D _SplatTex;
             float _Displacement;
 
-            void disp(inout appdata v)
+            void disp(inout appdata_full v)
             {
                 float d = tex2Dlod(_SplatTex, float4(v.texcoord.xy,0,0)).r * _Displacement;
                 v.vertex.xyz -= v.normal * d;
