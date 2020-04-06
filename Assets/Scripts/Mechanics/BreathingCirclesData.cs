@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BreathingCirclesData : MonoBehaviour
 {
-
+    [Header("Components links")]
     public GameObject playerCircle;
     public RectTransform playerCircleTransform;
     // cercle avatar
@@ -30,5 +30,13 @@ public class BreathingCirclesData : MonoBehaviour
     public float blockThreshold;
     [Range(0f, 1f)]
     public float timeCheckOffset;
+    #endregion
+
+    #region Colors
+    [Header("Colors")]
+    public Color insidePlayerCircleColor;
+    public Color outsidePlayerCircleColor;
+    [Range(0, 5f)]
+    public float transitionTimeBetween;
     #endregion
 }

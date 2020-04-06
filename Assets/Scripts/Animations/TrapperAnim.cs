@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public enum AnimState
 {
@@ -88,7 +89,7 @@ public class TrapperAnim : MonoBehaviour
                 break;
             case AnimState.BLIZZARD_WALK:
                 player.animator.SetBool("BlizzardWalk", true);
-                //UpdateAnimSpeed(0.8f);
+                UpdateAnimSpeed(0.8f);
                 break;
             case AnimState.PASSIVE_WALK:
                 player.animator.SetBool("Walk", true);
@@ -132,8 +133,23 @@ public class TrapperAnim : MonoBehaviour
     }
 
     //Permet de changer la vitesse de l'animation, au besoin.
-    private void UpdateAnimSpeed(float speed)
+    public void UpdateAnimSpeed(float speed)
     {
-        player.animator.speed = speed;
+        StartCoroutine(SmoothUpdateAnimSpeed(speed));
+    }
+
+    IEnumerator SmoothUpdateAnimSpeed(float endSpeed)
+    {
+        float currentAnimSpeed = player.animator.speed;
+
+        Tweener tweener = DOTween.To(() => currentAnimSpeed, x => currentAnimSpeed = x, endSpeed, 1f);
+        tweener.Play();
+        while (tweener.IsPlaying())
+        {
+            player.animator.speed = currentAnimSpeed;
+            yield return null;
+        }
+        tweener.Kill();
+        StopCoroutine(SmoothUpdateAnimSpeed(endSpeed));
     }
 }

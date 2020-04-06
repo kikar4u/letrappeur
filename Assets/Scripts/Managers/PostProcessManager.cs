@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using DG.Tweening;
 
 public class PostProcessManager : MonoBehaviour
 {
@@ -28,11 +29,20 @@ public class PostProcessManager : MonoBehaviour
 
     PostProcessLayer postProcessLayer;
     PostProcessVolume vignetingVolume;
+    PostProcessVolume bloomVolume;
 
     #region Vigneting
     Vignette vigneting;
     VignetingData vignetingData;
     bool isVigneting;
+    #endregion
+
+    #region Bloom
+    Bloom bloom;
+    float bloomBaseIntensity;
+    //Compliqué à expliqué... Mais ce booléen va permettre d'arrêter les coroutines en cours qui font fade le bloom 
+    //pour qu'il n'y en ai toujours qu'une qui influence le bloom
+    bool bloomTrick;
     #endregion
 
     private void OnEnable()
@@ -43,11 +53,16 @@ public class PostProcessManager : MonoBehaviour
     {
         postProcessLayer = FindObjectOfType<PostProcessLayer>();
         vignetingVolume = GameObject.FindGameObjectWithTag("Vignetage").GetComponent<PostProcessVolume>();
+        bloomVolume = GameObject.FindGameObjectWithTag("Bloom").GetComponent<PostProcessVolume>();
         vignetingVolume.profile.TryGetSettings<Vignette>(out vigneting);
+        bloomVolume.profile.TryGetSettings<Bloom>(out bloom);
 
         vigneting.intensity.value = 0f;
+        bloomBaseIntensity = bloom.intensity.value;
+        bloom.intensity.value = 0f;
     }
 
+    #region Vignetting
     public void UpdateVigneting(float intensity, float smoothness)
     {
         vigneting.intensity.value = intensity;
@@ -96,7 +111,6 @@ public class PostProcessManager : MonoBehaviour
 
     }
 
-
     IEnumerator VignetingCurrentAverageSlide(float newAverage)
     {
         float oldAverage = vignetingData.currentAverage;
@@ -130,4 +144,40 @@ public class PostProcessManager : MonoBehaviour
     {
         return vignetingData;
     }
+    #endregion
+
+    #region Bloom
+    public void SetBloomIntensity(float value, float transitionTime = 0f)
+    {
+        bloomTrick = !bloomTrick;
+        if (transitionTime > 0f)
+            StartCoroutine(FadeBloom(transitionTime, value, bloomTrick));
+        else
+            bloom.intensity.value = value;
+    }
+
+    public void SetDefaultBloomIntensity(float transitionTime)
+    {
+        bloomTrick = !bloomTrick;
+        if (transitionTime > 0f)
+            StartCoroutine(FadeBloom(transitionTime, bloomBaseIntensity, bloomTrick));
+        else
+            bloom.intensity.value = bloomBaseIntensity;
+    }
+    //Fait fade le bloom, si tu comprends pas à quoi sert le _trick, regarde en haut du script à son instantiation 
+    IEnumerator FadeBloom(float duration, float endValue, bool _trick)
+    {
+        bool trick = _trick;
+        float lerpValue = 0f;
+        float initialValue = bloom.intensity.value;
+        while (lerpValue <= 1f && trick == bloomTrick)
+        {
+            bloom.intensity.value = Mathf.Lerp(initialValue, endValue, lerpValue);
+            yield return null;
+            lerpValue += Time.deltaTime / duration;
+        }
+        StopCoroutine(FadeBloom(duration, endValue, _trick));
+    }
+
+    #endregion
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.Audio;
+using DG.Tweening;
 
 public class BreathingSystem : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class BreathingSystem : MonoBehaviour
     [HideInInspector] public float requiredTimeSpendInsideBounds;
     float insideBoundsTimer;
     bool haveSucceeded;
+    bool isInside;
     #endregion
 
     #region Lose
@@ -187,7 +189,6 @@ public class BreathingSystem : MonoBehaviour
 
     public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, TriggerBreathing _triggerBreathing, float _walkSpeedDuringBreathing = 0f)
     {
-        Debug.Log("Peopulate");
         breathingCirclesData = gameObject.GetComponent<BreathingCirclesData>();
         breathingUnits = _breathingUnits;
         triggerBreathing = _triggerBreathing;
@@ -202,12 +203,11 @@ public class BreathingSystem : MonoBehaviour
         canWalkDuringBreathing = _canWalkDuringBreathing;
         requiredFailedToLose = _requiredFailedToLose;
         walkSpeedDuringBreathing = _walkSpeedDuringBreathing;
+
         //Récupère le point le plus haut de la courbe
         highestValueInCurve = 0f;
         lowestValueInCurve = float.MaxValue;
 
-        //if (breathingUnits.Length == 1)
-        //{
         for (int i = 0; i < breathingUnits[0].breathingPattern.animationCurve.length; i++)
         {
             if (breathingUnits[0].breathingPattern.animationCurve[i].value > highestValueInCurve)
@@ -220,7 +220,6 @@ public class BreathingSystem : MonoBehaviour
                 lowestValueInCurve = breathingUnits[0].breathingPattern.animationCurve[i].value;
             }
         }
-        //}
     }
 
     private void Update()
@@ -402,8 +401,26 @@ public class BreathingSystem : MonoBehaviour
 
                 if (CheckCircleInBounds())
                 {
+                    //Si on était pas dedans au précédent check et que là on est dedans
+                    if (!isInside)
+                    {
+                        PostProcessManager.Instance.SetDefaultBloomIntensity(2f);
+                        breathingCirclesData.playerCircle.GetComponent<Image>().DOColor(breathingCirclesData.insidePlayerCircleColor, breathingCirclesData.transitionTimeBetween);
+                    }
+                    isInside = true;
                     counterSuccessTime += Time.deltaTime;
                 }
+                else
+                {
+                    //Si on était dedans au précédent check et qu'on est actuellement pas dedans
+                    if (isInside)
+                    {
+                        PostProcessManager.Instance.SetBloomIntensity(0f, 1f);
+                        breathingCirclesData.playerCircle.GetComponent<Image>().DOColor(breathingCirclesData.outsidePlayerCircleColor, breathingCirclesData.transitionTimeBetween);
+                    }
+                    isInside = false;
+                }
+
                 yield return null;
                 counterTime += Time.deltaTime;
             }
@@ -412,7 +429,6 @@ public class BreathingSystem : MonoBehaviour
             if (CheckPatternSuccess(counterSuccessTime))
             {
                 //On a réussi
-                //Debug.Log("success");
                 if (patternFailed > 0)
                 {
                     patternFailed--;
@@ -434,11 +450,10 @@ public class BreathingSystem : MonoBehaviour
             else
             {
                 //On s'est fail
-                //Debug.Log("Pattern raté");
                 patternFailed++;
                 if (patternFailed == requiredFailedToLose)
                 {
-                    //On a perdu
+                    //On a perdu, on respawn et reprépare le trigger
                     Fader.Instance.fadeOutDelegate += player.Respawn;
                     triggerBreathing.ReTrigger();
                     animator.SetTrigger("Over");

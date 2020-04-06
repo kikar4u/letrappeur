@@ -17,6 +17,7 @@ public class BreathingBlizzard : BreathingSystem
                     player.trapperAnim.SetAnimState(AnimState.BLIZZARD_WALK);
                 }
                 player.WalkFollowingPath(walkSpeedDuringBreathing, false);
+                player.trapperAnim.UpdateAnimSpeed(0.8f);
             }
 
             return true;
@@ -25,10 +26,7 @@ public class BreathingBlizzard : BreathingSystem
         {
             if (canWalkDuringBreathing)
             {
-                if (player.trapperAnim.GetCurrentState() != AnimState.BREATH)
-                {
-                    player.trapperAnim.SetAnimState(AnimState.BREATH);
-                }
+                player.trapperAnim.UpdateAnimSpeed(0f);
             }
             return false;
         }

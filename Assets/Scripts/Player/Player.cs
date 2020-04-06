@@ -120,7 +120,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        else if (trapperAnim.GetCurrentState() != AnimState.CLIMB && trapperAnim.GetCurrentState() != AnimState.BREATH && trapperAnim.GetCurrentState() != AnimState.CHOP)
+        //else if (trapperAnim.GetCurrentState() != AnimState.CLIMB && trapperAnim.GetCurrentState() != AnimState.BREATH && trapperAnim.GetCurrentState() != AnimState.CHOP)
+        else if (hasMovementControls && trapperAnim.GetCurrentState() != AnimState.CLIMB)
         {
             movementOffset = 0;
             trapperAnim.SetAnimState(AnimState.IDLE);
