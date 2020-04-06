@@ -93,6 +93,8 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         Fader.Instance.fadeOutDelegate += FadeSounds;
+
+        graphics.value = QualitySettings.GetQualityLevel();
     }
     private void FadeSounds()
     {
