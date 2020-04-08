@@ -82,6 +82,7 @@ public class TriggerBreathing : MonoBehaviour
                     startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
                 case AnimType.CHOPPING:
+                    other.gameObject.GetComponent<Player>().transform.LookAt(GameObject.FindObjectOfType<DestroyableTree>().transform, Vector3.up);
                     other.gameObject.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.CHOP);
                     startBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("StartPanic");
                     break;
@@ -120,6 +121,7 @@ public class TriggerBreathing : MonoBehaviour
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
             case AnimType.CHOPPING:
+
                 breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, walkSpeedDuringBreathing);
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;

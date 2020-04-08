@@ -18,7 +18,9 @@ public class TrapperAnim : MonoBehaviour
 {
     Player player;
     AnimState currentState;
-
+    [SerializeField] GameObject handPoint;
+    [SerializeField] GameObject assPoint;
+    [SerializeField] GameObject weaponPoint;
     InteractiveObject currentInteractiveObject;
 
     private void Start()
@@ -151,5 +153,16 @@ public class TrapperAnim : MonoBehaviour
         }
         tweener.Kill();
         StopCoroutine(SmoothUpdateAnimSpeed(endSpeed));
+    }
+
+    public void AttachWeaponToHand()
+    {
+        weaponPoint.transform.parent = handPoint.transform;
+        weaponPoint.transform.localPosition = Vector3.zero;
+    }
+    public void AttachWeaponToCul()
+    {
+        weaponPoint.transform.parent = assPoint.transform;
+        weaponPoint.transform.localPosition = Vector3.zero;
     }
 }
