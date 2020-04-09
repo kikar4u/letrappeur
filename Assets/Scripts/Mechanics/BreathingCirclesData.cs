@@ -34,6 +34,7 @@ public class BreathingCirclesData : MonoBehaviour
 
     #region Colors
     [Header("Colors")]
+    public Material bloomMat;
     public Color insidePlayerCircleColor;
     public Color outsidePlayerCircleColor;
     [Range(0, 5f)]

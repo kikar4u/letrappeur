@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 3d75ba8561a15dc43a0fa048c0885394, type: 2}
   m_Color: {r: 0.6273585, g: 1, b: 0.9409227, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
@@ -624,7 +624,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   blockThreshold: 0.5
   timeCheckOffset: 0.02
-  insidePlayerCircleColor: {r: 0.52428097, g: 0.85882354, b: 0.48235294, a: 1}
+  bloomMat: {fileID: 2100000, guid: 3d75ba8561a15dc43a0fa048c0885394, type: 2}
+  insidePlayerCircleColor: {r: 1, g: 1, b: 1, a: 1}
   outsidePlayerCircleColor: {r: 0.7176471, g: 0.3882353, b: 0.42664033, a: 1}
   transitionTimeBetween: 0.75
 --- !u!95 &148364710812144006

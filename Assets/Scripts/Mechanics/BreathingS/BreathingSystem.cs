@@ -403,6 +403,7 @@ public class BreathingSystem : MonoBehaviour
                     if (!isInside)
                     {
                         PostProcessManager.Instance.SetDefaultBloomIntensity(2f);
+                        breathingCirclesData.playerCircle.GetComponent<Image>().material = breathingCirclesData.bloomMat;
                         breathingCirclesData.playerCircle.GetComponent<Image>().DOColor(breathingCirclesData.insidePlayerCircleColor, breathingCirclesData.transitionTimeBetween);
                     }
                     isInside = true;
@@ -414,6 +415,7 @@ public class BreathingSystem : MonoBehaviour
                     if (isInside)
                     {
                         PostProcessManager.Instance.SetBloomIntensity(0f, 1f);
+                        breathingCirclesData.playerCircle.GetComponent<Image>().material = null;
                         breathingCirclesData.playerCircle.GetComponent<Image>().DOColor(breathingCirclesData.outsidePlayerCircleColor, breathingCirclesData.transitionTimeBetween);
                     }
                     isInside = false;
