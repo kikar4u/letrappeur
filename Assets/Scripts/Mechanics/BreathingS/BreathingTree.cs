@@ -45,4 +45,32 @@ public class BreathingTree : BreathingSystem
         else
             return false;
     }
+
+    public override void BreathingOver()
+    {
+        StopAllCoroutines();
+        ready = false;
+        BreathingManager.Instance.SetCurrentBreathing(null);
+        if (triggerBreathing.doCameraShake)
+        {
+            if (Camera.main.GetComponent<CameraShakin>().GetContinuousShake())
+                Camera.main.GetComponent<CameraShakin>().ToggleContinuousShake();
+        }
+
+        player.audioSource.loop = false;
+        AudioClip releaseClip;
+        if (haveSucceeded)
+        {
+            player.trapperAnim.SetAnimState(AnimState.IDLE);
+        }
+        else
+        {
+            releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
+
+            _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+            Fader.Instance.fadeOutDelegate += player.Respawn;
+            Fader.Instance.FadeIn();
+        }
+    }
+
 }

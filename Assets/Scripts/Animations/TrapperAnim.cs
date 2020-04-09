@@ -165,4 +165,9 @@ public class TrapperAnim : MonoBehaviour
         weaponPoint.transform.parent = assPoint.transform;
         weaponPoint.transform.localPosition = Vector3.zero;
     }
+
+    public void ToggleMovementControl()
+    {
+        player.hasMovementControls = !player.hasMovementControls;
+    }
 }

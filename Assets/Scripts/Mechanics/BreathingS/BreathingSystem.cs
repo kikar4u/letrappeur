@@ -18,7 +18,7 @@ public class BreathingSystem : MonoBehaviour
     [Range(1, 15)]
     [HideInInspector] public float playerCircleSpeed;
 
-    private bool ready;
+    protected bool ready;
     #endregion
 
     #region Input
@@ -45,7 +45,7 @@ public class BreathingSystem : MonoBehaviour
     #region Success
     [HideInInspector] public float requiredTimeSpendInsideBounds;
     float insideBoundsTimer;
-    bool haveSucceeded;
+    protected bool haveSucceeded;
     bool isInside;
     #endregion
 
@@ -71,12 +71,10 @@ public class BreathingSystem : MonoBehaviour
         ready = true;
 
         PlayDynamicBreath(highestCurrentKeyframe.time - breathingUnits[0].breathingPattern.animationCurve[0].time, "BreathInPanic");
-        Debug.Log("Highest : " + highestCurrentKeyframe.time);
-        Debug.Log(breathingUnits[0].breathingPattern.animationCurve[0].time);
     }
 
     //Animm event : Déclenche la fin de la respiration, le HUD fade out
-    public void BreathingOver()
+    public virtual void BreathingOver()
     {
         StopAllCoroutines();
         ready = false;
