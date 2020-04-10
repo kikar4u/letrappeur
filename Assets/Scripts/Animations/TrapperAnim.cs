@@ -166,6 +166,7 @@ public class TrapperAnim : MonoBehaviour
         weaponPoint.transform.parent = assPoint.transform;
         weaponPoint.transform.localPosition = Vector3.zero;
         weaponPoint.transform.localEulerAngles = Vector3.zero;
+        weaponPoint.transform.localScale = new Vector3(0.130409f, 0.5167661f, 0.3122272f);
     }
 
     public void ToggleMovementControl()

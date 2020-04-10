@@ -5478,17 +5478,17 @@ PrefabInstance:
     - target: {fileID: 7799736004042416236, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 163.673
+      value: 186.094
       objectReference: {fileID: 0}
     - target: {fileID: 7799736004042416236, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 365.85797
+      value: 382.255
       objectReference: {fileID: 0}
     - target: {fileID: 7799736004042416236, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 54.01599
+      value: 70.118
       objectReference: {fileID: 0}
     - target: {fileID: 7801757940788288175, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}
