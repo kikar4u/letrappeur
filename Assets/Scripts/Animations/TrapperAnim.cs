@@ -23,8 +23,11 @@ public class TrapperAnim : MonoBehaviour
     [SerializeField] GameObject weaponPoint;
     InteractiveObject currentInteractiveObject;
 
+    Vector3 initialScale;
+
     private void Start()
     {
+        initialScale = weaponPoint.transform.localScale;
         player = GetComponentInParent<Player>();
         currentState = AnimState.IDLE;
     }
@@ -166,11 +169,11 @@ public class TrapperAnim : MonoBehaviour
         weaponPoint.transform.parent = assPoint.transform;
         weaponPoint.transform.localPosition = Vector3.zero;
         weaponPoint.transform.localEulerAngles = Vector3.zero;
-        weaponPoint.transform.localScale = new Vector3(0.130409f, 0.5167661f, 0.3122272f);
+        weaponPoint.transform.localScale = initialScale;
     }
 
     public void ToggleMovementControl()
     {
-        player.hasMovementControls = !player.hasMovementControls;
+        player.hasMovementControls = true;
     }
 }
