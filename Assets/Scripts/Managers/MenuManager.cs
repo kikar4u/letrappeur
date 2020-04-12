@@ -30,8 +30,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] AudioMixer mixer;
 
     #endregion
-    [Tooltip("Mettez-y toutes les audiosources du menu")]
-    [SerializeField] AudioSource[] sources;
+    //[Tooltip("Mettez-y toutes les audiosources du menu")]
+    //List<AudioSource> sources;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -82,24 +82,25 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //GameObject _options = GameObject.FindGameObjectWithTag("Options");
-        //if (_options != null && options == null)
+        //sources = new List<AudioSource>();
+        //for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
         //{
-        //    options = _options;
+        //    if (FindObjectsOfType<AudioSource>()[i].gameObject.tag != "MainCamera")
+        //        sources.Add(FindObjectsOfType<AudioSource>()[i]);
         //}
-        //Debug.Log(options.name);
     }
 
     private void Start()
     {
-        Fader.Instance.fadeOutDelegate += FadeSounds;
+        //Fader.Instance.fadeOutDelegate += FadeSounds;
 
         graphics.value = QualitySettings.GetQualityLevel();
     }
-    private void FadeSounds()
-    {
-        _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
-    }
+    //private void FadeSounds()
+    //{
+    //    _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
+    //}
+
     public void changeSlider(Slider slider)
     {
         //Debug.Log(mixer);

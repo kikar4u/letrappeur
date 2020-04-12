@@ -91,7 +91,7 @@ public class TriggerBreathing : MonoBehaviour
                     break;
             }
             other.GetComponent<Player>().audioSource.loop = false;
-            _MGR_SoundDesign.Instance.PlaySpecificSound(startBreathingClip, other.gameObject.GetComponent<Player>().audioSource);
+            _MGR_SoundDesign.Instance.PlaySpecificSound(startBreathingClip, other.gameObject.GetComponent<Player>().audioSourceBuildRespiration);
             StartCoroutine(InstantationTimeOffset(startBreathingClip.length));
 
             if (doCameraShake)
@@ -129,9 +129,9 @@ public class TriggerBreathing : MonoBehaviour
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
         }
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource.loop = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSourceBuildRespiration.loop = true;
         BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
-        _MGR_SoundDesign.Instance.PlaySpecificSound(duringBreathingClip, GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSource);
+        _MGR_SoundDesign.Instance.PlaySpecificSound(duringBreathingClip, GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSourceBuildRespiration);
 
     }
 

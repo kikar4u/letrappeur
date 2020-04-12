@@ -85,34 +85,35 @@ public class BreathingSystem : MonoBehaviour
                 Camera.main.GetComponent<CameraShakin>().ToggleContinuousShake();
         }
 
-        player.audioSource.loop = false;
+        player.audioSourceBuildRespiration.loop = false;
         AudioClip releaseClip;
         if (haveSucceeded)
         {
             switch (triggerBreathing.animType)
             {
                 case AnimType.BLIZZARD:
-                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("BlizzardBreathRelease");
-                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("AfterPanic");
+                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSourceBuildRespiration);
                     break;
                 case AnimType.CHOPPING:
-                    //releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("ChopBreathRelease");
-                    //_MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("AfterPanic");
+                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSourceBuildRespiration);
                     player.trapperAnim.SetAnimState(AnimState.IDLE);
                     break;
                 case AnimType.NORMAL:
-                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
-                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("AfterPanic");
+                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSourceBuildRespiration);
                     break;
                 default:
-                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("NormalBreathRelease");
-                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);
+                    releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("AfterPanic");
+                    _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSourceBuildRespiration);
                     break;
             }
             player.hasMovementControls = true;
         }
         else
         {
+            player.audioSourceBuildRespiration.Stop();
             switch (triggerBreathing.animType)
             {
                 case AnimType.BLIZZARD:

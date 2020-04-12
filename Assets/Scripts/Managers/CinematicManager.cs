@@ -10,9 +10,12 @@ public class CinematicManager : MonoBehaviour
 
     [SerializeField] VideoPlayer mainCamera;
     [SerializeField] GameObject postProcessVolumesContainer;
+    List<AudioSource> pausedAudioSources;
 
     private void Awake()
     {
+        pausedAudioSources = new List<AudioSource>();
+
         if (_instance == null)
             _instance = this;
         else if (_instance != this)
@@ -39,19 +42,16 @@ public class CinematicManager : MonoBehaviour
         mainCamera.Play();
         CursorHandler.Instance.SetCursorVisibility(false);
 
-        AudioSource[] sources = new AudioSource[GameObject.FindObjectsOfType<AudioSource>().Length];
-        for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
-        {
-            if (FindObjectsOfType<AudioSource>()[i].isPlaying)
-                sources[i] = FindObjectsOfType<AudioSource>()[i];
-        }
-        _MGR_SoundDesign.Instance.FadeOutSounds(sources, 2f);
+        pausedAudioSources = _MGR_SoundDesign.Instance.GetAllPlayingAudioSources();
+
+        _MGR_SoundDesign.Instance.FadeOutSounds(pausedAudioSources, 1f);
         postProcessVolumesContainer.SetActive(false);
         StartCoroutine(CheckCinematic(video.length));
     }
 
     IEnumerator CheckCinematic(double videoClipLength)
     {
+        int actualScene = SceneManagers.Instance.GetCurrentSceneIndex();
         while (mainCamera.clip != null)
         {
             if (mainCamera.GetComponent<VideoPlayer>().time >= videoClipLength)
@@ -60,11 +60,26 @@ public class CinematicManager : MonoBehaviour
                 mainCamera.clip = null;
                 if (GameObject.FindGameObjectWithTag("Player") != null)
                     GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
-                postProcessVolumesContainer.SetActive(true);
             }
             yield return null;
         }
         StopCoroutine(CheckCinematic(videoClipLength));
+
+        postProcessVolumesContainer.SetActive(true);
+
+        Debug.Log(postProcessVolumesContainer);
+        if (actualScene == SceneManagers.Instance.GetCurrentSceneIndex())
+        {
+            _MGR_SoundDesign.Instance.FadeInSounds(pausedAudioSources, 3f);
+
+            if (Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName("FadeOut"))
+            {
+                Fader.Instance.GetAnimator().Play("FadeOut", -1, 0f);
+            }
+        }
+
+        pausedAudioSources.Clear();
+
     }
 
     //public void Populate()

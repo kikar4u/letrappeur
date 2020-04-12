@@ -11,9 +11,12 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator animator;
     [HideInInspector] public TrapperAnim trapperAnim;
     [HideInInspector] public InteractionRaycast raycastController;
+
     public AudioSource audioSource;
     public AudioSource audioSourceOtherFX;
     public AudioSource audioSourceRespiration;
+    public AudioSource audioSourceBuildRespiration;
+
     #endregion
 
     #region Movements
