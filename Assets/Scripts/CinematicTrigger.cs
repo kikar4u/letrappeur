@@ -37,15 +37,14 @@ public class CinematicTrigger : MonoBehaviour
         // on vérifie que c'est bien le joueur
         if (other.gameObject.tag == "Player")
         {
-            CinematicManager.Instance.LaunchCinematic(vid);
-            //other.GetComponent<Player>().trapperAnim.SetAnimState(AnimState.IDLE);
-            //mainCamera.SetTargetAudioSource(0, GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>());
-            //other.GetComponent<Player>().inCinematic = true;
-            //// on assigne le clip
-            //mainCamera.clip = vid;
-            //// et on joue la douce vidéo
-            //mainCamera.Play();
+            Fader.Instance.FadeIn();
+            Fader.Instance.fadeOutDelegate += PlayVideo;
 
         }
+    }
+
+    void PlayVideo()
+    {
+        CinematicManager.Instance.LaunchCinematic(vid);
     }
 }

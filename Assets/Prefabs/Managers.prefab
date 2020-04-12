@@ -141,10 +141,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 401e330ded0d1b04db660da76d6718ac, type: 3}
   - nom: StartPanic
     arr_sons:
-    - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
+    - {fileID: 8300000, guid: 3f941a5973d35e74c8089f9f046cf432, type: 3}
   - nom: DuringPanic
     arr_sons:
-    - {fileID: 8300000, guid: da7326a92b0e75741b54a966c15c5081, type: 3}
+    - {fileID: 8300000, guid: 6ed3859e479b557498b2d60377bf72a3, type: 3}
   - nom: NormalBreathRelease
     arr_sons:
     - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}
@@ -228,6 +228,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c7541370d3d302247a2ec3568f85b8b2, type: 3}
     - {fileID: 8300000, guid: 7496c97c29e92c040a218ce1b882881c, type: 3}
     - {fileID: 8300000, guid: c326a701e9dc48f478b78d644d3802ec, type: 3}
+  - nom: AfterPanic
+    arr_sons:
+    - {fileID: 8300000, guid: 7b48104d6cf061849ba3e42a8b6a0931, type: 3}
 --- !u!114 &7207323461498237086
 MonoBehaviour:
   m_ObjectHideFlags: 0

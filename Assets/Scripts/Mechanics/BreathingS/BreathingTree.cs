@@ -57,14 +57,17 @@ public class BreathingTree : BreathingSystem
                 Camera.main.GetComponent<CameraShakin>().ToggleContinuousShake();
         }
 
-        player.audioSource.loop = false;
+        player.audioSourceBuildRespiration.loop = false;
         AudioClip releaseClip;
         if (haveSucceeded)
         {
+            releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("AfterPanic");
+            _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSourceBuildRespiration);
             player.trapperAnim.SetAnimState(AnimState.IDLE);
         }
         else
         {
+            player.audioSourceBuildRespiration.Stop();
             releaseClip = _MGR_SoundDesign.Instance.GetSpecificClip("FailedBreath");
 
             _MGR_SoundDesign.Instance.PlaySpecificSound(releaseClip, player.audioSource);

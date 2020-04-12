@@ -2686,6 +2686,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 500744783719465161, guid: 233e15aef50399444b3f9a0c4531277e,
+        type: 3}
+      propertyPath: sons.Array.data[26].arr_sons.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7496c97c29e92c040a218ce1b882881c, type: 3}
+    - target: {fileID: 500744783719465161, guid: 233e15aef50399444b3f9a0c4531277e,
+        type: 3}
+      propertyPath: sons.Array.data[26].arr_sons.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: c326a701e9dc48f478b78d644d3802ec, type: 3}
     - target: {fileID: 2417246019932373528, guid: 233e15aef50399444b3f9a0c4531277e,
         type: 3}
       propertyPath: breathingPrefab
@@ -5335,16 +5345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.5228733
-      objectReference: {fileID: 0}
-    - target: {fileID: 6991477218951600713, guid: 94962096387ee8048a78583edb9d5583,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.762
-      objectReference: {fileID: 0}
-    - target: {fileID: 6991477218951600713, guid: 94962096387ee8048a78583edb9d5583,
-        type: 3}
-      propertyPath: Priority
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7050964672813766755, guid: 94962096387ee8048a78583edb9d5583,
         type: 3}

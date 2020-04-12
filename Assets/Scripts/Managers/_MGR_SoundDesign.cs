@@ -89,11 +89,44 @@ public class _MGR_SoundDesign : MonoBehaviour
         return p_sons[name][0];
     }
 
-    public void FadeOutSounds(AudioSource[] sources, float fadeTime)
+    public void FadeOutSounds(List<AudioSource> sources, float fadeTime)
     {
-        for (int i = 0; i < sources.Length; i++)
+        Tweener fadeTween;
+        Tweener pauseTween;
+
+        //Pause les sons dans 2s
+        StartCoroutine(PauseDelay(sources, fadeTime));
+
+        for (int i = 0; i < sources.Count; i++)
         {
-            sources[i].DOFade(0, fadeTime);
+            float initialVolume = sources[i].volume;
+            //Tween pour fade à 0 le volume
+            fadeTween = sources[i].DOFade(0, fadeTime);
+            //Tween pour fade au volume initial 
+            pauseTween = sources[i].DOFade(initialVolume, fadeTime);
+            pauseTween.SetDelay(fadeTime);
+        }
+    }
+
+    IEnumerator PauseDelay(List<AudioSource> source, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        for (int i = 0; i < source.Count; i++)
+        {
+            source[i].Pause();
+        }
+        StopCoroutine(PauseDelay(source, delay));
+    }
+
+    public void FadeInSounds(List<AudioSource> sources, float fadeTime)
+    {
+        Tweener tween;
+        for (int i = 0; i < sources.Count; i++)
+        {
+            float initialVolume = sources[i].volume;
+            sources[i].volume = 0;
+            sources[i].UnPause();
+            tween = sources[i].DOFade(initialVolume, fadeTime);
         }
     }
 
@@ -111,6 +144,28 @@ public class _MGR_SoundDesign : MonoBehaviour
         masterMixer.GetFloat(mixerName, out value);
 
         masterMixer.SetFloat(mixerName, value + endValue);
+    }
+
+    public List<AudioSource> GetAllPlayingAudioSources()
+    {
+        List<AudioSource> sources = new List<AudioSource>();
+        for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
+        {
+            if (FindObjectsOfType<AudioSource>()[i].gameObject.tag != "MainCamera" && FindObjectsOfType<AudioSource>()[i].isPlaying)
+                sources.Add(FindObjectsOfType<AudioSource>()[i]);
+        }
+        return sources;
+
+    }
+    public List<AudioSource> GetAllAudioSources()
+    {
+        List<AudioSource> sources = new List<AudioSource>();
+        for (int i = 0; i < FindObjectsOfType<AudioSource>().Length; i++)
+        {
+            if (FindObjectsOfType<AudioSource>()[i].gameObject.tag != "MainCamera")
+                sources.Add(FindObjectsOfType<AudioSource>()[i]);
+        }
+        return sources;
     }
 
     //public void PlayMusic(AudioClip audio, GameObject source, float volume)
