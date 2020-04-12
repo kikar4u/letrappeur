@@ -8,8 +8,9 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 8c06af8a49ee02947b7cf77d69481fec
+  m_OcclusionCullingData: {fileID: 36300000, guid: 71bc5be4fdabc6141b9b1fb278c7d0f0,
+    type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -38,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 393722577}
-  m_IndirectSpecularColor: {r: 0.8134255, g: 0.8143422, b: 0.74628407, a: 1}
+  m_IndirectSpecularColor: {r: 0.81342643, g: 0.81434536, b: 0.74628806, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
