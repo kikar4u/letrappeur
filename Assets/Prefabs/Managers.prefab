@@ -144,7 +144,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 6d84831a266cb2e4bbe4d722c1789776, type: 3}
   - nom: DuringPanic
     arr_sons:
-    - {fileID: 8300000, guid: 37d48f431a3675e498607dc9f6034b47, type: 3}
+    - {fileID: 8300000, guid: da7326a92b0e75741b54a966c15c5081, type: 3}
   - nom: NormalBreathRelease
     arr_sons:
     - {fileID: 8300000, guid: 2eb54e31ed517af4b9fbcf0186b65688, type: 3}

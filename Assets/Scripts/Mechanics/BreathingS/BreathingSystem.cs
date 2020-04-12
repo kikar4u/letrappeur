@@ -336,10 +336,9 @@ public class BreathingSystem : MonoBehaviour
     //Permet de modifier le pitch en fonction de l'intervalle de temps de la courbe du pattern vers la valeur la plus haute
     void PlayDynamicBreath(float intervalTime, string soundName)
     {
-        breathMixer.SetFloat("PitchBlend", intervalTime);
-
-        _MGR_SoundDesign.Instance.PlaySound(soundName, player.audioSourceRespiration);
-        player.audioSourceRespiration.pitch = (player.audioSourceRespiration.clip.length + player.audioSourceRespiration.clip.length / 3) / intervalTime;
+        _MGR_SoundDesign.Instance.InterruptAndPlaySound(soundName, player.audioSourceRespiration);
+        breathMixer.SetFloat("PitchBlend", player.audioSourceRespiration.clip.length / intervalTime);
+        player.audioSourceRespiration.pitch = player.audioSourceRespiration.clip.length / intervalTime;
     }
 
     #region Coroutines
