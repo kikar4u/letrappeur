@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1513293613422138108}
   - component: {fileID: 9112435657750398267}
   m_Layer: 0
-  m_Name: LittleTree_02 1
+  m_Name: LittleTree_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0.24494588, y: 1.8137367, z: -0.014352798}
   m_Size: 3.6360483
-  m_FadeMode: 0
+  m_FadeMode: 2
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
