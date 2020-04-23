@@ -17,10 +17,19 @@ public class TriggerBlizzard : MonoBehaviour
         animatorFog = blizzardObject.transform.GetChild(0).GetComponent<Animator>();
         speed = 1;
 
-
     }
 
     private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Entre dans trigger");
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartBlizzard();
+        }
+
+    }
+
+    public void StartBlizzard()
     {
         animatorSnow.ResetTrigger("SnowToNone");
         animatorFog.ResetTrigger("FogToNone");
@@ -30,63 +39,55 @@ public class TriggerBlizzard : MonoBehaviour
         animatorFog.ResetTrigger("NoneToFog");
         animatorSnow.ResetTrigger("SnowToBlizzard");
         animatorFog.ResetTrigger("FogToBlizzard");
+        //Debug.Log("Le tag est player");
+        animatorSnow.speed = speed;
+        animatorFog.speed = speed;
+        if (weather == Meteo.NONE)
         {
-            //Debug.Log("Entre dans trigger");
-            if (other.gameObject.CompareTag("Player"))
+            if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("SnowState2"))
             {
-                //Debug.Log("Le tag est player");
-                animatorSnow.speed = speed;
-                animatorFog.speed = speed;
-                if (weather == Meteo.NONE)
-                {
-                    if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("SnowState2"))
-                    {
-                        animatorSnow.SetTrigger("BlizzardToSnow");
-                        animatorFog.SetTrigger("BlizzardToFog");
-                    }
-                    //Debug.Log("snow to none");
-                    animatorSnow.SetTrigger("SnowToNone");
-                    animatorFog.SetTrigger("FogToNone");
-
-
-                }
-                if (weather == Meteo.SNOW)
-                {
-                    //Debug.Log("La meteo est snow");
-                    animatorSnow.ResetTrigger("SnowToNone");
-                    animatorFog.ResetTrigger("FogToNone");
-                    if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("BaseState"))
-                    {
-                        //Debug.Log("none to snow");
-                        animatorSnow.SetTrigger("NoneToSnow");
-                        animatorFog.SetTrigger("NoneToFog");
-                    }
-                    if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("SnowState2"))
-                    {
-                        //Debug.Log("blizzard to snow");
-                        animatorSnow.SetTrigger("BlizzardToSnow");
-                        animatorFog.SetTrigger("BlizzardToFog");
-                    }
-                    //animatorSnow.ResetTrigger("NoneToSnow");
-                    //animatorFog.ResetTrigger("NoneToFog");
-
-                }
-
-                if (weather == Meteo.BLIZZARD)
-                {
-                    //Debug.Log("Meteo is blizzard");
-                    if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("BaseState"))
-                    {
-                        animatorSnow.SetTrigger("NoneToSnow");
-                        animatorFog.SetTrigger("NoneToFog");
-                    }
-                    //Debug.Log("snow to blizzard");
-                    animatorSnow.SetTrigger("SnowToBlizzard");
-                    animatorFog.SetTrigger("FogToBlizzard");
-                }
-
+                animatorSnow.SetTrigger("BlizzardToSnow");
+                animatorFog.SetTrigger("BlizzardToFog");
             }
+            //Debug.Log("snow to none");
+            animatorSnow.SetTrigger("SnowToNone");
+            animatorFog.SetTrigger("FogToNone");
+
+
+        }
+        if (weather == Meteo.SNOW)
+        {
+            //Debug.Log("La meteo est snow");
+            animatorSnow.ResetTrigger("SnowToNone");
+            animatorFog.ResetTrigger("FogToNone");
+            if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("BaseState"))
+            {
+                //Debug.Log("none to snow");
+                animatorSnow.SetTrigger("NoneToSnow");
+                animatorFog.SetTrigger("NoneToFog");
+            }
+            if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("SnowState2"))
+            {
+                //Debug.Log("blizzard to snow");
+                animatorSnow.SetTrigger("BlizzardToSnow");
+                animatorFog.SetTrigger("BlizzardToFog");
+            }
+            //animatorSnow.ResetTrigger("NoneToSnow");
+            //animatorFog.ResetTrigger("NoneToFog");
+
         }
 
+        if (weather == Meteo.BLIZZARD)
+        {
+            //Debug.Log("Meteo is blizzard");
+            if (animatorSnow.GetCurrentAnimatorStateInfo(0).IsName("BaseState"))
+            {
+                animatorSnow.SetTrigger("NoneToSnow");
+                animatorFog.SetTrigger("NoneToFog");
+            }
+            //Debug.Log("snow to blizzard");
+            animatorSnow.SetTrigger("SnowToBlizzard");
+            animatorFog.SetTrigger("FogToBlizzard");
+        }
     }
 }

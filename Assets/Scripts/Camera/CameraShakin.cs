@@ -131,12 +131,19 @@ public class CameraShakin : MonoBehaviour
 
         while (alwaysShake || continuousShake)
         {
-            newPos = Random.insideUnitSphere * intensity + initialPos;
-            camTransform.DOMove(newPos, frequency).SetEase(Ease.InOutCubic);
-            yield return new WaitForSeconds(frequency);
-            camTransform.DOMove(initialPos, frequency).SetEase(Ease.InOutCubic);
-            yield return new WaitForSeconds(frequency);
+            if (alwaysShake || continuousShake)
+            {
+                newPos = Random.insideUnitSphere * intensity + initialPos;
+                camTransform.DOMove(newPos, frequency).SetEase(Ease.InOutCubic);
+                yield return new WaitForSeconds(frequency);
+            }
+            if (alwaysShake || continuousShake)
+            {
+                camTransform.DOMove(initialPos, frequency).SetEase(Ease.InOutCubic);
+                yield return new WaitForSeconds(frequency);
+            }
         }
+        StopCoroutine(SmoothShake(frequency, intensity));
     }
 
     public bool GetContinuousShake()
@@ -146,5 +153,6 @@ public class CameraShakin : MonoBehaviour
     public void StopContinuousShake()
     {
         continuousShake = false;
+        camTransform.DOKill();
     }
 }

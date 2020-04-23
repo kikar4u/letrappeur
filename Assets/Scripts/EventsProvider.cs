@@ -8,6 +8,8 @@ public class EventsProvider : MonoBehaviour
     public void LaunchCinematic(VideoClip clip)
     {
         //Fader.Instance.FadeIn();
+        //S'assure que le fog est désactivé pendant la cinématique
+        Camera.main.GetComponent<Test_Fog>().enabled = false;
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 
@@ -24,6 +26,7 @@ public class EventsProvider : MonoBehaviour
     public void LaunchCinematicWithLoadNewScene(VideoClip clip)
     {
         //Fader.Instance.FadeIn();
+        Camera.main.GetComponent<Test_Fog>().enabled = false;
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 
@@ -57,4 +60,29 @@ public class EventsProvider : MonoBehaviour
 
     }
 
+    public void SetActiveTrue(MonoBehaviour script)
+    {
+        script.enabled = true;
+    }
+
+    public void SetActiveFalse(MonoBehaviour script)
+    {
+        script.enabled = false;
+    }
+
+    public void SetActiveTrue(Behaviour script)
+    {
+        script.enabled = true;
+    }
+
+    public void SetActiveFalse(Behaviour script)
+    {
+        script.enabled = false;
+    }
+
+
+    public void ChangeSkybox(Material otherSkybox)
+    {
+        RenderSettings.skybox = otherSkybox;
+    }
 }

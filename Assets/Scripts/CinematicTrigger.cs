@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.Events;
 
 public class CinematicTrigger : MonoBehaviour
 {
     [SerializeField] VideoClip vid;
     VideoPlayer mainCamera;
     double length;
+
+    public UnityEvent cinematicEndEvents;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class CinematicTrigger : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
             mainCamera.clip = null;
 
+            cinematicEndEvents.Invoke();
             Fader.Instance.FadeOut();
             Destroy(gameObject);
         }
