@@ -96,7 +96,7 @@ public class TriggerBreathing : MonoBehaviour
 
             if (doCameraShake)
             {
-                Camera.main.GetComponent<CameraShakin>().Shake(shakeIntensity);
+                Camera.main.GetComponent<CameraShakin>().Shake(shakeIntensity, Camera.main.transform);
             }
         }
     }

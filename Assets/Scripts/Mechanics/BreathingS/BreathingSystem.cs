@@ -82,7 +82,7 @@ public class BreathingSystem : MonoBehaviour
         if (triggerBreathing.doCameraShake)
         {
             if (Camera.main.GetComponent<CameraShakin>().GetContinuousShake())
-                Camera.main.GetComponent<CameraShakin>().ToggleContinuousShake();
+                Camera.main.GetComponent<CameraShakin>().StopContinuousShake();
         }
 
         player.audioSourceBuildRespiration.loop = false;

@@ -36,7 +36,7 @@ public class InteractionRaycast : MonoBehaviour
         {
             player.blocked = false;
         }
-
+        Debug.Log(player.trapperAnim.GetCurrentState());
     }
     public void interactionAnim()
     {

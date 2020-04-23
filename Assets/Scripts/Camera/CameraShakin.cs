@@ -39,6 +39,7 @@ public class CameraShakin : MonoBehaviour
     void OnEnable()
     {
         continuousShake = false;
+        fadingShake = false;
     }
 
     private void Update()
@@ -49,35 +50,66 @@ public class CameraShakin : MonoBehaviour
         }
     }
 
+    //On l'utilise pas :l
     public void Shake(float duration, float intensity, float decreaseFactor)
     {
         continuousShake = false;
         StartCoroutine(ShakeFixed(duration, intensity, decreaseFactor));
     }
 
-    public void Shake(float intensity)
+    public void Shake(float intensity, Transform targetToFollow)
     {
         continuousShake = true;
-        StartCoroutine(ShakeContinue(intensity));
+        //StartCoroutine(ShakeContinue(intensity));
+        StartCoroutine(ShakeFollowingTarget(intensity, targetToFollow));
+
     }
 
-    //Permet de faire shaker la caméra ponctuellement
+    public void StartSmoothShake(float intensity, float frequency)
+    {
+        continuousShake = true;
+        //StartCoroutine(ShakeContinue(intensity));
+        StartCoroutine(SmoothShake(intensity, frequency));
+
+    }
+
+    //Permet de faire shaker la caméra ponctuellement, mais on l'utilise pas.
     IEnumerator ShakeFixed(float duration, float intensity, float decreaseFactor)
     {
         while (duration > 0)
         {
-            camTransform.localPosition = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition() + Random.insideUnitSphere * intensity * decreaseFactor;
+            camTransform.localPosition = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPositionRelativeToPlayer() + Random.insideUnitSphere * intensity * decreaseFactor;
             duration -= Time.deltaTime * decreaseFactor;
             decreaseFactor -= Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
     }
 
-    IEnumerator ShakeContinue(float intensity)
+    //IEnumerator ShakeContinue(float intensity)
+    //{
+    //    Vector3 initialPos = camTransform.position;
+    //    while (GetContinuousShake())
+    //    {
+    //        newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPositionRelativeToPlayer() + Random.insideUnitSphere * intensity;
+
+    //        yield return new WaitForSeconds(fadeShakeFrequence);
+    //    }
+    //    fadingShake = true;
+    //    while (intensity > 0)
+    //    {
+    //        intensity -= Time.deltaTime;
+    //        newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPositionRelativeToPlayer() + Random.insideUnitSphere * intensity;
+    //        yield return new WaitForSeconds(shakeSmoothness);
+    //    }
+    //    fadingShake = false;
+    //    StopCoroutine(ShakeContinue(intensity));
+    //}
+
+    IEnumerator ShakeFollowingTarget(float intensity, Transform target)
     {
         while (GetContinuousShake())
         {
-            newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition() + Random.insideUnitSphere * intensity;
+            newPos = target.position + Random.insideUnitSphere * intensity;
 
             yield return new WaitForSeconds(fadeShakeFrequence);
         }
@@ -85,24 +117,24 @@ public class CameraShakin : MonoBehaviour
         while (intensity > 0)
         {
             intensity -= Time.deltaTime;
-            newPos = camTransform.gameObject.GetComponent<CameraFollowing>().GetCameraPosition() + Random.insideUnitSphere * intensity;
+            newPos = target.position + Random.insideUnitSphere * intensity;
             yield return new WaitForSeconds(shakeSmoothness);
         }
         fadingShake = false;
-        StopCoroutine(ShakeContinue(intensity));
+        StopCoroutine(ShakeFollowingTarget(intensity, target));
     }
 
     IEnumerator SmoothShake(float frequency, float intensity)
     {
-        Vector3 initialPos = transform.position;
+        Vector3 initialPos = camTransform.position;
         newPos = Random.insideUnitSphere * shakeSmoothness + initialPos;
 
-        while (true)
+        while (alwaysShake || continuousShake)
         {
             newPos = Random.insideUnitSphere * intensity + initialPos;
-            transform.DOMove(newPos, frequency).SetEase(Ease.InOutCubic);
+            camTransform.DOMove(newPos, frequency).SetEase(Ease.InOutCubic);
             yield return new WaitForSeconds(frequency);
-            transform.DOMove(initialPos, frequency).SetEase(Ease.InOutCubic);
+            camTransform.DOMove(initialPos, frequency).SetEase(Ease.InOutCubic);
             yield return new WaitForSeconds(frequency);
         }
     }
@@ -111,8 +143,8 @@ public class CameraShakin : MonoBehaviour
     {
         return continuousShake;
     }
-    public void ToggleContinuousShake()
+    public void StopContinuousShake()
     {
-        continuousShake = !continuousShake;
+        continuousShake = false;
     }
 }

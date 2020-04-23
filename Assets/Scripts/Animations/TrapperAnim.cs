@@ -174,6 +174,6 @@ public class TrapperAnim : MonoBehaviour
 
     public void ToggleMovementControl()
     {
-        player.hasMovementControls = true;
+        player.hasMovementControls = !player.hasMovementControls;
     }
 }

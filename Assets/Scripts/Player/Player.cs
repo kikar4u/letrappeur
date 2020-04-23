@@ -96,6 +96,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
         //Ouvre les options
         if ((Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape)) && !inCinematic)
         {
@@ -203,7 +204,8 @@ public class Player : MonoBehaviour
     public void Rotate(Vector3 target)
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,
-        Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)), rotationSmoothness);
+        Quaternion.LookRotation(new Vector3(target.x - transform.position.x, 0f, target.z - transform.position.z)), rotationSmoothness * Time.deltaTime * 30);
+
     }
 
     void ChangeWaypointTarget(int _direction)

@@ -10,6 +10,11 @@ public class TriggerMoveCamera : MonoBehaviour
     public Transform targetPosition;
     [SerializeField] AnimationCurve animationCurve;
 
+    [Header("Shaking")]
+    public bool shake;
+    [HideInInspector] public float shakeintensity;
+    [HideInInspector] public float shakeFrequency;
+
 
     private void Start()
     {
@@ -55,10 +60,14 @@ public class TriggerMoveCamera : MonoBehaviour
         }
 
         StopCoroutine(nameof(MoveCameraToSpot));
+        if (shake)
+            cam.GetComponent<CameraShakin>().StartSmoothShake(shakeintensity, shakeFrequency);
     }
 
     IEnumerator MoveCameraToPlayer()
     {
+        if (shake)
+            cam.GetComponent<CameraShakin>().StopContinuousShake();
         float timeLimit = animationCurve.keys[animationCurve.length - 1].time;
         float timeCount = 0f;
         Vector3 initialCameraPosition = cam.transform.position;
@@ -73,5 +82,6 @@ public class TriggerMoveCamera : MonoBehaviour
         }
         cam.GetComponent<CameraFollowing>().focusedOnPlayer = true;
         StopCoroutine(nameof(MoveCameraToPlayer));
+
     }
 }

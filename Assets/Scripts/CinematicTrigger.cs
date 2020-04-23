@@ -24,12 +24,13 @@ public class CinematicTrigger : MonoBehaviour
     }
     void CheckIsFinished()
     {
-        if (mainCamera.GetComponent<VideoPlayer>().time == length)
+        if (mainCamera.GetComponent<VideoPlayer>().time >= length)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
             mainCamera.clip = null;
 
             Fader.Instance.FadeOut();
+            Destroy(gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
