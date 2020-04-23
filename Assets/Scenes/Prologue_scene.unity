@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 393722577}
-  m_IndirectSpecularColor: {r: 0.8134255, g: 0.8143422, b: 0.74628407, a: 1}
+  m_IndirectSpecularColor: {r: 0.81342643, g: 0.81434536, b: 0.74628806, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19952,6 +19952,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_DrawHalo
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394506713369497052, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8394506713369497053, guid: 0f3964a24dcc5b94881cd1ef89eb7b9d,
         type: 3}
