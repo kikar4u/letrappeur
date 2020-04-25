@@ -9,8 +9,10 @@ public class Fader : MonoBehaviour
     Animator fadeAnimator;
 
     public delegate void FadeOutDelegate();
+    public delegate void FadeInDelegate();
 
     public FadeOutDelegate fadeOutDelegate;
+    public FadeInDelegate fadeInDelegate;
 
     private static Fader _instance;
     public static Fader Instance
@@ -50,12 +52,15 @@ public class Fader : MonoBehaviour
 
     public void FadeIn()
     {
+
         fadeAnimator.SetTrigger("Fade");
+
     }
 
     public void FadeOut()
     {
         fadeAnimator.SetTrigger("FadeOut");
+
     }
 
     public void FadeOutActions()
@@ -64,6 +69,15 @@ public class Fader : MonoBehaviour
         {
             fadeOutDelegate();
             fadeOutDelegate = null;
+        }
+    }
+
+    public void FadeInActions()
+    {
+        if (fadeInDelegate != null)
+        {
+            fadeInDelegate();
+            fadeInDelegate = null;
         }
     }
 }

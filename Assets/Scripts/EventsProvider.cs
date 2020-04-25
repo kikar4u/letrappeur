@@ -9,7 +9,8 @@ public class EventsProvider : MonoBehaviour
     {
         //Fader.Instance.FadeIn();
         //S'assure que le fog est désactivé pendant la cinématique
-        Camera.main.GetComponent<Test_Fog>().enabled = false;
+        if (Camera.main.GetComponent<Test_Fog>() != null)
+            Camera.main.GetComponent<Test_Fog>().enabled = false;
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 
@@ -26,7 +27,8 @@ public class EventsProvider : MonoBehaviour
     public void LaunchCinematicWithLoadNewScene(VideoClip clip)
     {
         //Fader.Instance.FadeIn();
-        Camera.main.GetComponent<Test_Fog>().enabled = false;
+        if (Camera.main.GetComponent<Test_Fog>() != null)
+            Camera.main.GetComponent<Test_Fog>().enabled = false;
         RuntimeAnimatorController rac = Fader.Instance.GetAnimator().runtimeAnimatorController;
         float animDuration = 0;
 

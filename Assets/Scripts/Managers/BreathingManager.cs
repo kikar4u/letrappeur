@@ -48,6 +48,7 @@ public class BreathingManager : MonoBehaviour
             breathingCanvas = GameObject.FindGameObjectWithTag("BreathingCanvas");
             breathingCanvas.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
             breathingCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+            breathingCanvas.GetComponent<Canvas>().planeDistance = 0.5f;
         }
     }
 

@@ -52,11 +52,17 @@ public class CinematicManager : MonoBehaviour
     IEnumerator CheckCinematic(double videoClipLength)
     {
         int actualScene = SceneManagers.Instance.GetCurrentSceneIndex();
+        bool hasFaded = false;
         while (mainCamera.clip != null)
         {
+            //Commence à FadeIn un peu plus tôt
+            if (mainCamera.GetComponent<VideoPlayer>().time >= videoClipLength - Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).length && !hasFaded)
+            {
+                Fader.Instance.FadeIn();
+                hasFaded = true;
+            }
             if (mainCamera.GetComponent<VideoPlayer>().time >= videoClipLength)
             {
-                Fader.Instance.FadeOut();
                 mainCamera.clip = null;
                 if (GameObject.FindGameObjectWithTag("Player") != null)
                     GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
@@ -67,15 +73,14 @@ public class CinematicManager : MonoBehaviour
 
         postProcessVolumesContainer.SetActive(true);
 
-        Debug.Log(postProcessVolumesContainer);
         if (actualScene == SceneManagers.Instance.GetCurrentSceneIndex())
         {
             _MGR_SoundDesign.Instance.FadeInSounds(pausedAudioSources, 3f);
 
-            if (Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName("FadeOut"))
-            {
-                Fader.Instance.GetAnimator().Play("FadeOut", -1, 0f);
-            }
+            //if (Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).IsName("FadeOut"))
+            //{
+            //    Fader.Instance.GetAnimator().Play("FadeOut", -1, 0f);
+            //}
         }
 
         pausedAudioSources.Clear();

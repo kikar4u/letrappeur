@@ -24,10 +24,6 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
 
-        //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
-        Fader.Instance.fadeOutDelegate += playEvents.Invoke;
-        Fader.Instance.fadeOutDelegate += HideCanvas;
-
         menuButtons[0].Select();
         started = true;
 
@@ -42,9 +38,32 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void Play()
+    {
+        //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
+        //Fader.Instance.fadeOutDelegate += playEvents.Invoke;
+        Fader.Instance.fadeOutDelegate += HideCanvas;
+    }
+
+    public void StartCredits(VideoClip vid)
+    {
+        Fader.Instance.fadeOutDelegate += HideCanvas;
+        Invoke(nameof(ShowCanvasDeffered), (float)vid.length);
+    }
+
     private void HideCanvas()
     {
         mainCanvas.gameObject.SetActive(false);
+    }
+
+    private void ShowCanvasDeffered()
+    {
+        Fader.Instance.fadeInDelegate += ShowCanvas;
+    }
+
+    private void ShowCanvas()
+    {
+        mainCanvas.gameObject.SetActive(true);
     }
 
     public void HoverDeselect()
