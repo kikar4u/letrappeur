@@ -67,10 +67,15 @@ public class CameraShakin : MonoBehaviour
 
     public void StartSmoothShake(float intensity, float frequency)
     {
-        continuousShake = true;
+        //continuousShake = true;
         //StartCoroutine(ShakeContinue(intensity));
         StartCoroutine(SmoothShake(intensity, frequency));
 
+    }
+
+    public void SetContinuousShake(bool value)
+    {
+        continuousShake = value;
     }
 
     //Permet de faire shaker la caméra ponctuellement, mais on l'utilise pas.
@@ -143,6 +148,7 @@ public class CameraShakin : MonoBehaviour
                 yield return new WaitForSeconds(frequency);
             }
         }
+        Debug.Log("Stoped coroutine smoothshake");
         StopCoroutine(SmoothShake(frequency, intensity));
     }
 

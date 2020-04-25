@@ -9,7 +9,7 @@ public class TriggerMoveCamera : MonoBehaviour
     Camera cam;
     public Transform targetPosition;
     [SerializeField] AnimationCurve animationCurve;
-
+    bool shouldMoveToSpot;
     [Header("Shaking")]
     public bool shake;
     [HideInInspector] public float shakeintensity;
@@ -19,17 +19,21 @@ public class TriggerMoveCamera : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        shouldMoveToSpot = false;
+    }
+    private void Update()
+    {
+        Debug.Log(shouldMoveToSpot);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (cam.GetComponent<CameraFollowing>().focusedOnPlayer)
-            {
-                cam.GetComponent<CameraFollowing>().focusedOnPlayer = false;
-                StartCoroutine(MoveCameraToSpot(targetPosition));
-            }
+            shouldMoveToSpot = true;
+            cam.GetComponent<CameraFollowing>().focusedOnPlayer = false;
+            StartCoroutine(MoveCameraToSpot(targetPosition));
+
         }
     }
 
@@ -37,10 +41,9 @@ public class TriggerMoveCamera : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (!cam.GetComponent<CameraFollowing>().focusedOnPlayer)
-            {
-                StartCoroutine(nameof(MoveCameraToPlayer));
-            }
+            shouldMoveToSpot = false;
+            StartCoroutine(nameof(MoveCameraToPlayer));
+
         }
     }
 
@@ -50,7 +53,7 @@ public class TriggerMoveCamera : MonoBehaviour
         float timeCount = 0f;
         Vector3 initialCameraPosition = cam.transform.position;
         Quaternion initialCameraRotation = cam.transform.rotation;
-        while (timeCount < timeLimit)
+        while (timeCount < timeLimit && shouldMoveToSpot)
         {
             timeCount += Time.deltaTime;
             cam.transform.position = Vector3.Lerp(initialCameraPosition, newPos.position, animationCurve.Evaluate(timeCount));
@@ -60,8 +63,11 @@ public class TriggerMoveCamera : MonoBehaviour
         }
 
         StopCoroutine(nameof(MoveCameraToSpot));
-        if (shake)
+        if (shake && shouldMoveToSpot)
+        {
             cam.GetComponent<CameraShakin>().StartSmoothShake(shakeintensity, shakeFrequency);
+            cam.GetComponent<CameraShakin>().SetContinuousShake(true);
+        }
     }
 
     IEnumerator MoveCameraToPlayer()
@@ -72,7 +78,7 @@ public class TriggerMoveCamera : MonoBehaviour
         float timeCount = 0f;
         Vector3 initialCameraPosition = cam.transform.position;
         Quaternion initialCameraRotation = cam.transform.rotation;
-        while (timeCount < timeLimit)
+        while (timeCount < timeLimit && !shouldMoveToSpot)
         {
             timeCount += Time.deltaTime;
             cam.transform.position = Vector3.Lerp(initialCameraPosition, GameObject.FindGameObjectWithTag("Player").transform.position - cam.GetComponent<CameraFollowing>().GetCameraToPlayerOffset(), animationCurve.Evaluate(timeCount));
