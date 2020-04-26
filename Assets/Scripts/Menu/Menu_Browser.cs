@@ -23,7 +23,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         menu = GameObject.FindGameObjectWithTag("MenuPrincipal");
         nothingSelected = false;
         mainCanvas = GetComponent<Canvas>();
-
+        CursorHandler.Instance.SetCursorVisibility(true);
         menuButtons[0].Select();
         started = true;
 
@@ -34,6 +34,11 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
             {
                 menuButtons[i].onClick.RemoveAllListeners();
                 menuButtons[i].onClick.AddListener(SceneManagers.Instance.ExitGame);
+            }
+            if (menuButtons[i].gameObject.tag == "Credits")
+            {
+                menuButtons[i].onClick.RemoveAllListeners();
+                menuButtons[i].onClick.AddListener(Fader.Instance.FadeIn);
             }
         }
     }
