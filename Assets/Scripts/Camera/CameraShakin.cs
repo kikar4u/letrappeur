@@ -46,7 +46,7 @@ public class CameraShakin : MonoBehaviour
     {
         if (continuousShake || fadingShake)
         {
-            camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
+            //camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
         }
     }
 
@@ -67,7 +67,7 @@ public class CameraShakin : MonoBehaviour
 
     public void StartSmoothShake(float intensity, float frequency)
     {
-        //continuousShake = true;
+        continuousShake = true;
         //StartCoroutine(ShakeContinue(intensity));
         StartCoroutine(SmoothShake(intensity, frequency));
 
@@ -115,7 +115,7 @@ public class CameraShakin : MonoBehaviour
         while (GetContinuousShake())
         {
             newPos = target.position + Random.insideUnitSphere * intensity;
-
+            camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
             yield return new WaitForSeconds(fadeShakeFrequence);
         }
         fadingShake = true;
@@ -123,6 +123,7 @@ public class CameraShakin : MonoBehaviour
         {
             intensity -= Time.deltaTime;
             newPos = target.position + Random.insideUnitSphere * intensity;
+            camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
             yield return new WaitForSeconds(shakeSmoothness);
         }
         fadingShake = false;
