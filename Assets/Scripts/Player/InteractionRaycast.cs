@@ -52,7 +52,7 @@ public class InteractionRaycast : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
+            //Debug.DrawRay(player.transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
         }
     }
 }

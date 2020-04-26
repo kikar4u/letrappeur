@@ -38,7 +38,6 @@ public class BreathingTree : BreathingSystem
         if (successTime > (currentBreathing.breathingPattern.animationCurve[currentBreathing.breathingPattern.animationCurve.length - 1].time * currentBreathing.percentSuccessNeeded))
         {
             //on vient de reussir un pattern
-            Debug.Log("CHOP");
             player.trapperAnim.Chop();
             return true;
         }

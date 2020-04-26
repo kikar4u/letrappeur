@@ -21,10 +21,6 @@ public class TriggerMoveCamera : MonoBehaviour
         cam = Camera.main;
         shouldMoveToSpot = false;
     }
-    private void Update()
-    {
-        Debug.Log(shouldMoveToSpot);
-    }
 
     private void OnTriggerEnter(Collider other)
     {

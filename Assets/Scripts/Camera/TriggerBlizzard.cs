@@ -21,7 +21,6 @@ public class TriggerBlizzard : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Entre dans trigger");
         if (other.gameObject.CompareTag("Player"))
         {
             StartBlizzard();

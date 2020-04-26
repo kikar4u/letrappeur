@@ -148,7 +148,6 @@ public class CameraShakin : MonoBehaviour
                 yield return new WaitForSeconds(frequency);
             }
         }
-        Debug.Log("Stoped coroutine smoothshake");
         StopCoroutine(SmoothShake(frequency, intensity));
     }
 
