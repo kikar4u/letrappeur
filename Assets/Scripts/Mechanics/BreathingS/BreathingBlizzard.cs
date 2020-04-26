@@ -11,7 +11,6 @@ public class BreathingBlizzard : BreathingSystem
         {
             if (canWalkDuringBreathing)
             {
-                Debug.Log("Walk in blizzard");
                 if (player.trapperAnim.GetCurrentState() != AnimState.BLIZZARD_WALK)
                 {
                     player.trapperAnim.SetAnimState(AnimState.BLIZZARD_WALK);

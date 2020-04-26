@@ -297,7 +297,6 @@ public class BreathingSystem : MonoBehaviour
                 if (outsideBoundsTimer >= requiredTimeSpendOutsideBounds)
                 {
                     animator.SetTrigger("Over");
-                    Debug.Log("J'ai perdu...");
                 }
             }
         }

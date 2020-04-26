@@ -103,7 +103,6 @@ public class MenuManager : MonoBehaviour
 
     public void changeSlider(Slider slider)
     {
-        //Debug.Log(mixer);
         string name = slider.name;
         switch (name)
         {
