@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DownTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -48,11 +48,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -72,7 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Tex:
@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
-        m_Texture: {fileID: 2800000, guid: e511bac8653e0b847b86ec698e60fcb8, type: 3}
+        m_Texture: {fileID: 2800000, guid: bbf74a53663cf1b46aba5a0169c53738, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -107,4 +107,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GroundColor: {r: 1, g: 1, b: 1, a: 1}
     - _SkyTint: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
-    - _Tint: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.45490196}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0.45490196}
