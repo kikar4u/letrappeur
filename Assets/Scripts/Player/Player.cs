@@ -280,4 +280,9 @@ public class Player : MonoBehaviour
         Debug.Log("Saved curve ID" + respawnCurvedPosInfo.id);
         Debug.Log("Saved curve segment" + respawnSegment);
     }
+
+    public void Teleport(float amount)
+    {
+        WalkFollowingPath(amount, false);
+    }
 }

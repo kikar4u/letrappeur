@@ -8066,18 +8066,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &7903366465502803427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8033567528473741813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1f94f8bde59cf740bb39de740017c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &6994755416764552897
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8175,6 +8163,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7903366465502803427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8033567528473741813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f94f8bde59cf740bb39de740017c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8793412476521179969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10827,6 +10827,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 99.99998
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: fc6c86c6b792fef40a2affb1d22446d5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81a4fb2091f7e9b40a91f4ef1ab94afd, type: 2}
     - target: {fileID: -927199367670048503, guid: fc6c86c6b792fef40a2affb1d22446d5,
         type: 3}
       propertyPath: m_Name

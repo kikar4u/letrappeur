@@ -5185,7 +5185,7 @@ GameObject:
   - component: {fileID: 789905208}
   m_Layer: 5
   m_Name: Credits
-  m_TagString: Options
+  m_TagString: Credits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5268,6 +5268,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1162013277}
+          m_MethodName: StartCredits
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 32900000, guid: 8f125fbaf368ece429952d9a44c5460c,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Video.VideoClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 645756993}
+          m_MethodName: LaunchCinematic
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 32900000, guid: 8f125fbaf368ece429952d9a44c5460c,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Video.VideoClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!114 &789905209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5337,30 +5365,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 645756993}
-        m_MethodName: LaunchCinematic
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 32900000, guid: 8f125fbaf368ece429952d9a44c5460c,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Video.VideoClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1162013277}
-        m_MethodName: StartCredits
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 32900000, guid: 8f125fbaf368ece429952d9a44c5460c,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Video.VideoClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8257,6 +8261,7 @@ MonoBehaviour:
   menuButtons:
   - {fileID: 1743733513}
   - {fileID: 7890056}
+  - {fileID: 789905210}
   - {fileID: 2077186770}
   playEvents:
     m_PersistentCalls:

@@ -25,11 +25,16 @@ public class TriggerBlizzard : MonoBehaviour
         {
             StartBlizzard();
         }
-
     }
 
-    public void StartBlizzard()
+    public void DeferredBlizzard(float amount)
     {
+        Invoke(nameof(StartBlizzard), amount);
+    }
+
+    private void StartBlizzard()
+    {
+        Debug.Log(weather);
         animatorSnow.ResetTrigger("SnowToNone");
         animatorFog.ResetTrigger("FogToNone");
         animatorSnow.ResetTrigger("BlizzardToSnow");
