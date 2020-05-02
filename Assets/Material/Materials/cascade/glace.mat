@@ -61,9 +61,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 0.384
-    - _Glossiness: 0.666
+    - _Glossiness: 0.257
     - _GlossyReflections: 0
-    - _Metallic: 0.89
+    - _Metallic: 0.55
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
@@ -73,5 +73,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5608757, g: 0.7109885, b: 0.8679245, a: 1}
+    - _Color: {r: 0.629984, g: 0.778076, b: 0.9339623, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
