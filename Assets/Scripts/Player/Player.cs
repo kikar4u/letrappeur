@@ -128,7 +128,8 @@ public class Player : MonoBehaviour
         else if (hasMovementControls && trapperAnim.GetCurrentState() != AnimState.CLIMB)
         {
             movementOffset = 0;
-            trapperAnim.SetAnimState(AnimState.IDLE);
+            if (trapperAnim.GetCurrentState() != AnimState.IDLE)
+                trapperAnim.SetAnimState(AnimState.IDLE);
         }
 
         forwardWayPointAngle = Vector3.Angle(new Vector3(nextMoveDirection.x - transform.position.x, 0f, nextMoveDirection.z - transform.position.z), new Vector3(transform.forward.x, 0f, transform.forward.z));
@@ -252,6 +253,7 @@ public class Player : MonoBehaviour
     {
         hasMovementControls = true;
         trapperAnim.SetAnimState(AnimState.IDLE);
+        trapperAnim.UpdateAnimSpeed(1f);
         currentCurvedPosInfo = respawnCurvedPosInfo;
         currentSegment = respawnSegment;
 

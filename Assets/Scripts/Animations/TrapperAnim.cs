@@ -53,6 +53,8 @@ public class TrapperAnim : MonoBehaviour
 
     public void SetAnimState(AnimState newState)
     {
+        Debug.Log("Currentstate :" + currentState);
+        Debug.Log("Currentstate :" + newState);
         if (newState == currentState)
         {
             return;
@@ -81,6 +83,7 @@ public class TrapperAnim : MonoBehaviour
         }
         currentState = newState;
 
+        Debug.Log("Currentstate now:" + currentState);
         switch (currentState)
         {
             case AnimState.IDLE:
@@ -126,6 +129,7 @@ public class TrapperAnim : MonoBehaviour
     {
         if (GetCurrentState() == AnimState.CHOP)
         {
+            player.animator.SetInteger("RandomChop", Random.Range(1, 3));
             if (player.animator.GetCurrentAnimatorStateInfo(0).IsName("AxeMelee"))
             {
                 player.animator.Play("AxeMelee", -1, 0f);
@@ -141,6 +145,7 @@ public class TrapperAnim : MonoBehaviour
     public void UpdateAnimSpeed(float speed)
     {
         StartCoroutine(SmoothUpdateAnimSpeed(speed));
+        //player.animator.speed = speed;
     }
 
     IEnumerator SmoothUpdateAnimSpeed(float endSpeed)

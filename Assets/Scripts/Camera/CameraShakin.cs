@@ -42,13 +42,13 @@ public class CameraShakin : MonoBehaviour
         fadingShake = false;
     }
 
-    private void Update()
-    {
-        if (continuousShake || fadingShake)
-        {
-            //camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
-        }
-    }
+    //private void Update()
+    //{
+    //    if (continuousShake || fadingShake)
+    //    {
+    //        camTransform.localPosition = Vector3.Lerp(camTransform.localPosition, newPos, shakeSmoothness);
+    //    }
+    //}
 
     //On l'utilise pas :l
     public void Shake(float duration, float intensity, float decreaseFactor)
