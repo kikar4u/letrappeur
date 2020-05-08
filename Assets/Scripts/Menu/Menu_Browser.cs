@@ -43,12 +43,12 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    //public void Play()
-    //{
-    //    //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
-    //    //Fader.Instance.fadeOutDelegate += playEvents.Invoke;
-    //    Fader.Instance.fadeOutDelegate += HideCanvas;
-    //}
+    public void Play()
+    {
+        //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
+        //Fader.Instance.fadeOutDelegate += playEvents.Invoke;
+        Fader.Instance.fadeOutDelegate += HideCanvas;
+    }
 
     public void StartCredits()
     {
