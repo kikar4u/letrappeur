@@ -12673,6 +12673,11 @@ PrefabInstance:
       propertyPath: Music
       value: 
       objectReference: {fileID: 496143159}
+    - target: {fileID: 2417246019932373529, guid: 233e15aef50399444b3f9a0c4531277e,
+        type: 3}
+      propertyPath: skipCinematicHUD
+      value: 
+      objectReference: {fileID: 1670882901}
     - target: {fileID: 2417246019932373531, guid: 233e15aef50399444b3f9a0c4531277e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -28906,6 +28911,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3821871803416138367, guid: 43920df7888fad2479161965a84e9844,
     type: 3}
   m_PrefabInstance: {fileID: 1662784340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1670882901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6841972362072117289, guid: 8ef332681f21ae54eb57bd62eaef760f,
+    type: 3}
+  m_PrefabInstance: {fileID: 496143156}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1671232415 stripped
 Transform:
