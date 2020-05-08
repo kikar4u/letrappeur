@@ -11195,7 +11195,7 @@ PrefabInstance:
     - target: {fileID: 7332059584860147938, guid: 50d7f2cdfbbc13d47b11277a7cbd77e4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8720903964359922316, guid: 50d7f2cdfbbc13d47b11277a7cbd77e4,
         type: 3}
@@ -11265,6 +11265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Blizzard (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 431415145942588822, guid: 5c528e1160f28b94e9c4bb82e594ec47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1818006610007547896, guid: 5c528e1160f28b94e9c4bb82e594ec47,
         type: 3}
