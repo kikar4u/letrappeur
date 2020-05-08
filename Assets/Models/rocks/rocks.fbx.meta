@@ -7,58 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.005
-    second: {fileID: 2100000, guid: 3e33c71eef6660340805cf5a3d62ee37, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.006
-    second: {fileID: 2100000, guid: ea1e7460cd556c94a84bf0a65a2a4495, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.007
-    second: {fileID: 2100000, guid: 39d6cd273bdb42143bf5ccfb3967440d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.008
-    second: {fileID: 2100000, guid: 6c51290bfbbf56c4887b2d53d0523495, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.009
-    second: {fileID: 2100000, guid: 8f7583b67ac6d4846b14ac2336c19a56, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.010
-    second: {fileID: 2100000, guid: 06f4a07bf2305a54db3f983341933ab3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.011
-    second: {fileID: 2100000, guid: 79ec78359fc4c2946b6b5397f9a06695, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.012
-    second: {fileID: 2100000, guid: c92bdf034b868a643b59eb6f5f199523, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.013
-    second: {fileID: 2100000, guid: 864fa3b6ed5a2074c88e2a0807706472, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.014
-    second: {fileID: 2100000, guid: a8d4c696c137ab644afcc7897842ee0f, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: uv_update2.0
-    second: {fileID: 2800000, guid: 715dc8bd2172e0c4fa8c87325a42f0a9, type: 3}
+      name: Material
+    second: {fileID: 2100000, guid: e0538b3f19a6c354f87cfc59b1c122f9, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
