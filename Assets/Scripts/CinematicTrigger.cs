@@ -52,6 +52,7 @@ public class CinematicTrigger : MonoBehaviour
     void PlayEvents()
     {
         cinematicEndEvents.Invoke();
+        Destroy(gameObject);
     }
 
     void PlayVideo()
