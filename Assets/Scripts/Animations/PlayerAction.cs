@@ -36,8 +36,14 @@ public class PlayerAction : MonoBehaviour
         }
 
     }
+
     public void EquipAxe(AudioClip _clip)
     {
         _MGR_SoundDesign.Instance.PlaySpecificSound(_clip, player.audioSourceOtherFX);
+    }
+
+    public void PlayAxeHit()
+    {
+        _MGR_SoundDesign.Instance.PlaySound("AxeHit", player.audioSource);
     }
 }

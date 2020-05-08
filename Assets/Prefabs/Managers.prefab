@@ -93,6 +93,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   postProcessVolumesContainer: {fileID: 0}
+  skipCinematicHUD: {fileID: 0}
+  readyToSkip: 0
+  VideoEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &500744783719465161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,10 +179,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
   - nom: AxeHit
     arr_sons:
-    - {fileID: 8300000, guid: f53b58d989b4ad447a2a62670632b618, type: 3}
-    - {fileID: 8300000, guid: 7fbba91260563ec41b28e0d305e7f697, type: 3}
-    - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
-    - {fileID: 8300000, guid: 4f56dc040a135244eb918abb2f9f5c8d, type: 3}
+    - {fileID: 8300000, guid: 40ed752a94bb1a14c8b8671fc1b61955, type: 3}
+    - {fileID: 8300000, guid: 7673287f010cd3e47960b686b49ca3a9, type: 3}
+    - {fileID: 8300000, guid: 3d6a1b536e8180e429264ee782e9d324, type: 3}
+    - {fileID: 8300000, guid: ad217a35caf3a6e4494bd0857b551565, type: 3}
   - nom: Victory
     arr_sons:
     - {fileID: 8300000, guid: 2cd2c007784ba054fa72a7686fcb58a0, type: 3}
@@ -275,4 +280,3 @@ MonoBehaviour:
   SFX: {fileID: 0}
   masterMix: {fileID: 0}
   mixer: {fileID: 24100000, guid: 40992356a2f7b2244818d9488b34eef9, type: 2}
-  sources: []
