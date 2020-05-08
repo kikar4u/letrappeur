@@ -11,6 +11,8 @@ public class SceneManagers : MonoBehaviour
     private static SceneManagers p_instance = null;
     public static SceneManagers Instance { get { return p_instance; } }
 
+    AsyncOperation asyncLoadScene;
+
     void Awake()
     {
         //Check if instance already exists
@@ -36,22 +38,26 @@ public class SceneManagers : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
-    //public void LoadSceneAsync(string sceneName)
+    //public IEnumerator LoadSceneAsync(int sceneIndex, float timeToWait)
     //{
-    //    //Scene sceneToLoad = SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
-    //    //Debug.Log("load la scene :" + sceneToLoad.name + " qui a pour index : " + sceneToLoad.buildIndex);
-    //    AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(SceneManager.GetSceneByName(sceneName).buildIndex);
-    //    while (!asyncLoadScene.isDone)
-    //        Debug.Log(asyncLoadScene.progress);
+    //    asyncLoadScene = SceneManager.LoadSceneAsync(sceneIndex);
+    //    asyncLoadScene.allowSceneActivation = false;
+    //    yield return new WaitForSeconds(timeToWait);
+    //    CinematicManager.Instance.VideoEnd.AddListener(AllowScene);
+    //    //Fader.Instance.GetAnimator().Play(Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, -1);
     //}
 
-    public IEnumerator LoadSceneAsync(int sceneIndex, float timeToWait)
+
+    public void LoadSceneAsync(int sceneIndex)
     {
-        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(sceneIndex);
+        asyncLoadScene = SceneManager.LoadSceneAsync(sceneIndex);
         asyncLoadScene.allowSceneActivation = false;
-        yield return new WaitForSeconds(timeToWait);
+        CinematicManager.Instance.VideoEnd.AddListener(AllowScene);
+    }
+
+    private void AllowScene()
+    {
         asyncLoadScene.allowSceneActivation = true;
-        //Fader.Instance.GetAnimator().Play(Fader.Instance.GetAnimator().GetCurrentAnimatorStateInfo(0).fullPathHash, 0, -1);
     }
 
     public void ExitGame()

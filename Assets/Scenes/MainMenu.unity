@@ -2424,6 +2424,11 @@ PrefabInstance:
       propertyPath: options
       value: 
       objectReference: {fileID: 1105008388}
+    - target: {fileID: 2417246019932373529, guid: 233e15aef50399444b3f9a0c4531277e,
+        type: 3}
+      propertyPath: skipCinematicHUD
+      value: 
+      objectReference: {fileID: 1489744279}
     - target: {fileID: 2417246019932373531, guid: 233e15aef50399444b3f9a0c4531277e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11373,6 +11378,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ef332681f21ae54eb57bd62eaef760f, type: 3}
+--- !u!1 &1489744279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6841972362072117289, guid: 8ef332681f21ae54eb57bd62eaef760f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1489744278}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1489744280 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6070565824649707094, guid: 8ef332681f21ae54eb57bd62eaef760f,

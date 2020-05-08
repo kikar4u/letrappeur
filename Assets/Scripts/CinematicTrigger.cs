@@ -16,27 +16,28 @@ public class CinematicTrigger : MonoBehaviour
     {
         // on récupère le videoplayer sur la main camera
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<VideoPlayer>();
-        length = vid.length;
+        //length = vid.length;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (mainCamera.clip != null)
-            CheckIsFinished();
-    }
-    void CheckIsFinished()
-    {
-        if (mainCamera.GetComponent<VideoPlayer>().time >= length)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
-            mainCamera.clip = null;
+    //void Update()
+    //{
+    //    if (mainCamera.clip != null)
+    //        CheckIsFinished();
+    //}
+    //void CheckIsFinished()
+    //{
+    //    if (mainCamera.GetComponent<VideoPlayer>().time >= length)
+    //    {
+    //        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().inCinematic = false;
+    //        mainCamera.clip = null;
 
-            cinematicEndEvents.Invoke();
-            Fader.Instance.FadeOut();
-            Destroy(gameObject);
-        }
-    }
+    //        cinematicEndEvents.Invoke();
+    //        Fader.Instance.FadeOut();
+    //        Destroy(gameObject);
+    //    }
+    //}
+
     private void OnTriggerEnter(Collider other)
     {
         // on vérifie que c'est bien le joueur
@@ -44,8 +45,13 @@ public class CinematicTrigger : MonoBehaviour
         {
             Fader.Instance.FadeIn();
             Fader.Instance.fadeOutDelegate += PlayVideo;
-
+            CinematicManager.Instance.VideoEnd.AddListener(PlayEvents);
         }
+    }
+
+    void PlayEvents()
+    {
+        cinematicEndEvents.Invoke();
     }
 
     void PlayVideo()

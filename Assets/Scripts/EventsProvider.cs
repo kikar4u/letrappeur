@@ -56,7 +56,8 @@ public class EventsProvider : MonoBehaviour
         if (loadScene)
         {
             //Appelle la coroutine qui load asynchronement
-            SceneManagers.Instance.StartCoroutine(SceneManagers.Instance.LoadSceneAsync(sceneToLoad, (float)clip.length));
+            //SceneManagers.Instance.StartCoroutine(SceneManagers.Instance.LoadSceneAsync(sceneToLoad, (float)clip.length));
+            SceneManagers.Instance.LoadSceneAsync(sceneToLoad);
         }
         CinematicManager.Instance.LaunchCinematic(clip);
 

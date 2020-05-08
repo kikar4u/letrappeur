@@ -21,6 +21,8 @@ TagManager:
   - Quitter
   - Bloom
   - Credits
+  - lb_perchTarget
+  - SkipCinematicHUD
   layers:
   - Default
   - TransparentFX
