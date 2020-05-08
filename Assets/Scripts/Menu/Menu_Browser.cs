@@ -70,7 +70,7 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     private void ShowCanvas()
     {
         mainCanvas.gameObject.SetActive(true);
-        Debug.Log("show canvas");
+        CursorHandler.Instance.SetCursorVisibility(true);
     }
 
     public void HoverDeselect()
