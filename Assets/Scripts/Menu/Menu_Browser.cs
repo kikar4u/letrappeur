@@ -43,32 +43,34 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void Play()
-    {
-        //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
-        //Fader.Instance.fadeOutDelegate += playEvents.Invoke;
-        Fader.Instance.fadeOutDelegate += HideCanvas;
-    }
+    //public void Play()
+    //{
+    //    //Tous les evenements à lancer au lancement du jeu sont gérer à la fin du fade in
+    //    //Fader.Instance.fadeOutDelegate += playEvents.Invoke;
+    //    Fader.Instance.fadeOutDelegate += HideCanvas;
+    //}
 
-    public void StartCredits(VideoClip vid)
+    public void StartCredits()
     {
         Fader.Instance.fadeOutDelegate += HideCanvas;
-        Invoke(nameof(ShowCanvasDeffered), (float)vid.length);
+
     }
 
     private void HideCanvas()
     {
         mainCanvas.gameObject.SetActive(false);
+        Invoke(nameof(ShowCanvasDeffered), 0.1f);
     }
 
     private void ShowCanvasDeffered()
     {
-        Fader.Instance.fadeInDelegate += ShowCanvas;
+        Fader.Instance.fadeOutDelegate += ShowCanvas;
     }
 
     private void ShowCanvas()
     {
         mainCanvas.gameObject.SetActive(true);
+        Debug.Log("show canvas");
     }
 
     public void HoverDeselect()
