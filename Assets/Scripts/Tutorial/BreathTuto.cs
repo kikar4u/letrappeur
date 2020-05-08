@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(TriggerBreathing))]
 public class BreathTuto : MonoBehaviour
 {
     Animator animator;
@@ -19,6 +20,8 @@ public class BreathTuto : MonoBehaviour
         animator = GetComponent<Animator>();
         canvas = GetComponentInChildren<Canvas>();
         canvas.gameObject.SetActive(false);
+
+        GetComponent<TriggerBreathing>().isHold = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -30,6 +33,8 @@ public class BreathTuto : MonoBehaviour
 
             _MGR_SoundDesign.Instance.PlaySound("HUDTutoFadeIn", Camera.main.GetComponent<AudioSource>());
             _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", -masterAudioAttenuation, 1f);
+
+
         }
     }
 
@@ -45,12 +50,14 @@ public class BreathTuto : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0f;
+
+        //Time.timeScale = 0f;
     }
 
     public void Retake()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+        GetComponent<TriggerBreathing>().isHold = false;
         _MGR_SoundDesign.Instance.PlaySound("HUDTutoFadeOut", Camera.main.GetComponent<AudioSource>());
         _MGR_SoundDesign.Instance.ChangeMixerVolume("Master", masterAudioAttenuation, 1f);
     }

@@ -15,7 +15,7 @@ public class TriggerBreathing : MonoBehaviour
 {
     bool triggered;
     public AnimType animType;
-
+    [HideInInspector] public bool isHold;
     #region Curve
     public BreathingUnit[] breathingUnits;
     [SerializeField] float playerCircleSpeed;
@@ -103,6 +103,10 @@ public class TriggerBreathing : MonoBehaviour
 
     IEnumerator InstantationTimeOffset(float duration)
     {
+        while (isHold)
+        {
+            yield return null;
+        }
         yield return new WaitForSeconds(duration);
         GameObject prefabToInstantiate = BreathingManager.Instance.breathingPrefab;
 
@@ -129,6 +133,7 @@ public class TriggerBreathing : MonoBehaviour
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
         }
+
         GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSourceBuildRespiration.loop = true;
         BreathingManager.Instance.SetCurrentBreathing(breathingCircles.GetComponent<BreathingSystem>());
         _MGR_SoundDesign.Instance.PlaySpecificSound(duringBreathingClip, GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().audioSourceBuildRespiration);
