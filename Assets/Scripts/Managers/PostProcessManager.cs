@@ -180,4 +180,13 @@ public class PostProcessManager : MonoBehaviour
     }
 
     #endregion
+
+
+    #region Fog
+    public void UpdateFogIntensity(float endValue, float duration)
+    {
+        DOTween.To(() => RenderSettings.fogDensity, x => RenderSettings.fogDensity = x, endValue, duration);
+
+    }
+    #endregion
 }
