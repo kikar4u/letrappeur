@@ -53,16 +53,16 @@ public class Menu_Browser : MonoBehaviour, IPointerClickHandler
     public void StartCredits()
     {
         Fader.Instance.fadeOutDelegate += HideCanvas;
+        Invoke(nameof(ShowCanvasDeffered), 2f);
 
     }
 
     private void HideCanvas()
     {
         mainCanvas.gameObject.SetActive(false);
-        Invoke(nameof(ShowCanvasDeffered), 0.1f);
     }
 
-    private void ShowCanvasDeffered()
+    public void ShowCanvasDeffered()
     {
         Fader.Instance.fadeOutDelegate += ShowCanvas;
     }
