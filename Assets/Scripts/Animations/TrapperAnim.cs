@@ -177,8 +177,8 @@ public class TrapperAnim : MonoBehaviour
         weaponPoint.transform.localScale = initialScale;
     }
 
-    public void ToggleMovementControl()
+    public void SetMovementControl()
     {
-        player.hasMovementControls = !player.hasMovementControls;
+        player.hasMovementControls = true;
     }
 }

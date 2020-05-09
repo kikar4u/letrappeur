@@ -251,7 +251,8 @@ public class Player : MonoBehaviour
 
     public void Respawn()
     {
-        hasMovementControls = true;
+        if (!hasMovementControls)
+            hasMovementControls = true;
         trapperAnim.SetAnimState(AnimState.IDLE);
         trapperAnim.UpdateAnimSpeed(1f);
         currentCurvedPosInfo = respawnCurvedPosInfo;
