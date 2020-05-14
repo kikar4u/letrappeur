@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class lb_BirdController : MonoBehaviour {
 	public int idealNumberOfBirds;
 	public int maximumNumberOfBirds;
-	public Camera currentCamera;
-	public float unspawnDistance = 10.0f;
+	public GameObject currentCamera;
+    public Camera currentCamera2;
+    public float unspawnDistance = 10.0f;
 	public bool highQuality = true;
 	public bool collideWithObjects = true;
 	public LayerMask groundLayer;
@@ -71,15 +72,20 @@ public class lb_BirdController : MonoBehaviour {
 		}
 	}
 
-	public void ChangeCamera(Camera cam){
+    /*public void ChangeCamera(Camera cam){
 		currentCamera = cam;
-	}
+	}*/
 
-	void Start () {
+    public void ChangeCamera(GameObject cam){
+        currentCamera = cam;
+    }
+
+    void Start () {
 		//find the camera
 		if (currentCamera == null){
-			currentCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-		}
+            //currentCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            currentCamera = GameObject.FindGameObjectWithTag("Player-3").GetComponent<GameObject>();
+        }
 
 		if(idealNumberOfBirds >= maximumNumberOfBirds){
 			idealNumberOfBirds = maximumNumberOfBirds-1;
@@ -230,7 +236,7 @@ public class lb_BirdController : MonoBehaviour {
 	}
 
 	bool BirdOffCamera(Vector3 birdPos){
-		Vector3 screenPos = currentCamera.WorldToViewportPoint(birdPos);
+		Vector3 screenPos = currentCamera2.WorldToViewportPoint(birdPos);
 		if (screenPos.x < 0 || screenPos.x > 1 || screenPos.y < 0 || screenPos.y > 1){
 			return true;
 		}else{
@@ -288,7 +294,7 @@ public class lb_BirdController : MonoBehaviour {
 		Vector3 ray = -currentCamera.transform.forward;
 		int loopCheck = 0;
 		//find a random ray pointing away from the cameras field of view
-		ray += new Vector3(Random.Range (-.5f,.5f),Random.Range (-.5f,.5f),Random.Range (-.5f,.5f));
+		ray += new Vector3(Random.Range (-.15f,.15f),Random.Range (-.15f,.15f),Random.Range (-.15f,.15f));
 		//cycle through random rays until we find one that doesnt hit anything
 		while(Physics.Raycast(currentCamera.transform.position,ray,out hit,dist)){
 			dist = Random.Range (2,10);
