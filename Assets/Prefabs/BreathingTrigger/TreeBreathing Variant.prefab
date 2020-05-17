@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: m_Name
-      value: TreeBreathing Variant (1)
+      value: TreeBreathing Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384456, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -25,12 +25,12 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[0].percentSuccessNeeded
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[1].percentSuccessNeeded
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -53,7 +53,7 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingUnits.Array.data[2].breathingPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 904a8f21c13e34c4eb8cef85b01ef005,
+      objectReference: {fileID: 11400000, guid: 240fa26d1c1c92346862269ad4ea09d2,
         type: 2}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -64,7 +64,7 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingUnits.Array.data[3].breathingPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 904a8f21c13e34c4eb8cef85b01ef005,
+      objectReference: {fileID: 11400000, guid: 240fa26d1c1c92346862269ad4ea09d2,
         type: 2}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -75,12 +75,12 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingUnits.Array.data[4].breathingPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 904a8f21c13e34c4eb8cef85b01ef005,
+      objectReference: {fileID: 11400000, guid: 8506466ec573a4347adfe2c600f614bb,
         type: 2}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[4].percentSuccessNeeded
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}

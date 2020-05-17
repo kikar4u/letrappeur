@@ -77,25 +77,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Garder le cercle dans la zone avec <b>LT</b> et <b>RT</b>
---- !u!95 &5912619784091669104
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4177705398499077746}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: be9f3e53a296828478ac41e68f19c89c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2631089146701888866
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +257,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: <b>Ok</b>
+--- !u!95 &5912619784091669104
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4177705398499077746}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be9f3e53a296828478ac41e68f19c89c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4420947400110067617
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -585,22 +585,22 @@ PrefabInstance:
         type: 3}
       propertyPath: breathingUnits.Array.data[4].breathingPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 75c5154b8d761294c82d0eba5d7950dc,
+      objectReference: {fileID: 11400000, guid: a23ca3ef6277c9844818ce70931cc587,
         type: 2}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[1].percentSuccessNeeded
-      value: 0.8
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[2].percentSuccessNeeded
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[3].percentSuccessNeeded
-      value: 0.8
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -646,6 +646,17 @@ PrefabInstance:
         type: 3}
       propertyPath: vignetingData.stepIntensity
       value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[5].breathingPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: c80dd697ef1143848af68f8a795e676a,
+        type: 2}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[5].percentSuccessNeeded
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384459, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}

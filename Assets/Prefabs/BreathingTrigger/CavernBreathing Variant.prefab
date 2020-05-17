@@ -20,7 +20,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -31,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[0].percentSuccessNeeded
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -47,7 +47,7 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[1].percentSuccessNeeded
-      value: 0.5
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -76,22 +76,22 @@ PrefabInstance:
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[4].percentSuccessNeeded
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[5].percentSuccessNeeded
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[3].percentSuccessNeeded
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
       propertyPath: breathingUnits.Array.data[2].percentSuccessNeeded
-      value: 0.5
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}
@@ -132,6 +132,28 @@ PrefabInstance:
         type: 3}
       propertyPath: vignetingData.stepIntensity
       value: 0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[6].breathingPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: c01a714426c38364eb7d9eda0a3e3456,
+        type: 2}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[6].percentSuccessNeeded
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[7].breathingPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: a97066b64f6410d42be123e9febdc6fe,
+        type: 2}
+    - target: {fileID: 4480566234277384458, guid: faccafac50dd34e468a89f6c92de9eb9,
+        type: 3}
+      propertyPath: breathingUnits.Array.data[7].percentSuccessNeeded
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4480566234277384459, guid: faccafac50dd34e468a89f6c92de9eb9,
         type: 3}

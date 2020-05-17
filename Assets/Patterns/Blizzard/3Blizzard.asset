@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cb61a4eda4f1e24799c1b77b6e0e2b2, type: 3}
-  m_Name: 2Blizzard
+  m_Name: 3Blizzard
   m_EditorClassIdentifier: 
   animationCurve:
     serializedVersion: 2
@@ -27,15 +27,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.5
       value: 2.5
-      inSlope: 2.6666667
-      outSlope: 2.6666667
+      inSlope: 2.642857
+      outSlope: 2.642857
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2
-      value: 9
+      time: 2.25
+      value: 10
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -43,16 +43,16 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 3.5
+      time: 4
       value: 2.5
-      inSlope: -2.6666667
-      outSlope: -2.6666667
+      inSlope: -2.642857
+      outSlope: -2.642857
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 4
+      time: 4.5
       value: 2
       inSlope: 0
       outSlope: 0
