@@ -259,7 +259,7 @@ public class Player : MonoBehaviour
         currentSegment = respawnSegment;
 
         Vector3 newPos = currentCurvedPosInfo.CalculateCurvePoint(currentSegment);
-
+        XInputDotNetPure.GamePad.SetVibration(0, 0.0f, 0.0f);
         RaycastHit hit;
         if (Physics.Raycast(new Vector3(newPos.x, transform.position.y + playerCollider.bounds.size.y, newPos.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
         {
