@@ -2169,6 +2169,11 @@ PrefabInstance:
       propertyPath: playerCircleSpeed
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 2679060309414722483, guid: 53c633eeecf3ce542b2f579a05a874c7,
+        type: 3}
+      propertyPath: inputForceModifier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53c633eeecf3ce542b2f579a05a874c7, type: 3}
 --- !u!1001 &1853120406

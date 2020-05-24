@@ -141,6 +141,12 @@ public class Player : MonoBehaviour
         return direction * _speed * Time.deltaTime / currentCurvedPosInfo.GetCurvedLength();
     }
 
+    private float CalculateFixedOnCurve(float value)
+    {
+        value = Mathf.Clamp01(value);
+        return direction * value;
+    }
+
     //Déplace le personnage sur la courbe des waypoints en fonction d'une vitesse donnée
     public void WalkFollowingPath(float _speed, bool controled)
     {
@@ -286,6 +292,28 @@ public class Player : MonoBehaviour
 
     public void Teleport(float amount)
     {
-        WalkFollowingPath(amount, false);
+        //WalkFollowingPath(amount, false);
+        currentSegment += CalculateFixedOnCurve(amount);
+        moveDirection = currentCurvedPosInfo.CalculateCurvePoint(currentSegment);
+        //Debug.Log("Magnitude : " + (new Vector3(moveDirection.x, transform.position.y, moveDirection.z) - transform.position).magnitude);
+        moveDirection = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
+        Rotate(moveDirection);
+        movementOffset = Vector3.Distance(moveDirection, transform.position);
+
+        //Permet de garder les pieds sur terre
+        RaycastHit hit;
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down) * playerCollider.bounds.size.y * 10, Color.yellow, 2);
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + playerCollider.bounds.size.y, transform.position.z), transform.TransformDirection(Vector3.down), out hit, Mathf.Infinity, terrainMask))
+        {
+            transform.position = new Vector3(moveDirection.x, hit.point.y, moveDirection.z);
+        }
+        else
+        {
+            transform.position = new Vector3(moveDirection.x, transform.position.y, moveDirection.z);
+        }
+
+        nextMoveDirection = SetNextMoveDir(amount);
+
+        Rotate(nextMoveDirection);
     }
 }

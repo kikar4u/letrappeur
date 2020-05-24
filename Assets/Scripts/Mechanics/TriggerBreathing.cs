@@ -19,8 +19,7 @@ public class TriggerBreathing : MonoBehaviour
     #region Curve
     public BreathingUnit[] breathingUnits;
     [SerializeField] float playerCircleSpeed;
-    [SerializeField] float inputForceModifier;
-    //public float speedCirclePlayer;
+    [SerializeField] AnimationCurve circleSpeedCurve;
     #endregion
 
     #region Success
@@ -118,15 +117,16 @@ public class TriggerBreathing : MonoBehaviour
         switch (animType)
         {
             case AnimType.BLIZZARD:
-                breathingCircles.AddComponent<BreathingBlizzard>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, inputForceModifier, walkSpeedDuringBreathing);
+                breathingCircles.AddComponent<BreathingBlizzard>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, circleSpeedCurve, walkSpeedDuringBreathing);
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
             case AnimType.NORMAL:
-                breathingCircles.AddComponent<BreathingNormal>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, inputForceModifier, walkSpeedDuringBreathing);
+                breathingCircles.AddComponent<BreathingNormal>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, circleSpeedCurve, walkSpeedDuringBreathing);
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
             case AnimType.CHOPPING:
-                breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, inputForceModifier, walkSpeedDuringBreathing);
+
+                breathingCircles.AddComponent<BreathingTree>().PopulateBreathingSystem(breathingUnits, requiredFailedToLose, requiredTimeSpendInsideBounds, requiredTimeSpendOutsideBounds, canWalkDuringBreathing, playerCircleSpeed, this, circleSpeedCurve, walkSpeedDuringBreathing);
                 duringBreathingClip = _MGR_SoundDesign.Instance.GetSpecificClip("DuringPanic");
                 break;
             default:
