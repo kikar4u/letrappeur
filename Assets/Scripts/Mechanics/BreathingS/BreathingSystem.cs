@@ -24,6 +24,7 @@ public class BreathingSystem : MonoBehaviour
     #region Input
     float leftTrigger;
     float rightTrigger;
+    float inputForceModifier;
     #endregion
 
     #region Animation
@@ -62,7 +63,6 @@ public class BreathingSystem : MonoBehaviour
 
     bool stutter = false;
     bool checkingBlocked = false;
-
     [HideInInspector] public TriggerBreathing triggerBreathing;
 
     //Anim event : Déclenche le début de l'interaction possible du joueur
@@ -186,7 +186,7 @@ public class BreathingSystem : MonoBehaviour
         breathMixer = _MGR_SoundDesign.Instance.masterMixer;
     }
 
-    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, TriggerBreathing _triggerBreathing, float _walkSpeedDuringBreathing = 0f)
+    public void PopulateBreathingSystem(BreathingUnit[] _breathingUnits, int _requiredFailedToLose, float _requiredTimeSpendInsideBounds, float _requiredTimeSpendOutsideBounds, bool _canWalkDuringBreathing, float _playerCircleSpeed, TriggerBreathing _triggerBreathing, float _inputForceModifier, float _walkSpeedDuringBreathing = 0f)
     {
         breathingCirclesData = gameObject.GetComponent<BreathingCirclesData>();
         breathingUnits = _breathingUnits;
@@ -196,6 +196,7 @@ public class BreathingSystem : MonoBehaviour
             breathingUnits[i].breathingPattern.animationCurve.preWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
             breathingUnits[i].breathingPattern.animationCurve.postWrapMode = _breathingUnits[i].breathingPattern.animationWrapMode;
         }
+        inputForceModifier = _inputForceModifier;
         playerCircleSpeed = _playerCircleSpeed;
         requiredTimeSpendInsideBounds = _requiredTimeSpendInsideBounds;
         requiredTimeSpendOutsideBounds = _requiredTimeSpendOutsideBounds;
@@ -246,7 +247,7 @@ public class BreathingSystem : MonoBehaviour
         if (currentBreathing != null)
         {
             float inputsAverage = leftTriggerInput / 2 + rightTriggerInput / 2;
-            float inputsToValueOnCurve = Mathf.Lerp(lowestValueInCurve, highestValueInCurve, inputsAverage);
+            float inputsToValueOnCurve = Mathf.Lerp(lowestValueInCurve, highestValueInCurve, Mathf.Pow(Mathf.Clamp01(inputsAverage * inputForceModifier), 2));
 
             Vector3 scale = new Vector3(
                 Mathf.Lerp(breathingCirclesData.playerCircleTransform.localScale.x, inputsToValueOnCurve, (highestValueInCurve / lowestValueInCurve) * playerCircleSpeed * Time.deltaTime),
