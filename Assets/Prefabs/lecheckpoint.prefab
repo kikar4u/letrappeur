@@ -286,6 +286,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -396,6 +401,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -490,6 +500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -586,6 +601,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -680,6 +700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -791,6 +816,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -886,6 +916,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -975,6 +1010,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -1071,6 +1111,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1165,6 +1210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -1275,6 +1325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -1436,6 +1491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckPointCerclePlane
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: fc6c86c6b792fef40a2affb1d22446d5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc6c86c6b792fef40a2affb1d22446d5, type: 3}
 --- !u!1 &8033567528473741813 stripped
@@ -1538,6 +1598,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointTREE
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1e30df921058050439374701fa91e19e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2730434939621947655, guid: 1e30df921058050439374701fa91e19e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3364210953405337423, guid: 1e30df921058050439374701fa91e19e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4274444237877763117, guid: 1e30df921058050439374701fa91e19e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e30df921058050439374701fa91e19e, type: 3}
 --- !u!4 &7464886312343414133 stripped
@@ -1562,6 +1642,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -1673,6 +1758,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1783,6 +1873,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1877,6 +1972,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -1988,6 +2088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2097,6 +2202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -2208,6 +2318,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2317,6 +2432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -2428,6 +2548,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2522,6 +2647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -2633,6 +2763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2742,6 +2877,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -2853,6 +2993,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2962,6 +3107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -3073,6 +3223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3167,6 +3322,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -3263,6 +3423,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3358,6 +3523,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3452,6 +3622,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -3563,6 +3738,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3657,6 +3837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -3753,6 +3938,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3847,6 +4037,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -3943,6 +4138,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4037,6 +4237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
@@ -4148,6 +4353,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4242,6 +4452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prefab_JESUISLEVENT (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6207355954370651232, guid: 39de96897e45d804694052af5538ad14,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6953466027539551859, guid: 39de96897e45d804694052af5538ad14,
         type: 3}
